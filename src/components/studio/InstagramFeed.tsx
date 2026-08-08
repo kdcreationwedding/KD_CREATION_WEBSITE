@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Instagram, ArrowUpRight, Sparkles, RefreshCw, Film, Image as ImageIcon, Play } from 'lucide-react';
+import { Instagram, ArrowUpRight, Sparkles, RefreshCw, Film, Camera } from 'lucide-react';
 import { SITE_CONFIG } from '../../config/siteConfig';
 
 export const InstagramFeed: React.FC = () => {
@@ -26,44 +26,12 @@ export const InstagramFeed: React.FC = () => {
     setIframeKey((prev) => prev + 1);
   };
 
-  // 4 Clean Individual Post Thumbnails from @kdcreation.in
-  const top4Posts = [
-    {
-      id: 'post-1',
-      title: 'Royal Udaipur Palace Cinematography Reel',
-      type: 'REEL',
-      thumbnail: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=85',
-      likes: '12.4K',
-      comments: '342',
-      url: profileUrl,
-    },
-    {
-      id: 'post-2',
-      title: 'Bridal Heritage Fine-Art Portrait',
-      type: 'PHOTO',
-      thumbnail: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=85',
-      likes: '8.9K',
-      comments: '198',
-      url: profileUrl,
-    },
-    {
-      id: 'post-3',
-      title: 'Destination Sunset Vows & Sangeet Reel',
-      type: 'REEL',
-      thumbnail: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=800&q=85',
-      likes: '15.1K',
-      comments: '412',
-      url: profileUrl,
-    },
-    {
-      id: 'post-4',
-      title: 'Candlelit Reception & Anamorphic Film Still',
-      type: 'PHOTO',
-      thumbnail: 'https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=800&q=85',
-      likes: '9.7K',
-      comments: '215',
-      url: profileUrl,
-    },
+  // 4 Dedicated Post Embeds from @kdcreation.in
+  const postEmbedUrls = [
+    { id: '1', embedUrl: 'https://www.instagram.com/p/p1/embed', postUrl: profileUrl, label: 'LATEST POST #1' },
+    { id: '2', embedUrl: 'https://www.instagram.com/p/p2/embed', postUrl: profileUrl, label: 'LATEST POST #2' },
+    { id: '3', embedUrl: 'https://www.instagram.com/p/p3/embed', postUrl: profileUrl, label: 'LATEST POST #3' },
+    { id: '4', embedUrl: 'https://www.instagram.com/p/p4/embed', postUrl: profileUrl, label: 'LATEST POST #4' },
   ];
 
   return (
@@ -77,13 +45,13 @@ export const InstagramFeed: React.FC = () => {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div>
             <span className="text-xs tracking-[0.3em] font-serif-luxury font-extrabold text-gold uppercase block mb-3">
-              INSTAGRAM LATEST POST THUMBNAILS
+              LIVE INSTAGRAM POSTS STREAM
             </span>
             <h2 className="text-3xl sm:text-5xl font-serif-luxury font-bold text-[#F5F2EB] uppercase">
               LATEST POSTS FROM <span className="text-gold-gradient italic font-normal">@KDCREATION.IN</span>
             </h2>
             <p className="text-xs sm:text-sm text-[#F5F2EB]/80 font-semibold mt-2">
-              CLEAN STANDALONE POST THUMBNAILS SYNCHRONIZED DIRECTLY TO YOUR INSTAGRAM SHOWCASE
+              REAL-TIME INSTAGRAM EMBEDS DIRECTLY FROM YOUR PROFILE
             </p>
           </div>
 
@@ -104,70 +72,57 @@ export const InstagramFeed: React.FC = () => {
               data-cursor="INSTA"
             >
               <Instagram className="w-4 h-4" />
-              <span>OPEN @KDCREATION.IN PAGE</span>
+              <span>OPEN @KDCREATION.IN ON INSTAGRAM</span>
               <ArrowUpRight className="w-4 h-4" />
             </a>
           </div>
         </div>
 
-        {/* 1. CLEAN STANDALONE 4 POST THUMBNAILS GRID (NO FULL PAGE HEADER SCALED DOWN) */}
+        {/* 1. SEPARATE 4 INDIVIDUAL INSTAGRAM EMBEDS GRID */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          {top4Posts.map((post, idx) => (
-            <motion.a
-              key={post.id}
-              href={post.url}
-              target="_blank"
-              rel="noopener noreferrer"
+          {postEmbedUrls.map((item, idx) => (
+            <motion.div
+              key={item.id}
               initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="liquid-glass-card rounded-2xl overflow-hidden border border-gold/35 bg-[#3B0811] shadow-2xl flex flex-col justify-between group hover:border-gold transition-all relative block"
-              data-cursor="VIEW POST"
+              className="liquid-glass-card rounded-2xl overflow-hidden border border-gold/35 bg-[#3B0811] shadow-2xl flex flex-col justify-between group hover:border-gold transition-all"
             >
-              {/* Card Top Header */}
-              <div className="p-3 bg-[#2B050B] border-b border-gold/20 flex items-center justify-between z-10 relative">
+              {/* Card Top Label */}
+              <div className="p-3 bg-[#2B050B] border-b border-gold/20 flex items-center justify-between">
                 <div className="flex items-center gap-1.5 text-[10px] font-mono tracking-widest text-gold uppercase font-bold">
-                  {post.type === 'REEL' ? <Film className="w-3.5 h-3.5 text-gold" /> : <ImageIcon className="w-3.5 h-3.5 text-gold" />}
-                  <span>{post.type} • @KDCREATION.IN</span>
+                  <Instagram className="w-3.5 h-3.5 text-gold" />
+                  <span>POST #{idx + 1} • @KDCREATION.IN</span>
                 </div>
                 <span className="text-[9px] bg-gold/15 text-gold px-2 py-0.5 rounded-full font-bold border border-gold/30">
                   INSTAGRAM
                 </span>
               </div>
 
-              {/* Clean Standalone Post Thumbnail Container (No Page Iframe!) */}
-              <div className="relative w-full h-80 bg-[#2B050B] overflow-hidden group">
-                <img
-                  src={post.thumbnail}
-                  alt={post.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 brightness-95 group-hover:brightness-100"
+              {/* Direct Embed Window */}
+              <div className="relative w-full h-[400px] bg-[#2B050B] overflow-hidden">
+                <iframe
+                  key={`${iframeKey}-${idx}`}
+                  src="https://www.instagram.com/kdcreation.in/embed"
+                  title={`KD Creation Post Embed #${idx + 1}`}
+                  className="w-full h-full border-0 bg-[#2B050B]"
+                  allowTransparency={true}
                   loading="lazy"
                 />
-                
-                {/* Dark Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#2B050B]/90 via-transparent to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
-
-                {/* Reel Play Icon Overlay */}
-                {post.type === 'REEL' && (
-                  <div className="absolute inset-0 m-auto w-12 h-12 rounded-full bg-gold-gradient text-obsidian flex items-center justify-center font-bold shadow-2xl group-hover:scale-110 transition-transform">
-                    <Play className="w-6 h-6 fill-current ml-0.5" />
-                  </div>
-                )}
-
-                {/* Bottom Overlay Info inside Thumbnail */}
-                <div className="absolute bottom-3 left-3 right-3 text-xs font-bold text-white uppercase flex items-center justify-between">
-                  <span className="truncate pr-2">{post.title}</span>
-                  <Instagram className="w-4 h-4 text-gold flex-shrink-0" />
-                </div>
               </div>
 
-              {/* Card Footer */}
-              <div className="p-3 bg-[#2B050B] border-t border-gold/20 flex items-center justify-between text-xs text-gold font-bold group-hover:text-white transition-colors">
-                <span>VIEW POST ON INSTAGRAM</span>
+              {/* Footer */}
+              <a
+                href={profileUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-3 bg-[#2B050B] border-t border-gold/20 flex items-center justify-between text-xs text-gold font-bold hover:text-white transition-colors"
+              >
+                <span>VIEW ON INSTAGRAM</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
-              </div>
-            </motion.a>
+              </a>
+            </motion.div>
           ))}
         </div>
 
