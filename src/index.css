@@ -1,0 +1,140 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-maroon-dark: #240409;
+    --color-maroon-main: #33060D;
+    --color-maroon-rich: #4A0E17;
+    --color-gold: #D4AF37;
+    --color-gold-light: #F3E5AB;
+    --color-gold-dark: #A38136;
+    --color-champagne: #F5F2EB;
+  }
+
+  html, body {
+    background-color: #33060D !important;
+    color: #F5F2EB !important;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, .font-serif-luxury {
+    font-family: 'Cormorant Garamond', 'Cinzel', serif;
+  }
+}
+
+/* ==========================================================================
+   OFFICIAL KD CREATION BRAND PALETTE — PURE ROYAL MAROON & GOLD EVERYWHERE
+   ========================================================================== */
+
+body, .bg-obsidian, .bg-obsidian-300 {
+  background-color: #33060D !important;
+}
+
+.bg-obsidian-100 {
+  background-color: #4A0E17 !important;
+}
+
+.bg-obsidian-200 {
+  background-color: #3B0811 !important;
+}
+
+.bg-obsidian-400 {
+  background-color: #240409 !important;
+}
+
+/* Liquid Glass Panels & Cards in Royal Maroon & Gold */
+.liquid-glass-panel {
+  background: rgba(59, 8, 17, 0.88) !important;
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(212, 175, 55, 0.35) !important;
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.6),
+    inset 0 1.5px 2px rgba(243, 229, 171, 0.3),
+    inset 0 -1.5px 2px rgba(74, 14, 23, 0.4);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  color: #F5F2EB !important;
+}
+
+.liquid-glass-card {
+  background: rgba(74, 14, 23, 0.8) !important;
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(212, 175, 55, 0.3) !important;
+  box-shadow: 
+    0 12px 35px rgba(0, 0, 0, 0.5),
+    inset 0 1px 1.5px rgba(243, 229, 171, 0.25);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  color: #F5F2EB !important;
+}
+
+.liquid-glass-card:hover {
+  background: rgba(74, 14, 23, 0.95) !important;
+  border-color: rgba(212, 175, 55, 0.65) !important;
+  box-shadow: 
+    0 22px 50px rgba(212, 175, 55, 0.25),
+    inset 0 1.5px 2px rgba(243, 229, 171, 0.4);
+  transform: translateY(-5px);
+}
+
+.liquid-glass-pill {
+  background: rgba(74, 14, 23, 0.88) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(212, 175, 55, 0.4) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  color: #F5F2EB !important;
+}
+
+/* Liquid Gold Gradient Text & Buttons */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #F3E5AB 0%, #D4AF37 40%, #C5A059 70%, #94742B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bg-gold-gradient {
+  background: linear-gradient(135deg, #F3E5AB 0%, #D4AF37 50%, #A38136 100%) !important;
+  color: #240409 !important;
+  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.35);
+}
+
+/* Inputs & Form Elements in Royal Maroon & Gold */
+input, textarea, select {
+  background-color: rgba(36, 4, 9, 0.95) !important;
+  color: #F5F2EB !important;
+  border-color: rgba(212, 175, 55, 0.35) !important;
+}
+
+input::placeholder, textarea::placeholder {
+  color: rgba(245, 242, 235, 0.45) !important;
+}
+
+/* Enforce Custom Site Cursor EVERYWHERE on Desktop (Hide Browser System Cursor) */
+@media (min-width: 1024px) {
+  html, body, *, a, button, input, textarea, select, [role="button"], [role="dialog"], .fixed, div, span, header, footer, section {
+    cursor: none !important;
+  }
+}
+
+/* Custom Scrollbar for Royal Maroon Theme */
+::-webkit-scrollbar {
+  width: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #240409;
+}
+::-webkit-scrollbar-thumb {
+  background: #D4AF37;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #F3E5AB;
+}
+
+img {
+  transition: opacity 0.5s ease-in-out;
+}
