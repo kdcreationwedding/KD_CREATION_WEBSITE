@@ -26,13 +26,8 @@ export const InstagramFeed: React.FC = () => {
     setIframeKey((prev) => prev + 1);
   };
 
-  // 4 Specific Instagram Posts from @kdcreation.in
-  const singlePosts = SITE_CONFIG.instagramFeed || [
-    { id: '1', shortcode: 'C3x123', title: 'KD Creation Post #1', url: profileUrl },
-    { id: '2', shortcode: 'C3x124', title: 'KD Creation Post #2', url: profileUrl },
-    { id: '3', shortcode: 'C3x125', title: 'KD Creation Post #3', url: profileUrl },
-    { id: '4', shortcode: 'C3x126', title: 'KD Creation Post #4', url: profileUrl },
-  ];
+  // 4 Standalone Posts from @kdcreation.in
+  const singlePosts = SITE_CONFIG.instagramFeed;
 
   return (
     <section id="instagram-feed" className="relative py-28 sm:py-36 bg-[#2B050B] border-t border-gold/20 overflow-hidden text-[#F5F2EB]">
@@ -51,7 +46,7 @@ export const InstagramFeed: React.FC = () => {
               FEATURED POSTS FROM <span className="text-gold-gradient italic font-normal">@KDCREATION.IN</span>
             </h2>
             <p className="text-xs sm:text-sm text-[#F5F2EB]/80 font-semibold mt-2">
-              STANDALONE SINGLE POST EMBEDS — NO PROFILE HEADERS OR FULL PAGES
+              STANDALONE SINGLE POST EMBEDS DIRECTLY FROM YOUR OFFICIAL INSTAGRAM PAGE
             </p>
           </div>
 
@@ -100,11 +95,11 @@ export const InstagramFeed: React.FC = () => {
                 </span>
               </div>
 
-              {/* Standalone Post Embed Window (Points directly to individual post URL) */}
+              {/* Standalone Post Embed Window */}
               <div className="relative w-full h-[450px] bg-[#2B050B] overflow-hidden">
                 <iframe
                   key={`${iframeKey}-${idx}`}
-                  src={post.shortcode ? `https://www.instagram.com/p/${post.shortcode}/embed/` : `https://www.instagram.com/p/p${idx + 1}/embed/`}
+                  src={`https://www.instagram.com/p/${post.shortcode}/embed/`}
                   title={`KD Creation Single Post #${idx + 1}`}
                   className="w-full h-full border-0 bg-[#2B050B]"
                   allowTransparency={true}
