@@ -98,7 +98,7 @@ export const SITE_CONFIG = {
       badge: "CO-FOUNDER & CREATIVE / POST-PRODUCTION HEAD",
       tagline: "Head of Creativity, Editing & Studio Backoffice",
       bio: "Leading creative direction, post-production 4K editing suite, cinematic color matrix grading, sound design, and studio backoffice operations.",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=800&q=85",
+      image: "/assets/aniket-vaghela.jpg",
       instagram: "https://www.instagram.com/kdcreation.in?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
       email: "kdcreationwedding@gmail.com"
     }
