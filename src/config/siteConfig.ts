@@ -88,8 +88,8 @@ export const SITE_CONFIG = {
       tagline: "Head of Cinematography & Camera Operations",
       bio: "Master cinematographer heading all camera technology, 4K anamorphic cinema gear matrix, specialized lighting setups, and live on-location shoot direction.",
       image: "/assets/harshad-chawda.jpg",
-      instagram: "https://www.instagram.com/kdcreation.in?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
-      email: "kdcreationwedding@gmail.com"
+      instagram: "https://www.instagram.com/harshhhad.18?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+      email: "chavdaharshad529@gmail.com"
     },
     {
       id: "aniket-vaghela",
@@ -99,8 +99,8 @@ export const SITE_CONFIG = {
       tagline: "Head of Creativity, Editing & Studio Backoffice",
       bio: "Leading creative direction, post-production 4K editing suite, cinematic color matrix grading, sound design, and studio backoffice operations.",
       image: "/assets/aniket-vaghela.jpg",
-      instagram: "https://www.instagram.com/kdcreation.in?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
-      email: "kdcreationwedding@gmail.com"
+      instagram: "https://www.instagram.com/the.aniketvaghela?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+      email: "ajvaghela15300@gmail.com"
     }
   ] as FounderItem[],
 
