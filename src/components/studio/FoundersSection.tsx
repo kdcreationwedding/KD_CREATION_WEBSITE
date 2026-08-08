@@ -109,7 +109,7 @@ export const FoundersSection: React.FC = () => {
                     </a>
 
                     <a
-                      href={`https://mail.google.com/mail/?view=cm&fs=1&to=${SITE_CONFIG.brand.email}&su=${encodeURIComponent(`Inquiry for ${founder.name} - KD CREATION`)}`}
+                      href={`https://mail.google.com/mail/?view=cm&fs=1&to=${founder.email || SITE_CONFIG.brand.email}&su=${encodeURIComponent(`Direct Message for ${founder.name} - KD CREATION`)}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-9 h-9 rounded-full border border-gold/40 bg-[#2B050B] flex items-center justify-center text-gold hover:bg-gold-gradient hover:text-obsidian shadow-sm transition-all"
