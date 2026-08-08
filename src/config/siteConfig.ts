@@ -32,6 +32,18 @@ export interface Testimonial {
   weddingDate: string;
 }
 
+export interface FounderItem {
+  id: string;
+  name: string;
+  role: string;
+  badge: string;
+  tagline: string;
+  bio: string;
+  image: string;
+  instagram?: string;
+  email?: string;
+}
+
 export interface InstagramPostItem {
   id: string;
   shortcode: string;
@@ -54,6 +66,43 @@ export const SITE_CONFIG = {
     email: "kdcreationwedding@gmail.com",
     phone: "+91 7859894521"
   },
+
+  // Founders & Executive Leadership
+  founders: [
+    {
+      id: "mahesh-parmar",
+      name: "Mr. Mahesh Parmar",
+      role: "Founder of KD Group",
+      badge: "FOUNDER & CEO",
+      tagline: "Executive Director & Visionary Leader of KD Group",
+      bio: "Pioneering the overarching strategic vision and business expansion behind KD Group, elevating luxury wedding visual arts into timeless cinematic legacies.",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=85",
+      instagram: "https://www.instagram.com/kdcreation.in?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+      email: "kdcreationwedding@gmail.com"
+    },
+    {
+      id: "harshad-chawda",
+      name: "Mr. Harshad Chawda",
+      role: "Co-Founder of KD Creation",
+      badge: "CO-FOUNDER & MASTER CINEMATOGRAPHER",
+      tagline: "Head of Cinematography & Camera Operations",
+      bio: "Master cinematographer heading all camera technology, 4K anamorphic cinema gear matrix, specialized lighting setups, and live on-location shoot direction.",
+      image: "/assets/harshad-chawda.jpg",
+      instagram: "https://www.instagram.com/kdcreation.in?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+      email: "kdcreationwedding@gmail.com"
+    },
+    {
+      id: "aniket-vaghela",
+      name: "Mr. Aniket Vaghela",
+      role: "Co-Founder of KD Creation",
+      badge: "CO-FOUNDER & CREATIVE / POST-PRODUCTION HEAD",
+      tagline: "Head of Creativity, Editing & Studio Backoffice",
+      bio: "Leading creative direction, post-production 4K editing suite, cinematic color matrix grading, sound design, and studio backoffice operations.",
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=800&q=85",
+      instagram: "https://www.instagram.com/kdcreation.in?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+      email: "kdcreationwedding@gmail.com"
+    }
+  ] as FounderItem[],
 
   // Centralized Spline 3D Scene URL — Easily replaceable
   SPLINE_SCENE_URL: "https://prod.spline.design/6Wnt1MY7Y69uP30W/scene.splinecode",

@@ -8,6 +8,7 @@ import { SelectedStories } from './components/portfolio/SelectedStories';
 import { CinemaSection } from './components/video/CinemaSection';
 import { VideoModal } from './components/video/VideoModal';
 import { AboutSection } from './components/studio/AboutSection';
+import { FoundersSection } from './components/studio/FoundersSection';
 import { WhyKdCreation } from './components/studio/WhyKdCreation';
 import { ProcessTimeline } from './components/studio/ProcessTimeline';
 import { Testimonials } from './components/studio/Testimonials';
@@ -179,40 +180,43 @@ export const App: React.FC = () => {
       {/* 8. Studio Philosophy & About Section */}
       <AboutSection />
 
-      {/* 9. Why KD Creation Showcase */}
+      {/* 9. Founders & Executive Leadership Section */}
+      <FoundersSection />
+
+      {/* 10. Why KD Creation Showcase */}
       <WhyKdCreation />
 
-      {/* 10. Process & Timeline Section */}
+      {/* 11. Process & Timeline Section */}
       <ProcessTimeline />
 
-      {/* 11. Testimonials Showcase */}
+      {/* 12. Testimonials Showcase */}
       <Testimonials />
 
-      {/* 12. Instagram Live Feed */}
+      {/* 13. Instagram Live Feed */}
       <InstagramFeed />
 
-      {/* 13. Lead Inquiry Form Section */}
+      {/* 14. Lead Inquiry Form Section */}
       <LeadFormSection preselectedService={selectedService} />
 
-      {/* 14. Footer with Brand Credits & Admin Lead Access */}
+      {/* 15. Footer with Brand Credits & Admin Lead Access */}
       <Footer onOpenAdminPortal={handleOpenAdminAccess} />
 
-      {/* 15. Sticky Quick Lead Action Floating Bar */}
+      {/* 16. Sticky Quick Lead Action Floating Bar */}
       <StickyLeadCtas
         onOpenLeadForm={() => handleOpenLeadForm()}
       />
 
-      {/* 16. AI Wedding Consultant Chatbot */}
+      {/* 17. AI Wedding Consultant Chatbot */}
       <KdAiChatbot
         isOpen={isChatOpen}
         onToggle={() => setIsChatOpen(!isChatOpen)}
         onOpenLeadForm={() => handleOpenLeadForm()}
       />
 
-      {/* 17. Exit-Intent Smart Lead Modal */}
+      {/* 18. Exit-Intent Smart Lead Modal */}
       <ExitIntentModal onOpenLeadForm={() => handleOpenLeadForm()} />
 
-      {/* 18. Fullscreen Video Lightbox Player */}
+      {/* 19. Fullscreen Video Lightbox Player */}
       <VideoModal
         isOpen={videoModalState.isOpen}
         videoUrl={videoModalState.url}
@@ -220,14 +224,14 @@ export const App: React.FC = () => {
         onClose={() => setVideoModalState({ isOpen: false, url: '', title: '' })}
       />
 
-      {/* 19. Visitor / Client Auth Login & Sign-Up Modal */}
+      {/* 20. Visitor / Client Auth Login & Sign-Up Modal */}
       <ClientAuthModal
         isOpen={isClientAuthOpen}
         onClose={() => setIsClientAuthOpen(false)}
         onLoginSuccess={handleClientLoginSuccess}
       />
 
-      {/* 20. Logged-In VIP Client Wedding Portal Dashboard */}
+      {/* 21. Logged-In VIP Client Wedding Portal Dashboard */}
       <ClientPortalModal
         isOpen={isClientPortalOpen}
         clientInfo={loggedInClient}
@@ -236,14 +240,14 @@ export const App: React.FC = () => {
         onOpenVideoModal={handleOpenVideoModal}
       />
 
-      {/* 21. Admin Login Modal Screen */}
+      {/* 22. Admin Login Modal Screen */}
       <AdminLoginModal
         isOpen={isLoginModalOpen}
         onClose={() => setIsLoginModalOpen(false)}
         onLoginSuccess={handleLoginSuccess}
       />
 
-      {/* 22. Secret Admin Lead Vault Portal Modal */}
+      {/* 23. Secret Admin Lead Vault Portal Modal */}
       <AdminLeadPortal
         isOpen={isAdminPortalOpen}
         onClose={() => setIsAdminPortalOpen(false)}
