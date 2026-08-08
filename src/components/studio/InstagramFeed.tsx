@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Instagram, ArrowUpRight, Sparkles, RefreshCw } from 'lucide-react';
+import { Instagram, ArrowUpRight, Sparkles, RefreshCw, Film, Camera } from 'lucide-react';
 import { SITE_CONFIG } from '../../config/siteConfig';
 
 export const InstagramFeed: React.FC = () => {
@@ -26,8 +26,33 @@ export const InstagramFeed: React.FC = () => {
     setIframeKey((prev) => prev + 1);
   };
 
+  // Embedded Instagram Posts from @kdcreation.in
+  const instaPosts = [
+    {
+      id: 'post-1',
+      title: 'Royal Udaipur Wedding Cinematography',
+      tag: 'REEL • @KDCREATION.IN',
+      url: profileUrl,
+      embedUrl: 'https://www.instagram.com/kdcreation.in/embed'
+    },
+    {
+      id: 'post-2',
+      title: 'Bridal Editorial Fine-Art Stills',
+      tag: 'PHOTO • @KDCREATION.IN',
+      url: profileUrl,
+      embedUrl: 'https://www.instagram.com/kdcreation.in/embed'
+    },
+    {
+      id: 'post-3',
+      title: 'Destination Same-Day Edit Teaser',
+      tag: 'REEL • @KDCREATION.IN',
+      url: profileUrl,
+      embedUrl: 'https://www.instagram.com/kdcreation.in/embed'
+    }
+  ];
+
   return (
-    <section className="relative py-28 sm:py-36 bg-[#2B050B] border-t border-gold/20 overflow-hidden text-[#F5F2EB]">
+    <section id="instagram-feed" className="relative py-28 sm:py-36 bg-[#2B050B] border-t border-gold/20 overflow-hidden text-[#F5F2EB]">
       {/* Background ambient radial glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-gold/10 rounded-full blur-3xl pointer-events-none" />
 
@@ -37,13 +62,13 @@ export const InstagramFeed: React.FC = () => {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div>
             <span className="text-xs tracking-[0.3em] font-serif-luxury font-extrabold text-gold uppercase block mb-3">
-              LATEST LIVE INSTAGRAM FEED
+              OFFICIAL INSTAGRAM STREAM
             </span>
             <h2 className="text-3xl sm:text-5xl font-serif-luxury font-bold text-[#F5F2EB] uppercase">
-              LIVE FROM <span className="text-gold-gradient italic font-normal">@KDCREATION.IN</span>
+              LATEST POSTS FROM <span className="text-gold-gradient italic font-normal">@KDCREATION.IN</span>
             </h2>
             <p className="text-xs sm:text-sm text-[#F5F2EB]/80 font-semibold mt-2">
-              REAL-TIME LATEST POSTS, REELS & EDITORIAL SHOTS DIRECT FROM YOUR INSTAGRAM PROFILE
+              REAL-TIME LATEST WEDDING REELS, EDITORIAL SHOTS & BEHIND THE SCENES DIRECT FROM OUR INSTAGRAM
             </p>
           </div>
 
@@ -71,10 +96,10 @@ export const InstagramFeed: React.FC = () => {
         </div>
 
         {/* Live Instagram Embedded Profile Container */}
-        <div className="liquid-glass-panel rounded-3xl p-4 sm:p-6 border border-gold/35 shadow-2xl bg-[#3B0811]/90 relative overflow-hidden">
+        <div className="liquid-glass-panel rounded-3xl p-4 sm:p-6 border border-gold/35 shadow-2xl bg-[#3B0811]/90 relative overflow-hidden space-y-6">
           
           {/* Header Bar inside Panel */}
-          <div className="p-4 rounded-2xl bg-[#2B050B] border border-gold/20 flex items-center justify-between mb-6">
+          <div className="p-4 rounded-2xl bg-[#2B050B] border border-gold/20 flex items-center justify-between">
             <div className="flex items-center gap-3.5">
               <div className="w-11 h-11 rounded-full border border-gold bg-[#3B0811] p-0.5 shadow-md">
                 <img
@@ -89,7 +114,7 @@ export const InstagramFeed: React.FC = () => {
                     kdcreation.in
                   </span>
                   <span className="text-[9px] bg-gold/15 text-gold font-bold px-2 py-0.5 rounded-full border border-gold/30">
-                    VERIFIED CREATOR
+                    OFFICIAL BRAND INSTAGRAM
                   </span>
                 </div>
                 <span className="text-[11px] text-[#F5F2EB]/70 block font-medium">
@@ -105,12 +130,12 @@ export const InstagramFeed: React.FC = () => {
               className="hidden sm:inline-flex items-center gap-2 text-xs text-gold font-bold bg-gold/10 hover:bg-gold/20 px-4 py-2 rounded-full border border-gold/30 transition-all"
             >
               <Instagram className="w-3.5 h-3.5" />
-              <span>FOLLOW ON INSTAGRAM</span>
+              <span>FOLLOW @KDCREATION.IN</span>
             </a>
           </div>
 
           {/* Live Dynamic Instagram Embedded Profile Grid Frame */}
-          <div className="relative w-full h-[640px] sm:h-[720px] rounded-2xl overflow-hidden bg-[#2B050B] border border-gold/20">
+          <div className="relative w-full h-[680px] sm:h-[760px] rounded-2xl overflow-hidden bg-[#2B050B] border border-gold/20 shadow-2xl">
             <iframe
               key={iframeKey}
               src="https://www.instagram.com/kdcreation.in/embed"
@@ -122,10 +147,10 @@ export const InstagramFeed: React.FC = () => {
           </div>
 
           {/* Bottom Action Footer */}
-          <div className="mt-6 p-4 rounded-2xl bg-[#2B050B] border border-gold/20 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+          <div className="p-4 rounded-2xl bg-[#2B050B] border border-gold/20 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
             <div className="flex items-center gap-2 text-xs text-[#F5F2EB]/90 font-semibold">
               <Sparkles className="w-4 h-4 text-gold flex-shrink-0" />
-              <span>Showing latest live reels & wedding photography from <strong>@kdcreation.in</strong></span>
+              <span>Showing latest live posts, reels & wedding film highlights from <strong>@kdcreation.in</strong></span>
             </div>
 
             <a
