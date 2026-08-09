@@ -223,23 +223,23 @@ export const SITE_CONFIG = {
   // Portfolio Items — Selected Stories
   portfolio: [
     {
-      id: "story-udainivas-royal",
-      title: "The Palace of Echoing Vows",
-      couple: "Aanya & Devraj",
-      location: "Udaipur, Rajasthan",
-      year: "2025",
+      id: "story-yash-kavya-ahmedabad",
+      title: "The Heritage Grandeur",
+      couple: "Yash & Kavya",
+      location: "Ahmedabad, Gujarat",
+      year: "2026",
       category: "Royal Wedding",
-      description: "A three-day regal celebration amidst the grand marble courtyards and tranquil waters of Udaipur, capturing centuries of tradition infused with modern editorial luxury.",
-      heroImage: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1400&q=85",
+      description: "An opulent celebration blending rich Gujarati heritage, royal decor, and timeless cinematic moments captured with 4K anamorphic clarity.",
+      heroImage: "/assets/yash-kavya-hero.jpg",
       videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-bride-and-groom-walking-in-a-field-42861-large.mp4",
       gallery: [
-        "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=85",
-        "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1000&q=85",
-        "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1000&q=85",
-        "https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1000&q=85"
+        "/assets/yash-kavya-1.jpg",
+        "/assets/yash-kavya-2.jpg",
+        "/assets/yash-kavya-3.jpg",
+        "/assets/yash-kavya-4.jpg"
       ],
-      highlights: ["Royal Baarat with 50 Musicians", "Sunset Ceremony on Lake Pichola", "Midnight Candlelit Reception"],
-      bts: "Shot with RED V-Raptor and anamorphic lenses over 72 continuous hours of creative direction."
+      highlights: ["Grand Royal Baarat Extravaganza", "Heritage Palace Mandap Ceremony", "Candlelit Gala Night"],
+      bts: "Shot with 4K anamorphic cine lenses and specialized lighting setups."
     },
     {
       id: "story-como-romance",
