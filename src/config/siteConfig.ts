@@ -230,13 +230,13 @@ export const SITE_CONFIG = {
       year: "2026",
       category: "Royal Wedding",
       description: "An opulent celebration blending rich Gujarati heritage, royal decor, and timeless cinematic moments captured with 4K anamorphic clarity.",
-      heroImage: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1400&q=85",
+      heroImage: "/assets/Yash & kavya.jpg",
       videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-bride-and-groom-walking-in-a-field-42861-large.mp4",
       gallery: [
-        "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=85",
-        "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1000&q=85",
-        "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1000&q=85",
-        "https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1000&q=85"
+        "/assets/Yash & kavya.jpg",
+        "/assets/Yash & kavya - Copy.jpg",
+        "/assets/Yash & kavya - Copy (2).jpg",
+        "/assets/Yash & kavya - Copy (3).jpg"
       ],
       highlights: ["Grand Royal Baarat Extravaganza", "Heritage Palace Mandap Ceremony", "Candlelit Gala Night"],
       bts: "Shot with 4K anamorphic cine lenses and specialized lighting setups."
