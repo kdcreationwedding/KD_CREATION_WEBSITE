@@ -1,6 +1,6 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Play, Pause, Volume2, VolumeX, Maximize } from 'lucide-react';
+import { X, Play, Pause, Volume2, VolumeX, Maximize, Film } from 'lucide-react';
 
 interface VideoModalProps {
   isOpen: boolean;
@@ -14,6 +14,15 @@ export const VideoModal: React.FC<VideoModalProps> = ({ isOpen, videoUrl, title,
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(false);
   const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    if (isOpen && videoRef.current) {
+      videoRef.current.play().catch(() => {
+        // Autoplay policy fallback
+        setIsPlaying(false);
+      });
+    }
+  }, [isOpen, videoUrl]);
 
   if (!isOpen) return null;
 
@@ -41,6 +50,13 @@ export const VideoModal: React.FC<VideoModalProps> = ({ isOpen, videoUrl, title,
     setProgress((current / total) * 100);
   };
 
+  const handleProgressClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!videoRef.current) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const clickPosition = (e.clientX - rect.left) / rect.width;
+    videoRef.current.currentTime = clickPosition * videoRef.current.duration;
+  };
+
   const toggleFullscreen = () => {
     if (!videoRef.current) return;
     if (videoRef.current.requestFullscreen) {
@@ -50,59 +66,94 @@ export const VideoModal: React.FC<VideoModalProps> = ({ isOpen, videoUrl, title,
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/95 backdrop-blur-2xl p-4 sm:p-8">
+      <div className="fixed inset-0 z-[999999] flex items-center justify-center bg-black/95 backdrop-blur-2xl p-3 sm:p-6 md:p-10">
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.9 }}
-          transition={{ duration: 0.4 }}
-          className="relative w-full max-w-6xl rounded-3xl overflow-hidden bg-obsidian-200 border border-gold/30 shadow-2xl flex flex-col"
+          initial={{ opacity: 0, scale: 0.92, y: 15 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.92, y: 15 }}
+          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+          className="relative w-full max-w-6xl rounded-3xl overflow-hidden bg-[#2B050B] border border-gold/40 shadow-[0_25px_70px_rgba(0,0,0,0.9)] flex flex-col my-auto"
         >
-          {/* Top Bar */}
-          <div className="flex items-center justify-between p-6 bg-obsidian-100/90 border-b border-gold/15 z-10">
-            <span className="text-xs sm:text-sm tracking-[0.2em] font-serif-luxury font-bold text-gold uppercase">
-              KD CREATION CINEMA • {title}
-            </span>
+          {/* Header Bar */}
+          <div className="p-4 sm:p-5 bg-[#3B0811] border-b border-gold/30 flex items-center justify-between z-20">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full bg-gold/15 text-gold border border-gold/30 flex items-center justify-center">
+                <Film className="w-4 h-4" />
+              </div>
+              <div>
+                <span className="text-[9px] tracking-[0.2em] font-serif-luxury font-extrabold text-gold uppercase block">
+                  KD CREATION 4K CINEMA CINEMATOGRAPHY
+                </span>
+                <h3 className="text-sm sm:text-base font-serif-luxury font-bold text-[#F5F2EB] uppercase truncate max-w-xs sm:max-w-md">
+                  {title}
+                </h3>
+              </div>
+            </div>
+
             <button
               onClick={onClose}
-              className="p-2 text-gold hover:text-white rounded-full bg-gold/10 hover:bg-gold/30 transition-all"
+              className="p-2 text-gold hover:text-white rounded-full bg-gold/10 hover:bg-gold/20 transition-all border border-gold/30"
+              aria-label="Close Video Player"
             >
-              <X className="w-6 h-6" />
+              <X className="w-5 h-5" />
             </button>
           </div>
 
-          {/* Video Player Box */}
-          <div className="relative aspect-video bg-black flex items-center justify-center overflow-hidden">
+          {/* Responsive HTML5 4K Video Player Container */}
+          <div className="relative aspect-video w-full bg-black overflow-hidden flex items-center justify-center">
             <video
               ref={videoRef}
               src={videoUrl}
               autoPlay
               playsInline
+              controls
               onTimeUpdate={handleTimeUpdate}
               onEnded={() => setIsPlaying(false)}
-              className="w-full h-full object-contain"
+              className="w-full h-full object-contain bg-black"
             />
+          </div>
 
-            {/* Floating Custom Controls Bar */}
-            <div className="absolute bottom-0 inset-x-0 p-6 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col gap-3">
-              {/* Progress Scrubber */}
-              <div className="w-full h-1.5 bg-white/20 rounded-full overflow-hidden cursor-pointer relative">
-                <div className="h-full bg-gold-gradient" style={{ width: `${progress}%` }} />
+          {/* Custom Sleek Gold Control Bar */}
+          <div className="p-4 bg-[#3B0811] border-t border-gold/30 space-y-3">
+            {/* Clickable Timeline Scrubber */}
+            <div
+              onClick={handleProgressClick}
+              className="relative w-full h-2 bg-[#2B050B] rounded-full cursor-pointer overflow-hidden border border-gold/20 group"
+            >
+              <div
+                className="h-full bg-gold-gradient transition-all duration-150"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+
+            <div className="flex items-center justify-between text-xs text-[#F5F2EB]">
+              <div className="flex items-center gap-4">
+                <button
+                  onClick={togglePlay}
+                  className="p-2 text-gold hover:text-white rounded-full bg-gold/10 hover:bg-gold/20 transition-colors"
+                >
+                  {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 fill-current ml-0.5" />}
+                </button>
+
+                <button
+                  onClick={toggleMute}
+                  className="p-2 text-gold hover:text-white rounded-full bg-gold/10 hover:bg-gold/20 transition-colors"
+                >
+                  {isMuted ? <VolumeX className="w-4 h-4 text-rose-400" /> : <Volume2 className="w-4 h-4" />}
+                </button>
               </div>
 
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <button onClick={togglePlay} className="p-2 text-gold hover:scale-110 transition-transform">
-                    {isPlaying ? <Pause className="w-6 h-6" /> : <Play className="w-6 h-6 fill-current ml-0.5" />}
-                  </button>
+              <div className="flex items-center gap-4">
+                <span className="text-[10px] font-mono tracking-widest text-gold uppercase font-bold">
+                  4K ULTRA HD CINEMA
+                </span>
 
-                  <button onClick={toggleMute} className="p-2 text-gold hover:scale-110 transition-transform">
-                    {isMuted ? <VolumeX className="w-6 h-6" /> : <Volume2 className="w-6 h-6" />}
-                  </button>
-                </div>
-
-                <button onClick={toggleFullscreen} className="p-2 text-gold hover:scale-110 transition-transform">
-                  <Maximize className="w-5 h-5" />
+                <button
+                  onClick={toggleFullscreen}
+                  className="p-2 text-gold hover:text-white rounded-full bg-gold/10 hover:bg-gold/20 transition-colors"
+                  title="Fullscreen"
+                >
+                  <Maximize className="w-4 h-4" />
                 </button>
               </div>
             </div>

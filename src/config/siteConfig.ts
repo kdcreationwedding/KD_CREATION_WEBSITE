@@ -8,6 +8,12 @@ export interface ServiceItem {
   cta: string;
 }
 
+export interface VideoItem {
+  title: string;
+  url: string;
+  thumbnail?: string;
+}
+
 export interface PortfolioItem {
   id: string;
   title: string;
@@ -19,6 +25,7 @@ export interface PortfolioItem {
   heroImage: string;
   modalCover?: string;
   videoUrl?: string;
+  videos?: VideoItem[];
   gallery: string[];
   highlights: string[];
   bts: string;
@@ -77,8 +84,8 @@ export const SITE_CONFIG = {
       badge: "FOUNDER & CEO",
       tagline: "Executive Director & Visionary Leader of KD Group",
       bio: "Pioneering the overarching strategic vision and business expansion behind KD Group, elevating luxury wedding visual arts into timeless cinematic legacies.",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=85",
-      instagram: "https://www.instagram.com/kdcreation.in?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+      image: "/assets/mahesh-parmar.jpg",
+      instagram: "https://www.instagram.com/mr_mahesh_sir?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
       email: "kdcreationwedding@gmail.com"
     },
     {
@@ -233,67 +240,110 @@ export const SITE_CONFIG = {
       description: "An opulent celebration blending rich Gujarati heritage, royal decor, and timeless cinematic moments captured with 4K anamorphic clarity.",
       heroImage: "/assets/yash-kavya-outer-cover.jpg",
       modalCover: "/assets/yash-kavya-modal-cover.jpg",
-      videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-bride-and-groom-walking-in-a-field-42861-large.mp4",
+      videoUrl: "/assets/YASH & KAVYA/KD Creation - Roka.mp4",
+      videos: [
+        { title: "Yash & Kavya — Roka Ceremony Film", url: "/assets/YASH & KAVYA/KD Creation - Roka.mp4" }
+      ],
       gallery: [
-        "/assets/yash-kavya-g1.jpg",
-        "/assets/yash-kavya-g2.jpg",
-        "/assets/yash-kavya-g3.jpg",
-        "/assets/yash-kavya-g4.jpg"
+        "/assets/YASH & KAVYA/Yash & kavya.jpg",
+        "/assets/YASH & KAVYA/Yash & kavya - Copy.jpg",
+        "/assets/YASH & KAVYA/Yash & kavya - Copy - Copy.jpg",
+        "/assets/YASH & KAVYA/Yash & kavya - Copy - Copy (2).jpg",
+        "/assets/YASH & KAVYA/Yash & kavya - Copy - Copy (2) - Copy.jpg",
+        "/assets/YASH & KAVYA/Yash & kavya - Copy - Copy (3).jpg",
+        "/assets/YASH & KAVYA/Yash & kavya - Copy - Copy (3) - Copy.jpg",
+        "/assets/YASH & KAVYA/Yash & kavya - Copy - Copy (4).jpg",
+        "/assets/YASH & KAVYA/Yash & kavya - Copy - Copy (4) - Copy.jpg",
+        "/assets/YASH & KAVYA/Yash & kavya - Copy - Copy (5) - Copy.jpg"
       ],
       highlights: ["Grand Royal Baarat Extravaganza", "Heritage Palace Mandap Ceremony", "Candlelit Gala Night"],
       bts: "Shot with 4K anamorphic cine lenses and specialized lighting setups."
     },
     {
-      id: "story-como-romance",
-      title: "Whispers Over Como",
-      couple: "Rhea & Rohan",
-      location: "Villa d'Este, Lake Como, Italy",
+      id: "story-dhaval-sangeeta-ahmedabad",
+      title: "Two Souls — A Journey of Love",
+      couple: "Dhaval & Sangeeta",
+      location: "Ahmedabad, Gujarat",
+      year: "2026",
+      category: "Destination",
+      description: "In black and white, love speaks louder than colors. A beautiful journey where two souls choose each other, captured with pure 4K cinematic connection.",
+      heroImage: "/assets/dhaval-sangeeta-outer-cover.jpg",
+      modalCover: "/assets/dhaval-sangeeta-modal-cover.jpg",
+      videoUrl: "/assets/DHAVAL & SANGEETA/Pre-Wedding_Teaser + Song(Dhawal & Sangita).mp4",
+      videos: [
+        { title: "Dhaval & Sangeeta — Pre-Wedding Teaser + Song Film", url: "/assets/DHAVAL & SANGEETA/Pre-Wedding_Teaser + Song(Dhawal & Sangita).mp4" },
+        { title: "Dhaval & Sangeeta — Pre-Wedding High-Impact Reel", url: "/assets/DHAVAL & SANGEETA/Pre-Wedding_REEL.mp4" }
+      ],
+      gallery: [
+        "/assets/DHAVAL & SANGEETA/DHAVAL & SANDEETA PRE - Copy (4).jpg",
+        "/assets/DHAVAL & SANGEETA/DHAVAL & SANDEETA PRE - Copy (5).jpg",
+        "/assets/DHAVAL & SANGEETA/DHAVAL & SANGITA POST 01.jpg",
+        "/assets/DHAVAL & SANGEETA/DHAVAL & SANGITA POST 02.jpg",
+        "/assets/DHAVAL & SANGEETA/DHAVAL & SANGITA POST 03.jpg",
+        "/assets/DHAVAL & SANGEETA/DHAVAL & SANGITA POST 04.jpg",
+        "/assets/DHAVAL & SANGEETA/DHAVAL & SANGITA POST 05.jpg",
+        "/assets/DHAVAL & SANGEETA/DHAVAL & SANGITA POST 06.jpg",
+        "/assets/DHAVAL & SANGEETA/DS PRE W (2).jpg",
+        "/assets/DHAVAL & SANGEETA/DS PRE W (3).jpg",
+        "/assets/DHAVAL & SANGEETA/DS WEDDING (1).jpg",
+        "/assets/DHAVAL & SANGEETA/DS WEDDING (3).jpg",
+        "/assets/DHAVAL & SANGEETA/Dhaval & Sangita ......jpg",
+        "/assets/DHAVAL & SANGEETA/Dhaval & Sangita....jpg",
+        "/assets/DHAVAL & SANGEETA/KD_09678.jpg",
+        "/assets/DHAVAL & SANGEETA/KD_09784.jpg",
+        "/assets/DHAVAL & SANGEETA/KD_09786.jpg"
+      ],
+      highlights: ["Sunset Lakefront Portrait Session", "Emotional Mandap Ceremony", "Candlelit Gala Night"],
+      bts: "Filmed in 4K anamorphic cinema with golden hour natural directional lighting."
+    },
+    {
+      id: "story-kaushik-anjali-ahmedabad",
+      title: "Symphony of Grace",
+      couple: "Kaushik & Anjali",
+      location: "Ahmedabad, Gujarat",
       year: "2025",
-      category: "Destination",
-      description: "An intimate romantic getaway surrounded by Italian cypress trees, antique speedboats, and sun-kissed alpine reflections.",
-      heroImage: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1400&q=85",
-      videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-romantic-couple-looking-at-each-other-41618-large.mp4",
-      gallery: [
-        "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1000&q=85",
-        "https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&w=1000&q=85",
-        "https://images.unsplash.com/photo-1544078751-58fee2d8a03b?auto=format&fit=crop&w=1000&q=85"
-      ],
-      highlights: ["Wooden Riva Boat Portrait Session", "Open Air Italian Garden Feast", "Acoustic Cellist Sunset Vows"],
-      bts: "Utilized natural golden-hour directional light with vintage Leica R lenses."
-    },
-    {
-      id: "story-goa-sunset",
-      title: "Symphony of Waves",
-      couple: "Natasha & Kabir",
-      location: "St. Regis, Goa",
-      year: "2024",
-      category: "Destination",
-      description: "An energetic beachfront celebration featuring floral art installations, fiery sunset pheras, and uninhibited midnight revelry.",
-      heroImage: "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1400&q=85",
-      videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-couple-walking-hand-in-hand-on-the-beach-at-sunset-41551-large.mp4",
-      gallery: [
-        "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1000&q=85",
-        "https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1000&q=85"
-      ],
-      highlights: ["Barefoot Ocean Mandap", "Tropical Sangeet Dance Extravaganza", "Firework Finale"],
-      bts: "Dual 4K drone coverage combined with 120fps slow-motion ocean spray portraits."
-    },
-    {
-      id: "story-prewedding-ladakh",
-      title: "Above the Clouds",
-      couple: "Priya & Sidharth",
-      location: "Pangong Tso & Nubra, Ladakh",
-      year: "2024",
       category: "Pre-Wedding",
-      description: "High-altitude cinematic love story filmed against snow-capped peaks, surreal blue lakes, and dramatic desert dunes.",
-      heroImage: "https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&w=1400&q=85",
-      videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-young-couple-walking-through-a-field-42862-large.mp4",
-      gallery: [
-        "https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&w=1000&q=85",
-        "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=85"
+      description: "A joyful celebration of hand-in-hand devotion, lush mint green ethnic elegance, and timeless romantic moments captured in fine-art 4K cinema.",
+      heroImage: "/assets/kaushik-anjali-outer-cover.jpg",
+      modalCover: "/assets/kaushik-anjali-modal-cover.jpg",
+      videoUrl: "/assets/kaushik & anjali/KAUSHIK HIGH LIGHT HC.mp4",
+      videos: [
+        { title: "Kaushik Highlight Cinema (Part 1)", url: "/assets/kaushik & anjali/KAUSHIK HIGH LIGHT HC.mp4" },
+        { title: "Kaushik Highlight Cinema (Part 2)", url: "/assets/kaushik & anjali/KAUSHIK HIGH LIGHT HC_1.mp4" },
+        { title: "Kaushik Highlight Cinema (Part 3)", url: "/assets/kaushik & anjali/KAUSHIK HIGH LIGHT HC_2.mp4" },
+        { title: "Anjali Highlights Special Cinema Feature", url: "/assets/kaushik & anjali/Anjali highlits.mp4" }
       ],
-      highlights: ["Sunrise Reflection at 14,000ft", "Monastery Monochromatic Portraits", "Vintage Leather Styling"],
-      bts: "Extreme weather filming with specialized battery thermal wraps and gimbal stabilization."
+      gallery: [
+        "/assets/kaushik & anjali/DSC01971.JPG",
+        "/assets/kaushik & anjali/DSC01993.JPG",
+        "/assets/kaushik & anjali/DSC01997.JPG",
+        "/assets/kaushik & anjali/DSC02026.JPG",
+        "/assets/kaushik & anjali/DSC02030.JPG",
+        "/assets/kaushik & anjali/DSC02032.JPG"
+      ],
+      highlights: ["Hand-in-Hand Fine-Art Portrait", "Mint Green Heritage Walk", "Sunset Garden Celebrations"],
+      bts: "Captured with natural ambient light and 85mm prime portrait lenses."
+    },
+    {
+      id: "story-vishwa-dhawal-ahmedabad",
+      title: "Royal Vow Ceremony",
+      couple: "Vishwa & Dhawal",
+      location: "Ahmedabad, Gujarat",
+      year: "2024",
+      category: "Royal Wedding",
+      description: "An authentic Gujarati royal wedding adorned with regal maroon lehengas, floral chhadar bridal entries, and sacred Varmala traditions.",
+      heroImage: "/assets/vishwa-dhawal-outer-cover.jpg",
+      modalCover: "/assets/vishwa-dhawal-modal-cover.jpg",
+      gallery: [
+        "/assets/vishva & Dhaval 8 jan 2024/1091  KD Designing.JPG",
+        "/assets/vishva & Dhaval 8 jan 2024/1125  KD Designing.JPG",
+        "/assets/vishva & Dhaval 8 jan 2024/1387  KD Designing.JPG",
+        "/assets/vishva & Dhaval 8 jan 2024/Vishva (1).jpg",
+        "/assets/vishva & Dhaval 8 jan 2024/Vishva (3).JPG",
+        "/assets/vishva & Dhaval 8 jan 2024/Vishva (4).jpg"
+      ],
+      highlights: ["Phoolon Ki Chhadar Grand Entry", "Sacred Varmala Vow Exchange", "Royal Mandap Ceremony"],
+      bts: "Shot with fine-art portrait lenses and high-resolution studio lighting."
     }
   ] as PortfolioItem[],
 
