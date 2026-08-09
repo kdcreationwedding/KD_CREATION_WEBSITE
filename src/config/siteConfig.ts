@@ -235,7 +235,10 @@ export const SITE_CONFIG = {
       modalCover: "/assets/yash-kavya-modal-cover.jpg",
       videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-bride-and-groom-walking-in-a-field-42861-large.mp4",
       gallery: [
-        "/assets/yash-kavya-modal-cover.jpg"
+        "/assets/yash-kavya-g1.jpg",
+        "/assets/yash-kavya-g2.jpg",
+        "/assets/yash-kavya-g3.jpg",
+        "/assets/yash-kavya-g4.jpg"
       ],
       highlights: ["Grand Royal Baarat Extravaganza", "Heritage Palace Mandap Ceremony", "Candlelit Gala Night"],
       bts: "Shot with 4K anamorphic cine lenses and specialized lighting setups."
