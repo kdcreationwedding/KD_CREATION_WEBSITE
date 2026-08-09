@@ -53,7 +53,7 @@ export const StoryDetailModal: React.FC<StoryDetailModalProps> = ({
             {/* Hero Image / Video Container */}
             <div className="relative rounded-2xl overflow-hidden h-72 sm:h-[420px] border border-gold/35 group shadow-2xl">
               <img
-                src={story.heroImage}
+                src={story.modalCover || story.heroImage}
                 alt={story.title}
                 className="w-full h-full object-cover brightness-95 group-hover:brightness-100 transition-all duration-500"
               />

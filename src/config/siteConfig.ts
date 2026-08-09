@@ -17,6 +17,7 @@ export interface PortfolioItem {
   category: 'Royal Wedding' | 'Destination' | 'Pre-Wedding' | 'Cinematic Film';
   description: string;
   heroImage: string;
+  modalCover?: string;
   videoUrl?: string;
   gallery: string[];
   highlights: string[];
@@ -230,13 +231,11 @@ export const SITE_CONFIG = {
       year: "2026",
       category: "Royal Wedding",
       description: "An opulent celebration blending rich Gujarati heritage, royal decor, and timeless cinematic moments captured with 4K anamorphic clarity.",
-      heroImage: "/assets/Yash & kavya.jpg",
+      heroImage: "/assets/yash-kavya-outer-cover.jpg",
+      modalCover: "/assets/yash-kavya-modal-cover.jpg",
       videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-bride-and-groom-walking-in-a-field-42861-large.mp4",
       gallery: [
-        "/assets/Yash & kavya.jpg",
-        "/assets/Yash & kavya - Copy.jpg",
-        "/assets/Yash & kavya - Copy (2).jpg",
-        "/assets/Yash & kavya - Copy (3).jpg"
+        "/assets/yash-kavya-modal-cover.jpg"
       ],
       highlights: ["Grand Royal Baarat Extravaganza", "Heritage Palace Mandap Ceremony", "Candlelit Gala Night"],
       bts: "Shot with 4K anamorphic cine lenses and specialized lighting setups."
