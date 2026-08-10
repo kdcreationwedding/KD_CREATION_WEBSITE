@@ -183,15 +183,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenAdminPortal }) => {
             CRAFTING STORIES THAT LAST FOREVER.
           </div>
 
-          {/* Admin Leads Vault Secret Trigger */}
-          <button
-            onClick={onOpenAdminPortal}
-            className="flex items-center gap-2 text-gold hover:text-white transition-colors bg-[#3B0811] px-4 py-1.5 rounded-full border border-gold/30 shadow-sm"
-            title="Open Admin Client Leads Vault"
-          >
-            <Lock className="w-3.5 h-3.5" />
-            <span>VIEW ALL CLIENT LEADS (ADMIN)</span>
-          </button>
+          {/* Admin Leads Vault — HIDDEN from public. Use Ctrl+Shift+A to access. */}
 
           <button
             onClick={scrollToTop}

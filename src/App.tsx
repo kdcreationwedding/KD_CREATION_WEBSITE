@@ -18,6 +18,7 @@ import { LeadFormSection } from './components/forms/LeadFormSection';
 import { StickyLeadCtas } from './components/forms/StickyLeadCtas';
 import { KdAiChatbot } from './components/chatbot/KdAiChatbot';
 import { ExitIntentModal } from './components/exitIntent/ExitIntentModal';
+
 import { Footer } from './components/layout/Footer';
 import { AdminLeadPortal } from './components/admin/AdminLeadPortal';
 import { AdminLoginModal } from './components/admin/AdminLoginModal';
@@ -85,15 +86,12 @@ export const App: React.FC = () => {
     setIsClientPortalOpen(false);
   };
 
-  // Handle Action Trigger: Prompt Login Modal if visitor is not logged in!
+  // Handle Action Trigger: scroll to contact form directly
   const handleOpenLeadForm = (serviceName?: string) => {
-    if (!loggedInClient) {
-      setIsClientAuthOpen(true);
-      return;
-    }
     if (serviceName) setSelectedService(serviceName);
     scrollToSection('contact');
   };
+
 
   // Handle Admin Lead Access Trigger (Checks Auth first)
   const handleOpenAdminAccess = () => {
@@ -166,16 +164,11 @@ export const App: React.FC = () => {
 
       {/* 4. Fullscreen 3D Hero Section */}
       <HeroSection
-        onExploreStories={() => {
-          if (!loggedInClient) {
-            setIsClientAuthOpen(true);
-          } else {
-            scrollToSection('stories');
-          }
-        }}
+        onExploreStories={() => scrollToSection('stories')}
         onStartStory={() => handleOpenLeadForm()}
         onOpenVideoModal={handleOpenVideoModal}
       />
+
 
       {/* 5. Portfolio Stories Section */}
       <SelectedStories
@@ -228,8 +221,10 @@ export const App: React.FC = () => {
         onOpenLeadForm={() => handleOpenLeadForm()}
       />
 
-      {/* 18. Exit-Intent Smart Lead Modal */}
-      <ExitIntentModal onOpenLeadForm={() => handleOpenLeadForm()} />
+
+      {/* 18. Exit-Intent Smart Lead Modal — DISABLED */}
+      {/* <ExitIntentModal onOpenLeadForm={() => handleOpenLeadForm()} /> */}
+
 
       {/* 19. Fullscreen Video Lightbox Player */}
       <VideoModal

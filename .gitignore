@@ -140,3 +140,4 @@ dist-ssr/
 *.mp4
 *.mp4
 *.MP4
+.vercel
