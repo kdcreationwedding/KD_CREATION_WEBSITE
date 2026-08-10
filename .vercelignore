@@ -1,0 +1,9 @@
+# Exclude large local video files — using YouTube for streaming
+public/assets/YASH & KAVYA/*.mp4
+public/assets/DHAVAL & SANGEETA/*.mp4
+public/assets/kaushik & anjali/*.mp4
+public/assets/vishva & Dhaval 8 jan 2024/*.mp4
+public/assets/*.mp4
+
+# Node modules
+node_modules/
