@@ -17,7 +17,7 @@ export const AboutSection: React.FC = () => {
           >
             <div className="relative rounded-3xl overflow-hidden border border-gold/30 shadow-2xl h-[480px]">
               <img
-                src="/assets/about-behind-the-frames.jpg"
+                src="assets/about-behind-the-frames.jpg"
                 alt="KD CREATION Studio Team"
                 className="w-full h-full object-cover brightness-95"
               />

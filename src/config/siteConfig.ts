@@ -64,7 +64,7 @@ export const SITE_CONFIG = {
     name: "KD CREATION",
     tagline: "WE TURN YOUR WEDDING INTO A TIMELESS FILM.",
     subheading: "Wedding Photography • Cinematography • Films • Reels",
-    officialLogo: "/assets/kd-logo.jpg",
+    officialLogo: "assets/kd-logo.jpg",
     logoAlt: "KD CREATION Official Monogram Brand Logo",
     foundedYear: 2018,
     location: "Mumbai & Worldwide",
@@ -84,7 +84,7 @@ export const SITE_CONFIG = {
       badge: "FOUNDER & CEO",
       tagline: "Executive Director & Visionary Leader of KD Group",
       bio: "Pioneering the overarching strategic vision and business expansion behind KD Group, elevating luxury wedding visual arts into timeless cinematic legacies.",
-      image: "/assets/mahesh-parmar.jpg",
+      image: "assets/mahesh-parmar.jpg",
       instagram: "https://www.instagram.com/mr_mahesh_sir?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
       email: "kdcreationwedding@gmail.com"
     },
@@ -95,7 +95,7 @@ export const SITE_CONFIG = {
       badge: "CO-FOUNDER & MASTER CINEMATOGRAPHER",
       tagline: "Head of Cinematography & Camera Operations",
       bio: "Master cinematographer heading all camera technology, 4K anamorphic cinema gear matrix, specialized lighting setups, and live on-location shoot direction.",
-      image: "/assets/harshad-chawda.jpg",
+      image: "assets/harshad-chawda.jpg",
       instagram: "https://www.instagram.com/harshhhad.18?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
       email: "chavdaharshad529@gmail.com"
     },
@@ -106,7 +106,7 @@ export const SITE_CONFIG = {
       badge: "CO-FOUNDER & CREATIVE / POST-PRODUCTION HEAD",
       tagline: "Head of Creativity, Editing & Studio Backoffice",
       bio: "Leading creative direction, post-production 4K editing suite, cinematic color matrix grading, sound design, and studio backoffice operations.",
-      image: "/assets/aniket-vaghela.jpg",
+      image: "assets/aniket-vaghela.jpg",
       instagram: "https://www.instagram.com/the.aniketvaghela?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
       email: "ajvaghela15300@gmail.com"
     }
@@ -177,7 +177,7 @@ export const SITE_CONFIG = {
       title: "WEDDING PHOTOGRAPHY",
       subtitle: "Editorial & Emotional Still Frames",
       description: "Editorial photographs capturing every unscripted emotion, regal details, and timeless grandeur with fine-art precision.",
-      image: "/assets/service-bride-mirror.jpg",
+      image: "assets/service-bride-mirror.jpg",
       features: ["Editorial Couple Portraits", "Candid Emotional Moments", "Fine-Art Detail Shots", "High-Resolution Master Retouching"],
       cta: "GET DETAILS"
     },
@@ -186,7 +186,7 @@ export const SITE_CONFIG = {
       title: "WEDDING CINEMATOGRAPHY",
       subtitle: "Full-Length 4K Cinema Feature Films",
       description: "Cinematic storytelling crafted with high-end anamorphic optics, custom sound design, color grading, and emotional narrative flow.",
-      image: "/assets/service-wedding-joyful.jpg",
+      image: "assets/service-wedding-joyful.jpg",
       features: ["Anamorphic Cinema 4K", "Custom Original Sound Design", "Hollywood Grade Color Matrix", "Aerial Drone Cinematography"],
       cta: "GET DETAILS"
     },
@@ -195,7 +195,7 @@ export const SITE_CONFIG = {
       title: "PRE-WEDDING FILMS",
       subtitle: "Concept-Driven Romance Narratives",
       description: "Custom concept-driven visual love stories shot in exotic domestic or international destinations crafted around your unique journey.",
-      image: "/assets/service-prewedding-dhaval-sangita.jpg",
+      image: "assets/service-prewedding-dhaval-sangita.jpg",
       features: ["Custom Scripted Storylines", "Destination Location Scouting", "Styling & Art Direction", "Cinematic Trailer & Teasers"],
       cta: "GET DETAILS"
     },
@@ -204,7 +204,7 @@ export const SITE_CONFIG = {
       title: "WEDDING REELS",
       subtitle: "Next-Day Ultra High-Impact Social Films",
       description: "Short-form vertical visual masterworks color-graded and synchronized to audio trends for Instagram and digital showcases.",
-      image: "/assets/service-romance-arch.jpg",
+      image: "assets/service-romance-arch.jpg",
       features: ["24-Hour Same-Day Delivery", "Vertical 9:16 Cinema Color", "Custom Sound Syncing", "High-Engaging Instagram Hooks"],
       cta: "GET DETAILS"
     },
@@ -213,7 +213,7 @@ export const SITE_CONFIG = {
       title: "LUXURY HEIRLOOM ALBUMS",
       subtitle: "Original Genuine Leather & Master Quality Finish",
       description: "Handcrafted luxury photo books created with original genuine leather covers, museum-quality HD non-tearable metallic pages, precision color calibration, and master finishing standards.",
-      image: "/assets/service-album-ring.jpg",
+      image: "assets/service-album-ring.jpg",
       features: ["Original Genuine Leather Covers", "Master Premium Handcrafted Finish", "Fuji Archival HD Non-Tearable Pages", "Custom Gold Embossing & Heirloom Wooden Box Vault", "Archival HD Print & Master Color Finishing"],
       cta: "GET DETAILS"
     },
@@ -222,7 +222,7 @@ export const SITE_CONFIG = {
       title: "COMPLETE WEDDING COVERAGE",
       subtitle: "All-Inclusive Signature Master Experience",
       description: "The complete KD CREATION experience combining full photography, 4K film production, pre-wedding, reels, and master luxury albums.",
-      image: "/assets/service-complete-coverage.jpg",
+      image: "assets/service-complete-coverage.jpg",
       features: ["Full Director Team (10+ Crew)", "360 Multi-Camera Sync", "Live Stream Support", "Master Box Set & Heirloom Vault"],
       cta: "GET DETAILS"
     }
@@ -238,23 +238,23 @@ export const SITE_CONFIG = {
       year: "2026",
       category: "Royal Wedding",
       description: "An opulent celebration blending rich Gujarati heritage, royal decor, and timeless cinematic moments captured with 4K anamorphic clarity.",
-      heroImage: "/assets/yash-kavya-outer-cover.jpg",
-      modalCover: "/assets/yash-kavya-modal-cover.jpg",
+      heroImage: "assets/yash-kavya-outer-cover.jpg",
+      modalCover: "assets/yash-kavya-modal-cover.jpg",
       videoUrl: "https://youtu.be/3i1-aJcasSg",
       videos: [
         { title: "Yash & Kavya — Roka Ceremony Film", url: "https://youtu.be/3i1-aJcasSg" }
       ],
       gallery: [
-        "/assets/YASH & KAVYA/Yash & kavya.jpg",
-        "/assets/YASH & KAVYA/Yash & kavya - Copy.jpg",
-        "/assets/YASH & KAVYA/Yash & kavya - Copy - Copy.jpg",
-        "/assets/YASH & KAVYA/Yash & kavya - Copy - Copy (2).jpg",
-        "/assets/YASH & KAVYA/Yash & kavya - Copy - Copy (2) - Copy.jpg",
-        "/assets/YASH & KAVYA/Yash & kavya - Copy - Copy (3).jpg",
-        "/assets/YASH & KAVYA/Yash & kavya - Copy - Copy (3) - Copy.jpg",
-        "/assets/YASH & KAVYA/Yash & kavya - Copy - Copy (4).jpg",
-        "/assets/YASH & KAVYA/Yash & kavya - Copy - Copy (4) - Copy.jpg",
-        "/assets/YASH & KAVYA/Yash & kavya - Copy - Copy (5) - Copy.jpg"
+        "assets/YASH & KAVYA/Yash & kavya.jpg",
+        "assets/YASH & KAVYA/Yash & kavya - Copy.jpg",
+        "assets/YASH & KAVYA/Yash & kavya - Copy - Copy.jpg",
+        "assets/YASH & KAVYA/Yash & kavya - Copy - Copy (2).jpg",
+        "assets/YASH & KAVYA/Yash & kavya - Copy - Copy (2) - Copy.jpg",
+        "assets/YASH & KAVYA/Yash & kavya - Copy - Copy (3).jpg",
+        "assets/YASH & KAVYA/Yash & kavya - Copy - Copy (3) - Copy.jpg",
+        "assets/YASH & KAVYA/Yash & kavya - Copy - Copy (4).jpg",
+        "assets/YASH & KAVYA/Yash & kavya - Copy - Copy (4) - Copy.jpg",
+        "assets/YASH & KAVYA/Yash & kavya - Copy - Copy (5) - Copy.jpg"
       ],
       highlights: ["Grand Royal Baarat Extravaganza", "Heritage Palace Mandap Ceremony", "Candlelit Gala Night"],
       bts: "Shot with 4K anamorphic cine lenses and specialized lighting setups."
@@ -267,31 +267,31 @@ export const SITE_CONFIG = {
       year: "2026",
       category: "Destination",
       description: "In black and white, love speaks louder than colors. A beautiful journey where two souls choose each other, captured with pure 4K cinematic connection.",
-      heroImage: "/assets/dhaval-sangeeta-outer-cover.jpg",
-      modalCover: "/assets/dhaval-sangeeta-modal-cover.jpg",
+      heroImage: "assets/dhaval-sangeeta-outer-cover.jpg",
+      modalCover: "assets/dhaval-sangeeta-modal-cover.jpg",
       videoUrl: "https://youtu.be/mJ49EXaTXO8",
       videos: [
         { title: "Dhaval & Sangeeta — Pre-Wedding Teaser + Song Film", url: "https://youtu.be/mJ49EXaTXO8" },
         { title: "Dhaval & Sangeeta — Pre-Wedding High-Impact Reel", url: "https://youtu.be/x7782vFootg" }
       ],
       gallery: [
-        "/assets/DHAVAL & SANGEETA/DHAVAL & SANDEETA PRE - Copy (4).jpg",
-        "/assets/DHAVAL & SANGEETA/DHAVAL & SANDEETA PRE - Copy (5).jpg",
-        "/assets/DHAVAL & SANGEETA/DHAVAL & SANGITA POST 01.jpg",
-        "/assets/DHAVAL & SANGEETA/DHAVAL & SANGITA POST 02.jpg",
-        "/assets/DHAVAL & SANGEETA/DHAVAL & SANGITA POST 03.jpg",
-        "/assets/DHAVAL & SANGEETA/DHAVAL & SANGITA POST 04.jpg",
-        "/assets/DHAVAL & SANGEETA/DHAVAL & SANGITA POST 05.jpg",
-        "/assets/DHAVAL & SANGEETA/DHAVAL & SANGITA POST 06.jpg",
-        "/assets/DHAVAL & SANGEETA/DS PRE W (2).jpg",
-        "/assets/DHAVAL & SANGEETA/DS PRE W (3).jpg",
-        "/assets/DHAVAL & SANGEETA/DS WEDDING (1).jpg",
-        "/assets/DHAVAL & SANGEETA/DS WEDDING (3).jpg",
-        "/assets/DHAVAL & SANGEETA/Dhaval & Sangita ......jpg",
-        "/assets/DHAVAL & SANGEETA/Dhaval & Sangita....jpg",
-        "/assets/DHAVAL & SANGEETA/KD_09678.jpg",
-        "/assets/DHAVAL & SANGEETA/KD_09784.jpg",
-        "/assets/DHAVAL & SANGEETA/KD_09786.jpg"
+        "assets/DHAVAL & SANGEETA/DHAVAL & SANDEETA PRE - Copy (4).jpg",
+        "assets/DHAVAL & SANGEETA/DHAVAL & SANDEETA PRE - Copy (5).jpg",
+        "assets/DHAVAL & SANGEETA/DHAVAL & SANGITA POST 01.jpg",
+        "assets/DHAVAL & SANGEETA/DHAVAL & SANGITA POST 02.jpg",
+        "assets/DHAVAL & SANGEETA/DHAVAL & SANGITA POST 03.jpg",
+        "assets/DHAVAL & SANGEETA/DHAVAL & SANGITA POST 04.jpg",
+        "assets/DHAVAL & SANGEETA/DHAVAL & SANGITA POST 05.jpg",
+        "assets/DHAVAL & SANGEETA/DHAVAL & SANGITA POST 06.jpg",
+        "assets/DHAVAL & SANGEETA/DS PRE W (2).jpg",
+        "assets/DHAVAL & SANGEETA/DS PRE W (3).jpg",
+        "assets/DHAVAL & SANGEETA/DS WEDDING (1).jpg",
+        "assets/DHAVAL & SANGEETA/DS WEDDING (3).jpg",
+        "assets/DHAVAL & SANGEETA/Dhaval & Sangita ......jpg",
+        "assets/DHAVAL & SANGEETA/Dhaval & Sangita....jpg",
+        "assets/DHAVAL & SANGEETA/KD_09678.jpg",
+        "assets/DHAVAL & SANGEETA/KD_09784.jpg",
+        "assets/DHAVAL & SANGEETA/KD_09786.jpg"
       ],
       highlights: ["Sunset Lakefront Portrait Session", "Emotional Mandap Ceremony", "Candlelit Gala Night"],
       bts: "Filmed in 4K anamorphic cinema with golden hour natural directional lighting."
@@ -304,19 +304,19 @@ export const SITE_CONFIG = {
       year: "2025",
       category: "Pre-Wedding",
       description: "A joyful celebration of hand-in-hand devotion, lush mint green ethnic elegance, and timeless romantic moments captured in fine-art 4K cinema.",
-      heroImage: "/assets/kaushik-anjali-outer-cover.jpg",
-      modalCover: "/assets/kaushik-anjali-modal-cover.jpg",
+      heroImage: "assets/kaushik-anjali-outer-cover.jpg",
+      modalCover: "assets/kaushik-anjali-modal-cover.jpg",
       videoUrl: "https://youtu.be/DPSPFKgsDs4",
       videos: [
         { title: "Kaushik & Anjali — Wedding Highlights Film", url: "https://youtu.be/DPSPFKgsDs4" }
       ],
       gallery: [
-        "/assets/kaushik & anjali/DSC01971.JPG",
-        "/assets/kaushik & anjali/DSC01993.JPG",
-        "/assets/kaushik & anjali/DSC01997.JPG",
-        "/assets/kaushik & anjali/DSC02026.JPG",
-        "/assets/kaushik & anjali/DSC02030.JPG",
-        "/assets/kaushik & anjali/DSC02032.JPG"
+        "assets/kaushik & anjali/DSC01971.JPG",
+        "assets/kaushik & anjali/DSC01993.JPG",
+        "assets/kaushik & anjali/DSC01997.JPG",
+        "assets/kaushik & anjali/DSC02026.JPG",
+        "assets/kaushik & anjali/DSC02030.JPG",
+        "assets/kaushik & anjali/DSC02032.JPG"
       ],
       highlights: ["Hand-in-Hand Fine-Art Portrait", "Mint Green Heritage Walk", "Sunset Garden Celebrations"],
       bts: "Captured with natural ambient light and 85mm prime portrait lenses."
@@ -329,15 +329,15 @@ export const SITE_CONFIG = {
       year: "2024",
       category: "Royal Wedding",
       description: "An authentic Gujarati royal wedding adorned with regal maroon lehengas, floral chhadar bridal entries, and sacred Varmala traditions.",
-      heroImage: "/assets/vishwa-dhawal-outer-cover.jpg",
-      modalCover: "/assets/vishwa-dhawal-modal-cover.jpg",
+      heroImage: "assets/vishwa-dhawal-outer-cover.jpg",
+      modalCover: "assets/vishwa-dhawal-modal-cover.jpg",
       gallery: [
-        "/assets/vishva & Dhaval 8 jan 2024/1091  KD Designing.JPG",
-        "/assets/vishva & Dhaval 8 jan 2024/1125  KD Designing.JPG",
-        "/assets/vishva & Dhaval 8 jan 2024/1387  KD Designing.JPG",
-        "/assets/vishva & Dhaval 8 jan 2024/Vishva (1).jpg",
-        "/assets/vishva & Dhaval 8 jan 2024/Vishva (3).JPG",
-        "/assets/vishva & Dhaval 8 jan 2024/Vishva (4).jpg"
+        "assets/vishva & Dhaval 8 jan 2024/1091  KD Designing.JPG",
+        "assets/vishva & Dhaval 8 jan 2024/1125  KD Designing.JPG",
+        "assets/vishva & Dhaval 8 jan 2024/1387  KD Designing.JPG",
+        "assets/vishva & Dhaval 8 jan 2024/Vishva (1).jpg",
+        "assets/vishva & Dhaval 8 jan 2024/Vishva (3).JPG",
+        "assets/vishva & Dhaval 8 jan 2024/Vishva (4).jpg"
       ],
       highlights: ["Phoolon Ki Chhadar Grand Entry", "Sacred Varmala Vow Exchange", "Royal Mandap Ceremony"],
       bts: "Shot with fine-art portrait lenses and high-resolution studio lighting."
@@ -359,7 +359,7 @@ export const SITE_CONFIG = {
       id: "t1",
       couple: "Yash & Kavya",
       location: "Ahmedabad, Gujarat",
-      portrait: "/assets/yash-kavya-outer-cover.jpg",
+      portrait: "assets/yash-kavya-outer-cover.jpg",
       quote: "The entire team of KD CREATION captured our wedding so magnificently ki shabdo nathi! Every single frame feels like a Bollywood blockbuster film. Our families were completely emotional seeing our 4K cinematic film & handcrafted luxury album!",
       weddingDate: "January 2026"
     },
@@ -367,7 +367,7 @@ export const SITE_CONFIG = {
       id: "t2",
       couple: "Dhaval & Sangeeta",
       location: "Ahmedabad, Gujarat",
-      portrait: "/assets/dhaval-sangeeta-outer-cover.jpg",
+      portrait: "assets/dhaval-sangeeta-outer-cover.jpg",
       quote: "KD CREATION team preserved every emotion and moment beautifully! Emno lighting setup, 4K color science, and pre-wedding reels were absolute perfection. Harshad bhai and Mahesh bhai are true visionaries!",
       weddingDate: "January 2026"
     },
@@ -375,7 +375,7 @@ export const SITE_CONFIG = {
       id: "t3",
       couple: "Kaushik & Anjali",
       location: "Ahmedabad, Gujarat",
-      portrait: "/assets/kaushik-anjali-outer-cover.jpg",
+      portrait: "assets/kaushik-anjali-outer-cover.jpg",
       quote: "Amara wedding photos and Haldi teaser visual presentation was so stunning that all our guests were blown away! Next-level editorial photography and humble team management. Their Genuine Leather Album is pure luxury!",
       weddingDate: "December 2025"
     },
@@ -383,7 +383,7 @@ export const SITE_CONFIG = {
       id: "t4",
       couple: "Vishwa & Dhawal",
       location: "Ahmedabad, Gujarat",
-      portrait: "/assets/vishwa-dhawal-outer-cover.jpg",
+      portrait: "assets/vishwa-dhawal-outer-cover.jpg",
       quote: "Amari grand Varmala & Phoolon ki Chaadar entry capture jetli mind-blowing hati, today also watching our film gives us goosebumps! Absolute best wedding cinematography team in Gujarat!",
       weddingDate: "January 2024"
     },
@@ -391,7 +391,7 @@ export const SITE_CONFIG = {
       id: "t5",
       couple: "Rakhi & Sugam",
       location: "Ahmedabad, Gujarat",
-      portrait: "/assets/service-prewedding-rakhi.jpg",
+      portrait: "assets/service-prewedding-rakhi.jpg",
       quote: "KD CREATION photography is pure fine-art! Amaru custom romance story shoot and heirloom album brought tears of joy to our parents. Truly world-class cinematography!",
       weddingDate: "January 2026"
     }

@@ -11,25 +11,25 @@ const SHOWREEL_VIDEOS = [
   {
     title: "Yash & Kavya — Grand Roka Ceremony 4K Film",
     url: "https://youtu.be/3i1-aJcasSg",
-    poster: "/assets/yash-kavya-outer-cover.jpg",
+    poster: "assets/yash-kavya-outer-cover.jpg",
     badge: "YASH & KAVYA — ROKA CEREMONY 4K FILM"
   },
   {
     title: "Dhaval & Sangeeta — Pre-Wedding Teaser & Song Film",
     url: "https://youtu.be/mJ49EXaTXO8",
-    poster: "/assets/dhaval-sangeeta-outer-cover.jpg",
+    poster: "assets/dhaval-sangeeta-outer-cover.jpg",
     badge: "DHAVAL & SANGEETA — PRE-WEDDING FILM"
   },
   {
     title: "Dhaval & Sangeeta — High-Impact Cinema Reel",
     url: "https://youtu.be/x7782vFootg",
-    poster: "/assets/dhaval-sangeeta-outer-cover.jpg",
+    poster: "assets/dhaval-sangeeta-outer-cover.jpg",
     badge: "DHAVAL & SANGEETA — CINEMA REEL"
   },
   {
     title: "Kaushik & Anjali — Royal Wedding Highlights Film",
     url: "https://youtu.be/DPSPFKgsDs4",
-    poster: "/assets/kaushik-anjali-outer-cover.jpg",
+    poster: "assets/kaushik-anjali-outer-cover.jpg",
     badge: "KAUSHIK & ANJALI — HIGHLIGHTS FILM"
   }
 ];
