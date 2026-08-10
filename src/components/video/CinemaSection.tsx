@@ -10,32 +10,32 @@ interface CinemaSectionProps {
 const SHOWREEL_VIDEOS = [
   {
     title: "Yash & Kavya — Grand Roka Ceremony 4K Film",
-    url: "/assets/YASH & KAVYA/KD Creation - Roka.mp4",
-    poster: "/assets/yash-kavya-outer-cover.jpg",
+    url: "./assets/YASH & KAVYA/KD Creation - Roka.mp4",
+    poster: "./assets/yash-kavya-outer-cover.jpg",
     badge: "YASH & KAVYA — ROKA CEREMONY 4K FILM"
   },
   {
     title: "Dhaval & Sangeeta — Pre-Wedding Teaser & Song Film",
-    url: "/assets/DHAVAL & SANGEETA/Pre-Wedding_Teaser + Song(Dhawal & Sangita).mp4",
-    poster: "/assets/dhaval-sangeeta-outer-cover.jpg",
+    url: "./assets/DHAVAL & SANGEETA/Pre-Wedding_Teaser + Song(Dhawal & Sangita).mp4",
+    poster: "./assets/dhaval-sangeeta-outer-cover.jpg",
     badge: "DHAVAL & SANGEETA — PRE-WEDDING FILM"
   },
   {
     title: "Dhaval & Sangeeta — High-Impact Cinema Reel",
-    url: "/assets/DHAVAL & SANGEETA/Pre-Wedding_REEL.mp4",
-    poster: "/assets/dhaval-sangeeta-outer-cover.jpg",
+    url: "./assets/DHAVAL & SANGEETA/Pre-Wedding_REEL.mp4",
+    poster: "./assets/dhaval-sangeeta-outer-cover.jpg",
     badge: "DHAVAL & SANGEETA — CINEMA REEL"
   },
   {
     title: "Kaushik & Anjali — Royal Wedding Highlights Film",
-    url: "/assets/kaushik & anjali/KAUSHIK HIGH LIGHT HC.mp4",
-    poster: "/assets/kaushik-anjali-outer-cover.jpg",
+    url: "./assets/kaushik & anjali/KAUSHIK HIGH LIGHT HC.mp4",
+    poster: "./assets/kaushik-anjali-outer-cover.jpg",
     badge: "KAUSHIK & ANJALI — HIGHLIGHTS FILM"
   },
   {
     title: "Kaushik & Anjali — Bridal Highlights Cinema Film",
-    url: "/assets/kaushik & anjali/Anjali highlits.mp4",
-    poster: "/assets/service-bride-mirror.jpg",
+    url: "./assets/kaushik & anjali/Anjali highlits.mp4",
+    poster: "./assets/service-bride-mirror.jpg",
     badge: "KAUSHIK & ANJALI — BRIDAL FILM"
   }
 ];
