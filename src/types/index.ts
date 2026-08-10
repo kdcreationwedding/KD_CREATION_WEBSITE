@@ -11,7 +11,7 @@ export interface Lead {
   weddingLocation: string;
   eventType: string;
   services: string[];
-  guestCount: string;
+  guestCount?: string;
   budget: string;
   message?: string;
   leadSource: 'AI Chatbot' | 'Contact Form' | 'Exit Intent' | 'WhatsApp Direct';

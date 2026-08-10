@@ -40,21 +40,20 @@ export const Navbar: React.FC<NavbarProps> = ({
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? 'liquid-glass-panel py-2.5 sm:py-3 shadow-2xl border-b border-gold/35'
-            : 'bg-gradient-to-b from-[#33060D]/95 via-[#33060D]/70 to-transparent py-3.5 sm:py-4.5'
+            ? 'bg-[#33060D]/95 backdrop-blur-md py-2.5 shadow-2xl border-b border-gold/25'
+            : 'bg-gradient-to-b from-[#33060D]/95 via-[#33060D]/70 to-transparent py-3.5'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3">
-          
           {/* Official Logo Brand Container */}
           <a
             href="#hero"
             className="group flex items-center gap-2.5 relative focus:outline-none py-0.5"
             aria-label="KD CREATION Home"
           >
-            <div className="relative h-9 sm:h-11 w-auto overflow-hidden rounded-xl border border-gold/40 bg-[#3B0811] p-1 shadow-[0_4px_20px_rgba(212,175,55,0.25)] transition-all duration-300 group-hover:border-gold group-hover:shadow-[0_4px_25px_rgba(212,175,55,0.45)] flex items-center justify-center">
+            <div className="relative h-9 sm:h-10 w-auto overflow-hidden rounded-xl border border-gold/40 bg-[#3B0811] p-1 shadow-[0_4px_15px_rgba(212,175,55,0.2)] transition-all duration-300 group-hover:border-gold group-hover:shadow-[0_4px_20px_rgba(212,175,55,0.4)] flex items-center justify-center">
               <img
                 src={SITE_CONFIG.brand.officialLogo}
                 alt={SITE_CONFIG.brand.logoAlt}
@@ -77,20 +76,19 @@ export const Navbar: React.FC<NavbarProps> = ({
               <a
                 key={link.name}
                 href={link.href}
-                className="text-[11px] xl:text-xs tracking-[0.16em] font-bold text-[#F5F2EB] hover:text-gold transition-colors duration-300 relative py-1 group"
+                className="text-[11px] xl:text-xs tracking-[0.16em] font-bold text-[#F5F2EB] hover:text-gold transition-colors duration-300 py-1"
               >
                 {link.name}
-                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-gold transition-all duration-300 group-hover:w-full" />
               </a>
             ))}
           </nav>
 
           {/* Right Action CTAs */}
-          <div className="hidden md:flex items-center gap-2.5">
+          <div className="hidden md:flex items-center gap-2">
             {/* Client Portal Login / Dashboard Button */}
             <button
               onClick={onOpenClientAuth}
-              className="flex items-center gap-1.5 text-[10.5px] tracking-widest font-bold text-[#F5F2EB] border border-gold/40 bg-[#3B0811] px-3 py-2 rounded-full hover:border-gold hover:text-gold transition-all shadow-md"
+              className="flex items-center gap-1.5 text-[10px] tracking-widest font-bold text-[#F5F2EB] border border-gold/40 bg-[#3B0811] px-3 py-1.5 rounded-full hover:border-gold hover:text-gold hover:scale-105 transition-all shadow-md"
               title="Open VIP Client Portal"
             >
               <UserCheck className="w-3.5 h-3.5 text-gold" />
@@ -99,7 +97,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button
               onClick={onOpenChat}
-              className="flex items-center gap-1.5 text-[10.5px] tracking-widest font-bold text-gold border border-gold/40 bg-[#4A0E17]/80 backdrop-blur-md px-3 py-2 rounded-full hover:bg-gold-gradient hover:text-obsidian shadow-md transition-all duration-300"
+              className="flex items-center gap-1.5 text-[10px] tracking-widest font-bold text-gold border border-gold/40 bg-[#4A0E17]/80 backdrop-blur-md px-3 py-1.5 rounded-full hover:bg-gold-gradient hover:text-obsidian hover:scale-105 shadow-md transition-all duration-300"
             >
               <Sparkles className="w-3.5 h-3.5" />
               <span>ASK KD AI</span>
@@ -107,10 +105,10 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button
               onClick={onOpenLeadForm}
-              className="flex items-center gap-1.5 text-[10.5px] tracking-widest font-bold text-obsidian bg-gold-gradient px-3.5 py-2 rounded-full hover:brightness-110 shadow-lg shadow-gold/25 transition-all duration-300 active:scale-95"
+              className="flex items-center gap-1.5 text-[10px] tracking-widest font-bold text-obsidian bg-gold-gradient px-3.5 py-1.5 rounded-full hover:brightness-110 hover:scale-105 shadow-lg shadow-gold/25 transition-all duration-300 active:scale-95"
             >
               <Calendar className="w-3.5 h-3.5" />
-              <span>CHECK DATE</span>
+              <span>BOOK DATES</span>
             </button>
           </div>
 
@@ -133,7 +131,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-x-0 top-[58px] sm:top-[66px] z-40 liquid-glass-panel border-b border-gold/30 p-6 lg:hidden"
+            className="fixed inset-x-0 top-[58px] sm:top-[66px] z-40 apple-liquid-glass border-b border-gold/40 p-6 lg:hidden"
           >
             <div className="flex flex-col gap-5 items-center text-center py-3">
               <img

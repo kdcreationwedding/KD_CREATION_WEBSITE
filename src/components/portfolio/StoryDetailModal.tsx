@@ -152,10 +152,13 @@ export const StoryDetailModal: React.FC<StoryDetailModalProps> = ({
                         className="relative rounded-2xl overflow-hidden h-48 border-2 border-gold/40 bg-[#2B050B] group cursor-pointer shadow-2xl flex flex-col justify-between p-4 hover:border-gold hover:scale-[1.02] transition-all duration-300"
                         data-cursor="PLAY FILM"
                       >
-                        <img
-                          src={story.modalCover || story.heroImage}
-                          alt={vid.title}
-                          className="absolute inset-0 w-full h-full object-cover brightness-40 group-hover:brightness-55 transition-all"
+                        <video
+                          src={vid.url}
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          className="absolute inset-0 w-full h-full object-cover brightness-50 group-hover:brightness-75 transition-all pointer-events-none"
                         />
                         
                         <div className="relative z-10 flex items-center justify-between">

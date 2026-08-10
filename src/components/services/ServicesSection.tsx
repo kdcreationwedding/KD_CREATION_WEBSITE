@@ -54,22 +54,23 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
           {SITE_CONFIG.services.map((service, index) => (
             <motion.div
               key={service.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="liquid-glass-card rounded-3xl overflow-hidden flex flex-col group shadow-xl"
+              initial={{ opacity: 0, y: 40, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: false, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: (index % 3) * 0.12, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ y: -7, scale: 1.015 }}
+              className="liquid-glass-card rounded-3xl overflow-hidden flex flex-col group shadow-xl transition-all duration-300"
               data-cursor="VIEW"
             >
               {/* Image Preview with Hover Zoom */}
-              <div className="relative h-64 overflow-hidden">
+              <div className="relative h-72 sm:h-80 overflow-hidden bg-[#2B050B]">
                 <img
                   src={service.image}
                   alt={service.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 brightness-90 group-hover:brightness-100"
+                  className="w-full h-full object-cover object-[center_15%] transition-transform duration-700 group-hover:scale-105 brightness-95 group-hover:brightness-100"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#3B0811] via-transparent to-transparent opacity-90" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#3B0811] via-[#3B0811]/30 to-transparent opacity-85" />
                 
                 {/* Floating Service Badge */}
                 <div className="absolute top-4 left-4 liquid-glass-pill p-2.5 rounded-2xl shadow-lg">

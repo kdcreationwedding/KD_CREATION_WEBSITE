@@ -25,11 +25,12 @@ export const ProcessTimeline: React.FC = () => {
           {SITE_CONFIG.process.map((step, index) => (
             <motion.div
               key={step.number}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.15 }}
-              className="relative z-10 flex flex-col items-center text-center group"
+              initial={{ opacity: 0, y: 40, scale: 0.9 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: false, margin: "-40px" }}
+              transition={{ duration: 0.5, delay: index * 0.12 }}
+              whileHover={{ y: -6, scale: 1.05 }}
+              className="relative z-10 flex flex-col items-center text-center group transition-all duration-300"
             >
               {/* Step Circle Badge */}
               <div className="w-16 h-16 rounded-full bg-obsidian-100 border border-gold/40 text-gold flex items-center justify-center font-serif-luxury text-xl font-bold shadow-xl mb-6 group-hover:bg-gold-gradient group-hover:text-obsidian transition-all duration-500">

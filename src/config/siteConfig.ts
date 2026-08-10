@@ -79,7 +79,7 @@ export const SITE_CONFIG = {
   founders: [
     {
       id: "mahesh-parmar",
-      name: "Mr. Mahesh Parmar",
+      name: "Mr. Mahesh",
       role: "Founder of KD Group",
       badge: "FOUNDER & CEO",
       tagline: "Executive Director & Visionary Leader of KD Group",
@@ -90,7 +90,7 @@ export const SITE_CONFIG = {
     },
     {
       id: "harshad-chawda",
-      name: "Mr. Harshad Chawda",
+      name: "Mr. Harshad Chavda",
       role: "Co-Founder of KD Creation",
       badge: "CO-FOUNDER & MASTER CINEMATOGRAPHER",
       tagline: "Head of Cinematography & Camera Operations",
@@ -195,7 +195,7 @@ export const SITE_CONFIG = {
       title: "PRE-WEDDING FILMS",
       subtitle: "Concept-Driven Romance Narratives",
       description: "Custom concept-driven visual love stories shot in exotic domestic or international destinations crafted around your unique journey.",
-      image: "/assets/service-prewedding-rakhi.jpg",
+      image: "/assets/service-prewedding-dhaval-sangita.jpg",
       features: ["Custom Scripted Storylines", "Destination Location Scouting", "Styling & Art Direction", "Cinematic Trailer & Teasers"],
       cta: "GET DETAILS"
     },
@@ -211,10 +211,10 @@ export const SITE_CONFIG = {
     {
       id: "wedding-albums",
       title: "LUXURY HEIRLOOM ALBUMS",
-      subtitle: "Original Genuine Leather & International Quality",
-      description: "Handcrafted luxury photo books created with original genuine leather covers, museum-quality HD non-tearable metallic pages, precision color calibration, and international finishing standards.",
-      image: "/assets/service-couple-hands.jpg",
-      features: ["Original Genuine Leather Covers", "International Quality Handcrafted Finish", "Fuji Archival HD Non-Tearable Pages", "Custom Gold Embossing & Heirloom Wooden Box Vault", "Lifetime Print & Color Guarantee"],
+      subtitle: "Original Genuine Leather & Master Quality Finish",
+      description: "Handcrafted luxury photo books created with original genuine leather covers, museum-quality HD non-tearable metallic pages, precision color calibration, and master finishing standards.",
+      image: "/assets/service-album-ring.jpg",
+      features: ["Original Genuine Leather Covers", "Master Premium Handcrafted Finish", "Fuji Archival HD Non-Tearable Pages", "Custom Gold Embossing & Heirloom Wooden Box Vault", "Archival HD Print & Master Color Finishing"],
       cta: "GET DETAILS"
     },
     {
@@ -222,7 +222,7 @@ export const SITE_CONFIG = {
       title: "COMPLETE WEDDING COVERAGE",
       subtitle: "All-Inclusive Signature Master Experience",
       description: "The complete KD CREATION experience combining full photography, 4K film production, pre-wedding, reels, and master luxury albums.",
-      image: "/assets/vishwa-dhawal-outer-cover.jpg",
+      image: "/assets/service-complete-coverage.jpg",
       features: ["Full Director Team (10+ Crew)", "360 Multi-Camera Sync", "Live Stream Support", "Master Box Set & Heirloom Vault"],
       cta: "GET DETAILS"
     }
@@ -356,31 +356,47 @@ export const SITE_CONFIG = {
     { number: "05", title: "DELIVER", description: "Handcrafted Italian leather albums, 4K film vault, and next-day social reels." }
   ],
 
-  // Testimonials
+  // Testimonials — Words from the Couples
   testimonials: [
     {
       id: "t1",
-      couple: "Aanya & Devraj",
-      location: "Udaipur Palace",
-      portrait: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
-      quote: "KD CREATION didn't just photograph our wedding; they immortalized our emotions. Watching our wedding film felt like sitting in a premiere cinema showing our soul.",
-      weddingDate: "December 2025"
+      couple: "Yash & Kavya",
+      location: "Ahmedabad, Gujarat",
+      portrait: "/assets/yash-kavya-outer-cover.jpg",
+      quote: "The entire team of KD CREATION captured our wedding so magnificently ki shabdo nathi! Every single frame feels like a Bollywood blockbuster film. Our families were completely emotional seeing our 4K cinematic film & handcrafted luxury album!",
+      weddingDate: "January 2026"
     },
     {
       id: "t2",
-      couple: "Rhea & Rohan",
-      location: "Lake Como, Italy",
-      portrait: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
-      quote: "The professionalism, artistic vision, and quiet grace of the KD CREATION team blew us away. Our guests were mesmerized by the next-day reels!",
-      weddingDate: "October 2025"
+      couple: "Dhaval & Sangeeta",
+      location: "Ahmedabad, Gujarat",
+      portrait: "/assets/dhaval-sangeeta-outer-cover.jpg",
+      quote: "KD CREATION team preserved every emotion and moment beautifully! Emno lighting setup, 4K color science, and pre-wedding reels were absolute perfection. Harshad bhai and Mahesh bhai are true visionaries!",
+      weddingDate: "January 2026"
     },
     {
       id: "t3",
-      couple: "Natasha & Kabir",
-      location: "St. Regis Goa",
-      portrait: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80",
-      quote: "Every single frame looks straight out of Vogue. We couldn't have chosen a more gifted team for our destination wedding.",
-      weddingDate: "November 2024"
+      couple: "Kaushik & Anjali",
+      location: "Ahmedabad, Gujarat",
+      portrait: "/assets/kaushik-anjali-outer-cover.jpg",
+      quote: "Amara wedding photos and Haldi teaser visual presentation was so stunning that all our guests were blown away! Next-level editorial photography and humble team management. Their Genuine Leather Album is pure luxury!",
+      weddingDate: "December 2025"
+    },
+    {
+      id: "t4",
+      couple: "Vishwa & Dhawal",
+      location: "Ahmedabad, Gujarat",
+      portrait: "/assets/vishwa-dhawal-outer-cover.jpg",
+      quote: "Amari grand Varmala & Phoolon ki Chaadar entry capture jetli mind-blowing hati, today also watching our film gives us goosebumps! Absolute best wedding cinematography team in Gujarat!",
+      weddingDate: "January 2024"
+    },
+    {
+      id: "t5",
+      couple: "Rakhi & Sugam",
+      location: "Ahmedabad, Gujarat",
+      portrait: "/assets/service-prewedding-rakhi.jpg",
+      quote: "KD CREATION photography is pure fine-art! Amaru custom romance story shoot and heirloom album brought tears of joy to our parents. Truly world-class cinematography!",
+      weddingDate: "January 2026"
     }
   ] as Testimonial[]
 };

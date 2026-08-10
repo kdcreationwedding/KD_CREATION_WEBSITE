@@ -1,17 +1,60 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Play, Sparkles } from 'lucide-react';
+import { Play, Sparkles, RefreshCw } from 'lucide-react';
 
 interface CinemaSectionProps {
   onOpenVideoModal: (url: string, title: string) => void;
   onStartStory: () => void;
 }
 
+const SHOWREEL_VIDEOS = [
+  {
+    title: "Yash & Kavya — Grand Roka Ceremony 4K Film",
+    url: "/assets/YASH & KAVYA/KD Creation - Roka.mp4",
+    poster: "/assets/yash-kavya-outer-cover.jpg",
+    badge: "YASH & KAVYA — ROKA CEREMONY 4K FILM"
+  },
+  {
+    title: "Dhaval & Sangeeta — Pre-Wedding Teaser & Song Film",
+    url: "/assets/DHAVAL & SANGEETA/Pre-Wedding_Teaser + Song(Dhawal & Sangita).mp4",
+    poster: "/assets/dhaval-sangeeta-outer-cover.jpg",
+    badge: "DHAVAL & SANGEETA — PRE-WEDDING FILM"
+  },
+  {
+    title: "Dhaval & Sangeeta — High-Impact Cinema Reel",
+    url: "/assets/DHAVAL & SANGEETA/Pre-Wedding_REEL.mp4",
+    poster: "/assets/dhaval-sangeeta-outer-cover.jpg",
+    badge: "DHAVAL & SANGEETA — CINEMA REEL"
+  },
+  {
+    title: "Kaushik & Anjali — Royal Wedding Highlights Film",
+    url: "/assets/kaushik & anjali/KAUSHIK HIGH LIGHT HC.mp4",
+    poster: "/assets/kaushik-anjali-outer-cover.jpg",
+    badge: "KAUSHIK & ANJALI — HIGHLIGHTS FILM"
+  },
+  {
+    title: "Kaushik & Anjali — Bridal Highlights Cinema Film",
+    url: "/assets/kaushik & anjali/Anjali highlits.mp4",
+    poster: "/assets/service-bride-mirror.jpg",
+    badge: "KAUSHIK & ANJALI — BRIDAL FILM"
+  }
+];
+
 export const CinemaSection: React.FC<CinemaSectionProps> = ({ onOpenVideoModal, onStartStory }) => {
-  const showreelUrl = "https://assets.mixkit.co/videos/preview/mixkit-bride-and-groom-walking-in-a-field-42861-large.mp4";
+  // Select a random video index on component mount / page refresh
+  const [currentIndex, setCurrentIndex] = useState(() => {
+    return Math.floor(Math.random() * SHOWREEL_VIDEOS.length);
+  });
+
+  const activeVideo = SHOWREEL_VIDEOS[currentIndex];
+
+  const handleNextVideo = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentIndex((prev) => (prev + 1) % SHOWREEL_VIDEOS.length);
+  };
 
   return (
-    <section className="relative py-28 bg-obsidian border-t border-gold/10 overflow-hidden">
+    <section id="cinema" className="relative py-28 bg-obsidian border-t border-gold/10 overflow-hidden">
       {/* Background Glow */}
       <div className="absolute inset-0 bg-gold-radial opacity-20 pointer-events-none" />
 
@@ -33,18 +76,22 @@ export const CinemaSection: React.FC<CinemaSectionProps> = ({ onOpenVideoModal, 
 
         {/* Video Hero Player Banner Card */}
         <motion.div
+          key={activeVideo.url}
           initial={{ opacity: 0, scale: 0.96 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          onClick={() => onOpenVideoModal(showreelUrl, "KD CREATION Signature Master Film")}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6 }}
+          onClick={() => onOpenVideoModal(activeVideo.url, activeVideo.title)}
           className="relative rounded-3xl overflow-hidden border border-gold/30 shadow-2xl h-[420px] sm:h-[560px] group cursor-pointer"
           data-cursor="PLAY"
         >
-          {/* Background Poster Image */}
-          <img
-            src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1600&q=85"
-            alt="KD CREATION Cinema"
+          {/* Background Live Looping Video Frame */}
+          <video
+            key={activeVideo.url}
+            src={activeVideo.url}
+            autoPlay
+            loop
+            muted
+            playsInline
             className="w-full h-full object-cover brightness-75 group-hover:scale-105 transition-transform duration-1000"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/40 to-transparent" />
@@ -59,14 +106,26 @@ export const CinemaSection: React.FC<CinemaSectionProps> = ({ onOpenVideoModal, 
             </div>
           </div>
 
+          {/* Top Right Quick Change Button */}
+          <div className="absolute top-6 right-6">
+            <button
+              onClick={handleNextVideo}
+              className="inline-flex items-center gap-2 text-[10px] tracking-widest font-semibold text-gold border border-gold/40 bg-obsidian/85 backdrop-blur-md px-4 py-2 rounded-full hover:bg-gold-gradient hover:text-obsidian transition-all shadow-lg"
+              title="Switch to next film"
+            >
+              <RefreshCw className="w-3.5 h-3.5" />
+              <span>SWITCH FILM ({currentIndex + 1}/{SHOWREEL_VIDEOS.length})</span>
+            </button>
+          </div>
+
           {/* Bottom Card Title Overlay */}
           <div className="absolute bottom-8 left-8 right-8 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div>
               <span className="text-xs tracking-[0.25em] text-gold uppercase font-serif-luxury font-semibold block mb-1">
-                4K ANAMORPHIC MASTERPIECE
+                {activeVideo.badge}
               </span>
-              <h3 className="text-2xl sm:text-3xl font-serif-luxury font-bold text-champagne uppercase">
-                THE KD CREATION EXPERIENCE
+              <h3 className="text-xl sm:text-3xl font-serif-luxury font-bold text-champagne uppercase">
+                {activeVideo.title}
               </h3>
             </div>
 

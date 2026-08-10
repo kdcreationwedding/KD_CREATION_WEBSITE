@@ -17,17 +17,17 @@ export const AboutSection: React.FC = () => {
           >
             <div className="relative rounded-3xl overflow-hidden border border-gold/30 shadow-2xl h-[480px]">
               <img
-                src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1200&q=85"
+                src="/assets/about-behind-the-frames.jpg"
                 alt="KD CREATION Studio Team"
-                className="w-full h-full object-cover brightness-90"
+                className="w-full h-full object-cover brightness-95"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-transparent opacity-80" />
             </div>
 
             {/* Overlapping Badge */}
             <div className="absolute -bottom-6 -right-6 sm:right-6 border border-gold/40 bg-obsidian-100/95 backdrop-blur-xl p-6 rounded-2xl shadow-2xl max-w-xs border-l-4 border-l-gold">
               <span className="text-3xl font-serif-luxury font-bold text-gold-gradient block mb-1">
-                8+ YEARS
+                16+ YEARS
               </span>
               <span className="text-xs text-champagne/80 uppercase font-serif-luxury tracking-widest font-semibold block">
                 CRAFTING TIMELESS ROYAL WEDDINGS
@@ -64,11 +64,11 @@ export const AboutSection: React.FC = () => {
             <div className="pt-6 border-t border-gold/15 grid grid-cols-2 gap-6 text-center sm:text-left">
               <div>
                 <span className="text-3xl font-serif-luxury font-bold text-gold block">350+</span>
-                <span className="text-xs text-champagne/60 tracking-widest uppercase">ROYAL CELEBRATIONS</span>
+                <span className="text-xs text-champagne/60 tracking-widest uppercase font-semibold">ROYAL CELEBRATIONS</span>
               </div>
               <div>
-                <span className="text-3xl font-serif-luxury font-bold text-gold block">18+</span>
-                <span className="text-xs text-champagne/60 tracking-widest uppercase">GLOBAL DESTINATIONS</span>
+                <span className="text-3xl font-serif-luxury font-bold text-gold block">PAN INDIA</span>
+                <span className="text-xs text-champagne/60 tracking-widest uppercase font-semibold">ALL OVER INDIA COVERAGE</span>
               </div>
             </div>
           </motion.div>

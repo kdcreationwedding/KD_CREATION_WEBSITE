@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Calendar, MapPin, Phone, Mail, User, DollarSign, MessageSquare, CheckCircle, MessageCircle } from 'lucide-react';
+import { Sparkles, Calendar, MapPin, Phone, Mail, User, DollarSign, MessageSquare, CheckCircle, MessageCircle, Clock } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { LeadService } from '../../services/leadService';
 import { SITE_CONFIG } from '../../config/siteConfig';
@@ -16,12 +16,56 @@ export const LeadFormSection: React.FC<LeadFormSectionProps> = ({ preselectedSer
     email: '',
     weddingDate: '',
     weddingLocation: '',
+    eventDays: '2 Days',
     eventType: 'Full Wedding',
     services: preselectedService ? [preselectedService] : ['Wedding Cinematography', 'Wedding Photography'],
-    guestCount: '300-500',
-    budget: '₹10L - ₹15L',
+    guestCount: '100-300',
+    budget: '₹1.5L - ₹3L',
     message: ''
   });
+
+  // Auto-fill Email, Name & Date if logged in or stored in browser
+  useEffect(() => {
+    const syncLoginDetails = () => {
+      try {
+        // 1. Check active logged in client user session
+        const savedClient = localStorage.getItem('kd_client_user');
+        if (savedClient) {
+          const clientObj = JSON.parse(savedClient);
+          if (clientObj.name || clientObj.email) {
+            setFormData((prev) => ({
+              ...prev,
+              name: clientObj.name || prev.name,
+              email: clientObj.email || prev.email,
+              weddingDate: clientObj.weddingDate || prev.weddingDate
+            }));
+            return;
+          }
+        }
+
+        // 2. Check saved form inputs
+        const savedEmail = localStorage.getItem('kd_user_email') || localStorage.getItem('user_email') || '';
+        const savedName = localStorage.getItem('kd_user_name') || localStorage.getItem('user_name') || '';
+        if (savedEmail || savedName) {
+          setFormData((prev) => ({
+            ...prev,
+            email: savedEmail || prev.email,
+            name: savedName || prev.name
+          }));
+        }
+      } catch (err) {
+        // Storage fallback
+      }
+    };
+
+    syncLoginDetails();
+    const intervalId = setInterval(syncLoginDetails, 1000);
+    window.addEventListener('storage', syncLoginDetails);
+    return () => {
+      clearInterval(intervalId);
+      window.removeEventListener('storage', syncLoginDetails);
+    };
+  }, []);
 
   const [submitted, setSubmitted] = useState(false);
   const [whatsappUrl, setWhatsappUrl] = useState('');
@@ -29,6 +73,14 @@ export const LeadFormSection: React.FC<LeadFormSectionProps> = ({ preselectedSer
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+
+    // Store in browser for future auto-fill
+    if (name === 'email' && value) {
+      try { localStorage.setItem('kd_user_email', value); } catch (e) {}
+    }
+    if (name === 'name' && value) {
+      try { localStorage.setItem('kd_user_name', value); } catch (e) {}
+    }
   };
 
   const handleServiceToggle = (svc: string) => {
@@ -49,7 +101,7 @@ export const LeadFormSection: React.FC<LeadFormSectionProps> = ({ preselectedSer
       email: formData.email,
       weddingDate: formData.weddingDate,
       weddingLocation: formData.weddingLocation,
-      eventType: formData.eventType,
+      eventType: `${formData.eventType} • ${formData.eventDays}`,
       services: formData.services,
       guestCount: formData.guestCount,
       budget: formData.budget,
@@ -148,13 +200,13 @@ export const LeadFormSection: React.FC<LeadFormSectionProps> = ({ preselectedSer
                   <div className="space-y-2">
                     <label className="text-xs tracking-widest text-gold uppercase font-serif-luxury font-extrabold flex items-center gap-2">
                       <User className="w-3.5 h-3.5" />
-                      FULL NAME *
+                      YOUR FULL NAME (PERSON NAME) *
                     </label>
                     <input
                       type="text"
                       name="name"
                       required
-                      placeholder="e.g. Ananya & Devraj"
+                      placeholder="e.g. Mahesh Parmar"
                       value={formData.name}
                       onChange={handleChange}
                       className="w-full bg-[#2B050B] border border-gold/35 rounded-xl px-4 py-3.5 text-sm text-[#F5F2EB] placeholder-[#F5F2EB]/40 font-semibold focus:outline-none focus:border-gold transition-colors shadow-sm"
@@ -229,6 +281,26 @@ export const LeadFormSection: React.FC<LeadFormSectionProps> = ({ preselectedSer
                     />
                   </div>
 
+                  {/* Function Duration (Number of Days) */}
+                  <div className="space-y-2">
+                    <label className="text-xs tracking-widest text-gold uppercase font-serif-luxury font-extrabold flex items-center gap-2">
+                      <Clock className="w-3.5 h-3.5" />
+                      EVENT DURATION (NO. OF DAYS) *
+                    </label>
+                    <select
+                      name="eventDays"
+                      value={formData.eventDays}
+                      onChange={handleChange}
+                      className="w-full bg-[#2B050B] border border-gold/35 rounded-xl px-4 py-3.5 text-sm text-[#F5F2EB] font-semibold focus:outline-none focus:border-gold transition-colors shadow-sm"
+                    >
+                      <option value="1 Day">1 Day</option>
+                      <option value="2 Days">2 Days</option>
+                      <option value="3 Days">3 Days</option>
+                      <option value="4 Days">4 Days</option>
+                      <option value="5+ Days">5+ Days (Multi-Day)</option>
+                    </select>
+                  </div>
+
                   {/* Budget */}
                   <div className="space-y-2">
                     <label className="text-xs tracking-widest text-gold uppercase font-serif-luxury font-extrabold flex items-center gap-2">
@@ -241,10 +313,30 @@ export const LeadFormSection: React.FC<LeadFormSectionProps> = ({ preselectedSer
                       onChange={handleChange}
                       className="w-full bg-[#2B050B] border border-gold/35 rounded-xl px-4 py-3.5 text-sm text-[#F5F2EB] font-semibold focus:outline-none focus:border-gold transition-colors shadow-sm"
                     >
+                      <option value="₹1.5L - ₹3L">₹1.5 Lakhs – ₹3 Lakhs</option>
+                      <option value="₹3L - ₹5L">₹3 Lakhs – ₹5 Lakhs</option>
                       <option value="₹5L - ₹10L">₹5 Lakhs – ₹10 Lakhs</option>
                       <option value="₹10L - ₹15L">₹10 Lakhs – ₹15 Lakhs</option>
-                      <option value="₹15L - ₹25L+">₹15 Lakhs – ₹25 Lakhs+</option>
-                      <option value="Custom Luxury Experience">Custom Luxury Experience (₹25L+)</option>
+                      <option value="₹15L+ Luxury Experience">Custom Luxury Experience (₹15L+)</option>
+                    </select>
+                  </div>
+
+                  {/* Guest Count (Optional) */}
+                  <div className="space-y-2">
+                    <label className="text-xs tracking-widest text-gold uppercase font-serif-luxury font-extrabold flex items-center gap-2">
+                      <User className="w-3.5 h-3.5" />
+                      ESTIMATED GUESTS (OPTIONAL)
+                    </label>
+                    <select
+                      name="guestCount"
+                      value={formData.guestCount || '100-300'}
+                      onChange={handleChange}
+                      className="w-full bg-[#2B050B] border border-gold/35 rounded-xl px-4 py-3.5 text-sm text-[#F5F2EB] font-semibold focus:outline-none focus:border-gold transition-colors shadow-sm"
+                    >
+                      <option value="Under 100">Intimate Gathering (Under 100)</option>
+                      <option value="100-300">100 – 300 Guests</option>
+                      <option value="300-500">300 – 500 Guests</option>
+                      <option value="500-1000+">Grand Celebration (500 – 1000+ Guests)</option>
                     </select>
                   </div>
 

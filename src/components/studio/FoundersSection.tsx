@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Award, Instagram, Mail, Sparkles } from 'lucide-react';
+import { Award, Sparkles } from 'lucide-react';
 import { SITE_CONFIG } from '../../config/siteConfig';
 
 export const FoundersSection: React.FC = () => {
@@ -42,7 +42,7 @@ export const FoundersSection: React.FC = () => {
             transition={{ delay: 0.2 }}
             className="text-sm sm:text-base text-[#F5F2EB]/80 font-semibold leading-relaxed"
           >
-            Pioneering the future of luxury 4K wedding cinematography, editorial fine-art photography, and grand celebration storytelling across India and worldwide.
+            Pioneering the future of luxury 4K wedding cinematography, editorial fine-art photography, and grand celebration storytelling across Gujarat and All Over India.
           </motion.p>
         </div>
 
@@ -51,11 +51,12 @@ export const FoundersSection: React.FC = () => {
           {SITE_CONFIG.founders.map((founder, idx) => (
             <motion.div
               key={founder.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: idx * 0.15 }}
-              className="liquid-glass-card rounded-3xl overflow-hidden flex flex-col group border border-gold/35 hover:border-gold/65 shadow-2xl bg-[#3B0811]/90"
+              initial={{ opacity: 0, y: 45, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: false, margin: "-50px" }}
+              transition={{ duration: 0.6, delay: idx * 0.15, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ y: -8, scale: 1.015 }}
+              className="liquid-glass-card rounded-3xl overflow-hidden flex flex-col group border border-gold/35 hover:border-gold/65 shadow-2xl bg-[#3B0811]/90 transition-all duration-300"
               data-cursor="LEADER"
             >
               {/* Founder Image Container */}
@@ -95,30 +96,11 @@ export const FoundersSection: React.FC = () => {
                   </p>
                 </div>
 
-                {/* Founder Contact & Social Actions */}
+                {/* Founder Footer Badge */}
                 <div className="pt-4 border-t border-gold/20 flex items-center justify-between">
-                  <div className="flex items-center gap-2.5">
-                    <a
-                      href={founder.instagram || SITE_CONFIG.brand.instagramUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-9 h-9 rounded-full border border-gold/40 bg-[#2B050B] flex items-center justify-center text-gold hover:bg-gold-gradient hover:text-obsidian shadow-sm transition-all"
-                      aria-label={`${founder.name} Instagram`}
-                    >
-                      <Instagram className="w-4 h-4" />
-                    </a>
-
-                    <a
-                      href={`https://mail.google.com/mail/?view=cm&fs=1&to=${founder.email || SITE_CONFIG.brand.email}&su=${encodeURIComponent(`Direct Message for ${founder.name} - KD CREATION`)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-9 h-9 rounded-full border border-gold/40 bg-[#2B050B] flex items-center justify-center text-gold hover:bg-gold-gradient hover:text-obsidian shadow-sm transition-all"
-                      aria-label={`Email ${founder.name}`}
-                    >
-                      <Mail className="w-4 h-4" />
-                    </a>
-                  </div>
-
+                  <span className="text-[10px] tracking-[0.2em] font-serif-luxury font-extrabold text-gold uppercase">
+                    KD CREATION DIRECTORS
+                  </span>
                   <span className="text-[10px] font-mono tracking-widest text-gold uppercase font-bold flex items-center gap-1">
                     <Sparkles className="w-3 h-3" /> EXECUTIVE
                   </span>

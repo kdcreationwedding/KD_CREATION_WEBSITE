@@ -32,7 +32,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         >
           <Award className="w-4 h-4 text-gold" />
           <span className="text-[11px] sm:text-xs tracking-[0.25em] font-serif-luxury font-extrabold text-gold uppercase">
-            INTERNATIONAL WEDDING FILM STUDIO
+            LUXURY WEDDING FILM STUDIO
           </span>
         </motion.div>
 
@@ -83,32 +83,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </button>
         </motion.div>
 
-        {/* Quick Reel Teaser Badge */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 1 }}
-          className="mt-14 flex items-center gap-4 border border-gold/35 bg-[#3B0811]/80 backdrop-blur-lg px-6 py-3 rounded-2xl shadow-2xl hover:border-gold cursor-pointer transition-all duration-300"
-          onClick={() =>
-            onOpenVideoModal(
-              'https://assets.mixkit.co/videos/preview/mixkit-bride-and-groom-walking-in-a-field-42861-large.mp4',
-              'KD CREATION 2026 Showreel'
-            )
-          }
-          data-cursor="PLAY"
-        >
-          <div className="w-10 h-10 rounded-full bg-gold-gradient text-obsidian flex items-center justify-center shadow-md">
-            <Play className="w-4 h-4 fill-current ml-0.5" />
-          </div>
-          <div className="text-left">
-            <span className="block text-[11px] tracking-widest text-gold uppercase font-serif-luxury font-extrabold">
-              WATCH 2026 CINEMATIC SHOWREEL
-            </span>
-            <span className="block text-[11px] text-[#F5F2EB]/80 font-semibold">
-              Press to experience raw emotion in 4K
-            </span>
-          </div>
-        </motion.div>
+
       </div>
 
       {/* Scroll Down Indicator */}

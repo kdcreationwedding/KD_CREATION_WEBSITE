@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import { LoadingScreen } from './components/loading/LoadingScreen';
 import { CustomCursor } from './components/layout/CustomCursor';
 import { Navbar } from './components/layout/Navbar';
@@ -133,8 +134,22 @@ export const App: React.FC = () => {
     setVideoModalState({ isOpen: true, url, title });
   };
 
+  // Real-Time Scroll Reactive Physics Progress
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
   return (
     <div className="relative min-h-screen bg-obsidian text-champagne font-sans overflow-x-hidden">
+      {/* Real-Time Luxury Scroll Progress Indicator */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-gold-light via-gold to-[#A38136] z-[999999] origin-left shadow-[0_0_12px_rgba(212,175,55,0.85)]"
+        style={{ scaleX }}
+      />
+
       {/* 1. Cinematic Loading Screen Overlay */}
       <LoadingScreen />
 
