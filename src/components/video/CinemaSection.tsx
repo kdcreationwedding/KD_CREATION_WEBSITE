@@ -78,19 +78,25 @@ export const CinemaSection: React.FC<CinemaSectionProps> = ({ onOpenVideoModal, 
           className="relative rounded-3xl overflow-hidden border border-gold/30 shadow-2xl h-[420px] sm:h-[560px] group cursor-pointer"
           data-cursor="PLAY"
         >
-          {/* Background Live Looping Video Frame */}
-          <video
-            key={activeVideo.url}
-            src={encodeURI(activeVideo.url)}
-            autoPlay
-            loop
-            muted
-            playsInline
-            onError={(e) => {
-              (e.currentTarget as HTMLVideoElement).src = 'https://assets.mixkit.co/videos/preview/mixkit-bride-and-groom-walking-in-a-field-42861-large.mp4';
-            }}
-            className="w-full h-full object-cover brightness-75 group-hover:scale-105 transition-transform duration-1000"
-          />
+          {/* Background — poster image for YouTube, looping video for direct MP4 */}
+          {activeVideo.url.includes('youtu') ? (
+            <img
+              key={activeVideo.url}
+              src={activeVideo.poster}
+              alt={activeVideo.title}
+              className="w-full h-full object-cover brightness-75 group-hover:scale-105 transition-transform duration-1000"
+            />
+          ) : (
+            <video
+              key={activeVideo.url}
+              src={encodeURI(activeVideo.url)}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-cover brightness-75 group-hover:scale-105 transition-transform duration-1000"
+            />
+          )}
           <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/40 to-transparent" />
 
           {/* Central Animated Play Button */}
