@@ -240,9 +240,9 @@ export const SITE_CONFIG = {
       description: "An opulent celebration blending rich Gujarati heritage, royal decor, and timeless cinematic moments captured with 4K anamorphic clarity.",
       heroImage: "/WEBSITE/assets/yash-kavya-outer-cover.jpg",
       modalCover: "/WEBSITE/assets/yash-kavya-modal-cover.jpg",
-      videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-bride-and-groom-walking-in-a-field-42861-large.mp4",
+      videoUrl: "https://youtu.be/3i1-aJcasSg",
       videos: [
-        { title: "Yash & Kavya — Roka Ceremony Film", url: "https://assets.mixkit.co/videos/preview/mixkit-bride-and-groom-walking-in-a-field-42861-large.mp4" }
+        { title: "Yash & Kavya — Roka Ceremony Film", url: "https://youtu.be/3i1-aJcasSg" }
       ],
       gallery: [
         "/WEBSITE/assets/YASH & KAVYA/Yash & kavya.jpg",
@@ -269,9 +269,9 @@ export const SITE_CONFIG = {
       description: "In black and white, love speaks louder than colors. A beautiful journey where two souls choose each other, captured with pure 4K cinematic connection.",
       heroImage: "/WEBSITE/assets/dhaval-sangeeta-outer-cover.jpg",
       modalCover: "/WEBSITE/assets/dhaval-sangeeta-modal-cover.jpg",
-      videoUrl: "https://youtu.be/x7782vFootg",
+      videoUrl: "https://youtu.be/mJ49EXaTXO8",
       videos: [
-        { title: "Dhaval & Sangeeta — Pre-Wedding Teaser + Song Film", url: "https://assets.mixkit.co/videos/preview/mixkit-slow-motion-of-a-happy-couple-walking-in-a-forest-42866-large.mp4" },
+        { title: "Dhaval & Sangeeta — Pre-Wedding Teaser + Song Film", url: "https://youtu.be/mJ49EXaTXO8" },
         { title: "Dhaval & Sangeeta — Pre-Wedding High-Impact Reel", url: "https://youtu.be/x7782vFootg" }
       ],
       gallery: [
@@ -306,10 +306,9 @@ export const SITE_CONFIG = {
       description: "A joyful celebration of hand-in-hand devotion, lush mint green ethnic elegance, and timeless romantic moments captured in fine-art 4K cinema.",
       heroImage: "/WEBSITE/assets/kaushik-anjali-outer-cover.jpg",
       modalCover: "/WEBSITE/assets/kaushik-anjali-modal-cover.jpg",
-      videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-bride-and-groom-posing-for-a-photo-shoot-42863-large.mp4",
+      videoUrl: "https://youtu.be/DPSPFKgsDs4",
       videos: [
-        { title: "Kaushik Highlight Cinema (Part 1)", url: "https://assets.mixkit.co/videos/preview/mixkit-bride-and-groom-posing-for-a-photo-shoot-42863-large.mp4" },
-        { title: "Anjali Highlights Special Cinema Feature", url: "https://assets.mixkit.co/videos/preview/mixkit-bride-putting-on-an-earring-42865-large.mp4" }
+        { title: "Kaushik & Anjali — Wedding Highlights Film", url: "https://youtu.be/DPSPFKgsDs4" }
       ],
       gallery: [
         "/WEBSITE/assets/kaushik & anjali/DSC01971.JPG",

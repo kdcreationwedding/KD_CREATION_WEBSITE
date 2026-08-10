@@ -10,13 +10,13 @@ interface CinemaSectionProps {
 const SHOWREEL_VIDEOS = [
   {
     title: "Yash & Kavya — Grand Roka Ceremony 4K Film",
-    url: "https://assets.mixkit.co/videos/preview/mixkit-bride-and-groom-walking-in-a-field-42861-large.mp4",
+    url: "https://youtu.be/3i1-aJcasSg",
     poster: "/WEBSITE/assets/yash-kavya-outer-cover.jpg",
     badge: "YASH & KAVYA — ROKA CEREMONY 4K FILM"
   },
   {
     title: "Dhaval & Sangeeta — Pre-Wedding Teaser & Song Film",
-    url: "https://assets.mixkit.co/videos/preview/mixkit-slow-motion-of-a-happy-couple-walking-in-a-forest-42866-large.mp4",
+    url: "https://youtu.be/mJ49EXaTXO8",
     poster: "/WEBSITE/assets/dhaval-sangeeta-outer-cover.jpg",
     badge: "DHAVAL & SANGEETA — PRE-WEDDING FILM"
   },
@@ -28,15 +28,9 @@ const SHOWREEL_VIDEOS = [
   },
   {
     title: "Kaushik & Anjali — Royal Wedding Highlights Film",
-    url: "https://assets.mixkit.co/videos/preview/mixkit-bride-and-groom-posing-for-a-photo-shoot-42863-large.mp4",
+    url: "https://youtu.be/DPSPFKgsDs4",
     poster: "/WEBSITE/assets/kaushik-anjali-outer-cover.jpg",
     badge: "KAUSHIK & ANJALI — HIGHLIGHTS FILM"
-  },
-  {
-    title: "Kaushik & Anjali — Bridal Highlights Cinema Film",
-    url: "https://assets.mixkit.co/videos/preview/mixkit-bride-putting-on-an-earring-42865-large.mp4",
-    poster: "/WEBSITE/assets/service-bride-mirror.jpg",
-    badge: "KAUSHIK & ANJALI — BRIDAL FILM"
   }
 ];
 
