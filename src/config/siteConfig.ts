@@ -177,7 +177,7 @@ export const SITE_CONFIG = {
       title: "WEDDING PHOTOGRAPHY",
       subtitle: "Editorial & Emotional Still Frames",
       description: "Editorial photographs capturing every unscripted emotion, regal details, and timeless grandeur with fine-art precision.",
-      image: "/assets/yash-kavya-modal-cover.jpg",
+      image: "/assets/service-bride-mirror.jpg",
       features: ["Editorial Couple Portraits", "Candid Emotional Moments", "Fine-Art Detail Shots", "High-Resolution Master Retouching"],
       cta: "GET DETAILS"
     },
@@ -186,7 +186,7 @@ export const SITE_CONFIG = {
       title: "WEDDING CINEMATOGRAPHY",
       subtitle: "Full-Length 4K Cinema Feature Films",
       description: "Cinematic storytelling crafted with high-end anamorphic optics, custom sound design, color grading, and emotional narrative flow.",
-      image: "/assets/dhaval-sangeeta-outer-cover.jpg",
+      image: "/assets/service-wedding-joyful.jpg",
       features: ["Anamorphic Cinema 4K", "Custom Original Sound Design", "Hollywood Grade Color Matrix", "Aerial Drone Cinematography"],
       cta: "GET DETAILS"
     },
@@ -195,7 +195,7 @@ export const SITE_CONFIG = {
       title: "PRE-WEDDING FILMS",
       subtitle: "Concept-Driven Romance Narratives",
       description: "Custom concept-driven visual love stories shot in exotic domestic or international destinations crafted around your unique journey.",
-      image: "/assets/kaushik-anjali-outer-cover.jpg",
+      image: "/assets/service-prewedding-rakhi.jpg",
       features: ["Custom Scripted Storylines", "Destination Location Scouting", "Styling & Art Direction", "Cinematic Trailer & Teasers"],
       cta: "GET DETAILS"
     },
@@ -204,7 +204,7 @@ export const SITE_CONFIG = {
       title: "WEDDING REELS",
       subtitle: "Next-Day Ultra High-Impact Social Films",
       description: "Short-form vertical visual masterworks color-graded and synchronized to audio trends for Instagram and digital showcases.",
-      image: "/assets/DHAVAL & SANGEETA/DS PRE W (2).jpg",
+      image: "/assets/service-romance-arch.jpg",
       features: ["24-Hour Same-Day Delivery", "Vertical 9:16 Cinema Color", "Custom Sound Syncing", "High-Engaging Instagram Hooks"],
       cta: "GET DETAILS"
     },
@@ -213,7 +213,7 @@ export const SITE_CONFIG = {
       title: "LUXURY HEIRLOOM ALBUMS",
       subtitle: "Original Genuine Leather & International Quality",
       description: "Handcrafted luxury photo books created with original genuine leather covers, museum-quality HD non-tearable metallic pages, precision color calibration, and international finishing standards.",
-      image: "/assets/vishwa-dhawal-modal-cover.jpg",
+      image: "/assets/service-couple-hands.jpg",
       features: ["Original Genuine Leather Covers", "International Quality Handcrafted Finish", "Fuji Archival HD Non-Tearable Pages", "Custom Gold Embossing & Heirloom Wooden Box Vault", "Lifetime Print & Color Guarantee"],
       cta: "GET DETAILS"
     },
