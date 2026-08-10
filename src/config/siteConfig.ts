@@ -177,7 +177,7 @@ export const SITE_CONFIG = {
       title: "WEDDING PHOTOGRAPHY",
       subtitle: "Editorial & Emotional Still Frames",
       description: "Editorial photographs capturing every unscripted emotion, regal details, and timeless grandeur with fine-art precision.",
-      image: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=85",
+      image: "/assets/yash-kavya-modal-cover.jpg",
       features: ["Editorial Couple Portraits", "Candid Emotional Moments", "Fine-Art Detail Shots", "High-Resolution Master Retouching"],
       cta: "GET DETAILS"
     },
@@ -186,7 +186,7 @@ export const SITE_CONFIG = {
       title: "WEDDING CINEMATOGRAPHY",
       subtitle: "Full-Length 4K Cinema Feature Films",
       description: "Cinematic storytelling crafted with high-end anamorphic optics, custom sound design, color grading, and emotional narrative flow.",
-      image: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1200&q=85",
+      image: "/assets/dhaval-sangeeta-outer-cover.jpg",
       features: ["Anamorphic Cinema 4K", "Custom Original Sound Design", "Hollywood Grade Color Matrix", "Aerial Drone Cinematography"],
       cta: "GET DETAILS"
     },
@@ -195,7 +195,7 @@ export const SITE_CONFIG = {
       title: "PRE-WEDDING FILMS",
       subtitle: "Concept-Driven Romance Narratives",
       description: "Custom concept-driven visual love stories shot in exotic domestic or international destinations crafted around your unique journey.",
-      image: "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1200&q=85",
+      image: "/assets/kaushik-anjali-outer-cover.jpg",
       features: ["Custom Scripted Storylines", "Destination Location Scouting", "Styling & Art Direction", "Cinematic Trailer & Teasers"],
       cta: "GET DETAILS"
     },
@@ -204,17 +204,17 @@ export const SITE_CONFIG = {
       title: "WEDDING REELS",
       subtitle: "Next-Day Ultra High-Impact Social Films",
       description: "Short-form vertical visual masterworks color-graded and synchronized to audio trends for Instagram and digital showcases.",
-      image: "https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&w=1200&q=85",
+      image: "/assets/DHAVAL & SANGEETA/DS PRE W (2).jpg",
       features: ["24-Hour Same-Day Delivery", "Vertical 9:16 Cinema Color", "Custom Sound Syncing", "High-Engaging Instagram Hooks"],
       cta: "GET DETAILS"
     },
     {
       id: "wedding-albums",
-      title: "WEDDING ALBUMS",
-      subtitle: "Handcrafted Luxury Heirloom Books",
-      description: "Museum-quality flush mount albums handcrafted in Italy & Japan with metallic silks, genuine leather, and archival inks.",
-      image: "https://images.unsplash.com/photo-1544078751-58fee2d8a03b?auto=format&fit=crop&w=1200&q=85",
-      features: ["Italian Genuine Leather Covers", "Fuji Crystal Archival Paper", "Custom Embossing & Foil Monograms", "Lifetime Guarantee"],
+      title: "LUXURY HEIRLOOM ALBUMS",
+      subtitle: "Original Genuine Leather & International Quality",
+      description: "Handcrafted luxury photo books created with original genuine leather covers, museum-quality HD non-tearable metallic pages, precision color calibration, and international finishing standards.",
+      image: "/assets/vishwa-dhawal-modal-cover.jpg",
+      features: ["Original Genuine Leather Covers", "International Quality Handcrafted Finish", "Fuji Archival HD Non-Tearable Pages", "Custom Gold Embossing & Heirloom Wooden Box Vault", "Lifetime Print & Color Guarantee"],
       cta: "GET DETAILS"
     },
     {
@@ -222,7 +222,7 @@ export const SITE_CONFIG = {
       title: "COMPLETE WEDDING COVERAGE",
       subtitle: "All-Inclusive Signature Master Experience",
       description: "The complete KD CREATION experience combining full photography, 4K film production, pre-wedding, reels, and master luxury albums.",
-      image: "https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1200&q=85",
+      image: "/assets/vishwa-dhawal-outer-cover.jpg",
       features: ["Full Director Team (10+ Crew)", "360 Multi-Camera Sync", "Live Stream Support", "Master Box Set & Heirloom Vault"],
       cta: "GET DETAILS"
     }
