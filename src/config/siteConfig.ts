@@ -269,10 +269,10 @@ export const SITE_CONFIG = {
       description: "In black and white, love speaks louder than colors. A beautiful journey where two souls choose each other, captured with pure 4K cinematic connection.",
       heroImage: "/WEBSITE/assets/dhaval-sangeeta-outer-cover.jpg",
       modalCover: "/WEBSITE/assets/dhaval-sangeeta-modal-cover.jpg",
-      videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-slow-motion-of-a-happy-couple-walking-in-a-forest-42866-large.mp4",
+      videoUrl: "https://youtu.be/x7782vFootg",
       videos: [
         { title: "Dhaval & Sangeeta — Pre-Wedding Teaser + Song Film", url: "https://assets.mixkit.co/videos/preview/mixkit-slow-motion-of-a-happy-couple-walking-in-a-forest-42866-large.mp4" },
-        { title: "Dhaval & Sangeeta — Pre-Wedding High-Impact Reel", url: "https://assets.mixkit.co/videos/preview/mixkit-romantic-couple-looking-at-each-other-in-the-sunset-42868-large.mp4" }
+        { title: "Dhaval & Sangeeta — Pre-Wedding High-Impact Reel", url: "https://youtu.be/x7782vFootg" }
       ],
       gallery: [
         "/WEBSITE/assets/DHAVAL & SANGEETA/DHAVAL & SANDEETA PRE - Copy (4).jpg",

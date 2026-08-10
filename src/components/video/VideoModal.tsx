@@ -39,6 +39,23 @@ export const VideoModal: React.FC<VideoModalProps> = ({ isOpen, videoUrl, title,
 
   if (!isOpen) return null;
 
+  const getEmbedUrl = (url: string) => {
+    if (!url) return '';
+    if (url.includes('youtube.com') || url.includes('youtu.be')) {
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+      const match = url.match(regExp);
+      const id = (match && match[2].length === 11) ? match[2] : null;
+      return id ? `https://www.youtube.com/embed/${id}?autoplay=1&rel=0` : url;
+    }
+    if (url.includes('vimeo.com')) {
+      const match = url.match(/vimeo\.com\/(\d+)/);
+      return match ? `https://player.vimeo.com/video/${match[1]}?autoplay=1` : url;
+    }
+    return '';
+  };
+
+  const embedUrl = getEmbedUrl(currentVideoSrc);
+
   const togglePlay = () => {
     if (!videoRef.current) return;
     if (isPlaying) {
@@ -113,34 +130,32 @@ export const VideoModal: React.FC<VideoModalProps> = ({ isOpen, videoUrl, title,
           </div>
 
           {/* Responsive HTML5 4K Video Player Container */}
-          <div
-            onClick={togglePlay}
-            className="relative aspect-video w-full bg-black overflow-hidden flex items-center justify-center cursor-pointer group/player"
-          >
-            <video
-              ref={videoRef}
-              src={currentVideoSrc}
-              autoPlay
-              muted={isMuted}
-              playsInline
-              controls
-              onError={() => {
-                setCurrentVideoSrc('https://assets.mixkit.co/videos/preview/mixkit-bride-and-groom-walking-in-a-field-42861-large.mp4');
-              }}
-              onTimeUpdate={handleTimeUpdate}
-              onPlay={() => setIsPlaying(true)}
-              onPause={() => setIsPlaying(false)}
-              onEnded={() => setIsPlaying(false)}
-              className="w-full h-full object-contain bg-black"
-            />
-
-            {/* Central Animated Play Button Overlay */}
-            {!isPlaying && (
-              <div className="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-[2px] transition-all z-20">
-                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gold-gradient text-obsidian flex items-center justify-center shadow-[0_0_50px_rgba(212,175,55,0.7)] group-hover/player:scale-110 transition-transform">
-                  <Play className="w-10 h-10 sm:w-12 sm:h-12 fill-current ml-1" />
-                </div>
-              </div>
+          <div className="relative aspect-video w-full bg-black overflow-hidden flex items-center justify-center">
+            {embedUrl ? (
+              <iframe
+                src={embedUrl}
+                title={title}
+                className="w-full h-full border-0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            ) : (
+              <video
+                ref={videoRef}
+                src={currentVideoSrc}
+                autoPlay
+                muted={isMuted}
+                playsInline
+                controls
+                onError={() => {
+                  setCurrentVideoSrc('https://assets.mixkit.co/videos/preview/mixkit-bride-and-groom-walking-in-a-field-42861-large.mp4');
+                }}
+                onTimeUpdate={handleTimeUpdate}
+                onPlay={() => setIsPlaying(true)}
+                onPause={() => setIsPlaying(false)}
+                onEnded={() => setIsPlaying(false)}
+                className="w-full h-full object-contain bg-black"
+              />
             )}
           </div>
 

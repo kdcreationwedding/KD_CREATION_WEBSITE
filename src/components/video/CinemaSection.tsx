@@ -22,7 +22,7 @@ const SHOWREEL_VIDEOS = [
   },
   {
     title: "Dhaval & Sangeeta — High-Impact Cinema Reel",
-    url: "https://assets.mixkit.co/videos/preview/mixkit-romantic-couple-looking-at-each-other-in-the-sunset-42868-large.mp4",
+    url: "https://youtu.be/x7782vFootg",
     poster: "/WEBSITE/assets/dhaval-sangeeta-outer-cover.jpg",
     badge: "DHAVAL & SANGEETA — CINEMA REEL"
   },
