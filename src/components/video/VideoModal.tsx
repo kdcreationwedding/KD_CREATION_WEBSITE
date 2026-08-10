@@ -11,21 +11,29 @@ interface VideoModalProps {
 
 export const VideoModal: React.FC<VideoModalProps> = ({ isOpen, videoUrl, title, onClose }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [progress, setProgress] = useState(0);
   const [currentVideoSrc, setCurrentVideoSrc] = useState(() => encodeURI(videoUrl));
 
   useEffect(() => {
     setCurrentVideoSrc(encodeURI(videoUrl));
+    setIsPlaying(false);
   }, [videoUrl]);
 
   useEffect(() => {
     if (isOpen && videoRef.current) {
-      videoRef.current.play().catch(() => {
-        // Autoplay policy fallback
-        setIsPlaying(false);
-      });
+      videoRef.current.play()
+        .then(() => setIsPlaying(true))
+        .catch(() => {
+          if (videoRef.current) {
+            videoRef.current.muted = true;
+            setIsMuted(true);
+            videoRef.current.play()
+              .then(() => setIsPlaying(true))
+              .catch(() => setIsPlaying(false));
+          }
+        });
     }
   }, [isOpen, currentVideoSrc]);
 
@@ -105,20 +113,35 @@ export const VideoModal: React.FC<VideoModalProps> = ({ isOpen, videoUrl, title,
           </div>
 
           {/* Responsive HTML5 4K Video Player Container */}
-          <div className="relative aspect-video w-full bg-black overflow-hidden flex items-center justify-center">
+          <div
+            onClick={togglePlay}
+            className="relative aspect-video w-full bg-black overflow-hidden flex items-center justify-center cursor-pointer group/player"
+          >
             <video
               ref={videoRef}
               src={currentVideoSrc}
               autoPlay
+              muted={isMuted}
               playsInline
               controls
               onError={() => {
                 setCurrentVideoSrc('https://assets.mixkit.co/videos/preview/mixkit-bride-and-groom-walking-in-a-field-42861-large.mp4');
               }}
               onTimeUpdate={handleTimeUpdate}
+              onPlay={() => setIsPlaying(true)}
+              onPause={() => setIsPlaying(false)}
               onEnded={() => setIsPlaying(false)}
               className="w-full h-full object-contain bg-black"
             />
+
+            {/* Central Animated Play Button Overlay */}
+            {!isPlaying && (
+              <div className="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-[2px] transition-all z-20">
+                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gold-gradient text-obsidian flex items-center justify-center shadow-[0_0_50px_rgba(212,175,55,0.7)] group-hover/player:scale-110 transition-transform">
+                  <Play className="w-10 h-10 sm:w-12 sm:h-12 fill-current ml-1" />
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Custom Sleek Gold Control Bar */}
