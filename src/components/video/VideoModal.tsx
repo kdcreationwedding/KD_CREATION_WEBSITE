@@ -14,6 +14,11 @@ export const VideoModal: React.FC<VideoModalProps> = ({ isOpen, videoUrl, title,
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [currentVideoSrc, setCurrentVideoSrc] = useState(() => encodeURI(videoUrl));
+
+  useEffect(() => {
+    setCurrentVideoSrc(encodeURI(videoUrl));
+  }, [videoUrl]);
 
   useEffect(() => {
     if (isOpen && videoRef.current) {
@@ -22,7 +27,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({ isOpen, videoUrl, title,
         setIsPlaying(false);
       });
     }
-  }, [isOpen, videoUrl]);
+  }, [isOpen, currentVideoSrc]);
 
   if (!isOpen) return null;
 
@@ -103,10 +108,13 @@ export const VideoModal: React.FC<VideoModalProps> = ({ isOpen, videoUrl, title,
           <div className="relative aspect-video w-full bg-black overflow-hidden flex items-center justify-center">
             <video
               ref={videoRef}
-              src={videoUrl}
+              src={currentVideoSrc}
               autoPlay
               playsInline
               controls
+              onError={() => {
+                setCurrentVideoSrc('https://assets.mixkit.co/videos/preview/mixkit-bride-and-groom-walking-in-a-field-42861-large.mp4');
+              }}
               onTimeUpdate={handleTimeUpdate}
               onEnded={() => setIsPlaying(false)}
               className="w-full h-full object-contain bg-black"

@@ -87,11 +87,14 @@ export const CinemaSection: React.FC<CinemaSectionProps> = ({ onOpenVideoModal, 
           {/* Background Live Looping Video Frame */}
           <video
             key={activeVideo.url}
-            src={activeVideo.url}
+            src={encodeURI(activeVideo.url)}
             autoPlay
             loop
             muted
             playsInline
+            onError={(e) => {
+              (e.currentTarget as HTMLVideoElement).src = 'https://assets.mixkit.co/videos/preview/mixkit-bride-and-groom-walking-in-a-field-42861-large.mp4';
+            }}
             className="w-full h-full object-cover brightness-75 group-hover:scale-105 transition-transform duration-1000"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/40 to-transparent" />
