@@ -1,6 +1,6 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Play, Pause, Volume2, VolumeX, Maximize, Film } from 'lucide-react';
+import { X, Film } from 'lucide-react';
 
 interface VideoModalProps {
   isOpen: boolean;
@@ -9,103 +9,43 @@ interface VideoModalProps {
   onClose: () => void;
 }
 
+const getYouTubeId = (url: string): string | null => {
+  const regExp = /(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^#&?]{11})/;
+  const match = url.match(regExp);
+  return match ? match[1] : null;
+};
+
 export const VideoModal: React.FC<VideoModalProps> = ({ isOpen, videoUrl, title, onClose }) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const [currentVideoSrc, setCurrentVideoSrc] = useState(() => encodeURI(videoUrl));
+  const [activeUrl, setActiveUrl] = useState(videoUrl);
 
   useEffect(() => {
-    setCurrentVideoSrc(encodeURI(videoUrl));
-    setIsPlaying(false);
+    setActiveUrl(videoUrl);
   }, [videoUrl]);
-
-  useEffect(() => {
-    if (isOpen && videoRef.current) {
-      videoRef.current.play()
-        .then(() => setIsPlaying(true))
-        .catch(() => {
-          if (videoRef.current) {
-            videoRef.current.muted = true;
-            setIsMuted(true);
-            videoRef.current.play()
-              .then(() => setIsPlaying(true))
-              .catch(() => setIsPlaying(false));
-          }
-        });
-    }
-  }, [isOpen, currentVideoSrc]);
 
   if (!isOpen) return null;
 
-  const getEmbedUrl = (url: string) => {
-    if (!url) return '';
-    if (url.includes('youtube.com') || url.includes('youtu.be')) {
-      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-      const match = url.match(regExp);
-      const id = (match && match[2].length === 11) ? match[2] : null;
-      return id ? `https://www.youtube.com/embed/${id}?autoplay=1&rel=0` : url;
-    }
-    if (url.includes('vimeo.com')) {
-      const match = url.match(/vimeo\.com\/(\d+)/);
-      return match ? `https://player.vimeo.com/video/${match[1]}?autoplay=1` : url;
-    }
-    return '';
-  };
-
-  const embedUrl = getEmbedUrl(currentVideoSrc);
-
-  const togglePlay = () => {
-    if (!videoRef.current) return;
-    if (isPlaying) {
-      videoRef.current.pause();
-      setIsPlaying(false);
-    } else {
-      videoRef.current.play();
-      setIsPlaying(true);
-    }
-  };
-
-  const toggleMute = () => {
-    if (!videoRef.current) return;
-    videoRef.current.muted = !isMuted;
-    setIsMuted(!isMuted);
-  };
-
-  const handleTimeUpdate = () => {
-    if (!videoRef.current) return;
-    const current = videoRef.current.currentTime;
-    const total = videoRef.current.duration || 1;
-    setProgress((current / total) * 100);
-  };
-
-  const handleProgressClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!videoRef.current) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const clickPosition = (e.clientX - rect.left) / rect.width;
-    videoRef.current.currentTime = clickPosition * videoRef.current.duration;
-  };
-
-  const toggleFullscreen = () => {
-    if (!videoRef.current) return;
-    if (videoRef.current.requestFullscreen) {
-      videoRef.current.requestFullscreen();
-    }
-  };
+  const ytId = getYouTubeId(activeUrl);
+  const isYouTube = !!ytId;
+  const embedSrc = isYouTube
+    ? `https://www.youtube-nocookie.com/embed/${ytId}?autoplay=1&rel=0&modestbranding=1`
+    : activeUrl;
 
   return (
     <AnimatePresence>
       <div className="fixed inset-0 z-[999999] flex items-center justify-center bg-black/95 backdrop-blur-2xl p-3 sm:p-6 md:p-10">
+        {/* Click outside to close */}
+        <div className="absolute inset-0" onClick={onClose} />
+
         <motion.div
           initial={{ opacity: 0, scale: 0.92, y: 15 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.92, y: 15 }}
           transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-full max-w-6xl rounded-3xl overflow-hidden bg-[#2B050B] border border-gold/40 shadow-[0_25px_70px_rgba(0,0,0,0.9)] flex flex-col my-auto"
+          className="relative z-10 w-full max-w-6xl rounded-3xl overflow-hidden bg-[#2B050B] border border-gold/40 shadow-[0_25px_70px_rgba(0,0,0,0.9)] flex flex-col my-auto"
+          onClick={(e) => e.stopPropagation()}
         >
           {/* Header Bar */}
-          <div className="p-4 sm:p-5 bg-[#3B0811] border-b border-gold/30 flex items-center justify-between z-20">
+          <div className="p-4 sm:p-5 bg-[#3B0811] border-b border-gold/30 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-full bg-gold/15 text-gold border border-gold/30 flex items-center justify-center">
                 <Film className="w-4 h-4" />
@@ -119,7 +59,6 @@ export const VideoModal: React.FC<VideoModalProps> = ({ isOpen, videoUrl, title,
                 </h3>
               </div>
             </div>
-
             <button
               onClick={onClose}
               className="p-2 text-gold hover:text-white rounded-full bg-gold/10 hover:bg-gold/20 transition-all border border-gold/30"
@@ -129,80 +68,34 @@ export const VideoModal: React.FC<VideoModalProps> = ({ isOpen, videoUrl, title,
             </button>
           </div>
 
-          {/* Responsive HTML5 4K Video Player Container */}
-          <div className="relative aspect-video w-full bg-black overflow-hidden flex items-center justify-center">
-            {embedUrl ? (
+          {/* Video Player Container */}
+          <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+            {isYouTube ? (
               <iframe
-                src={embedUrl}
+                key={embedSrc}
+                src={embedSrc}
                 title={title}
-                className="w-full h-full border-0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                className="absolute inset-0 w-full h-full border-0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
               />
             ) : (
               <video
-                ref={videoRef}
-                src={currentVideoSrc}
+                key={activeUrl}
+                src={activeUrl}
                 autoPlay
-                muted={isMuted}
                 playsInline
                 controls
-                onError={() => {
-                  setCurrentVideoSrc('https://assets.mixkit.co/videos/preview/mixkit-bride-and-groom-walking-in-a-field-42861-large.mp4');
-                }}
-                onTimeUpdate={handleTimeUpdate}
-                onPlay={() => setIsPlaying(true)}
-                onPause={() => setIsPlaying(false)}
-                onEnded={() => setIsPlaying(false)}
-                className="w-full h-full object-contain bg-black"
+                className="absolute inset-0 w-full h-full object-contain bg-black"
               />
             )}
           </div>
 
-          {/* Custom Sleek Gold Control Bar */}
-          <div className="p-4 bg-[#3B0811] border-t border-gold/30 space-y-3">
-            {/* Clickable Timeline Scrubber */}
-            <div
-              onClick={handleProgressClick}
-              className="relative w-full h-2 bg-[#2B050B] rounded-full cursor-pointer overflow-hidden border border-gold/20 group"
-            >
-              <div
-                className="h-full bg-gold-gradient transition-all duration-150"
-                style={{ width: `${progress}%` }}
-              />
-            </div>
-
-            <div className="flex items-center justify-between text-xs text-[#F5F2EB]">
-              <div className="flex items-center gap-4">
-                <button
-                  onClick={togglePlay}
-                  className="p-2 text-gold hover:text-white rounded-full bg-gold/10 hover:bg-gold/20 transition-colors"
-                >
-                  {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 fill-current ml-0.5" />}
-                </button>
-
-                <button
-                  onClick={toggleMute}
-                  className="p-2 text-gold hover:text-white rounded-full bg-gold/10 hover:bg-gold/20 transition-colors"
-                >
-                  {isMuted ? <VolumeX className="w-4 h-4 text-rose-400" /> : <Volume2 className="w-4 h-4" />}
-                </button>
-              </div>
-
-              <div className="flex items-center gap-4">
-                <span className="text-[10px] font-mono tracking-widest text-gold uppercase font-bold">
-                  4K ULTRA HD CINEMA
-                </span>
-
-                <button
-                  onClick={toggleFullscreen}
-                  className="p-2 text-gold hover:text-white rounded-full bg-gold/10 hover:bg-gold/20 transition-colors"
-                  title="Fullscreen"
-                >
-                  <Maximize className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
+          {/* Footer Bar */}
+          <div className="px-5 py-3 bg-[#3B0811] border-t border-gold/30 flex items-center justify-end">
+            <span className="text-[9px] tracking-[0.25em] font-serif-luxury font-bold text-gold uppercase">
+              4K ULTRA HD CINEMA
+            </span>
           </div>
         </motion.div>
       </div>
