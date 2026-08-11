@@ -178,7 +178,8 @@ export const SITE_CONFIG = {
       title: "WEDDING PHOTOGRAPHY",
       subtitle: "Editorial & Emotional Still Frames",
       description: "Editorial photographs capturing every unscripted emotion, regal details, and timeless grandeur with fine-art precision.",
-      image: "assets/service-bride-mirror.jpg",
+      image: "assets/service-wedding-photography.jpg",
+      images: ["assets/service-wedding-photography.jpg", "assets/service-complete-coverage.jpg"],
       features: ["Editorial Couple Portraits", "Candid Emotional Moments", "Fine-Art Detail Shots", "High-Resolution Master Retouching"],
       cta: "GET DETAILS"
     },
@@ -224,7 +225,7 @@ export const SITE_CONFIG = {
       subtitle: "All-Inclusive Signature Master Experience",
       description: "The complete KD CREATION experience combining full photography, 4K film production, pre-wedding, reels, and master luxury albums.",
       image: "assets/service-complete-coverage.jpg",
-      images: ["assets/service-complete-coverage.jpg", "assets/service-complete-coverage-2.jpg"],
+      images: ["assets/service-complete-coverage.jpg", "assets/service-wedding-photography.jpg"],
       features: ["Full Director Team (10+ Crew)", "360 Multi-Camera Sync", "Live Stream Support", "Master Box Set & Heirloom Vault"],
       cta: "GET DETAILS"
     }
