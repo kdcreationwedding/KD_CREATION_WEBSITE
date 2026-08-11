@@ -15,11 +15,25 @@ export default defineConfig({
     host: true
   },
   build: {
+    chunkSizeWarningLimit: 6000,
     rollupOptions: {
       output: {
-        entryFileNames: `assets/[name].${Date.now()}.js`,
-        chunkFileNames: `assets/[name].${Date.now()}.js`,
-        assetFileNames: `assets/[name].${Date.now()}.[ext]`
+        entryFileNames: 'assets/[name].[hash].js',
+        chunkFileNames: 'assets/[name].[hash].js',
+        assetFileNames: 'assets/[name].[hash].[ext]',
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('framer-motion')) {
+              return 'vendor-framer';
+            }
+            if (id.includes('lucide-react')) {
+              return 'vendor-icons';
+            }
+            if (id.includes('three') || id.includes('@splinetool')) {
+              return 'vendor-three';
+            }
+          }
+        }
       }
     }
   }

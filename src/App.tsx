@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { LoadingScreen } from './components/loading/LoadingScreen';
 import { CustomCursor } from './components/layout/CustomCursor';
@@ -7,7 +7,6 @@ import { HeroSection } from './components/hero/HeroSection';
 import { ServicesSection } from './components/services/ServicesSection';
 import { SelectedStories } from './components/portfolio/SelectedStories';
 import { CinemaSection } from './components/video/CinemaSection';
-import { VideoModal } from './components/video/VideoModal';
 import { AboutSection } from './components/studio/AboutSection';
 import { FoundersSection } from './components/studio/FoundersSection';
 import { WhyKdCreation } from './components/studio/WhyKdCreation';
@@ -16,14 +15,15 @@ import { Testimonials } from './components/studio/Testimonials';
 import { InstagramFeed } from './components/studio/InstagramFeed';
 import { LeadFormSection } from './components/forms/LeadFormSection';
 import { StickyLeadCtas } from './components/forms/StickyLeadCtas';
-import { KdAiChatbot } from './components/chatbot/KdAiChatbot';
-import { ExitIntentModal } from './components/exitIntent/ExitIntentModal';
-
 import { Footer } from './components/layout/Footer';
-import { AdminLeadPortal } from './components/admin/AdminLeadPortal';
-import { AdminLoginModal } from './components/admin/AdminLoginModal';
-import { ClientAuthModal } from './components/client/ClientAuthModal';
-import { ClientPortalModal } from './components/client/ClientPortalModal';
+
+// Lazy-loaded Modal and Overlay Components for Performance Optimization
+const VideoModal = lazy(() => import('./components/video/VideoModal').then(m => ({ default: m.VideoModal })));
+const KdAiChatbot = lazy(() => import('./components/chatbot/KdAiChatbot').then(m => ({ default: m.KdAiChatbot })));
+const AdminLeadPortal = lazy(() => import('./components/admin/AdminLeadPortal').then(m => ({ default: m.AdminLeadPortal })));
+const AdminLoginModal = lazy(() => import('./components/admin/AdminLoginModal').then(m => ({ default: m.AdminLoginModal })));
+const ClientAuthModal = lazy(() => import('./components/client/ClientAuthModal').then(m => ({ default: m.ClientAuthModal })));
+const ClientPortalModal = lazy(() => import('./components/client/ClientPortalModal').then(m => ({ default: m.ClientPortalModal })));
 
 export const App: React.FC = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
@@ -218,54 +218,46 @@ export const App: React.FC = () => {
         onOpenLeadForm={() => handleOpenLeadForm()}
       />
 
-      {/* 17. AI Wedding Consultant Chatbot */}
-      <KdAiChatbot
-        isOpen={isChatOpen}
-        onToggle={() => setIsChatOpen(!isChatOpen)}
-        onOpenLeadForm={() => handleOpenLeadForm()}
-      />
+      {/* 17. Lazy Loaded Overlays & Modals */}
+      <Suspense fallback={null}>
+        <KdAiChatbot
+          isOpen={isChatOpen}
+          onToggle={() => setIsChatOpen(!isChatOpen)}
+          onOpenLeadForm={() => handleOpenLeadForm()}
+        />
 
+        <VideoModal
+          isOpen={videoModalState.isOpen}
+          videoUrl={videoModalState.url}
+          title={videoModalState.title}
+          onClose={() => setVideoModalState({ isOpen: false, url: '', title: '' })}
+        />
 
-      {/* 18. Exit-Intent Smart Lead Modal — DISABLED */}
-      {/* <ExitIntentModal onOpenLeadForm={() => handleOpenLeadForm()} /> */}
+        <ClientAuthModal
+          isOpen={isClientAuthOpen}
+          onClose={() => setIsClientAuthOpen(false)}
+          onLoginSuccess={handleClientLoginSuccess}
+        />
 
+        <ClientPortalModal
+          isOpen={isClientPortalOpen}
+          clientInfo={loggedInClient}
+          onClose={() => setIsClientPortalOpen(false)}
+          onLogout={handleClientLogout}
+          onOpenVideoModal={handleOpenVideoModal}
+        />
 
-      {/* 19. Fullscreen Video Lightbox Player */}
-      <VideoModal
-        isOpen={videoModalState.isOpen}
-        videoUrl={videoModalState.url}
-        title={videoModalState.title}
-        onClose={() => setVideoModalState({ isOpen: false, url: '', title: '' })}
-      />
+        <AdminLoginModal
+          isOpen={isLoginModalOpen}
+          onClose={() => setIsLoginModalOpen(false)}
+          onLoginSuccess={handleLoginSuccess}
+        />
 
-      {/* 20. Visitor / Client Auth Login & Sign-Up Modal */}
-      <ClientAuthModal
-        isOpen={isClientAuthOpen}
-        onClose={() => setIsClientAuthOpen(false)}
-        onLoginSuccess={handleClientLoginSuccess}
-      />
-
-      {/* 21. Logged-In VIP Client Wedding Portal Dashboard */}
-      <ClientPortalModal
-        isOpen={isClientPortalOpen}
-        clientInfo={loggedInClient}
-        onClose={() => setIsClientPortalOpen(false)}
-        onLogout={handleClientLogout}
-        onOpenVideoModal={handleOpenVideoModal}
-      />
-
-      {/* 22. Admin Login Modal Screen */}
-      <AdminLoginModal
-        isOpen={isLoginModalOpen}
-        onClose={() => setIsLoginModalOpen(false)}
-        onLoginSuccess={handleLoginSuccess}
-      />
-
-      {/* 23. Secret Admin Lead Vault Portal Modal */}
-      <AdminLeadPortal
-        isOpen={isAdminPortalOpen}
-        onClose={() => setIsAdminPortalOpen(false)}
-      />
+        <AdminLeadPortal
+          isOpen={isAdminPortalOpen}
+          onClose={() => setIsAdminPortalOpen(false)}
+        />
+      </Suspense>
     </div>
   );
 };
