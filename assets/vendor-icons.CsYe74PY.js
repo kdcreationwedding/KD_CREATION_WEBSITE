@@ -1,4 +1,4 @@
-import{r as s}from"./vendor-framer.D_jke8xQ.js";/**
+import{r as s}from"./vendor-framer.C8kokVM1.js";/**
  * @license lucide-react v0.475.0 - ISC
  *
  * This source code is licensed under the ISC license.
