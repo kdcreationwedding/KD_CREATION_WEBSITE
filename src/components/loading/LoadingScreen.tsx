@@ -18,12 +18,12 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
           setTimeout(() => {
             setIsVisible(false);
             if (onComplete) onComplete();
-          }, 400);
+          }, 150);
           return 100;
         }
-        return prev + Math.floor(Math.random() * 15) + 8;
+        return prev + Math.floor(Math.random() * 25) + 18;
       });
-    }, 70);
+    }, 25);
 
     return () => clearInterval(timer);
   }, []);

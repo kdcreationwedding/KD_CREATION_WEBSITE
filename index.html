@@ -2,23 +2,6 @@
 <html lang="en" class="scroll-smooth dark">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="0" />
-    <script>
-      (function() {
-        if ('serviceWorker' in navigator) {
-          navigator.serviceWorker.getRegistrations().then(function(regs) {
-            for (let reg of regs) reg.unregister();
-          });
-        }
-        if ('caches' in window) {
-          caches.keys().then(function(keys) {
-            for (let key of keys) caches.delete(key);
-          });
-        }
-      })();
-    </script>
     <link rel="icon" type="image/jpeg" href="assets/kd-logo.jpg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
     
@@ -42,9 +25,10 @@
     <meta property="twitter:description" content="We turn your wedding into a timeless film." />
     <meta property="twitter:image" content="assets/kd-logo.jpg" />
 
-    <!-- Google Fonts -->
+    <!-- Preconnect & Preload for Zero-Latency Font & Image Delivery -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="image" href="assets/kd-logo.jpg" fetchpriority="high">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   </head>
   <body class="bg-obsidian text-champagne antialiased selection:bg-gold selection:text-obsidian overflow-x-hidden">
