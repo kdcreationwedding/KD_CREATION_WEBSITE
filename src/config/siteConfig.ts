@@ -4,6 +4,7 @@ export interface ServiceItem {
   subtitle: string;
   description: string;
   image: string;
+  images?: string[];
   features: string[];
   cta: string;
 }
@@ -223,6 +224,7 @@ export const SITE_CONFIG = {
       subtitle: "All-Inclusive Signature Master Experience",
       description: "The complete KD CREATION experience combining full photography, 4K film production, pre-wedding, reels, and master luxury albums.",
       image: "assets/service-complete-coverage.jpg",
+      images: ["assets/service-complete-coverage.jpg", "assets/service-complete-coverage-2.jpg"],
       features: ["Full Director Team (10+ Crew)", "360 Multi-Camera Sync", "Live Stream Support", "Master Box Set & Heirloom Vault"],
       cta: "GET DETAILS"
     }

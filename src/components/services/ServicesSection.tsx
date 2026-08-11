@@ -62,15 +62,23 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
               className="liquid-glass-card rounded-3xl overflow-hidden flex flex-col group shadow-xl transition-all duration-300"
               data-cursor="VIEW"
             >
-              {/* Image Preview with Hover Zoom */}
+              {/* Image Preview with Hover Zoom & Crossfade */}
               <div className="relative h-72 sm:h-80 overflow-hidden bg-[#2B050B]">
                 <img
                   src={service.image}
                   alt={service.title}
-                  className="w-full h-full object-cover object-[center_15%] transition-transform duration-700 group-hover:scale-105 brightness-95 group-hover:brightness-100"
+                  className="w-full h-full object-cover object-[center_15%] transition-all duration-700 group-hover:scale-105 brightness-95 group-hover:brightness-100"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#3B0811] via-[#3B0811]/30 to-transparent opacity-85" />
+                {service.images && service.images.length > 1 && (
+                  <img
+                    src={service.images[1]}
+                    alt={`${service.title} alternate`}
+                    className="absolute inset-0 w-full h-full object-cover object-[center_15%] transition-all duration-700 opacity-0 group-hover:opacity-100 group-hover:scale-105 brightness-95 group-hover:brightness-100"
+                    loading="lazy"
+                  />
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#3B0811] via-[#3B0811]/30 to-transparent opacity-85 pointer-events-none" />
                 
                 {/* Floating Service Badge */}
                 <div className="absolute top-4 left-4 liquid-glass-pill p-2.5 rounded-2xl shadow-lg">
