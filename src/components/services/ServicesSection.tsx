@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Camera, Film, Video, Smartphone, BookOpen, Crown, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { SITE_CONFIG } from '../../config/siteConfig';
+import { getAssetUrl } from '../../utils/assetHelper';
 
 interface ServicesSectionProps {
   onSelectService: (serviceName: string) => void;
@@ -65,14 +66,14 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
               {/* Image Preview with Hover Zoom & Crossfade */}
               <div className="relative h-72 sm:h-80 overflow-hidden bg-[#2B050B]">
                 <img
-                  src={service.image}
+                  src={getAssetUrl(service.image)}
                   alt={service.title}
                   className="w-full h-full object-cover object-[center_15%] transition-all duration-700 group-hover:scale-105 brightness-95 group-hover:brightness-100"
                   loading="lazy"
                 />
                 {service.images && service.images.length > 1 && (
                   <img
-                    src={service.images[1]}
+                    src={getAssetUrl(service.images[1])}
                     alt={`${service.title} alternate`}
                     className="absolute inset-0 w-full h-full object-cover object-[center_15%] transition-all duration-700 opacity-0 group-hover:opacity-100 group-hover:scale-105 brightness-95 group-hover:brightness-100"
                     loading="lazy"
