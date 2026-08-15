@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "predeploy": "npm run build",
-    "deploy": "GITHUB_PAGES=true npx gh-pages -d dist",
+    "predeploy": "GITHUB_PAGES=true npm run build",
+    "deploy": "npx gh-pages -d dist",
     "lint": "tsc",
     "preview": "vite preview"
   },
