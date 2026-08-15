@@ -115,79 +115,95 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Mobile Menu Toggle Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 text-gold focus:outline-none"
+            className="lg:hidden flex items-center justify-center p-2 rounded-xl text-gold border border-gold/40 bg-[#3B0811]/90 backdrop-blur-md shadow-[0_4px_15px_rgba(212,175,55,0.2)] hover:border-gold hover:text-white transition-all active:scale-95"
             aria-label="Toggle Navigation Menu"
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileMenuOpen ? <X className="w-5 h-5 text-gold" /> : <Menu className="w-5 h-5 text-gold" />}
           </button>
         </div>
       </header>
 
-      {/* Mobile Drawer Menu */}
+      {/* Mobile Backdrop & Glass Drawer Overlay */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-x-0 top-[58px] sm:top-[66px] z-40 apple-liquid-glass border-b border-gold/40 p-6 lg:hidden"
-          >
-            <div className="flex flex-col gap-5 items-center text-center py-3">
-              <img
-                src={SITE_CONFIG.brand.officialLogo}
-                alt={SITE_CONFIG.brand.logoAlt}
-                className="w-28 h-auto rounded-xl border border-gold/40 p-1 mb-1 bg-[#3B0811] shadow-md"
-              />
-              <div className="flex flex-col gap-3.5 w-full">
-                {navLinks.map((link) => (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="text-xs tracking-[0.22em] font-bold text-[#F5F2EB] hover:text-gold transition-colors py-1"
+          <>
+            {/* Fullscreen Frosted Glass Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              onClick={() => setMobileMenuOpen(false)}
+              className="fixed inset-0 z-40 bg-[#1C0307]/80 backdrop-blur-xl lg:hidden"
+            />
+
+            {/* Mobile Drawer Content */}
+            <motion.div
+              initial={{ opacity: 0, y: -20, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -20, scale: 0.96 }}
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              className="fixed inset-x-4 top-[64px] sm:top-[74px] z-50 rounded-3xl bg-[#2B050B]/95 backdrop-blur-2xl border border-gold/40 p-6 shadow-[0_20px_50px_rgba(0,0,0,0.8)] lg:hidden max-h-[85vh] overflow-y-auto"
+            >
+              <div className="flex flex-col gap-5 items-center text-center py-2">
+                <div className="relative p-1.5 rounded-2xl border border-gold/40 bg-[#3B0811] shadow-lg">
+                  <img
+                    src={SITE_CONFIG.brand.officialLogo}
+                    alt={SITE_CONFIG.brand.logoAlt}
+                    className="w-28 h-auto object-contain rounded-xl"
+                  />
+                </div>
+
+                <div className="flex flex-col gap-3 w-full">
+                  {navLinks.map((link) => (
+                    <a
+                      key={link.name}
+                      href={link.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="text-xs tracking-[0.22em] font-bold text-[#F5F2EB] hover:text-gold hover:bg-gold/10 rounded-xl transition-all py-2.5 px-4"
+                    >
+                      {link.name}
+                    </a>
+                  ))}
+                </div>
+
+                <div className="flex flex-col gap-2.5 w-full pt-4 border-t border-gold/25">
+                  <button
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      onOpenClientAuth();
+                    }}
+                    className="flex items-center justify-center gap-2 text-xs tracking-widest font-bold text-[#F5F2EB] border border-gold/40 py-3 rounded-2xl w-full bg-[#3B0811] shadow-md hover:border-gold transition-colors"
                   >
-                    {link.name}
-                  </a>
-                ))}
+                    <UserCheck className="w-4 h-4 text-gold" />
+                    <span>{loggedInClient ? 'MY CLIENT PORTAL' : 'CLIENT LOGIN / REGISTER'}</span>
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      onOpenChat();
+                    }}
+                    className="flex items-center justify-center gap-2 text-xs tracking-widest font-bold text-gold border border-gold/40 py-3 rounded-2xl w-full bg-[#4A0E17] shadow-md hover:border-gold transition-colors"
+                  >
+                    <Sparkles className="w-4 h-4" />
+                    <span>ASK KD AI CONSULTANT</span>
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      onOpenLeadForm();
+                    }}
+                    className="flex items-center justify-center gap-2 text-xs tracking-widest font-bold text-obsidian bg-gold-gradient py-3.5 rounded-2xl w-full shadow-lg shadow-gold/20 hover:brightness-110 transition-all active:scale-98"
+                  >
+                    <Calendar className="w-4 h-4" />
+                    <span>CHECK YOUR WEDDING DATE</span>
+                  </button>
+                </div>
               </div>
-
-              <div className="flex flex-col gap-2.5 w-full pt-4 border-t border-gold/20">
-                <button
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    onOpenClientAuth();
-                  }}
-                  className="flex items-center justify-center gap-2 text-xs tracking-widest font-bold text-[#F5F2EB] border border-gold/40 py-2.5 rounded-full w-full bg-[#3B0811] shadow-sm"
-                >
-                  <UserCheck className="w-4 h-4 text-gold" />
-                  <span>{loggedInClient ? 'MY CLIENT PORTAL' : 'CLIENT LOGIN / REGISTER'}</span>
-                </button>
-
-                <button
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    onOpenChat();
-                  }}
-                  className="flex items-center justify-center gap-2 text-xs tracking-widest font-bold text-gold border border-gold/40 py-2.5 rounded-full w-full bg-[#4A0E17] shadow-sm"
-                >
-                  <Sparkles className="w-4 h-4" />
-                  <span>ASK KD AI CONSULTANT</span>
-                </button>
-
-                <button
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    onOpenLeadForm();
-                  }}
-                  className="flex items-center justify-center gap-2 text-xs tracking-widest font-bold text-obsidian bg-gold-gradient py-3 rounded-full w-full shadow-lg"
-                >
-                  <Calendar className="w-4 h-4" />
-                  <span>CHECK YOUR WEDDING DATE</span>
-                </button>
-              </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>
