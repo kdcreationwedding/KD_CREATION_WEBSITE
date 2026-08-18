@@ -1,4 +1,4 @@
-import{r as p,j as e,m as A,A as j}from"./vendor-framer.C8kokVM1.js";import{S as E,L as w}from"./index.WEZY3ECO.js";import{S as N,v as D,w as S,X as k,x as W}from"./vendor-icons.CsYe74PY.js";import"./vendor-three.UU_95PR3.js";class I{static getInitialState(){return{message:{id:"init-1",sender:"ai",text:`Namaste & Welcome to **KD CREATION**! ✨
+import{r as p,j as e,m as A,A as j}from"./vendor-framer.C8kokVM1.js";import{S as E,L as w}from"./index.DbNcSUqM.js";import{S as N,v as D,w as S,X as k,x as W}from"./vendor-icons.CsYe74PY.js";import"./vendor-three.UU_95PR3.js";class I{static getInitialState(){return{message:{id:"init-1",sender:"ai",text:`Namaste & Welcome to **KD CREATION**! ✨
 
 I am **KD AI**, your personal Luxury Wedding Film & Photography Consultant.
 
