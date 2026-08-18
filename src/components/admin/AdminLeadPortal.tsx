@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Flame, Download, Trash2, MessageCircle, Phone, Mail, User, Calendar, MapPin, Sparkles, Filter } from 'lucide-react';
+import { X, Flame, Download, Trash2, MessageCircle, Phone, Mail, User, Calendar, MapPin, Sparkles, Filter, Lock } from 'lucide-react';
 import { Lead, LeadScore } from '../../types';
 import { LeadService } from '../../services/leadService';
 import { SITE_CONFIG } from '../../config/siteConfig';
@@ -8,9 +8,10 @@ import { SITE_CONFIG } from '../../config/siteConfig';
 interface AdminLeadPortalProps {
   isOpen: boolean;
   onClose: () => void;
+  onLogout: () => void;
 }
 
-export const AdminLeadPortal: React.FC<AdminLeadPortalProps> = ({ isOpen, onClose }) => {
+export const AdminLeadPortal: React.FC<AdminLeadPortalProps> = ({ isOpen, onClose, onLogout }) => {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [filterScore, setFilterScore] = useState<string>('ALL');
 
@@ -102,6 +103,15 @@ export const AdminLeadPortal: React.FC<AdminLeadPortalProps> = ({ isOpen, onClos
               >
                 <Download className="w-4 h-4" />
                 <span>EXPORT CSV</span>
+              </button>
+
+              <button
+                onClick={onLogout}
+                className="inline-flex items-center gap-1.5 text-xs tracking-wider font-extrabold text-rose-300 bg-rose-950/80 border border-rose-500/40 px-3.5 py-2 rounded-full hover:bg-rose-900 transition-all shadow-md"
+                title="Lock Vault & Require Password Again"
+              >
+                <Lock className="w-3.5 h-3.5" />
+                <span>LOCK VAULT</span>
               </button>
 
               <button

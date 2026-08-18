@@ -113,6 +113,12 @@ export const App: React.FC = () => {
     setIsAdminPortalOpen(true);
   };
 
+  const handleAdminLogout = () => {
+    setIsAdminAuthenticated(false);
+    sessionStorage.removeItem('kd_admin_auth');
+    setIsAdminPortalOpen(false);
+  };
+
   // Global Private Admin Triggers: Ctrl + Shift + A or secret URL parameter (?admin=true or ?vault=true)
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -261,6 +267,7 @@ export const App: React.FC = () => {
         <AdminLeadPortal
           isOpen={isAdminPortalOpen}
           onClose={() => setIsAdminPortalOpen(false)}
+          onLogout={handleAdminLogout}
         />
       </Suspense>
     </div>
