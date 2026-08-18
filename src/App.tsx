@@ -113,8 +113,13 @@ export const App: React.FC = () => {
     setIsAdminPortalOpen(true);
   };
 
-  // Global Keyboard Shortcut: Ctrl + Shift + A or Cmd + Shift + A to open Admin Leads Access
+  // Global Private Admin Triggers: Ctrl + Shift + A or secret URL parameter (?admin=true or ?vault=true)
   useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('admin') === 'true' || urlParams.get('vault') === 'true' || window.location.hash === '#admin-vault') {
+      handleOpenAdminAccess();
+    }
+
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
         e.preventDefault();

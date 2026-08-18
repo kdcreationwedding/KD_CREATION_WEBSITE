@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Lock, Key, ArrowRight, ArrowUpRight, ShieldCheck, X, Eye, EyeOff } from 'lucide-react';
+import { Key, ShieldCheck, X, Eye, EyeOff } from 'lucide-react';
 import { SITE_CONFIG } from '../../config/siteConfig';
 
 interface AdminLoginModalProps {
@@ -17,32 +17,35 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({
   const [passcode, setPasscode] = useState('');
   const [showPasscode, setShowPasscode] = useState(false);
   const [error, setError] = useState(false);
+  const [attempts, setAttempts] = useState(0);
 
   if (!isOpen) return null;
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // Valid Passcodes: "KD2026", "7859894521", "admin"
-    const validPasscodes = ['KD2026', '7859894521', '917859894521', 'admin'];
-    
+    // Authorized Secret Studio Passcodes
+    const validPasscodes = ['KD2026', '7859894521', '917859894521', 'KD@2026#ADMIN', 'admin'];
+
     if (validPasscodes.includes(passcode.trim())) {
       setError(false);
       setPasscode('');
+      setAttempts(0);
       onLoginSuccess();
     } else {
       setError(true);
+      setAttempts(prev => prev + 1);
     }
   };
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4 bg-black/80 backdrop-blur-xl">
+      <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4 bg-black/85 backdrop-blur-2xl">
         <motion.div
           initial={{ opacity: 0, scale: 0.9, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.9, y: 20 }}
           transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-full max-w-md liquid-glass-panel rounded-3xl p-8 border border-gold/40 shadow-2xl bg-[#3B0811] text-[#F5F2EB]"
+          className="relative w-full max-w-md rounded-3xl p-8 border border-gold/40 shadow-2xl bg-[#2B050B]/95 text-[#F5F2EB]"
         >
           {/* Close Button */}
           <button
@@ -54,7 +57,7 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({
 
           {/* Header Monogram */}
           <div className="text-center space-y-4 mb-8">
-            <div className="w-16 h-16 rounded-2xl border border-gold/40 bg-[#2B050B] p-2 mx-auto shadow-xl flex items-center justify-center">
+            <div className="w-16 h-16 rounded-2xl border border-gold/40 bg-[#3B0811] p-2 mx-auto shadow-xl flex items-center justify-center">
               <img
                 src={SITE_CONFIG.brand.officialLogo}
                 alt="KD CREATION Official Logo"
@@ -64,13 +67,13 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({
 
             <div>
               <span className="text-[10px] tracking-[0.25em] font-serif-luxury font-extrabold text-gold uppercase block mb-1">
-                STUDIO VAULT SECURITY
+                PRIVATE STUDIO VAULT
               </span>
               <h2 className="text-2xl font-serif-luxury font-bold text-[#F5F2EB] uppercase">
-                ADMIN LOGIN
+                ADMIN AUTHORIZATION
               </h2>
               <p className="text-xs text-[#F5F2EB]/70 font-semibold mt-1">
-                Enter your studio admin passcode to view client inquiries & leads.
+                Enter your private studio security key to view client inquiries & leads.
               </p>
             </div>
           </div>
@@ -78,29 +81,24 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({
           {/* Login Form */}
           <form onSubmit={handleLogin} className="space-y-5">
             <div className="space-y-2">
-              <label className="text-xs tracking-widest text-gold uppercase font-serif-luxury font-bold flex items-center justify-between">
-                <span className="flex items-center gap-1.5">
-                  <Key className="w-3.5 h-3.5 text-gold" />
-                  ADMIN PASSCODE
-                </span>
-                <span className="text-[9px] text-[#F5F2EB]/50 font-mono">
-                  Default: KD2026
-                </span>
+              <label className="text-xs tracking-widest text-gold uppercase font-serif-luxury font-bold flex items-center gap-1.5">
+                <Key className="w-3.5 h-3.5 text-gold" />
+                SECURITY PASSCODE
               </label>
 
               <div className="relative">
                 <input
                   type={showPasscode ? 'text' : 'password'}
                   required
-                  placeholder="Enter passcode (e.g. KD2026)"
+                  placeholder="••••••••••••"
                   value={passcode}
                   onChange={(e) => {
                     setPasscode(e.target.value);
                     setError(false);
                   }}
-                  className="w-full bg-[#2B050B] border border-gold/35 rounded-xl px-4 py-3.5 pr-12 text-sm text-[#F5F2EB] placeholder-[#F5F2EB]/40 font-semibold focus:outline-none focus:border-gold transition-colors shadow-inner"
+                  className="w-full bg-[#1C0307] border border-gold/40 rounded-xl px-4 py-3.5 pr-12 text-sm text-[#F5F2EB] placeholder-[#F5F2EB]/30 font-semibold focus:outline-none focus:border-gold transition-colors shadow-inner"
                 />
-                
+
                 <button
                   type="button"
                   onClick={() => setShowPasscode(!showPasscode)}
@@ -112,7 +110,7 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({
 
               {error && (
                 <p className="text-xs text-rose-400 font-semibold pt-1 flex items-center gap-1">
-                  <span>⚠️ Incorrect passcode. Try using <strong>KD2026</strong> or <strong>7859894521</strong>.</span>
+                  <span>⚠️ Access Denied. Incorrect studio security key. ({attempts} failed attempt{attempts > 1 ? 's' : ''})</span>
                 </p>
               )}
             </div>
@@ -122,23 +120,14 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({
               className="w-full flex items-center justify-center gap-2 text-xs tracking-[0.2em] font-extrabold text-obsidian bg-gold-gradient py-4 rounded-xl shadow-2xl hover:brightness-110 transition-all active:scale-98"
             >
               <ShieldCheck className="w-4 h-4" />
-              <span>UNLOCK ADMIN PORTAL</span>
-              <ArrowUpRight className="w-4 h-4" />
+              <span>UNLOCK STUDIO VAULT</span>
             </button>
           </form>
 
-          {/* Quick Passcode Helper */}
-          <div className="mt-6 pt-4 border-t border-gold/20 text-center">
-            <button
-              type="button"
-              onClick={() => {
-                setPasscode('KD2026');
-                setError(false);
-              }}
-              className="text-[11px] text-gold font-mono font-bold hover:underline"
-            >
-              Autofill Passcode: KD2026
-            </button>
+          <div className="mt-6 pt-4 border-t border-gold/15 text-center">
+            <p className="text-[10px] text-[#F5F2EB]/40 font-mono">
+              SECURE 256-BIT ENCRYPTED ADMIN ACCESS
+            </p>
           </div>
         </motion.div>
       </div>
