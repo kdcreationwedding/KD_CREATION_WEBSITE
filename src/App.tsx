@@ -12,6 +12,7 @@ import { FoundersSection } from './components/studio/FoundersSection';
 import { WhyKdCreation } from './components/studio/WhyKdCreation';
 import { ProcessTimeline } from './components/studio/ProcessTimeline';
 import { Testimonials } from './components/studio/Testimonials';
+import { FaqSection } from './components/studio/FaqSection';
 import { InstagramFeed } from './components/studio/InstagramFeed';
 import { LeadFormSection } from './components/forms/LeadFormSection';
 import { StickyLeadCtas } from './components/forms/StickyLeadCtas';
@@ -214,6 +215,8 @@ export const App: React.FC = () => {
 
       {/* 12. Testimonials Showcase */}
       <Testimonials />
+
+      <FaqSection />
 
       {/* 13. Instagram Live Feed */}
       <InstagramFeed />
