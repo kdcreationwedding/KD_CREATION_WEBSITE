@@ -68,7 +68,36 @@ export class LeadService {
     // Sync to backend if configured
     this.syncToBackend(lead);
 
+    // Trigger Meta Pixel & Google Ads Conversion Event
+    this.trackPerformanceLeadEvent(lead);
+
     return lead;
+  }
+
+  /**
+   * Performance Marketing Conversion Tracker Hook (Meta Pixel & GA4)
+   */
+  static trackPerformanceLeadEvent(lead: Partial<Lead>): void {
+    if (typeof window !== 'undefined') {
+      try {
+        if ((window as any).fbq) {
+          (window as any).fbq('track', 'Lead', {
+            content_name: lead.eventType || 'Wedding Photography Coverage',
+            value: lead.budget || 'Custom Package',
+            currency: 'INR'
+          });
+        }
+        if ((window as any).gtag) {
+          (window as any).gtag('event', 'generate_lead', {
+            event_category: 'Wedding Booking Inquiry',
+            event_label: lead.weddingLocation || 'Ahmedabad',
+            value: 1.0
+          });
+        }
+      } catch (e) {
+        console.warn('Analytics tracking not initialized yet', e);
+      }
+    }
   }
 
   /**
