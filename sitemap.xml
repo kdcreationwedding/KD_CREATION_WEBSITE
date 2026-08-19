@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+  <url>
+    <loc>https://kdcreations.in/</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://kdcreations.in/assets/kd-logo.jpg</image:loc>
+      <image:title>KD CREATION Official Logo</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://kdcreations.in/assets/service-wedding-photography.jpg</image:loc>
+      <image:title>KD CREATION Luxury Wedding Photography</image:title>
+    </image:image>
+    <video:video>
+      <video:thumbnail_loc>https://kdcreations.in/assets/dhaval-sangeeta-outer-cover.jpg</video:thumbnail_loc>
+      <video:title>KD CREATION 4K Luxury Wedding Cinema Showreel</video:title>
+      <video:description>Royal destination wedding films and pre-wedding teasers by KD CREATION</video:description>
+      <video:player_loc>https://www.youtube.com/embed/3i1-aJcasSg</video:player_loc>
+    </video:video>
+  </url>
+</urlset>
