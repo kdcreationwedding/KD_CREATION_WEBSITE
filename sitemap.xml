@@ -22,4 +22,10 @@
       <video:player_loc>https://www.youtube.com/embed/3i1-aJcasSg</video:player_loc>
     </video:video>
   </url>
+  <url>
+    <loc>https://kdcreations.in/llms.txt</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
