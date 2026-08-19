@@ -74,7 +74,7 @@ export const SelectedStories: React.FC<SelectedStoriesProps> = ({
               <div className="relative h-80 sm:h-96 overflow-hidden">
                 <img
                   src={story.heroImage}
-                  alt={story.title}
+                  alt={`KD Creation Wedding Photography & 4K Cinema - ${story.couple} ${story.title} ${story.location}`}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 brightness-90 group-hover:brightness-100"
                   loading="lazy"
                 />

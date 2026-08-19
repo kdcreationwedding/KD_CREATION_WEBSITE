@@ -67,14 +67,14 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
               <div className="relative h-72 sm:h-80 overflow-hidden bg-[#2B050B]">
                 <img
                   src={getAssetUrl(service.image)}
-                  alt={service.title}
+                  alt={`KD Creation ${service.title} - Luxury Wedding Photography & Cinematography Ahmedabad Gujarat`}
                   className="w-full h-full object-cover object-[center_15%] transition-all duration-700 group-hover:scale-105 brightness-95 group-hover:brightness-100"
                   loading="lazy"
                 />
                 {service.images && service.images.length > 1 && (
                   <img
                     src={getAssetUrl(service.images[1])}
-                    alt={`${service.title} alternate`}
+                    alt={`KD Creation ${service.title} Gujarat Royal Wedding Portfolio`}
                     className="absolute inset-0 w-full h-full object-cover object-[center_15%] transition-all duration-700 opacity-0 group-hover:opacity-100 group-hover:scale-105 brightness-95 group-hover:brightness-100"
                     loading="lazy"
                   />
