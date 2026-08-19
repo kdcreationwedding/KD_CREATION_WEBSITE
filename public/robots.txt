@@ -1,0 +1,8 @@
+# KD CREATION Official Robots.txt
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /?admin=true
+
+# Sitemap Location for Googlebot and Bingbot
+Sitemap: https://kdcreations.in/sitemap.xml
