@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Camera, Film, Video, Smartphone, BookOpen, Crown, ArrowRight, CheckCircle2 } from 'lucide-react';
-import { SITE_CONFIG } from '../../config/siteConfig';
+import { SITE_CONFIG, ServiceItem } from '../../config/siteConfig';
 import { getAssetUrl } from '../../utils/assetHelper';
+import { ServiceDetailModal } from './ServiceDetailModal';
 
 interface ServicesSectionProps {
   onSelectService: (serviceName: string) => void;
@@ -28,8 +29,16 @@ const getServiceIcon = (id: string) => {
 };
 
 export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectService }) => {
+  const [activeModalService, setActiveModalService] = useState<ServiceItem | null>(null);
+
   return (
     <section id="services" className="relative py-28 sm:py-36 bg-[#3B0811] border-t border-gold/20 overflow-hidden text-[#F5F2EB]">
+      {/* Service Detail Modal */}
+      <ServiceDetailModal
+        service={activeModalService}
+        onClose={() => setActiveModalService(null)}
+        onBookService={onSelectService}
+      />
       {/* Ambient background glows */}
       <div className="absolute top-1/4 left-0 w-96 h-96 bg-gold/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-gold/15 rounded-full blur-3xl pointer-events-none" />
@@ -113,10 +122,10 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
 
                 {/* Card CTA Action */}
                 <button
-                  onClick={() => onSelectService(service.title)}
+                  onClick={() => setActiveModalService(service)}
                   className="w-full flex items-center justify-between text-xs tracking-widest font-bold text-gold border border-gold/40 bg-[#2B050B]/60 py-3.5 px-5 rounded-2xl hover:bg-gold-gradient hover:text-obsidian shadow-sm transition-all duration-300 group/btn"
                 >
-                  <span>{service.cta}</span>
+                  <span>EXPLORE {service.title}</span>
                   <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
                 </button>
               </div>
