@@ -73,7 +73,7 @@ export const SITE_CONFIG = {
     instagramUrl: "https://www.instagram.com/kdcreation.in?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
     youtubeUrl: "https://youtube.com/@kdcreationwedding?si=9j18Y9E_eXxGWrIW",
     email: "kdcreationwedding@gmail.com",
-    phone: "+91 7859894521"
+    phone: "+91 9033032922"
   },
 
   // Founders & Executive Leadership
@@ -118,8 +118,8 @@ export const SITE_CONFIG = {
 
   // Centralized WhatsApp Configuration
   WHATSAPP: {
-    number: "917859894521",
-    displayNumber: "+91 7859894521",
+    number: "919033032922",
+    displayNumber: "+91 9033032922",
     defaultGreeting: "Hi KD CREATION, I would like to check availability and packages for my wedding."
   },
 

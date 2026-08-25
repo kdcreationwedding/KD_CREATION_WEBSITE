@@ -24,7 +24,7 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     // Authorized Secret Studio Passcodes
-    const validPasscodes = ['KD2026', '7859894521', '917859894521', 'KD@2026#ADMIN', 'admin'];
+    const validPasscodes = ['KD2026', '9033032922', '919033032922', '7859894521', '917859894521', 'KD@2026#ADMIN', 'admin'];
 
     if (validPasscodes.includes(passcode.trim())) {
       setError(false);
