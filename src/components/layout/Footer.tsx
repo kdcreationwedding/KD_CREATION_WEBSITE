@@ -177,21 +177,24 @@ export const Footer: React.FC<FooterProps> = ({ onOpenAdminPortal }) => {
 
         </div>
 
-        {/* Copyright, Admin Portal Trigger & Scroll to Top */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] tracking-widest text-[#F5F2EB]/70 font-bold">
-          <div>
-            CRAFTING STORIES THAT LAST FOREVER.
+        {/* Regional Location Coverage Bar & Copyright */}
+        <div className="pt-8 border-t border-gold/15 flex flex-col items-center gap-4 text-center">
+          <p className="text-[10px] sm:text-xs text-gold/80 font-mono uppercase tracking-wider">
+            PRIMARY LOCATIONS: AHMEDABAD • GANDHINAGAR • VADODARA • SURAT • RAJKOT • ANAND • NADIAD • UDAIPUR • JAIPUR • GOA • MUMBAI
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-between w-full gap-4 text-[11px] tracking-widest text-[#F5F2EB]/70 font-bold">
+            <div>
+              © 2018–2026 KD CREATION. ALL RIGHTS RESERVED. LUXURY WEDDING PHOTOGRAPHY & 4K CINEMATOGRAPHY.
+            </div>
+
+            <button
+              onClick={scrollToTop}
+              className="flex items-center gap-1.5 text-gold hover:text-white transition-colors"
+            >
+              <span>BACK TO TOP</span>
+              <ArrowUp className="w-3.5 h-3.5" />
+            </button>
           </div>
-
-          {/* Admin Leads Vault — HIDDEN from public. Use Ctrl+Shift+A to access. */}
-
-          <button
-            onClick={scrollToTop}
-            className="flex items-center gap-1.5 text-gold hover:text-white transition-colors"
-          >
-            <span>BACK TO TOP</span>
-            <ArrowUp className="w-3.5 h-3.5" />
-          </button>
         </div>
 
       </div>
