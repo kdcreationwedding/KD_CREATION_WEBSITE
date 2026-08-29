@@ -398,16 +398,16 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
           </div>
         )}
 
-        {/* 3. 3D REALISTIC PHOTOBOOK 2-PAGE SPREAD STAGE */}
+        {/* 3. 3D REALISTIC PHOTOBOOK SPREAD STAGE (100% UNCROPPED FULL PHOTO) */}
         {viewMode === 'book' && (
           <div className="relative w-full h-full flex flex-col items-center justify-center p-2 sm:p-4">
 
             {/* Stage Container with Zoom */}
             <div
-              className="relative transition-transform duration-300 w-full flex items-center justify-center"
+              className="relative transition-transform duration-300 w-full h-full flex items-center justify-center"
               style={{ transform: `scale(${zoomLevel})` }}
             >
-              <div className="relative w-full max-w-[96vw] lg:max-w-6xl h-[60vh] sm:h-[75vh] flex items-center justify-center shadow-2xl border border-gold/40 rounded-2xl overflow-hidden bg-[#140205]">
+              <div className="relative w-full max-w-[98vw] lg:max-w-6xl h-[65vh] sm:h-[80vh] flex items-center justify-center shadow-2xl border border-gold/40 rounded-2xl overflow-hidden bg-[#120204] p-1 sm:p-3">
 
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -422,45 +422,16 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
                     {pages[currentPageIndex] ? (
                       <div className="w-full h-full flex items-center justify-center relative overflow-hidden">
 
-                        {/* DESKTOP 2-PAGE SPREAD VIEW (Lg Screens: Split wide image into Left and Right halves with Spine Crease) */}
-                        <div className="hidden lg:flex w-full h-full relative">
+                        {/* 100% UNCROPPED FULL PHOTO DISPLAY (Zero Cropping on any device) */}
+                        <img
+                          src={getAssetPath(pages[currentPageIndex])}
+                          alt={`Page ${currentPageIndex + 1}`}
+                          className="w-full h-full object-contain shadow-2xl rounded-lg pointer-events-auto"
+                        />
 
-                          {/* LEFT PAGE (Left 50% of the Wide Photobook Spread) */}
-                          <div className="w-1/2 h-full relative overflow-hidden border-r border-black/70 bg-[#140205] flex items-center justify-end">
-                            <img
-                              src={getAssetPath(pages[currentPageIndex])}
-                              alt={`Page ${currentPageIndex + 1} - Left`}
-                              className="h-full w-[200%] max-w-none object-cover object-left shadow-xl"
-                            />
-                            {/* Spine Crease Shadow Overlay (Left Edge) */}
-                            <div className="absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-black/90 via-black/40 to-transparent pointer-events-none z-10" />
-                            <div className="absolute inset-y-0 right-0 w-[1px] bg-gold/30 pointer-events-none z-10" />
-                          </div>
-
-                          {/* RIGHT PAGE (Right 50% of the Wide Photobook Spread) */}
-                          <div className="w-1/2 h-full relative overflow-hidden bg-[#140205] flex items-center justify-start">
-                            <img
-                              src={getAssetPath(pages[currentPageIndex])}
-                              alt={`Page ${currentPageIndex + 1} - Right`}
-                              className="h-full w-[200%] max-w-none object-cover object-right shadow-xl"
-                            />
-                            {/* Spine Crease Shadow Overlay (Right Edge) */}
-                            <div className="absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-black/90 via-black/40 to-transparent pointer-events-none z-10" />
-                            <div className="absolute inset-y-0 left-0 w-[1px] bg-gold/30 pointer-events-none z-10" />
-                          </div>
-
-                        </div>
-
-                        {/* MOBILE / TABLET RESPONSIVE SPREAD VIEW (Fills screen aspect ratio automatically) */}
-                        <div className="flex lg:hidden w-full h-full relative items-center justify-center p-2">
-                          <img
-                            src={getAssetPath(pages[currentPageIndex])}
-                            alt={`Page ${currentPageIndex + 1}`}
-                            className="w-full h-full object-contain shadow-2xl rounded-lg"
-                          />
-                          {/* Center Fold Line Indicator */}
-                          <div className="absolute inset-y-0 left-1/2 w-[1px] bg-gold/25 pointer-events-none" />
-                        </div>
+                        {/* CENTER PHOTOBOOK SPINE CREASE SHADOW (Adds realistic 2-page photobook fold depth without cropping) */}
+                        <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-16 bg-gradient-to-r from-transparent via-black/45 to-transparent pointer-events-none z-10" />
+                        <div className="absolute inset-y-0 left-1/2 w-[1px] bg-gold/30 pointer-events-none z-10" />
 
                         {/* Watermark Overlay */}
                         {watermarkOn && (
