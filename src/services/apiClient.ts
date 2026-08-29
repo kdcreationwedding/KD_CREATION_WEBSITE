@@ -210,8 +210,9 @@ export const apiClient = {
     return null;
   },
 
-  // 5. Photo Upload Endpoint directly to disk/cloud
+  // 5. High-Capacity Multi-Photo Upload Endpoint (Local Server Disk + High-Capacity Cloud Media Storage)
   uploadPhotos: async (files: File[]): Promise<string[] | null> => {
+    // 1. Try local Express backend proxy first (/api/upload)
     try {
       const formData = new FormData();
       files.forEach((file) => formData.append('photos', file));
@@ -223,11 +224,41 @@ export const apiClient = {
 
       if (res.ok) {
         const data = await res.json();
-        return data.urls || [];
+        if (data && Array.isArray(data.urls) && data.urls.length > 0) {
+          return data.urls;
+        }
       }
     } catch (e) {
-      console.warn('Backend photo upload unavailable, using portable HD encoding', e);
+      console.warn('Local Express server upload unavailable', e);
     }
+
+    // 2. High-Capacity Free Cloud Storage Upload API (for live site https://www.kdcreations.in)
+    try {
+      const cloudUrls: string[] = [];
+      for (const file of files) {
+        const cloudFormData = new FormData();
+        cloudFormData.append('image', file);
+
+        const cloudRes = await fetch('https://api.imgbb.com/1/upload?key=6d704453d10006761005f15ca8dc1dd2', {
+          method: 'POST',
+          body: cloudFormData
+        });
+
+        if (cloudRes.ok) {
+          const cloudData = await cloudRes.json();
+          if (cloudData && cloudData.data && cloudData.data.url) {
+            cloudUrls.push(cloudData.data.url);
+          }
+        }
+      }
+
+      if (cloudUrls.length > 0) {
+        return cloudUrls;
+      }
+    } catch (err) {
+      console.warn('Cloud Media Upload API fallback', err);
+    }
+
     return null;
   }
 };
