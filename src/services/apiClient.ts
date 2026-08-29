@@ -1,3 +1,5 @@
+import { supabase, isSupabaseConfigured, uploadPhotoToSupabase } from './supabaseClient';
+
 const getApiBaseUrl = () => {
   if (typeof window !== 'undefined') {
     if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
@@ -21,9 +23,39 @@ export const apiClient = {
     }
   },
 
-  // 1. Digital Albums - 24/7 Cloud Sync from GitHub Cloud DB + Local Backend
+  // 1. Digital Albums - 24/7 Cloud Sync from Supabase + GitHub Cloud DB + Local Backend
   getAlbums: async () => {
-    // 1. Try local Express backend proxy first
+    // 0. Try Supabase first if configured
+    if (isSupabaseConfigured() && supabase) {
+      try {
+        const { data, error } = await supabase.from('albums').select('*').order('created_at', { ascending: false });
+        if (!error && Array.isArray(data) && data.length > 0) {
+          return data.map((item: any) => ({
+            id: item.id,
+            slug: item.slug,
+            title: item.title,
+            couple: item.couple,
+            subtitle: item.subtitle,
+            date: item.date,
+            location: item.location,
+            coverImage: item.cover_image || item.coverImage,
+            description: item.description,
+            pages: typeof item.pages === 'string' ? JSON.parse(item.pages) : (item.pages || []),
+            isPublished: item.is_published ?? item.isPublished ?? true,
+            isPrivate: item.is_private ?? item.isPrivate ?? false,
+            password: item.password || '',
+            watermarkEnabled: item.watermark_enabled ?? item.watermarkEnabled ?? true,
+            downloadAllowed: item.download_allowed ?? item.downloadAllowed ?? false,
+            createdAt: item.created_at || item.createdAt,
+            updatedAt: item.updated_at || item.updatedAt
+          }));
+        }
+      } catch (e) {
+        console.warn('Supabase fetch albums error:', e);
+      }
+    }
+
+    // 1. Try local Express backend proxy
     try {
       const res = await fetch(`${API_BASE_URL}/albums`);
       if (res.ok) {
@@ -51,6 +83,34 @@ export const apiClient = {
   },
 
   saveAlbum: async (album: any) => {
+    // 0. Save to Supabase if configured
+    if (isSupabaseConfigured() && supabase) {
+      try {
+        const payload = {
+          id: album.id,
+          slug: album.slug,
+          title: album.title,
+          couple: album.couple,
+          subtitle: album.subtitle || '',
+          date: album.date || '2026',
+          location: album.location || '',
+          cover_image: album.coverImage || '',
+          description: album.description || '',
+          pages: JSON.stringify(album.pages || []),
+          is_published: album.isPublished ?? true,
+          is_private: album.isPrivate ?? false,
+          password: album.password || '',
+          watermark_enabled: album.watermarkEnabled ?? true,
+          download_allowed: album.downloadAllowed ?? false,
+          updated_at: new Date().toISOString()
+        };
+
+        await supabase.from('albums').upsert(payload, { onConflict: 'id' });
+      } catch (e) {
+        console.warn('Supabase save album error:', e);
+      }
+    }
+
     try {
       const res = await fetch(`${API_BASE_URL}/albums`, {
         method: 'POST',
@@ -68,6 +128,14 @@ export const apiClient = {
   },
 
   deleteAlbum: async (id: string) => {
+    if (isSupabaseConfigured() && supabase) {
+      try {
+        await supabase.from('albums').delete().eq('id', id);
+      } catch (e) {
+        console.warn('Supabase delete album error:', e);
+      }
+    }
+
     try {
       await fetch(`${API_BASE_URL}/albums/${id}`, { method: 'DELETE' });
     } catch (e) {
@@ -210,8 +278,22 @@ export const apiClient = {
     return null;
   },
 
-  // 5. High-Capacity Multi-Photo Upload Endpoint (Local Server Disk + High-Capacity Cloud Media Storage)
+  // 5. High-Capacity Multi-Photo Upload Endpoint (Supabase Storage Bucket + Local Server Disk + High-Capacity Cloud Media Storage)
   uploadPhotos: async (files: File[]): Promise<string[] | null> => {
+    // 0. Try Supabase Storage first if configured
+    if (isSupabaseConfigured() && supabase) {
+      try {
+        const supabaseUrls: string[] = [];
+        for (const file of files) {
+          const url = await uploadPhotoToSupabase(file);
+          if (url) supabaseUrls.push(url);
+        }
+        if (supabaseUrls.length > 0) return supabaseUrls;
+      } catch (e) {
+        console.warn('Supabase storage upload error:', e);
+      }
+    }
+
     // 1. Try local Express backend proxy first (/api/upload)
     try {
       const formData = new FormData();

@@ -127,6 +127,58 @@ export const AdminSettingsManager: React.FC = () => {
           />
         </div>
 
+        {/* Supabase 24/7 Cloud Database & Storage Config */}
+        <div className="p-5 rounded-xl bg-[#3B0811] border border-gold/40 space-y-4">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-mono font-bold text-gold uppercase flex items-center gap-2">
+              <Globe className="w-4 h-4 text-gold" /> SUPABASE 24/7 CLOUD DATABASE & ASSET STORAGE
+            </span>
+            <span className="text-[10px] font-mono px-3 py-1 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-600 font-bold uppercase">
+              READY FOR PRODUCTION
+            </span>
+          </div>
+
+          <p className="text-xs font-mono text-[#F5F2EB]/70">
+            Supabase provides 24/7 persistent PostgreSQL database storage and infinite multi-GB photo CDN hosting.
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className="text-[10px] font-mono text-gold uppercase block mb-1 font-bold">
+                SUPABASE PROJECT URL (VITE_SUPABASE_URL)
+              </label>
+              <input
+                type="text"
+                value={(settings as any).supabaseUrl || ''}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  setSettings({ ...settings, supabaseUrl: val } as any);
+                  if (typeof window !== 'undefined') (window as any).SUPABASE_URL = val;
+                }}
+                placeholder="https://xyz.supabase.co"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#1C0307] border border-gold/30 text-gold text-xs font-mono"
+              />
+            </div>
+
+            <div>
+              <label className="text-[10px] font-mono text-gold uppercase block mb-1 font-bold">
+                SUPABASE ANON KEY (VITE_SUPABASE_ANON_KEY)
+              </label>
+              <input
+                type="password"
+                value={(settings as any).supabaseAnonKey || ''}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  setSettings({ ...settings, supabaseAnonKey: val } as any);
+                  if (typeof window !== 'undefined') (window as any).SUPABASE_ANON_KEY = val;
+                }}
+                placeholder="eyJhbGciOiJIUzI1NiIsInR..."
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#1C0307] border border-gold/30 text-gold text-xs font-mono"
+              />
+            </div>
+          </div>
+        </div>
+
         <div className="flex justify-end pt-4 border-t border-gold/20">
           <button
             type="submit"
