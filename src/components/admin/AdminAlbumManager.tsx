@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {
   Plus, Edit, Trash2, Eye, EyeOff, QrCode, Upload, ArrowUp, ArrowDown,
-  Check, X, BookOpen, Lock, Image as ImageIcon, Sparkles
+  Check, X, BookOpen, Lock, Image as ImageIcon, Sparkles, RefreshCw
 } from 'lucide-react';
 import { DigitalAlbum } from '../../types/album';
 import { albumService } from '../../services/albumService';
@@ -93,6 +93,12 @@ export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCo
 
     albumService.saveAlbum(albumToSave);
     setEditingAlbum(null);
+    refreshAlbums();
+    alert(`✓ Photobook "${albumToSave.couple}" saved successfully!`);
+  };
+
+  const handleRestoreDemoAlbums = () => {
+    albumService.restoreDemoAlbums();
     refreshAlbums();
   };
 
@@ -190,13 +196,25 @@ export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCo
           </h3>
         </div>
 
-        <button
-          onClick={handleStartCreate}
-          className="flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gold-gradient text-obsidian font-bold text-xs uppercase tracking-wider hover:brightness-110 transition-all shadow-lg"
-        >
-          <Plus className="w-4 h-4" />
-          <span>CREATE NEW ALBUM</span>
-        </button>
+        <div className="flex items-center gap-3">
+          {albums.length === 0 && (
+            <button
+              onClick={handleRestoreDemoAlbums}
+              className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-[#3B0811] border border-gold/40 text-gold font-bold text-xs uppercase tracking-wider hover:bg-gold hover:text-obsidian transition-all shadow-md font-mono"
+              title="Restore sample real wedding photobooks for testing"
+            >
+              <RefreshCw className="w-4 h-4" />
+              <span>RESTORE SAMPLE ALBUMS</span>
+            </button>
+          )}
+          <button
+            onClick={handleStartCreate}
+            className="flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gold-gradient text-obsidian font-bold text-xs uppercase tracking-wider hover:brightness-110 transition-all shadow-lg"
+          >
+            <Plus className="w-4 h-4" />
+            <span>CREATE NEW ALBUM</span>
+          </button>
+        </div>
       </div>
 
       {/* CREATE / EDIT FORM MODAL */}
