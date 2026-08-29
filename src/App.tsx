@@ -17,6 +17,7 @@ import { InstagramFeed } from './components/studio/InstagramFeed';
 import { LeadFormSection } from './components/forms/LeadFormSection';
 import { StickyLeadCtas } from './components/forms/StickyLeadCtas';
 import { Footer } from './components/layout/Footer';
+import { apiClient } from './services/apiClient';
 
 import { DigitalAlbumsShowcase } from './components/albums/DigitalAlbumsShowcase';
 import { DigitalAlbumViewerModal } from './components/albums/DigitalAlbumViewerModal';
@@ -48,7 +49,7 @@ export const App: React.FC = () => {
 
   // URL Hash & Query Deep-Linking for Direct Shareable Album Links (e.g. /?album=yash-kavya)
   useEffect(() => {
-    const handleHashChange = () => {
+    const handleHashChange = async () => {
       const hash = window.location.hash;
       const search = window.location.search;
       let slug = '';
@@ -63,34 +64,28 @@ export const App: React.FC = () => {
       }
 
       if (slug) {
-        let found = albumService.getAlbumBySlug(slug);
-        if (!found && encodedData) {
-          found = decodeAlbumFromUrl(encodedData) || undefined;
+        const cleanSlug = slug.toLowerCase().trim();
+        let found = albumService.getAlbumBySlug(cleanSlug);
+
+        // If not in local memory (e.g. opened on a 2nd phone), fetch 24/7 Cloud Database
+        if (!found) {
+          const cloudAlbums = await apiClient.getAlbums();
+          if (cloudAlbums && Array.isArray(cloudAlbums)) {
+            const matched = cloudAlbums.find(
+              (a: any) =>
+                a.slug?.toLowerCase().trim() === cleanSlug ||
+                a.id?.toLowerCase().trim() === cleanSlug ||
+                a.id?.toLowerCase().trim() === `album-${cleanSlug}`
+            );
+            if (matched) {
+              found = matched;
+              albumService.saveAlbum(matched);
+            }
+          }
         }
 
-        // Guaranteed Fallback: If opened on a new mobile device, generate exact couple name from slug (Never substitute another couple!)
-        if (!found) {
-          const formattedCouple = slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' & ');
-          found = {
-            id: `album-${slug}`,
-            slug: slug,
-            couple: formattedCouple,
-            title: `${formattedCouple} Wedding Photobook`,
-            subtitle: 'Luxury 3D Digital Wedding Photobook',
-            date: '2026',
-            location: 'Ahmedabad, Gujarat',
-            coverImage: 'assets/service-album-ring.jpg',
-            description: `Handcrafted digital wedding photobook for ${formattedCouple} captured by KD Creation.`,
-            pages: [
-              'assets/service-album-ring.jpg'
-            ],
-            isPublished: true,
-            isPrivate: false,
-            watermarkEnabled: true,
-            downloadAllowed: false,
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString()
-          };
+        if (!found && encodedData) {
+          found = decodeAlbumFromUrl(encodedData) || undefined;
         }
 
         if (found) {
