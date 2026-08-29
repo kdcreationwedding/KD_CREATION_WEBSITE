@@ -48,8 +48,16 @@ export const App: React.FC = () => {
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash;
-      if (hash.startsWith('#album-')) {
-        const slug = hash.replace('#album-', '');
+      const search = window.location.search;
+      let slug = '';
+      if (hash.includes('album-')) {
+        slug = hash.split('album-')[1].split('?')[0].split('&')[0];
+      } else if (search.includes('album=')) {
+        const params = new URLSearchParams(search);
+        slug = params.get('album') || '';
+      }
+
+      if (slug) {
         const found = albumService.getAlbumBySlug(slug);
         if (found) {
           setActiveAlbum(found);
@@ -59,7 +67,11 @@ export const App: React.FC = () => {
 
     handleHashChange();
     window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    window.addEventListener('popstate', handleHashChange);
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+      window.removeEventListener('popstate', handleHashChange);
+    };
   }, []);
 
   // Visitor / Client Authentication State

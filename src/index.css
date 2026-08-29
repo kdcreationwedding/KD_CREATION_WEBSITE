@@ -128,3 +128,27 @@ input::placeholder, textarea::placeholder {
 img {
   transition: opacity 0.5s ease-in-out;
 }
+
+/* Print Media Styles: Only Print the Luxury QR Card */
+@media print {
+  body * {
+    visibility: hidden !important;
+  }
+  .printable-card, .printable-card * {
+    visibility: visible !important;
+  }
+  .printable-card {
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 90% !important;
+    max-width: 480px !important;
+    border: 2px solid #D4AF37 !important;
+    background: #1C0307 !important;
+    color: #F5F2EB !important;
+    box-shadow: none !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}

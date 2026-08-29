@@ -82,12 +82,19 @@ export const albumService = {
     return [];
   },
 
-  // Get single album by slug or ID
+  // Get single album by slug or ID with DEMO_ALBUMS fallback so QR links never fail
   getAlbumBySlug: (slugOrId: string): DigitalAlbum | undefined => {
+    const clean = slugOrId.replace(/^#?album-/, '').toLowerCase().trim();
     const albums = albumService.getAlbums();
-    return albums.find(
-      (a) => a.slug.toLowerCase() === slugOrId.toLowerCase() || a.id === slugOrId
+    let found = albums.find(
+      (a) => a.slug.toLowerCase().trim() === clean || a.id.toLowerCase().trim() === clean || a.id.toLowerCase().trim() === `album-${clean}`
     );
+    if (!found) {
+      found = DEMO_ALBUMS.find(
+        (a) => a.slug.toLowerCase().trim() === clean || a.id.toLowerCase().trim() === clean || a.id.toLowerCase().trim() === `album-${clean}`
+      );
+    }
+    return found;
   },
 
   // Save or update an album
