@@ -9,9 +9,10 @@ import { getAssetPath } from '../../utils/assetHelper';
 
 interface AdminAlbumManagerProps {
   onOpenQrCode: (album: DigitalAlbum) => void;
+  onSelectAlbum?: (album: DigitalAlbum) => void;
 }
 
-export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCode }) => {
+export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCode, onSelectAlbum }) => {
   const [albums, setAlbums] = useState<DigitalAlbum[]>(() => albumService.getAlbums());
   const [editingAlbum, setEditingAlbum] = useState<Partial<DigitalAlbum> | null>(null);
   const [isCreating, setIsCreating] = useState(false);
@@ -441,6 +442,15 @@ export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCo
                   </td>
 
                   <td className="p-4 text-right space-x-2">
+                    {onSelectAlbum && (
+                      <button
+                        onClick={() => onSelectAlbum(album)}
+                        className="p-2 rounded-lg bg-gold/10 text-gold hover:bg-gold hover:text-obsidian transition-colors"
+                        title="Open / Preview Photobook"
+                      >
+                        <Eye className="w-4 h-4" />
+                      </button>
+                    )}
                     <button
                       onClick={() => onOpenQrCode(album)}
                       className="p-2 rounded-lg bg-gold/10 text-gold hover:bg-gold hover:text-obsidian transition-colors"

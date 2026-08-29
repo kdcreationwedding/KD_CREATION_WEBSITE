@@ -12,9 +12,10 @@ interface AdminLeadPortalProps {
   onClose: () => void;
   onLogout: () => void;
   onOpenQrCode?: (album: DigitalAlbum) => void;
+  onSelectAlbum?: (album: DigitalAlbum) => void;
 }
 
-export const AdminLeadPortal: React.FC<AdminLeadPortalProps> = ({ isOpen, onClose, onLogout, onOpenQrCode }) => {
+export const AdminLeadPortal: React.FC<AdminLeadPortalProps> = ({ isOpen, onClose, onLogout, onOpenQrCode, onSelectAlbum }) => {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [filterScore, setFilterScore] = useState<string>('ALL');
   const [activeTab, setActiveTab] = useState<'leads' | 'albums'>('leads');
@@ -146,7 +147,10 @@ export const AdminLeadPortal: React.FC<AdminLeadPortalProps> = ({ isOpen, onClos
           {/* Tab Content */}
           {activeTab === 'albums' ? (
             <div className="flex-1 overflow-y-auto">
-              <AdminAlbumManager onOpenQrCode={onOpenQrCode || (() => {})} />
+              <AdminAlbumManager
+                onOpenQrCode={onOpenQrCode || (() => {})}
+                onSelectAlbum={onSelectAlbum}
+              />
             </div>
           ) : (
             <div className="flex-1 overflow-y-auto flex flex-col">

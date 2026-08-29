@@ -300,6 +300,7 @@ export const App: React.FC = () => {
           onClose={() => setIsAdminPortalOpen(false)}
           onLogout={handleAdminLogout}
           onOpenQrCode={(album) => setQrModalAlbum(album)}
+          onSelectAlbum={(album) => setActiveAlbum(album)}
         />
       </Suspense>
 
