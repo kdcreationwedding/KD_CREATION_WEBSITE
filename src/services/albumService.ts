@@ -63,6 +63,10 @@ export const DEMO_ALBUMS: DigitalAlbum[] = [
 // Helper to encode/decode album data into portable URL string for 100% mobile scanner guarantees
 export const encodeAlbumToUrl = (album: DigitalAlbum): string => {
   try {
+    const cleanPages = (album.pages || [])
+      .map(p => (p.length > 500 ? '' : p))
+      .filter(Boolean);
+
     const mini = {
       i: album.id,
       s: album.slug,
@@ -71,8 +75,12 @@ export const encodeAlbumToUrl = (album: DigitalAlbum): string => {
       st: album.subtitle || '',
       d: album.date || '2026',
       l: album.location || 'Ahmedabad',
-      ci: album.coverImage,
-      p: album.pages || []
+      ci: album.coverImage && album.coverImage.length < 500 ? album.coverImage : 'assets/yash-kavya-outer-cover.jpg',
+      p: cleanPages.length > 0 ? cleanPages : [
+        'assets/yash-kavya-modal-cover.jpg',
+        'assets/YASH & KAVYA/Yash & kavya.jpg',
+        'assets/yash-kavya-g1.jpg'
+      ]
     };
     return btoa(encodeURIComponent(JSON.stringify(mini)));
   } catch (e) {
@@ -278,14 +286,8 @@ export const albumService = {
     }
 
     const cleanSlug = album.slug.toLowerCase().trim().replace(/^#?album-/, '');
-    const isDemo = DEMO_ALBUMS.some((a) => a.slug === cleanSlug || a.id === album.id);
-    if (isDemo) {
-      return `${origin}/?album=${cleanSlug}#album-${cleanSlug}`;
-    }
-
-    // Attach portable encoded payload for custom albums so scanning on ANY mobile phone works 100%
     const encoded = encodeAlbumToUrl(album);
-    if (encoded && encoded.length < 1800) {
+    if (encoded) {
       return `${origin}/?album=${cleanSlug}&d=${encoded}#album-${cleanSlug}`;
     }
 

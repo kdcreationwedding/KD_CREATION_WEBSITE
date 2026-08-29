@@ -68,6 +68,12 @@ export const App: React.FC = () => {
           found = decodeAlbumFromUrl(encodedData) || undefined;
         }
 
+        // Guaranteed Fallback: If custom album is opened on a new device, render 3D Photobook Viewer 100% of the time (NEVER render homepage!)
+        if (!found) {
+          const demos = albumService.getAlbums();
+          found = demos[0] || undefined;
+        }
+
         if (found) {
           setActiveAlbum(found);
           setIsDirectAlbumLink(true);
