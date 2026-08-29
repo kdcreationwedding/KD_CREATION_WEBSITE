@@ -6,6 +6,7 @@ import {
 import { DigitalAlbum } from '../../types/album';
 import { albumService } from '../../services/albumService';
 import { apiClient } from '../../services/apiClient';
+import { isSupabaseConfigured, uploadPhotoToSupabase } from '../../services/supabaseClient';
 import { getAssetPath } from '../../utils/assetHelper';
 
 interface AdminAlbumManagerProps {
@@ -107,8 +108,17 @@ export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCo
     refreshAlbums();
   };
 
-  // Helper to compress high-res photo files into crisp HD preview data URLs (With 3s Fail-Safe Timeout)
-  const compressImageFile = (file: File): Promise<string> => {
+  // Helper to compress high-res photo files into crisp HD preview data URLs or upload to Supabase Storage Bucket
+  const compressImageFile = async (file: File): Promise<string> => {
+    if (isSupabaseConfigured()) {
+      try {
+        const publicUrl = await uploadPhotoToSupabase(file);
+        if (publicUrl) return publicUrl;
+      } catch (e) {
+        console.warn('Supabase storage upload fallback to canvas compression:', e);
+      }
+    }
+
     return new Promise((resolve) => {
       let isDone = false;
 

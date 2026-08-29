@@ -72,17 +72,18 @@ export const App: React.FC = () => {
       }
 
       if (slug) {
-        const cleanSlug = slug.toLowerCase().trim();
+        const cleanSlug = slug.toLowerCase().trim().replace(/[^a-z0-9]/g, '');
 
         // 1. Try 24/7 Supabase Cloud Database first for instant multi-device sync
         const cloudAlbums = await apiClient.getAlbums();
         if (cloudAlbums && Array.isArray(cloudAlbums) && cloudAlbums.length > 0) {
-          const matched = cloudAlbums.find(
-            (a: any) =>
-              a.slug?.toLowerCase().trim() === cleanSlug ||
-              a.id?.toLowerCase().trim() === cleanSlug ||
-              a.id?.toLowerCase().trim() === `album-${cleanSlug}`
-          );
+          const matched = cloudAlbums.find((a: any) => {
+            const s = (a.slug || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+            const c = (a.couple || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+            const i = (a.id || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+            return s === cleanSlug || c === cleanSlug || i === cleanSlug || i === `album${cleanSlug}` || cleanSlug.includes(s) || s.includes(cleanSlug);
+          });
+
           if (matched) {
             albumService.saveAlbum(matched);
             setActiveAlbum(matched);
@@ -92,7 +93,7 @@ export const App: React.FC = () => {
         }
 
         // 2. Fallback to local memory / demo albums
-        let found = albumService.getAlbumBySlug(cleanSlug);
+        let found = albumService.getAlbumBySlug(slug);
         if (!found && encodedData) {
           found = decodeAlbumFromUrl(encodedData) || undefined;
         }
