@@ -5,6 +5,7 @@ import {
 } from 'lucide-react';
 import { DigitalAlbum } from '../../types/album';
 import { albumService } from '../../services/albumService';
+import { apiClient } from '../../services/apiClient';
 import { getAssetPath } from '../../utils/assetHelper';
 
 interface AdminAlbumManagerProps {
@@ -19,7 +20,7 @@ export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCo
   const [uploadProgress, setUploadProgress] = useState<number | null>(null);
 
   const refreshAlbums = () => {
-    setAlbums(albumService.getAlbums());
+    setAlbums([...albumService.getAlbums()]);
   };
 
   const handleTogglePublish = (id: string) => {
@@ -35,16 +36,17 @@ export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCo
   };
 
   const handleStartCreate = () => {
+    setIsCreating(true);
     setEditingAlbum({
       id: `album-${Date.now()}`,
       slug: '',
       title: '',
       couple: '',
-      subtitle: '',
-      date: new Date().getFullYear().toString(),
+      subtitle: 'Luxury 3D Wedding Photobook',
+      date: '2026',
       location: 'Ahmedabad, Gujarat',
-      coverImage: 'assets/service-album-ring.jpg',
-      description: '',
+      coverImage: 'assets/yash-kavya-outer-cover.jpg',
+      description: 'Handcrafted luxury digital wedding photobook captured by KD Creation.',
       pages: [],
       isPublished: true,
       isPrivate: false,
@@ -54,7 +56,6 @@ export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCo
       seoTitle: '',
       seoDescription: ''
     });
-    setIsCreating(true);
   };
 
   const handleStartEdit = (album: DigitalAlbum) => {
@@ -102,7 +103,7 @@ export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCo
     refreshAlbums();
   };
 
-  // Bulk Image File Upload Handler with Natural Numerical Ascending Sort (1, 2, 3...)
+  // Bulk Image File Upload Handler directly to Node.js Express Backend
   const handleBulkUploadPages = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files || files.length === 0 || !editingAlbum) return;
@@ -114,20 +115,29 @@ export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCo
 
     setUploadProgress(10);
 
-    const readPage = (file: File): Promise<string> => {
-      return new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.onload = (event) => resolve((event.target?.result as string) || '');
-        reader.readAsDataURL(file);
-      });
-    };
+    // 1. Try Direct Upload to Node.js Express Server
+    const serverUrls = await apiClient.uploadPhotos(sortedFiles);
 
-    const uploadedPages: string[] = [];
-    for (let i = 0; i < sortedFiles.length; i++) {
-      const pageData = await readPage(sortedFiles[i]);
-      if (pageData) {
-        uploadedPages.push(pageData);
-        setUploadProgress(Math.round(((i + 1) / sortedFiles.length) * 100));
+    let uploadedPages: string[] = [];
+    if (serverUrls && serverUrls.length > 0) {
+      uploadedPages = serverUrls;
+      setUploadProgress(100);
+    } else {
+      // 2. Fallback to Local FileReader if server is offline
+      const readPage = (file: File): Promise<string> => {
+        return new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.onload = (event) => resolve((event.target?.result as string) || '');
+          reader.readAsDataURL(file);
+        });
+      };
+
+      for (let i = 0; i < sortedFiles.length; i++) {
+        const pageData = await readPage(sortedFiles[i]);
+        if (pageData) {
+          uploadedPages.push(pageData);
+          setUploadProgress(Math.round(((i + 1) / sortedFiles.length) * 100));
+        }
       }
     }
 
@@ -136,19 +146,24 @@ export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCo
     setTimeout(() => setUploadProgress(null), 500);
   };
 
-  // Cover Image Upload Handler
-  const handleCoverUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // Cover Image Upload Handler directly to Node.js Express Backend
+  const handleCoverUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file || !editingAlbum) return;
 
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const result = event.target?.result as string;
-      if (result) {
-        setEditingAlbum((prev) => prev ? { ...prev, coverImage: result } : null);
-      }
-    };
-    reader.readAsDataURL(file);
+    const serverUrls = await apiClient.uploadPhotos([file]);
+    if (serverUrls && serverUrls.length > 0) {
+      setEditingAlbum((prev) => prev ? { ...prev, coverImage: serverUrls[0] } : null);
+    } else {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const result = event.target?.result as string;
+        if (result) {
+          setEditingAlbum((prev) => prev ? { ...prev, coverImage: result } : null);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   // Move Page Up / Down
