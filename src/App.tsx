@@ -223,12 +223,6 @@ export const App: React.FC = () => {
       {/* 6. Signature Services Section */}
       <ServicesSection onSelectService={handleOpenLeadForm} />
 
-      {/* 6.5 Digital Wedding Photobooks / E-Albums Section */}
-      <DigitalAlbumsShowcase
-        onSelectAlbum={(album) => setActiveAlbum(album)}
-        onOpenQrCode={(album) => setQrModalAlbum(album)}
-      />
-
       {/* 7. Cinema Showreel Showcase */}
       <CinemaSection
         onOpenVideoModal={handleOpenVideoModal}
