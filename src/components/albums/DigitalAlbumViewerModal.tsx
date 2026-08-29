@@ -42,18 +42,46 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
+  // Helper to safely parse pages array from any format (Array, JSON string, or nested string)
+  const getParsedPages = (rawPages: any): string[] => {
+    if (!rawPages) return [];
+    if (Array.isArray(rawPages)) {
+      return rawPages.map((p) => (typeof p === 'string' ? p : String(p))).filter(Boolean);
+    }
+    if (typeof rawPages === 'string') {
+      try {
+        const parsed = JSON.parse(rawPages);
+        if (Array.isArray(parsed)) {
+          return parsed.map((p) => (typeof p === 'string' ? p : String(p))).filter(Boolean);
+        }
+        if (typeof parsed === 'string') {
+          const doubleParsed = JSON.parse(parsed);
+          if (Array.isArray(doubleParsed)) {
+            return doubleParsed.map((p) => (typeof p === 'string' ? p : String(p))).filter(Boolean);
+          }
+        }
+      } catch {
+        if (rawPages.startsWith('http') || rawPages.startsWith('/') || rawPages.startsWith('data:')) {
+          return [rawPages];
+        }
+      }
+    }
+    return [];
+  };
+
   useEffect(() => {
     if (isOpen && album) {
       setCurrentPageIndex(0);
       setZoomLevel(1);
-      // Instant access via QR Code link, hash URL or QR trigger without password
       const isQrAccess =
         window.location.hash.includes(album.slug) ||
         window.location.search.includes('qr=true') ||
-        window.location.search.includes('access=qr');
+        window.location.search.includes('access=qr') ||
+        window.location.search.includes('album=') ||
+        window.location.search.includes('album_id=');
 
       if (isQrAccess || !album.isPrivate) {
-        setViewMode('cover');
+        setViewMode('book');
       } else {
         setViewMode('password');
       }
@@ -80,7 +108,8 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
 
   if (!isOpen || !album) return null;
 
-  const totalPages = album.pages.length;
+  const pages = getParsedPages(album.pages);
+  const totalPages = pages.length;
 
   const handlePasswordSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -370,9 +399,9 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
 
                 {/* Left Page (Desktop 2-Page Spread) */}
                 <div className="hidden lg:block relative w-[480px] h-[640px] border-r border-black/60 bg-[#140205] overflow-hidden">
-                  {currentPageIndex > 0 ? (
+                  {currentPageIndex > 0 && pages[currentPageIndex - 1] ? (
                     <img
-                      src={getAssetPath(album.pages[currentPageIndex - 1])}
+                      src={getAssetPath(pages[currentPageIndex - 1])}
                       alt={`Page ${currentPageIndex}`}
                       className="w-full h-full object-contain p-2"
                     />
@@ -401,11 +430,18 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
                       className="w-full h-full relative flex items-center justify-center"
                       style={{ transformOrigin: flipDirection === 'next' ? 'left center' : 'right center' }}
                     >
-                      <img
-                        src={getAssetPath(album.pages[currentPageIndex])}
-                        alt={`Page ${currentPageIndex + 1}`}
-                        className="w-full h-full object-contain p-2 shadow-2xl"
-                      />
+                      {pages[currentPageIndex] ? (
+                        <img
+                          src={getAssetPath(pages[currentPageIndex])}
+                          alt={`Page ${currentPageIndex + 1}`}
+                          className="w-full h-full object-contain p-2 shadow-2xl"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex flex-col items-center justify-center p-6 text-center text-gold/60">
+                          <BookOpen className="w-10 h-10 mb-2 opacity-50" />
+                          <p className="font-mono text-xs uppercase">No Page Loaded</p>
+                        </div>
+                      )}
                       {/* Dynamic Paper Turn Shadow Overlay */}
                       <motion.div
                         initial={{ opacity: 0.6 }}
@@ -505,7 +541,7 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
       {/* BOTTOM THUMBNAIL DRAWER */}
       {viewMode === 'book' && showThumbnails && (
         <div className="relative z-30 bg-[#1C0307]/95 border-t border-gold/30 p-3 flex items-center gap-3 overflow-x-auto max-h-28 backdrop-blur-md">
-          {album.pages.map((pageUrl, idx) => (
+          {pages.map((pageUrl, idx) => (
             <button
               key={idx}
               onClick={() => handleJumpToPage(idx)}
