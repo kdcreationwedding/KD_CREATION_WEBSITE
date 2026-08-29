@@ -411,16 +411,22 @@ export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCo
               {albums.map((album) => (
                 <tr key={album.id} className="hover:bg-[#3B0811]/40 transition-colors">
                   <td className="p-4">
-                    <div className="flex items-center gap-3">
-                      <img src={getAssetPath(album.coverImage)} alt={album.couple} className="w-10 h-10 object-cover rounded-lg border border-gold/30" />
+                    <div
+                      onClick={() => onSelectAlbum && onSelectAlbum(album)}
+                      className="flex items-center gap-3 cursor-pointer group"
+                      title="Click to Preview Photobook"
+                    >
+                      <img src={getAssetPath(album.coverImage)} alt={album.couple} className="w-10 h-10 object-cover rounded-lg border border-gold/30 group-hover:border-gold group-hover:scale-105 transition-all" />
                       <div>
-                        <span className="font-bold text-white block">{album.title}</span>
+                        <span className="font-bold text-white group-hover:text-gold transition-colors block">{album.title}</span>
                         <span className="text-[9px] text-gold/70">/album/{album.slug}</span>
                       </div>
                     </div>
                   </td>
 
-                  <td className="p-4 font-bold text-gold">{album.couple}</td>
+                  <td className="p-4 font-bold text-gold cursor-pointer" onClick={() => onSelectAlbum && onSelectAlbum(album)}>
+                    {album.couple}
+                  </td>
                   <td className="p-4 text-[#F5F2EB]/70">{album.location} ({album.date})</td>
                   <td className="p-4 font-bold">{album.pages.length} Pages</td>
 
@@ -429,15 +435,23 @@ export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCo
                       <button
                         onClick={() => handleTogglePublish(album.id)}
                         className={`px-2.5 py-1 rounded-full text-[9px] font-bold uppercase transition-all ${album.isPublished ? 'bg-emerald-900/80 text-emerald-300 border border-emerald-500/40' : 'bg-rose-900/80 text-rose-300 border border-rose-500/40'}`}
+                        title="Click to Toggle Published / Draft"
                       >
                         {album.isPublished ? 'PUBLISHED' : 'DRAFT'}
                       </button>
 
-                      {album.isPrivate && (
-                        <span className="px-2 py-0.5 rounded bg-amber-950 text-amber-300 text-[9px] flex items-center gap-1 border border-amber-500/30">
-                          <Lock className="w-2.5 h-2.5" /> PRIVATE
-                        </span>
-                      )}
+                      <button
+                        onClick={() => {
+                          const updated = { ...album, isPrivate: !album.isPrivate };
+                          albumService.saveAlbum(updated);
+                          refreshAlbums();
+                        }}
+                        className={`px-2.5 py-1 rounded-full text-[9px] font-bold uppercase transition-all flex items-center gap-1 ${album.isPrivate ? 'bg-amber-950 text-amber-300 border border-amber-500/40' : 'bg-emerald-950 text-emerald-300 border border-emerald-500/40'}`}
+                        title="Click to Toggle Private Password Protection"
+                      >
+                        <Lock className="w-2.5 h-2.5" />
+                        {album.isPrivate ? 'PRIVATE' : 'PUBLIC'}
+                      </button>
                     </div>
                   </td>
 

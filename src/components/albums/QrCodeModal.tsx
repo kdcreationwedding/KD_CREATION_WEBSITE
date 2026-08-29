@@ -52,7 +52,7 @@ export const QrCodeModal: React.FC<QrCodeModalProps> = ({ album, isOpen, onClose
   const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(whatsappMsg)}`;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-black/90 backdrop-blur-md animate-fade-in overflow-y-auto">
+    <div className="fixed inset-0 z-[100000] flex items-center justify-center p-4 sm:p-6 bg-black/90 backdrop-blur-md animate-fade-in overflow-y-auto">
       <div className="relative w-full max-w-xl bg-[#1C0307] border border-gold/40 rounded-2xl shadow-2xl p-6 sm:p-8 text-[#F5F2EB] my-auto">
         
         {/* Close Button */}

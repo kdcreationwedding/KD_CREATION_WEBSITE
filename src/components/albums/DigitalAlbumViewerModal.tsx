@@ -155,7 +155,7 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 z-[100] bg-[#0A0103] flex flex-col justify-between overflow-hidden select-none"
+      className="fixed inset-0 z-[100000] bg-[#0A0103] flex flex-col justify-between overflow-hidden select-none"
     >
       {/* Background Audio */}
       {album.backgroundMusic && (
