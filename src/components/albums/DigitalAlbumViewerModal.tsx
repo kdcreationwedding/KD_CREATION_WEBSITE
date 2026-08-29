@@ -44,10 +44,16 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
     if (isOpen && album) {
       setCurrentPageIndex(0);
       setZoomLevel(1);
-      if (album.isPrivate) {
-        setViewMode('password');
-      } else {
+      // Instant access via QR Code link, hash URL or QR trigger without password
+      const isQrAccess =
+        window.location.hash.includes(album.slug) ||
+        window.location.search.includes('qr=true') ||
+        window.location.search.includes('access=qr');
+
+      if (isQrAccess || !album.isPrivate) {
         setViewMode('cover');
+      } else {
+        setViewMode('password');
       }
     }
   }, [isOpen, album]);
@@ -379,18 +385,33 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
                 </div>
 
                 {/* Right / Main Active Page (Mobile 1-Page & Desktop Right Page) */}
-                <div className="relative w-[340px] sm:w-[480px] h-[520px] sm:h-[640px] bg-[#140205] overflow-hidden flex items-center justify-center">
+                <div
+                  className="relative w-[340px] sm:w-[480px] h-[520px] sm:h-[640px] bg-[#140205] overflow-hidden flex items-center justify-center"
+                  style={{ perspective: 1200 }}
+                >
                   <AnimatePresence mode="wait">
-                    <motion.img
+                    <motion.div
                       key={currentPageIndex}
-                      src={getAssetPath(album.pages[currentPageIndex])}
-                      alt={`Page ${currentPageIndex + 1}`}
-                      initial={{ opacity: 0, rotateY: flipDirection === 'next' ? 45 : -45 }}
-                      animate={{ opacity: 1, rotateY: 0 }}
-                      exit={{ opacity: 0, rotateY: flipDirection === 'next' ? -45 : 45 }}
-                      transition={{ duration: 0.45, ease: 'easeOut' }}
-                      className="w-full h-full object-contain p-2"
-                    />
+                      initial={{ opacity: 0.2, rotateY: flipDirection === 'next' ? 75 : -75, scale: 0.95 }}
+                      animate={{ opacity: 1, rotateY: 0, scale: 1 }}
+                      exit={{ opacity: 0.2, rotateY: flipDirection === 'next' ? -75 : 75, scale: 0.95 }}
+                      transition={{ duration: 0.5, ease: [0.25, 1, 0.5, 1] }}
+                      className="w-full h-full relative flex items-center justify-center"
+                      style={{ transformOrigin: flipDirection === 'next' ? 'left center' : 'right center' }}
+                    >
+                      <img
+                        src={getAssetPath(album.pages[currentPageIndex])}
+                        alt={`Page ${currentPageIndex + 1}`}
+                        className="w-full h-full object-contain p-2 shadow-2xl"
+                      />
+                      {/* Dynamic Paper Turn Shadow Overlay */}
+                      <motion.div
+                        initial={{ opacity: 0.6 }}
+                        animate={{ opacity: 0 }}
+                        transition={{ duration: 0.5 }}
+                        className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent pointer-events-none"
+                      />
+                    </motion.div>
                   </AnimatePresence>
 
                   {/* Spine Crease Shadow Overlay */}
