@@ -6,12 +6,19 @@ import multer from 'multer';
 import mongoose from 'mongoose';
 import { fileURLToPath } from 'url';
 
+import { createClient } from '@supabase/supabase-js';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 const MONGODB_URI = process.env.MONGODB_URI || '';
+const SUPABASE_URL = process.env.SUPABASE_URL || 'https://qrljgqlisbfchspwgiwe.supabase.co';
+const SUPABASE_PUBLISHABLE_KEY = process.env.SUPABASE_PUBLISHABLE_KEY || 'sb_publishable_9lH15TiavVbVnP0NO1ubIw_SjHh1wUx';
+const SUPABASE_JWKS_URL = process.env.SUPABASE_JWKS_URL || 'https://qrljgqlisbfchspwgiwe.supabase.co/auth/v1/.well-known/jwks.json';
+
+const supabase = (SUPABASE_URL && SUPABASE_PUBLISHABLE_KEY) ? createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY) : null;
 
 // Enable CORS and JSON body parser
 app.use(cors());

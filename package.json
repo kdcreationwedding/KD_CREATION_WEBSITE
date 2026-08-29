@@ -15,6 +15,7 @@
   "dependencies": {
     "@splinetool/react-spline": "^4.0.0",
     "@splinetool/runtime": "^1.9.0",
+    "@supabase/server": "^1.4.1",
     "@supabase/ssr": "^0.12.5",
     "@supabase/supabase-js": "^2.112.4",
     "@types/canvas-confetti": "^1.9.0",
