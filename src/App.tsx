@@ -43,6 +43,7 @@ export const App: React.FC = () => {
   // Digital Album Platform State
   const [activeAlbum, setActiveAlbum] = useState<DigitalAlbum | null>(null);
   const [qrModalAlbum, setQrModalAlbum] = useState<DigitalAlbum | null>(null);
+  const [isDirectAlbumLink, setIsDirectAlbumLink] = useState(false);
 
   // URL Hash Deep-Linking for Direct Shareable Album Links (e.g. /#album-yash-kavya)
   useEffect(() => {
@@ -61,7 +62,10 @@ export const App: React.FC = () => {
         const found = albumService.getAlbumBySlug(slug);
         if (found) {
           setActiveAlbum(found);
+          setIsDirectAlbumLink(true);
         }
+      } else {
+        setIsDirectAlbumLink(false);
       }
     };
 
@@ -195,6 +199,33 @@ export const App: React.FC = () => {
     damping: 30,
     restDelta: 0.001
   });
+
+  // Standalone Direct 3D E-Album Viewer Page (When accessed via QR or direct album URL)
+  if (isDirectAlbumLink && activeAlbum) {
+    return (
+      <div className="fixed inset-0 bg-[#0F0204] text-[#F5F2EB] z-[999999] overflow-hidden">
+        <DigitalAlbumViewerModal
+          album={activeAlbum}
+          isOpen={true}
+          isQrAccess={true}
+          onClose={() => {
+            setActiveAlbum(null);
+            setIsDirectAlbumLink(false);
+            window.history.pushState('', document.title, window.location.pathname);
+          }}
+          onOpenQrCode={(album) => setQrModalAlbum(album)}
+        />
+
+        {qrModalAlbum && (
+          <QrCodeModal
+            album={qrModalAlbum}
+            isOpen={!!qrModalAlbum}
+            onClose={() => setQrModalAlbum(null)}
+          />
+        )}
+      </div>
+    );
+  }
 
   return (
     <div className="relative min-h-screen bg-obsidian text-champagne font-sans overflow-x-hidden">

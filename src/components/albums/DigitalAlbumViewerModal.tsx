@@ -11,6 +11,7 @@ import { SITE_CONFIG } from '../../config/siteConfig';
 interface DigitalAlbumViewerModalProps {
   album: DigitalAlbum | null;
   isOpen: boolean;
+  isQrAccess?: boolean;
   onClose: () => void;
   onOpenQrCode?: (album: DigitalAlbum) => void;
 }
@@ -18,6 +19,7 @@ interface DigitalAlbumViewerModalProps {
 export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = ({
   album,
   isOpen,
+  isQrAccess,
   onClose,
   onOpenQrCode
 }) => {
