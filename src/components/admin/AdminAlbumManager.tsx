@@ -105,6 +105,43 @@ export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCo
     refreshAlbums();
   };
 
+  // Helper to compress high-res photo files into crisp HD preview data URLs
+  const compressImageFile = (file: File): Promise<string> => {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          let width = img.width;
+          let height = img.height;
+          const maxDim = 1200; // 1200px max dimension for crisp HD display
+
+          if (width > height && width > maxDim) {
+            height = Math.round((height * maxDim) / width);
+            width = maxDim;
+          } else if (height > maxDim) {
+            width = Math.round((width * maxDim) / height);
+            height = maxDim;
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          if (ctx) {
+            ctx.drawImage(img, 0, 0, width, height);
+            resolve(canvas.toDataURL('image/jpeg', 0.82));
+          } else {
+            resolve((e.target?.result as string) || '');
+          }
+        };
+        img.onerror = () => resolve((e.target?.result as string) || '');
+        img.src = (e.target?.result as string) || '';
+      };
+      reader.readAsDataURL(file);
+    });
+  };
+
   // Bulk Image File Upload Handler directly to Node.js Express Backend
   const handleBulkUploadPages = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -125,17 +162,9 @@ export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCo
       uploadedPages = serverUrls;
       setUploadProgress(100);
     } else {
-      // 2. Fallback to Local FileReader if server is offline
-      const readPage = (file: File): Promise<string> => {
-        return new Promise((resolve) => {
-          const reader = new FileReader();
-          reader.onload = (event) => resolve((event.target?.result as string) || '');
-          reader.readAsDataURL(file);
-        });
-      };
-
+      // 2. Compress images for instant persistent storage on all devices
       for (let i = 0; i < sortedFiles.length; i++) {
-        const pageData = await readPage(sortedFiles[i]);
+        const pageData = await compressImageFile(sortedFiles[i]);
         if (pageData) {
           uploadedPages.push(pageData);
           setUploadProgress(Math.round(((i + 1) / sortedFiles.length) * 100));
@@ -158,14 +187,10 @@ export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCo
     if (serverUrls && serverUrls.length > 0) {
       setEditingAlbum((prev) => prev ? { ...prev, coverImage: serverUrls[0] } : null);
     } else {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        const result = event.target?.result as string;
-        if (result) {
-          setEditingAlbum((prev) => prev ? { ...prev, coverImage: result } : null);
-        }
-      };
-      reader.readAsDataURL(file);
+      const pageData = await compressImageFile(file);
+      if (pageData) {
+        setEditingAlbum((prev) => prev ? { ...prev, coverImage: pageData } : null);
+      }
     }
   };
 
