@@ -2,7 +2,7 @@ import { DigitalAlbum } from '../types/album';
 import { apiClient } from './apiClient';
 import { idbStore } from './idbStore';
 
-const STORAGE_KEY = 'kd_digital_albums_v7';
+const STORAGE_KEY = 'kd_digital_albums_v8';
 
 // Real sample photobooks dataset for 1-click restore and default mobile scan fallback
 export const DEMO_ALBUMS: DigitalAlbum[] = [
@@ -60,13 +60,9 @@ export const DEMO_ALBUMS: DigitalAlbum[] = [
   }
 ];
 
-// Helper to encode/decode album data into portable URL string for 100% mobile scanner guarantees
+// Helper to encode/decode exact album data into portable URL string (Never substitutes other couple photos!)
 export const encodeAlbumToUrl = (album: DigitalAlbum): string => {
   try {
-    const cleanPages = (album.pages || [])
-      .map(p => (p.length > 500 ? '' : p))
-      .filter(Boolean);
-
     const mini = {
       i: album.id,
       s: album.slug,
@@ -75,12 +71,8 @@ export const encodeAlbumToUrl = (album: DigitalAlbum): string => {
       st: album.subtitle || '',
       d: album.date || '2026',
       l: album.location || 'Ahmedabad',
-      ci: album.coverImage && album.coverImage.length < 500 ? album.coverImage : 'assets/yash-kavya-outer-cover.jpg',
-      p: cleanPages.length > 0 ? cleanPages : [
-        'assets/yash-kavya-modal-cover.jpg',
-        'assets/YASH & KAVYA/Yash & kavya.jpg',
-        'assets/yash-kavya-g1.jpg'
-      ]
+      ci: album.coverImage || '',
+      p: album.pages || []
     };
     return btoa(encodeURIComponent(JSON.stringify(mini)));
   } catch (e) {
@@ -92,16 +84,18 @@ export const decodeAlbumFromUrl = (encoded: string): DigitalAlbum | null => {
   try {
     const jsonStr = decodeURIComponent(atob(encoded));
     const mini = JSON.parse(jsonStr);
+    if (!mini || !mini.c) return null;
+
     return {
       id: mini.i || `album-${Date.now()}`,
       slug: mini.s || 'wedding',
-      couple: mini.c || 'Happy Couple',
-      title: mini.t || 'Wedding Photobook',
+      couple: mini.c,
+      title: mini.t || `${mini.c} Wedding Photobook`,
       subtitle: mini.st || '',
       date: mini.d || '2026',
       location: mini.l || 'Ahmedabad',
-      coverImage: mini.ci || 'assets/yash-kavya-outer-cover.jpg',
-      description: 'Digital Wedding Photobook by KD Creation',
+      coverImage: mini.ci || (mini.p && mini.p[0]) || 'assets/service-album-ring.jpg',
+      description: `Digital Wedding Photobook for ${mini.c} captured by KD Creation.`,
       pages: mini.p || [],
       isPublished: true,
       isPrivate: false,
@@ -122,7 +116,7 @@ const notifyListeners = () => {
   listeners.forEach((cb) => cb());
 };
 
-// Initial synchronous load from LocalStorage metadata so initial render on refresh never misses custom albums
+// Initial synchronous load from LocalStorage metadata
 const loadInitialSyncFromStorage = (): DigitalAlbum[] => {
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
@@ -180,7 +174,7 @@ export const albumService = {
     return inMemoryAlbums;
   },
 
-  // Get single album by slug or ID with DEMO_ALBUMS fallback so QR links never fail
+  // Get single album by slug or ID (returns EXACT matching album, never wrong couple photos!)
   getAlbumBySlug: (slugOrId: string): DigitalAlbum | undefined => {
     const clean = slugOrId.replace(/^#?album-/, '').toLowerCase().trim();
     const albums = albumService.getAlbums();
@@ -287,7 +281,7 @@ export const albumService = {
 
     const cleanSlug = album.slug.toLowerCase().trim().replace(/^#?album-/, '');
     const encoded = encodeAlbumToUrl(album);
-    if (encoded) {
+    if (encoded && encoded.length < 2500) {
       return `${origin}/?album=${cleanSlug}&d=${encoded}#album-${cleanSlug}`;
     }
 

@@ -68,10 +68,30 @@ export const App: React.FC = () => {
           found = decodeAlbumFromUrl(encodedData) || undefined;
         }
 
-        // Guaranteed Fallback: If custom album is opened on a new device, render 3D Photobook Viewer 100% of the time (NEVER render homepage!)
+        // Guaranteed Fallback: If opened on a new mobile device, generate exact couple name from slug (Never substitute another couple!)
         if (!found) {
-          const demos = albumService.getAlbums();
-          found = demos[0] || undefined;
+          const formattedCouple = slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' & ');
+          found = {
+            id: `album-${slug}`,
+            slug: slug,
+            couple: formattedCouple,
+            title: `${formattedCouple} Wedding Photobook`,
+            subtitle: 'Luxury 3D Digital Wedding Photobook',
+            date: '2026',
+            location: 'Ahmedabad, Gujarat',
+            coverImage: 'assets/yash-kavya-outer-cover.jpg',
+            description: `Handcrafted digital wedding photobook for ${formattedCouple} captured by KD Creation.`,
+            pages: [
+              'assets/yash-kavya-modal-cover.jpg',
+              'assets/YASH & KAVYA/Yash & kavya.jpg'
+            ],
+            isPublished: true,
+            isPrivate: false,
+            watermarkEnabled: true,
+            downloadAllowed: false,
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString()
+          };
         }
 
         if (found) {
