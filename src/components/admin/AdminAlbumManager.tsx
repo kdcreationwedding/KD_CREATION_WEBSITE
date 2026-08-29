@@ -107,40 +107,75 @@ export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCo
     refreshAlbums();
   };
 
-  // Helper to compress high-res photo files into crisp HD preview data URLs
+  // Helper to compress high-res photo files into crisp HD preview data URLs (With 3s Fail-Safe Timeout)
   const compressImageFile = (file: File): Promise<string> => {
     return new Promise((resolve) => {
+      let isDone = false;
+
+      // 3-second Fail-Safe Safety Timeout
+      const timer = setTimeout(() => {
+        if (!isDone) {
+          isDone = true;
+          // Fallback to direct FileReader if image compression times out
+          const fallbackReader = new FileReader();
+          fallbackReader.onload = (e) => resolve((e.target?.result as string) || '');
+          fallbackReader.onerror = () => resolve('');
+          fallbackReader.readAsDataURL(file);
+        }
+      }, 3000);
+
+      const finish = (result: string) => {
+        if (!isDone) {
+          isDone = true;
+          clearTimeout(timer);
+          resolve(result);
+        }
+      };
+
       const reader = new FileReader();
+      reader.onerror = () => finish('');
       reader.onload = (e) => {
+        const rawResult = (e.target?.result as string) || '';
+        if (!rawResult) return finish('');
+
         const img = new Image();
+        img.onerror = () => finish(rawResult);
         img.onload = () => {
-          const canvas = document.createElement('canvas');
-          let width = img.width;
-          let height = img.height;
-          const maxDim = 960; // 960px max dimension for ultra-fast portable QR payloads
+          try {
+            const canvas = document.createElement('canvas');
+            let width = img.width;
+            let height = img.height;
+            const maxDim = 960; // 960px max dimension for ultra-fast portable QR payloads
 
-          if (width > height && width > maxDim) {
-            height = Math.round((height * maxDim) / width);
-            width = maxDim;
-          } else if (height > maxDim) {
-            width = Math.round((width * maxDim) / height);
-            height = maxDim;
-          }
+            if (width > height && width > maxDim) {
+              height = Math.round((height * maxDim) / width);
+              width = maxDim;
+            } else if (height > maxDim) {
+              width = Math.round((width * maxDim) / height);
+              height = maxDim;
+            }
 
-          canvas.width = width;
-          canvas.height = height;
-          const ctx = canvas.getContext('2d');
-          if (ctx) {
-            ctx.drawImage(img, 0, 0, width, height);
-            resolve(canvas.toDataURL('image/jpeg', 0.75));
-          } else {
-            resolve((e.target?.result as string) || '');
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            if (ctx) {
+              ctx.drawImage(img, 0, 0, width, height);
+              finish(canvas.toDataURL('image/jpeg', 0.75));
+            } else {
+              finish(rawResult);
+            }
+          } catch {
+            finish(rawResult);
           }
         };
-        img.onerror = () => resolve((e.target?.result as string) || '');
-        img.src = (e.target?.result as string) || '';
+        img.src = rawResult;
       };
-      reader.readAsDataURL(file);
+
+      try {
+        reader.readAsDataURL(file);
+      } catch {
+        finish('');
+      }
     });
   };
 
@@ -376,11 +411,18 @@ export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCo
           <div className="space-y-2">
             <label className="text-xs font-mono text-gold uppercase block">ALBUM COVER IMAGE</label>
             <div className="flex items-center gap-4">
-              <img
-                src={getAssetPath(editingAlbum.coverImage || '')}
-                alt="Cover Preview"
-                className="w-24 h-24 object-cover rounded-xl border border-gold/40"
-              />
+              {editingAlbum.coverImage ? (
+                <img
+                  src={getAssetPath(editingAlbum.coverImage)}
+                  alt="Cover Preview"
+                  className="w-24 h-24 object-cover rounded-xl border border-gold/40 shadow-md"
+                />
+              ) : (
+                <div className="w-24 h-24 rounded-xl border border-dashed border-gold/40 bg-[#3B0811] flex flex-col items-center justify-center text-gold/50 p-2 text-center">
+                  <ImageIcon className="w-6 h-6 mb-1" />
+                  <span className="text-[9px] font-mono uppercase font-bold">Auto Cover</span>
+                </div>
+              )}
               <label className="cursor-pointer px-4 py-2.5 rounded-xl bg-[#3B0811] border border-gold/40 text-gold hover:bg-gold hover:text-obsidian text-xs font-mono font-bold flex items-center gap-2 transition-all">
                 <Upload className="w-4 h-4" /> CHANGE COVER IMAGE
                 <input type="file" accept="image/*" onChange={handleCoverUpload} className="hidden" />
