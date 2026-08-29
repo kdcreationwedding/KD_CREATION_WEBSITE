@@ -144,7 +144,7 @@ export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCo
     });
   };
 
-  // Bulk Image File Upload Handler directly to Node.js Express Backend
+  // Bulk Image File Upload Handler with instant non-blocking HD compression
   const handleBulkUploadPages = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files || files.length === 0 || !editingAlbum) return;
@@ -154,45 +154,42 @@ export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCo
       a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' })
     );
 
-    setUploadProgress(10);
+    setUploadProgress(5);
 
-    // 1. Try Direct Upload to Node.js Express Server
-    const serverUrls = await apiClient.uploadPhotos(sortedFiles);
+    try {
+      const uploadedPages: string[] = [];
+      const total = sortedFiles.length;
 
-    let uploadedPages: string[] = [];
-    if (serverUrls && serverUrls.length > 0) {
-      uploadedPages = serverUrls;
-      setUploadProgress(100);
-    } else {
-      // 2. Compress images for instant persistent storage on all devices
-      for (let i = 0; i < sortedFiles.length; i++) {
-        const pageData = await compressImageFile(sortedFiles[i]);
-        if (pageData) {
-          uploadedPages.push(pageData);
-          setUploadProgress(Math.round(((i + 1) / sortedFiles.length) * 100));
+      for (let i = 0; i < total; i++) {
+        const compressed = await compressImageFile(sortedFiles[i]);
+        if (compressed) {
+          uploadedPages.push(compressed);
         }
+        setUploadProgress(Math.round(((i + 1) / total) * 100));
       }
-    }
 
-    const combinedPages = [...(editingAlbum.pages || []), ...uploadedPages];
-    const autoCover = editingAlbum.coverImage || combinedPages[0] || '';
-    setEditingAlbum((prev) => (prev ? { ...prev, pages: combinedPages, coverImage: prev.coverImage || autoCover } : null));
-    setTimeout(() => setUploadProgress(null), 500);
+      const combinedPages = [...(editingAlbum.pages || []), ...uploadedPages];
+      const autoCover = editingAlbum.coverImage || combinedPages[0] || '';
+      setEditingAlbum((prev) => (prev ? { ...prev, pages: combinedPages, coverImage: prev.coverImage || autoCover } : null));
+    } catch (err) {
+      console.error('Error uploading photos', err);
+    } finally {
+      setTimeout(() => setUploadProgress(null), 300);
+    }
   };
 
-  // Cover Image Upload Handler directly to Node.js Express Backend
+  // Cover Image Upload Handler with instant non-blocking HD compression
   const handleCoverUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file || !editingAlbum) return;
 
-    const serverUrls = await apiClient.uploadPhotos([file]);
-    if (serverUrls && serverUrls.length > 0) {
-      setEditingAlbum((prev) => prev ? { ...prev, coverImage: serverUrls[0] } : null);
-    } else {
+    try {
       const pageData = await compressImageFile(file);
       if (pageData) {
-        setEditingAlbum((prev) => prev ? { ...prev, coverImage: pageData } : null);
+        setEditingAlbum((prev) => (prev ? { ...prev, coverImage: pageData } : null));
       }
+    } catch (err) {
+      console.error('Error uploading cover image', err);
     }
   };
 
