@@ -1,8 +1,8 @@
 import { createClient } from '@supabase/supabase-js';
 
-// Read Supabase environment variables or default configured Supabase URL
+// Read Supabase environment variables or default configured Supabase URL & Live Publishable Key
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || (typeof window !== 'undefined' ? (window as any).SUPABASE_URL : '') || 'https://qrljgqlisbfchspwgiwe.supabase.co';
-const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || (typeof window !== 'undefined' ? (window as any).SUPABASE_ANON_KEY : '') || '';
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || (typeof window !== 'undefined' ? (window as any).SUPABASE_ANON_KEY : '') || 'sb_publishable_9lH15TiavVbVnP0NO1ubIw_SjHh1wUx';
 
 export const isSupabaseConfigured = (): boolean => {
   return Boolean(SUPABASE_URL && SUPABASE_ANON_KEY && SUPABASE_URL !== 'YOUR_SUPABASE_URL');
