@@ -61,6 +61,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenAdminPortal }) => {
               <li><a href="#hero" className="hover:text-gold transition-colors">HOME</a></li>
               <li><a href="#stories" className="hover:text-gold transition-colors">STORIES</a></li>
               <li><a href="#services" className="hover:text-gold transition-colors">SERVICES</a></li>
+              <li><a href="#digital-albums" className="hover:text-gold transition-colors">DIGITAL ALBUMS</a></li>
               <li><a href="#about" className="hover:text-gold transition-colors">ABOUT STUDIO</a></li>
               <li><a href="#contact" className="hover:text-gold transition-colors">ENQUIRE / BOOK</a></li>
             </ul>

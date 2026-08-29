@@ -18,6 +18,12 @@ import { LeadFormSection } from './components/forms/LeadFormSection';
 import { StickyLeadCtas } from './components/forms/StickyLeadCtas';
 import { Footer } from './components/layout/Footer';
 
+import { DigitalAlbumsShowcase } from './components/albums/DigitalAlbumsShowcase';
+import { DigitalAlbumViewerModal } from './components/albums/DigitalAlbumViewerModal';
+import { QrCodeModal } from './components/albums/QrCodeModal';
+import { DigitalAlbum } from './types/album';
+import { albumService } from './services/albumService';
+
 // Lazy-loaded Modal and Overlay Components for Performance Optimization
 const VideoModal = lazy(() => import('./components/video/VideoModal').then(m => ({ default: m.VideoModal })));
 const KdAiChatbot = lazy(() => import('./components/chatbot/KdAiChatbot').then(m => ({ default: m.KdAiChatbot })));
@@ -33,6 +39,28 @@ export const App: React.FC = () => {
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(() => {
     return sessionStorage.getItem('kd_admin_auth') === 'true';
   });
+
+  // Digital Album Platform State
+  const [activeAlbum, setActiveAlbum] = useState<DigitalAlbum | null>(null);
+  const [qrModalAlbum, setQrModalAlbum] = useState<DigitalAlbum | null>(null);
+
+  // URL Hash Deep-Linking for Direct Shareable Album Links (e.g. /#album-yash-kavya)
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash;
+      if (hash.startsWith('#album-')) {
+        const slug = hash.replace('#album-', '');
+        const found = albumService.getAlbumBySlug(slug);
+        if (found) {
+          setActiveAlbum(found);
+        }
+      }
+    };
+
+    handleHashChange();
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
 
   // Visitor / Client Authentication State
   const [isClientAuthOpen, setIsClientAuthOpen] = useState(false);
@@ -195,6 +223,12 @@ export const App: React.FC = () => {
       {/* 6. Signature Services Section */}
       <ServicesSection onSelectService={handleOpenLeadForm} />
 
+      {/* 6.5 Digital Wedding Photobooks / E-Albums Section */}
+      <DigitalAlbumsShowcase
+        onSelectAlbum={(album) => setActiveAlbum(album)}
+        onOpenQrCode={(album) => setQrModalAlbum(album)}
+      />
+
       {/* 7. Cinema Showreel Showcase */}
       <CinemaSection
         onOpenVideoModal={handleOpenVideoModal}
@@ -271,8 +305,30 @@ export const App: React.FC = () => {
           isOpen={isAdminPortalOpen}
           onClose={() => setIsAdminPortalOpen(false)}
           onLogout={handleAdminLogout}
+          onOpenQrCode={(album) => setQrModalAlbum(album)}
         />
       </Suspense>
+
+      {/* 18. Digital Album Viewer & QR Code Modals */}
+      <DigitalAlbumViewerModal
+        album={activeAlbum}
+        isOpen={!!activeAlbum}
+        onClose={() => {
+          setActiveAlbum(null);
+          if (window.location.hash.startsWith('#album-')) {
+            window.history.pushState('', document.title, window.location.pathname + window.location.search);
+          }
+        }}
+        onOpenQrCode={(album) => setQrModalAlbum(album)}
+      />
+
+      {qrModalAlbum && (
+        <QrCodeModal
+          album={qrModalAlbum}
+          isOpen={!!qrModalAlbum}
+          onClose={() => setQrModalAlbum(null)}
+        />
+      )}
     </div>
   );
 };

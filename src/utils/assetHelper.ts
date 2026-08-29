@@ -9,3 +9,5 @@ export const getAssetUrl = (path: string): string => {
     : `${import.meta.env.BASE_URL}/`;
   return `${base}${cleanPath}`;
 };
+
+export const getAssetPath = getAssetUrl;

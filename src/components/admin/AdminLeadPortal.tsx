@@ -1,19 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Flame, Download, Trash2, MessageCircle, Phone, Mail, User, Calendar, MapPin, Sparkles, Filter, Lock } from 'lucide-react';
-import { Lead, LeadScore } from '../../types';
+import { Lead } from '../../types';
+import { DigitalAlbum } from '../../types/album';
 import { LeadService } from '../../services/leadService';
 import { SITE_CONFIG } from '../../config/siteConfig';
+import { AdminAlbumManager } from './AdminAlbumManager';
 
 interface AdminLeadPortalProps {
   isOpen: boolean;
   onClose: () => void;
   onLogout: () => void;
+  onOpenQrCode?: (album: DigitalAlbum) => void;
 }
 
-export const AdminLeadPortal: React.FC<AdminLeadPortalProps> = ({ isOpen, onClose, onLogout }) => {
+export const AdminLeadPortal: React.FC<AdminLeadPortalProps> = ({ isOpen, onClose, onLogout, onOpenQrCode }) => {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [filterScore, setFilterScore] = useState<string>('ALL');
+  const [activeTab, setActiveTab] = useState<'leads' | 'albums'>('leads');
 
   useEffect(() => {
     if (isOpen) {
@@ -90,7 +94,7 @@ export const AdminLeadPortal: React.FC<AdminLeadPortalProps> = ({ isOpen, onClos
                   KD CREATION STUDIO VAULT
                 </span>
                 <h2 className="text-xl sm:text-2xl font-serif-luxury font-bold text-[#F5F2EB] uppercase">
-                  CLIENT INQUIRIES & LEAD PORTAL
+                  STUDIO MANAGEMENT VAULT
                 </h2>
               </div>
             </div>
@@ -123,199 +127,171 @@ export const AdminLeadPortal: React.FC<AdminLeadPortalProps> = ({ isOpen, onClos
             </div>
           </div>
 
-          {/* Lead Metrics & Filters */}
-          <div className="p-6 bg-[#3B0811]/90 border-b border-gold/20 flex flex-wrap items-center justify-between gap-4">
-            {/* Stat Counters */}
-            <div className="flex items-center gap-3 sm:gap-6 text-xs">
-              <div className="px-3.5 py-1.5 rounded-xl bg-[#2B050B] border border-gold/30">
-                <span className="text-[#F5F2EB]/70 font-semibold block text-[10px]">TOTAL LEADS</span>
-                <span className="text-lg font-bold text-gold font-mono">{leads.length}</span>
-              </div>
-              <div className="px-3.5 py-1.5 rounded-xl bg-[#2B050B] border border-emerald-500/30">
-                <span className="text-emerald-400 font-semibold block text-[10px]">🔥 HOT LEADS</span>
-                <span className="text-lg font-bold text-emerald-400 font-mono">{hotCount}</span>
-              </div>
-              <div className="px-3.5 py-1.5 rounded-xl bg-[#2B050B] border border-amber-500/30">
-                <span className="text-amber-400 font-semibold block text-[10px]">⚡ WARM LEADS</span>
-                <span className="text-lg font-bold text-amber-400 font-mono">{warmCount}</span>
-              </div>
-              <div className="px-3.5 py-1.5 rounded-xl bg-[#2B050B] border border-blue-500/30">
-                <span className="text-blue-400 font-semibold block text-[10px]">❄️ COLD LEADS</span>
-                <span className="text-lg font-bold text-blue-400 font-mono">{coldCount}</span>
-              </div>
-            </div>
-
-            {/* Filter Pills */}
-            <div className="flex items-center gap-2">
-              <Filter className="w-4 h-4 text-gold" />
-              {['ALL', 'HOT', 'WARM', 'COLD'].map((s) => (
-                <button
-                  key={s}
-                  onClick={() => setFilterScore(s)}
-                  className={`text-xs px-3 py-1.5 rounded-full font-bold uppercase transition-all ${
-                    filterScore === s
-                      ? 'bg-gold-gradient text-obsidian shadow-md'
-                      : 'bg-[#2B050B] text-[#F5F2EB]/80 border border-gold/30 hover:border-gold'
-                  }`}
-                >
-                  {s}
-                </button>
-              ))}
-            </div>
+          {/* Admin Vault Tab Navigation */}
+          <div className="bg-[#230409] border-b border-gold/25 px-6 py-2 flex items-center gap-4">
+            <button
+              onClick={() => setActiveTab('leads')}
+              className={`px-4 py-2 rounded-xl text-xs font-mono font-bold uppercase transition-all ${activeTab === 'leads' ? 'bg-gold-gradient text-obsidian shadow-md' : 'text-gold/70 hover:text-gold'}`}
+            >
+              CLIENT LEADS ({leads.length})
+            </button>
+            <button
+              onClick={() => setActiveTab('albums')}
+              className={`px-4 py-2 rounded-xl text-xs font-mono font-bold uppercase transition-all ${activeTab === 'albums' ? 'bg-gold-gradient text-obsidian shadow-md' : 'text-gold/70 hover:text-gold'}`}
+            >
+              DIGITAL WEDDING PHOTOBOOKS
+            </button>
           </div>
 
-          {/* Lead List Scroll Content */}
-          <div className="p-6 overflow-y-auto flex-1 space-y-4">
-            {filteredLeads.length === 0 ? (
-              <div className="text-center py-16 space-y-4">
-                <div className="w-16 h-16 rounded-full bg-gold/10 text-gold flex items-center justify-center mx-auto border border-gold/30">
-                  <User className="w-8 h-8 opacity-60" />
-                </div>
-                <h3 className="text-xl font-serif-luxury font-bold text-gold uppercase">
-                  NO INQUIRIES FOUND YET
-                </h3>
-                <p className="text-xs text-[#F5F2EB]/70 max-w-sm mx-auto font-semibold">
-                  When clients fill out the enquiry form or chat with KD AI, their complete details and qualification scores will instantly appear right here.
-                </p>
-              </div>
-            ) : (
-              filteredLeads.map((lead) => (
-                <div
-                  key={lead.id}
-                  className="p-5 rounded-2xl bg-[#2B050B] border border-gold/30 hover:border-gold transition-all shadow-xl space-y-4"
-                >
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-gold/15">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-gold/15 border border-gold/40 text-gold flex items-center justify-center font-bold">
-                        {lead.name.charAt(0).toUpperCase()}
-                      </div>
-                      <div>
-                        <h4 className="text-base font-bold text-[#F5F2EB]">
-                          {lead.name}
-                        </h4>
-                        <span className="text-[10px] text-[#F5F2EB]/60 font-mono">
-                          ID: {lead.id} • {new Date(lead.createdDate).toLocaleString()}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-2">
-                      <span className="text-[9px] uppercase px-2.5 py-1 rounded-full font-bold bg-gold/15 border border-gold/30 text-gold">
-                        SOURCE: {lead.leadSource}
-                      </span>
-
-                      <span
-                        className={`text-[10px] uppercase font-bold px-3 py-1 rounded-full border ${
-                          lead.leadScore === 'HOT'
-                            ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/40'
-                            : lead.leadScore === 'WARM'
-                            ? 'bg-amber-500/20 text-amber-400 border-amber-500/40'
-                            : 'bg-blue-500/20 text-blue-400 border-blue-500/40'
-                        }`}
-                      >
-                        <Flame className="w-3 h-3 inline mr-1" />
-                        {lead.leadScore} LEAD
-                      </span>
-                    </div>
+          {/* Tab Content */}
+          {activeTab === 'albums' ? (
+            <div className="flex-1 overflow-y-auto">
+              <AdminAlbumManager onOpenQrCode={onOpenQrCode || (() => {})} />
+            </div>
+          ) : (
+            <div className="flex-1 overflow-y-auto flex flex-col">
+              {/* Lead Metrics & Filters */}
+              <div className="p-6 bg-[#3B0811]/90 border-b border-gold/20 flex flex-wrap items-center justify-between gap-4">
+                <div className="flex items-center gap-3 sm:gap-6 text-xs">
+                  <div className="px-3.5 py-1.5 rounded-xl bg-[#2B050B] border border-gold/30">
+                    <span className="text-[#F5F2EB]/70 font-semibold block text-[10px]">TOTAL LEADS</span>
+                    <span className="text-lg font-bold text-gold font-mono">{leads.length}</span>
                   </div>
-
-                  {/* Details Grid */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
-                    <div className="space-y-1">
-                      <span className="text-[10px] text-gold uppercase font-bold flex items-center gap-1">
-                        <Calendar className="w-3 h-3" /> WEDDING DATE
-                      </span>
-                      <p className="font-semibold text-[#F5F2EB]">{lead.weddingDate || 'TBD'}</p>
-                    </div>
-
-                    <div className="space-y-1">
-                      <span className="text-[10px] text-gold uppercase font-bold flex items-center gap-1">
-                        <MapPin className="w-3 h-3" /> LOCATION
-                      </span>
-                      <p className="font-semibold text-[#F5F2EB]">{lead.weddingLocation || 'TBD'}</p>
-                    </div>
-
-                    <div className="space-y-1">
-                      <span className="text-[10px] text-gold uppercase font-bold">BUDGET & GUESTS</span>
-                      <p className="font-semibold text-[#F5F2EB]">{lead.budget} • {lead.guestCount} guests</p>
-                    </div>
-
-                    <div className="space-y-1">
-                      <span className="text-[10px] text-gold uppercase font-bold">SERVICES</span>
-                      <p className="font-semibold text-[#F5F2EB] truncate">{lead.services?.join(', ') || 'Cinematography'}</p>
-                    </div>
+                  <div className="px-3.5 py-1.5 rounded-xl bg-[#2B050B] border border-emerald-500/30">
+                    <span className="text-emerald-400 font-semibold block text-[10px]">🔥 HOT LEADS</span>
+                    <span className="text-lg font-bold text-emerald-400 font-mono">{hotCount}</span>
                   </div>
-
-                  {/* Instant Contact Action Buttons */}
-                  <div className="pt-3 border-t border-gold/15 flex flex-wrap items-center justify-between gap-3">
-                    <div className="flex items-center gap-2 text-xs font-mono font-bold text-gold">
-                      <span>Phone: {lead.phone}</span>
-                      <span>•</span>
-                      <span>Email: {lead.email}</span>
-                    </div>
-
-                    <div className="flex items-center gap-2">
-                      {/* WhatsApp Client Direct */}
-                      <a
-                        href={LeadService.generateWhatsAppUrl(lead)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-[10px] tracking-wider font-extrabold text-white bg-emerald-700 hover:bg-emerald-600 px-3.5 py-2 rounded-xl transition-all shadow-sm"
-                      >
-                        <MessageCircle className="w-3.5 h-3.5 fill-current" />
-                        <span>WHATSAPP CLIENT</span>
-                      </a>
-
-                      {/* Direct Call Client */}
-                      <a
-                        href={`tel:${lead.phone.replace(/\s+/g, '')}`}
-                        className="inline-flex items-center gap-1.5 text-[10px] tracking-wider font-extrabold text-obsidian bg-gold-gradient hover:brightness-110 px-3.5 py-2 rounded-xl transition-all shadow-sm"
-                      >
-                        <Phone className="w-3.5 h-3.5" />
-                        <span>CALL CLIENT</span>
-                      </a>
-
-                      {/* Direct Gmail Client */}
-                      <a
-                        href={`https://mail.google.com/mail/?view=cm&fs=1&to=${lead.email}&su=${encodeURIComponent('KD CREATION - Wedding Film Inquiry Followup')}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-[10px] tracking-wider font-extrabold text-gold border border-gold/40 bg-[#3B0811] hover:bg-gold/20 px-3.5 py-2 rounded-xl transition-all shadow-sm"
-                      >
-                        <Mail className="w-3.5 h-3.5" />
-                        <span>GMAIL</span>
-                      </a>
-                    </div>
+                  <div className="px-3.5 py-1.5 rounded-xl bg-[#2B050B] border border-amber-500/30">
+                    <span className="text-amber-400 font-semibold block text-[10px]">⚡ WARM LEADS</span>
+                    <span className="text-lg font-bold text-amber-400 font-mono">{warmCount}</span>
+                  </div>
+                  <div className="px-3.5 py-1.5 rounded-xl bg-[#2B050B] border border-blue-500/30">
+                    <span className="text-blue-400 font-semibold block text-[10px]">❄️ COLD LEADS</span>
+                    <span className="text-lg font-bold text-blue-400 font-mono">{coldCount}</span>
                   </div>
                 </div>
-              ))
-            )}
-          </div>
 
-          {/* Footer Actions */}
-          <div className="p-4 bg-[#2B050B] border-t border-gold/25 flex items-center justify-between">
-            <span className="text-[10px] text-[#F5F2EB]/60 font-mono">
-              Press <strong>Ctrl + Shift + A</strong> anytime to toggle Admin Lead Vault.
-            </span>
+                <div className="flex items-center gap-2">
+                  <Filter className="w-4 h-4 text-gold" />
+                  {['ALL', 'HOT', 'WARM', 'COLD'].map((s) => (
+                    <button
+                      key={s}
+                      onClick={() => setFilterScore(s)}
+                      className={`px-3 py-1.5 rounded-full text-[11px] font-extrabold uppercase transition-all ${
+                        filterScore === s
+                          ? 'bg-gold-gradient text-obsidian shadow-md'
+                          : 'bg-[#2B050B] text-gold/70 border border-gold/20 hover:border-gold'
+                      }`}
+                    >
+                      {s}
+                    </button>
+                  ))}
+                </div>
+              </div>
 
-            <div className="flex items-center gap-3">
-              <button
-                onClick={handleClearLeads}
-                disabled={leads.length === 0}
-                className="text-xs text-rose-400 hover:text-rose-300 font-bold flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-rose-500/30 hover:border-rose-500 transition-all disabled:opacity-40"
-              >
-                <Trash2 className="w-3.5 h-3.5" />
-                <span>CLEAR LEADS</span>
-              </button>
+              {/* Leads List Grid */}
+              <div className="p-6 flex-1 overflow-y-auto space-y-4">
+                {filteredLeads.length === 0 ? (
+                  <div className="text-center py-16 space-y-3">
+                    <Flame className="w-12 h-12 text-gold/30 mx-auto" />
+                    <p className="text-base font-serif-luxury text-gold">NO CLIENT INQUIRIES FOUND</p>
+                    <p className="text-xs text-[#F5F2EB]/60 max-w-sm mx-auto">
+                      Submissions from the lead booking form will automatically populate in this vault.
+                    </p>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {filteredLeads.map((lead) => (
+                      <div
+                        key={lead.id}
+                        className="p-5 rounded-2xl bg-[#2B050B] border border-gold/30 space-y-4 hover:border-gold transition-all shadow-lg"
+                      >
+                        <div className="flex items-start justify-between">
+                          <div>
+                            <span className="text-[10px] font-mono text-gold/70 block">
+                              ID: {lead.id.slice(0, 8)} • {new Date(lead.createdDate).toLocaleDateString()}
+                            </span>
+                            <h4 className="text-lg font-serif-luxury font-bold text-white flex items-center gap-2">
+                              <User className="w-4 h-4 text-gold" />
+                              {lead.name}
+                            </h4>
+                          </div>
 
-              <button
-                onClick={onClose}
-                className="text-xs tracking-widest font-bold text-obsidian bg-gold-gradient px-6 py-2 rounded-full hover:brightness-110 transition-all"
-              >
-                CLOSE VAULT
-              </button>
+                          <span
+                            className={`px-3 py-1 rounded-full text-[10px] font-mono font-extrabold uppercase ${
+                              lead.leadScore === 'HOT'
+                                ? 'bg-emerald-950 text-emerald-400 border border-emerald-500/40'
+                                : lead.leadScore === 'WARM'
+                                ? 'bg-amber-950 text-amber-400 border border-amber-500/40'
+                                : 'bg-blue-950 text-blue-400 border border-blue-500/40'
+                            }`}
+                          >
+                            {lead.leadScore} SCORE
+                          </span>
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-2 text-xs font-mono text-[#F5F2EB]/80">
+                          <div className="flex items-center gap-1.5">
+                            <Calendar className="w-3.5 h-3.5 text-gold" />
+                            <span>{lead.weddingDate || 'TBD'}</span>
+                          </div>
+                          <div className="flex items-center gap-1.5">
+                            <MapPin className="w-3.5 h-3.5 text-gold" />
+                            <span className="truncate">{lead.weddingLocation || 'Ahmedabad'}</span>
+                          </div>
+                        </div>
+
+                        <div className="pt-3 border-t border-gold/20 flex items-center justify-between text-xs font-mono">
+                          <a
+                            href={`https://wa.me/${lead.phone.replace(/[^0-9]/g, '')}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-emerald-400 hover:text-emerald-300 font-bold flex items-center gap-1"
+                          >
+                            <MessageCircle className="w-3.5 h-3.5" />
+                            <span>{lead.phone}</span>
+                          </a>
+
+                          <a
+                            href={`mailto:${lead.email}`}
+                            className="text-gold hover:text-white font-bold flex items-center gap-1 truncate max-w-[180px]"
+                          >
+                            <Mail className="w-3.5 h-3.5" />
+                            <span className="truncate">{lead.email}</span>
+                          </a>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Bottom Footer Actions */}
+              <div className="p-4 bg-[#2B050B] border-t border-gold/30 flex items-center justify-between">
+                <span className="text-[10px] text-[#F5F2EB]/60 font-mono">
+                  Press <strong>Ctrl + Shift + A</strong> anytime to toggle Admin Vault.
+                </span>
+
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={handleClearLeads}
+                    disabled={leads.length === 0}
+                    className="text-xs text-rose-400 hover:text-rose-300 font-bold flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-rose-500/30 hover:border-rose-500 transition-all disabled:opacity-40"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                    <span>CLEAR LEADS</span>
+                  </button>
+
+                  <button
+                    onClick={onClose}
+                    className="text-xs tracking-widest font-bold text-obsidian bg-gold-gradient px-6 py-2 rounded-full hover:brightness-110 transition-all"
+                  >
+                    CLOSE VAULT
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>
+          )}
         </motion.div>
       </div>
     </AnimatePresence>
