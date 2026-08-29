@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 
-// Read Supabase environment variables or fallback values
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || (typeof window !== 'undefined' ? (window as any).SUPABASE_URL : '') || '';
+// Read Supabase environment variables or default configured Supabase URL
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || (typeof window !== 'undefined' ? (window as any).SUPABASE_URL : '') || 'https://qrljgqlisbfchspwgiwe.supabase.co';
 const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || (typeof window !== 'undefined' ? (window as any).SUPABASE_ANON_KEY : '') || '';
 
 export const isSupabaseConfigured = (): boolean => {
