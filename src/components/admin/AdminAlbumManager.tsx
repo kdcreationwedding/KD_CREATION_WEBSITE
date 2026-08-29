@@ -45,7 +45,7 @@ export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCo
       subtitle: 'Luxury 3D Wedding Photobook',
       date: '2026',
       location: 'Ahmedabad, Gujarat',
-      coverImage: 'assets/yash-kavya-outer-cover.jpg',
+      coverImage: '',
       description: 'Handcrafted luxury digital wedding photobook captured by KD Creation.',
       pages: [],
       isPublished: true,
@@ -144,7 +144,8 @@ export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCo
     }
 
     const combinedPages = [...(editingAlbum.pages || []), ...uploadedPages];
-    setEditingAlbum((prev) => (prev ? { ...prev, pages: combinedPages } : null));
+    const autoCover = editingAlbum.coverImage || combinedPages[0] || '';
+    setEditingAlbum((prev) => (prev ? { ...prev, pages: combinedPages, coverImage: prev.coverImage || autoCover } : null));
     setTimeout(() => setUploadProgress(null), 500);
   };
 

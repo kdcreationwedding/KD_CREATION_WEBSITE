@@ -79,11 +79,10 @@ export const App: React.FC = () => {
             subtitle: 'Luxury 3D Digital Wedding Photobook',
             date: '2026',
             location: 'Ahmedabad, Gujarat',
-            coverImage: 'assets/yash-kavya-outer-cover.jpg',
+            coverImage: 'assets/service-album-ring.jpg',
             description: `Handcrafted digital wedding photobook for ${formattedCouple} captured by KD Creation.`,
             pages: [
-              'assets/yash-kavya-modal-cover.jpg',
-              'assets/YASH & KAVYA/Yash & kavya.jpg'
+              'assets/service-album-ring.jpg'
             ],
             isPublished: true,
             isPrivate: false,
