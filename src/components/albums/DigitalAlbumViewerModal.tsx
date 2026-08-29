@@ -69,24 +69,36 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
     return [];
   };
 
+  // Ref to track active album ID to prevent unwanted resets on background re-renders
+  const activeAlbumIdRef = useRef<string | null>(null);
+
   useEffect(() => {
     if (isOpen && album) {
-      setCurrentPageIndex(0);
-      setZoomLevel(1);
-      const isQrAccess =
-        window.location.hash.includes(album.slug) ||
-        window.location.search.includes('qr=true') ||
-        window.location.search.includes('access=qr') ||
-        window.location.search.includes('album=') ||
-        window.location.search.includes('album_id=');
+      const albumKey = album.id || album.slug;
+      if (activeAlbumIdRef.current !== albumKey) {
+        activeAlbumIdRef.current = albumKey;
+        setCurrentPageIndex(0);
+        setZoomLevel(1);
 
-      if (isQrAccess || !album.isPrivate) {
-        setViewMode('book');
-      } else {
-        setViewMode('password');
+        const isQrAccess =
+          window.location.hash.includes(album.slug) ||
+          window.location.search.includes('qr=true') ||
+          window.location.search.includes('access=qr') ||
+          window.location.search.includes('album=') ||
+          window.location.search.includes('album_id=');
+
+        if (isQrAccess || !album.isPrivate) {
+          setViewMode('book');
+        } else {
+          setViewMode('password');
+        }
       }
     }
-  }, [isOpen, album]);
+
+    if (!isOpen) {
+      activeAlbumIdRef.current = null;
+    }
+  }, [isOpen, album?.id, album?.slug]);
 
   // Keyboard Arrow Navigation listener
   useEffect(() => {
