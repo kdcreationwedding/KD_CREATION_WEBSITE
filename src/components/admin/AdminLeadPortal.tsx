@@ -6,6 +6,8 @@ import { DigitalAlbum } from '../../types/album';
 import { LeadService } from '../../services/leadService';
 import { SITE_CONFIG } from '../../config/siteConfig';
 import { AdminAlbumManager } from './AdminAlbumManager';
+import { AdminStoryManager } from './AdminStoryManager';
+import { AdminSettingsManager } from './AdminSettingsManager';
 
 interface AdminLeadPortalProps {
   isOpen: boolean;
@@ -18,7 +20,7 @@ interface AdminLeadPortalProps {
 export const AdminLeadPortal: React.FC<AdminLeadPortalProps> = ({ isOpen, onClose, onLogout, onOpenQrCode, onSelectAlbum }) => {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [filterScore, setFilterScore] = useState<string>('ALL');
-  const [activeTab, setActiveTab] = useState<'leads' | 'albums'>('leads');
+  const [activeTab, setActiveTab] = useState<'leads' | 'albums' | 'stories' | 'settings'>('leads');
 
   useEffect(() => {
     if (isOpen) {
@@ -129,7 +131,7 @@ export const AdminLeadPortal: React.FC<AdminLeadPortalProps> = ({ isOpen, onClos
           </div>
 
           {/* Admin Vault Tab Navigation */}
-          <div className="bg-[#230409] border-b border-gold/25 px-6 py-2 flex items-center gap-4">
+          <div className="bg-[#230409] border-b border-gold/25 px-6 py-2 flex flex-wrap items-center gap-3 overflow-x-auto">
             <button
               onClick={() => setActiveTab('leads')}
               className={`px-4 py-2 rounded-xl text-xs font-mono font-bold uppercase transition-all ${activeTab === 'leads' ? 'bg-gold-gradient text-obsidian shadow-md' : 'text-gold/70 hover:text-gold'}`}
@@ -142,6 +144,18 @@ export const AdminLeadPortal: React.FC<AdminLeadPortalProps> = ({ isOpen, onClos
             >
               DIGITAL WEDDING PHOTOBOOKS
             </button>
+            <button
+              onClick={() => setActiveTab('stories')}
+              className={`px-4 py-2 rounded-xl text-xs font-mono font-bold uppercase transition-all ${activeTab === 'stories' ? 'bg-gold-gradient text-obsidian shadow-md' : 'text-gold/70 hover:text-gold'}`}
+            >
+              PORTFOLIO STORIES & GALLERIES
+            </button>
+            <button
+              onClick={() => setActiveTab('settings')}
+              className={`px-4 py-2 rounded-xl text-xs font-mono font-bold uppercase transition-all ${activeTab === 'settings' ? 'bg-gold-gradient text-obsidian shadow-md' : 'text-gold/70 hover:text-gold'}`}
+            >
+              SITE SETTINGS & CONTACTS
+            </button>
           </div>
 
           {/* Tab Content */}
@@ -151,6 +165,14 @@ export const AdminLeadPortal: React.FC<AdminLeadPortalProps> = ({ isOpen, onClos
                 onOpenQrCode={onOpenQrCode || (() => {})}
                 onSelectAlbum={onSelectAlbum}
               />
+            </div>
+          ) : activeTab === 'stories' ? (
+            <div className="flex-1 overflow-y-auto">
+              <AdminStoryManager />
+            </div>
+          ) : activeTab === 'settings' ? (
+            <div className="flex-1 overflow-y-auto">
+              <AdminSettingsManager />
             </div>
           ) : (
             <div className="flex-1 overflow-y-auto flex flex-col">
