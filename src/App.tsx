@@ -22,7 +22,8 @@ import { DigitalAlbumsShowcase } from './components/albums/DigitalAlbumsShowcase
 import { DigitalAlbumViewerModal } from './components/albums/DigitalAlbumViewerModal';
 import { QrCodeModal } from './components/albums/QrCodeModal';
 import { DigitalAlbum } from './types/album';
-import { albumService } from './services/albumService';
+import { albumService, decodeAlbumFromUrl } from './services/albumService';
+import { SITE_CONFIG } from './config/siteConfig';
 
 // Lazy-loaded Modal and Overlay Components for Performance Optimization
 const VideoModal = lazy(() => import('./components/video/VideoModal').then(m => ({ default: m.VideoModal })));
@@ -45,21 +46,28 @@ export const App: React.FC = () => {
   const [qrModalAlbum, setQrModalAlbum] = useState<DigitalAlbum | null>(null);
   const [isDirectAlbumLink, setIsDirectAlbumLink] = useState(false);
 
-  // URL Hash Deep-Linking for Direct Shareable Album Links (e.g. /#album-yash-kavya)
+  // URL Hash & Query Deep-Linking for Direct Shareable Album Links (e.g. /?album=yash-kavya)
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash;
       const search = window.location.search;
       let slug = '';
-      if (hash.includes('album-')) {
-        slug = hash.split('album-')[1].split('?')[0].split('&')[0];
-      } else if (search.includes('album=')) {
+      let encodedData = '';
+
+      if (search.includes('album=')) {
         const params = new URLSearchParams(search);
         slug = params.get('album') || '';
+        encodedData = params.get('d') || '';
+      } else if (hash.includes('album-')) {
+        slug = hash.split('album-')[1].split('?')[0].split('&')[0];
       }
 
       if (slug) {
-        const found = albumService.getAlbumBySlug(slug);
+        let found = albumService.getAlbumBySlug(slug);
+        if (!found && encodedData) {
+          found = decodeAlbumFromUrl(encodedData) || undefined;
+        }
+
         if (found) {
           setActiveAlbum(found);
           setIsDirectAlbumLink(true);

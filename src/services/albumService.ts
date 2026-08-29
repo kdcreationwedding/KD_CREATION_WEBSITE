@@ -1,9 +1,9 @@
 import { DigitalAlbum } from '../types/album';
 import { apiClient } from './apiClient';
 
-const STORAGE_KEY = 'kd_digital_albums_v4';
+const STORAGE_KEY = 'kd_digital_albums_v5';
 
-// Real sample photobooks dataset for 1-click restore
+// Real sample photobooks dataset for 1-click restore and default mobile scan fallback
 export const DEMO_ALBUMS: DigitalAlbum[] = [
   {
     id: 'album-yash-kavya',
@@ -59,10 +59,57 @@ export const DEMO_ALBUMS: DigitalAlbum[] = [
   }
 ];
 
+// Helper to encode/decode album data into portable URL string for 100% mobile scanner guarantees
+export const encodeAlbumToUrl = (album: DigitalAlbum): string => {
+  try {
+    const mini = {
+      i: album.id,
+      s: album.slug,
+      c: album.couple,
+      t: album.title || `${album.couple} Wedding Photobook`,
+      st: album.subtitle || '',
+      d: album.date || '2026',
+      l: album.location || 'Ahmedabad',
+      ci: album.coverImage,
+      p: album.pages || []
+    };
+    return btoa(encodeURIComponent(JSON.stringify(mini)));
+  } catch (e) {
+    return '';
+  }
+};
+
+export const decodeAlbumFromUrl = (encoded: string): DigitalAlbum | null => {
+  try {
+    const jsonStr = decodeURIComponent(atob(encoded));
+    const mini = JSON.parse(jsonStr);
+    return {
+      id: mini.i || `album-${Date.now()}`,
+      slug: mini.s || 'wedding',
+      couple: mini.c || 'Happy Couple',
+      title: mini.t || 'Wedding Photobook',
+      subtitle: mini.st || '',
+      date: mini.d || '2026',
+      location: mini.l || 'Ahmedabad',
+      coverImage: mini.ci || 'assets/yash-kavya-outer-cover.jpg',
+      description: 'Digital Wedding Photobook by KD Creation',
+      pages: mini.p || [],
+      isPublished: true,
+      isPrivate: false,
+      watermarkEnabled: true,
+      downloadAllowed: false,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    };
+  } catch (e) {
+    return null;
+  }
+};
+
 let inMemoryAlbums: DigitalAlbum[] | null = null;
 
 export const albumService = {
-  // Retrieve all albums from memory or localStorage
+  // Retrieve all albums from memory or localStorage (Defaults to DEMO_ALBUMS on new mobile visits!)
   getAlbums: (): DigitalAlbum[] => {
     if (inMemoryAlbums !== null) {
       return inMemoryAlbums;
@@ -71,7 +118,7 @@ export const albumService = {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored !== null) {
         const parsed = JSON.parse(stored);
-        if (Array.isArray(parsed)) {
+        if (Array.isArray(parsed) && parsed.length > 0) {
           inMemoryAlbums = parsed;
           return parsed;
         }
@@ -79,8 +126,8 @@ export const albumService = {
     } catch (e) {
       console.warn('Could not read digital albums from localStorage', e);
     }
-    inMemoryAlbums = [];
-    return [];
+    inMemoryAlbums = [...DEMO_ALBUMS];
+    return DEMO_ALBUMS;
   },
 
   // Get single album by slug or ID with DEMO_ALBUMS fallback so QR links never fail
@@ -166,10 +213,31 @@ export const albumService = {
     return album.isPublished;
   },
 
-  // Generate full shareable URL (Uses both query param ?album= & hash #album- for 100% Mobile QR Scanner compatibility)
-  getShareableUrl: (slug: string): string => {
+  // Generate full shareable URL with portable ?d= data encoding for 100% mobile scanner compatibility
+  getShareableUrl: (album: DigitalAlbum | string): string => {
     const origin = typeof window !== 'undefined' ? window.location.origin : 'https://www.kdcreations.in';
-    const cleanSlug = slug.toLowerCase().trim().replace(/^#?album-/, '');
+    
+    if (typeof album === 'string') {
+      const cleanSlug = album.toLowerCase().trim().replace(/^#?album-/, '');
+      const found = albumService.getAlbumBySlug(cleanSlug);
+      if (found) {
+        return albumService.getShareableUrl(found);
+      }
+      return `${origin}/?album=${cleanSlug}#album-${cleanSlug}`;
+    }
+
+    const cleanSlug = album.slug.toLowerCase().trim().replace(/^#?album-/, '');
+    const isDemo = DEMO_ALBUMS.some((a) => a.slug === cleanSlug || a.id === album.id);
+    if (isDemo) {
+      return `${origin}/?album=${cleanSlug}#album-${cleanSlug}`;
+    }
+
+    // Attach portable encoded payload for custom albums so scanning on ANY mobile phone works 100%
+    const encoded = encodeAlbumToUrl(album);
+    if (encoded && encoded.length < 1800) {
+      return `${origin}/?album=${cleanSlug}&d=${encoded}#album-${cleanSlug}`;
+    }
+
     return `${origin}/?album=${cleanSlug}#album-${cleanSlug}`;
   }
 };
