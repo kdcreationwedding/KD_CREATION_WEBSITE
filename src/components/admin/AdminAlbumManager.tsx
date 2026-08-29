@@ -340,15 +340,16 @@ export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCo
             <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-3 max-h-80 overflow-y-auto p-2 bg-[#1C0307] rounded-xl border border-gold/20">
               {editingAlbum.pages?.map((pageUrl, idx) => (
                 <div key={idx} className="relative group border border-gold/30 rounded-lg overflow-hidden bg-[#3B0811] flex flex-col justify-between">
-                  <img src={getAssetPath(pageUrl)} alt={`Page ${idx + 1}`} className="w-full h-24 object-cover" />
-                  <div className="p-1 bg-black/80 flex items-center justify-between text-[9px] font-mono text-gold">
-                    <span>P.{idx + 1}</span>
+                  <img src={getAssetPath(pageUrl)} alt={`Image ${idx + 1}`} className="w-full h-24 object-cover" />
+                  <div className="p-1.5 bg-black/90 flex items-center justify-between text-[9px] font-mono text-gold font-bold">
+                    <span>Image {idx + 1}</span>
                     <div className="flex items-center gap-1">
                       <button
                         type="button"
                         onClick={() => handleMovePage(idx, 'up')}
                         disabled={idx === 0}
                         className="hover:text-white disabled:opacity-20"
+                        title="Move Up"
                       >
                         <ArrowUp className="w-3 h-3" />
                       </button>
@@ -357,6 +358,7 @@ export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCo
                         onClick={() => handleMovePage(idx, 'down')}
                         disabled={idx === (editingAlbum.pages?.length || 0) - 1}
                         className="hover:text-white disabled:opacity-20"
+                        title="Move Down"
                       >
                         <ArrowDown className="w-3 h-3" />
                       </button>
@@ -364,6 +366,7 @@ export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCo
                         type="button"
                         onClick={() => handleDeletePage(idx)}
                         className="text-rose-400 hover:text-rose-200"
+                        title="Delete Image"
                       >
                         <Trash2 className="w-3 h-3" />
                       </button>
@@ -408,7 +411,20 @@ export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCo
               </tr>
             </thead>
             <tbody className="divide-y divide-gold/10 text-xs font-mono">
-              {albums.map((album) => (
+              {albums.length === 0 ? (
+                <tr>
+                  <td colSpan={6} className="p-12 text-center text-gold/70 font-mono">
+                    <div className="max-w-md mx-auto space-y-3">
+                      <BookOpen className="w-12 h-12 mx-auto text-gold/40" />
+                      <p className="text-base font-bold text-gold uppercase tracking-widest">NO ALBUMS FOUND</p>
+                      <p className="text-xs text-[#F5F2EB]/60">
+                        No digital photobooks uploaded yet. Click "+ CREATE NEW ALBUM" to add one.
+                      </p>
+                    </div>
+                  </td>
+                </tr>
+              ) : (
+                albums.map((album) => (
                 <tr key={album.id} className="hover:bg-[#3B0811]/40 transition-colors">
                   <td className="p-4">
                     <div
@@ -488,7 +504,8 @@ export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCo
                     </button>
                   </td>
                 </tr>
-              ))}
+              ))
+              )}
             </tbody>
           </table>
         </div>
