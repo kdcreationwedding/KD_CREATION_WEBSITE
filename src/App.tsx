@@ -52,6 +52,7 @@ export const App: React.FC = () => {
     const handleHashChange = async () => {
       const hash = window.location.hash;
       const search = window.location.search;
+      const pathname = window.location.pathname;
       let slug = '';
       let encodedData = '';
 
@@ -59,31 +60,39 @@ export const App: React.FC = () => {
         const params = new URLSearchParams(search);
         slug = params.get('album') || '';
         encodedData = params.get('d') || '';
+      } else if (search.includes('album_id=')) {
+        const params = new URLSearchParams(search);
+        slug = params.get('album_id') || '';
       } else if (hash.includes('album-')) {
         slug = hash.split('album-')[1].split('?')[0].split('&')[0];
+      } else if (hash.includes('album/')) {
+        slug = hash.split('album/')[1].split('?')[0].split('&')[0];
+      } else if (pathname.includes('/album/')) {
+        slug = pathname.split('/album/')[1].split('?')[0].split('&')[0];
       }
 
       if (slug) {
         const cleanSlug = slug.toLowerCase().trim();
-        let found = albumService.getAlbumBySlug(cleanSlug);
 
-        // If not in local memory (e.g. opened on a 2nd phone), fetch 24/7 Cloud Database
-        if (!found) {
-          const cloudAlbums = await apiClient.getAlbums();
-          if (cloudAlbums && Array.isArray(cloudAlbums)) {
-            const matched = cloudAlbums.find(
-              (a: any) =>
-                a.slug?.toLowerCase().trim() === cleanSlug ||
-                a.id?.toLowerCase().trim() === cleanSlug ||
-                a.id?.toLowerCase().trim() === `album-${cleanSlug}`
-            );
-            if (matched) {
-              found = matched;
-              albumService.saveAlbum(matched);
-            }
+        // 1. Try 24/7 Supabase Cloud Database first for instant multi-device sync
+        const cloudAlbums = await apiClient.getAlbums();
+        if (cloudAlbums && Array.isArray(cloudAlbums) && cloudAlbums.length > 0) {
+          const matched = cloudAlbums.find(
+            (a: any) =>
+              a.slug?.toLowerCase().trim() === cleanSlug ||
+              a.id?.toLowerCase().trim() === cleanSlug ||
+              a.id?.toLowerCase().trim() === `album-${cleanSlug}`
+          );
+          if (matched) {
+            albumService.saveAlbum(matched);
+            setActiveAlbum(matched);
+            setIsDirectAlbumLink(true);
+            return;
           }
         }
 
+        // 2. Fallback to local memory / demo albums
+        let found = albumService.getAlbumBySlug(cleanSlug);
         if (!found && encodedData) {
           found = decodeAlbumFromUrl(encodedData) || undefined;
         }
