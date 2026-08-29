@@ -117,7 +117,7 @@ export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCo
           const canvas = document.createElement('canvas');
           let width = img.width;
           let height = img.height;
-          const maxDim = 1200; // 1200px max dimension for crisp HD display
+          const maxDim = 960; // 960px max dimension for ultra-fast portable QR payloads
 
           if (width > height && width > maxDim) {
             height = Math.round((height * maxDim) / width);
@@ -132,7 +132,7 @@ export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCo
           const ctx = canvas.getContext('2d');
           if (ctx) {
             ctx.drawImage(img, 0, 0, width, height);
-            resolve(canvas.toDataURL('image/jpeg', 0.82));
+            resolve(canvas.toDataURL('image/jpeg', 0.75));
           } else {
             resolve((e.target?.result as string) || '');
           }
