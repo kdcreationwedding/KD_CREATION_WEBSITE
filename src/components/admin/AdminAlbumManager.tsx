@@ -63,7 +63,7 @@ export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCo
     setIsCreating(false);
   };
 
-  const handleSaveAlbum = (e: React.FormEvent) => {
+  const handleSaveAlbum = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!editingAlbum || !editingAlbum.couple || !editingAlbum.slug) {
       alert('Please fill in required fields (Couple Name & Slug)');
@@ -93,9 +93,11 @@ export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCo
     };
 
     albumService.saveAlbum(albumToSave);
+    await apiClient.saveAlbum(albumToSave);
+
     setEditingAlbum(null);
     refreshAlbums();
-    alert(`✓ Photobook "${albumToSave.couple}" saved successfully!`);
+    alert(`✓ Photobook "${albumToSave.couple}" uploaded & saved directly to Database!`);
   };
 
   const handleRestoreDemoAlbums = () => {
