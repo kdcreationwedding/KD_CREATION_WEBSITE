@@ -2,7 +2,7 @@ import { DigitalAlbum } from '../types/album';
 import { apiClient } from './apiClient';
 import { idbStore } from './idbStore';
 
-const STORAGE_KEY = 'kd_digital_albums_v6';
+const STORAGE_KEY = 'kd_digital_albums_v7';
 
 // Real sample photobooks dataset for 1-click restore and default mobile scan fallback
 export const DEMO_ALBUMS: DigitalAlbum[] = [
@@ -108,12 +108,36 @@ export const decodeAlbumFromUrl = (encoded: string): DigitalAlbum | null => {
 };
 
 let inMemoryAlbums: DigitalAlbum[] | null = null;
+const listeners: Array<() => void> = [];
+
+const notifyListeners = () => {
+  listeners.forEach((cb) => cb());
+};
+
+// Initial synchronous load from LocalStorage metadata so initial render on refresh never misses custom albums
+const loadInitialSyncFromStorage = (): DigitalAlbum[] => {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored !== null) {
+      const parsed = JSON.parse(stored);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        return parsed;
+      }
+    }
+  } catch (e) {
+    console.warn('Could not read digital albums from localStorage', e);
+  }
+  return [...DEMO_ALBUMS];
+};
+
+inMemoryAlbums = loadInitialSyncFromStorage();
 
 // Background hydration from IndexedDB and API server
 if (typeof window !== 'undefined') {
   idbStore.getAlbums().then((idbAlbums) => {
     if (idbAlbums && idbAlbums.length > 0) {
       inMemoryAlbums = idbAlbums;
+      notifyListeners();
     }
   });
 
@@ -121,30 +145,31 @@ if (typeof window !== 'undefined') {
     if (serverAlbums && Array.isArray(serverAlbums) && serverAlbums.length > 0) {
       inMemoryAlbums = serverAlbums;
       idbStore.saveAlbums(serverAlbums);
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(serverAlbums));
+      } catch (e) {}
+      notifyListeners();
     }
   });
 }
 
 export const albumService = {
-  // Retrieve all albums from memory, localStorage or IndexedDB
+  // Subscribe to album state updates
+  subscribe: (callback: () => void) => {
+    listeners.push(callback);
+    return () => {
+      const idx = listeners.indexOf(callback);
+      if (idx >= 0) listeners.splice(idx, 1);
+    };
+  },
+
+  // Retrieve all albums synchronously
   getAlbums: (): DigitalAlbum[] => {
-    if (inMemoryAlbums !== null) {
+    if (inMemoryAlbums !== null && inMemoryAlbums.length > 0) {
       return inMemoryAlbums;
     }
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored !== null) {
-        const parsed = JSON.parse(stored);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          inMemoryAlbums = parsed;
-          return parsed;
-        }
-      }
-    } catch (e) {
-      console.warn('Could not read digital albums from localStorage', e);
-    }
-    inMemoryAlbums = [...DEMO_ALBUMS];
-    return DEMO_ALBUMS;
+    inMemoryAlbums = loadInitialSyncFromStorage();
+    return inMemoryAlbums;
   },
 
   // Get single album by slug or ID with DEMO_ALBUMS fallback so QR links never fail
@@ -162,7 +187,7 @@ export const albumService = {
     return found;
   },
 
-  // Save or update an album with IndexedDB & Node.js Express server sync
+  // Save or update an album with IndexedDB, LocalStorage & Node.js Express server sync
   saveAlbum: (album: DigitalAlbum): DigitalAlbum => {
     const albums = albumService.getAlbums();
     const index = albums.findIndex((a) => a.id === album.id);
@@ -181,21 +206,22 @@ export const albumService = {
 
     inMemoryAlbums = newAlbums;
 
-    // 1. Save to IndexedDB (Multi-GB unlimited persistent storage)
-    idbStore.saveAlbums(newAlbums);
-
-    // 2. Save to localStorage (if small enough)
+    // 1. Save to LocalStorage (for synchronous instant load on F5 refresh)
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(newAlbums));
     } catch (e) {
-      console.warn('LocalStorage quota limit reached, persisted in IndexedDB & runtime memory', e);
+      console.warn('LocalStorage quota limit reached, persisted in IndexedDB', e);
     }
 
-    // 3. Sync to Node.js Backend API Server
+    // 2. Save to IndexedDB (Multi-GB unlimited persistent storage)
+    idbStore.saveAlbums(newAlbums);
+
+    // 3. Sync to Node.js Backend API Server (which writes to server/data/db.json)
     apiClient.saveAlbum(updatedAlbum).catch((err) => {
       console.warn('Server sync error', err);
     });
 
+    notifyListeners();
     return updatedAlbum;
   },
 
@@ -208,6 +234,7 @@ export const albumService = {
     } catch (e) {
       console.warn('Could not persist demo albums', e);
     }
+    notifyListeners();
     return DEMO_ALBUMS;
   },
 
@@ -223,6 +250,7 @@ export const albumService = {
       console.warn('Could not delete digital album', e);
     }
     apiClient.deleteAlbum(id).catch(() => {});
+    notifyListeners();
   },
 
   // Toggle published status

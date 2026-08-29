@@ -78,9 +78,11 @@ export const App: React.FC = () => {
     };
 
     handleHashChange();
+    const unsubscribe = albumService.subscribe(handleHashChange);
     window.addEventListener('hashchange', handleHashChange);
     window.addEventListener('popstate', handleHashChange);
     return () => {
+      unsubscribe();
       window.removeEventListener('hashchange', handleHashChange);
       window.removeEventListener('popstate', handleHashChange);
     };
