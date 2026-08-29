@@ -166,9 +166,10 @@ export const albumService = {
     return album.isPublished;
   },
 
-  // Generate full shareable URL
+  // Generate full shareable URL (Uses both query param ?album= & hash #album- for 100% Mobile QR Scanner compatibility)
   getShareableUrl: (slug: string): string => {
     const origin = typeof window !== 'undefined' ? window.location.origin : 'https://www.kdcreations.in';
-    return `${origin}/#album-${slug}`;
+    const cleanSlug = slug.toLowerCase().trim().replace(/^#?album-/, '');
+    return `${origin}/?album=${cleanSlug}#album-${cleanSlug}`;
   }
 };
