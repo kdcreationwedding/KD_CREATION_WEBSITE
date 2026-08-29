@@ -17,7 +17,7 @@ export const QrCodeModal: React.FC<QrCodeModalProps> = ({ album, isOpen, onClose
 
   if (!isOpen) return null;
 
-  const shareableUrl = albumService.getShareableUrl(album.slug);
+  const shareableUrl = albumService.getShareableUrl(album);
   const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(shareableUrl)}&color=d4af37&bgcolor=1c0307`;
 
   const handleCopyLink = () => {
@@ -99,7 +99,11 @@ export const QrCodeModal: React.FC<QrCodeModalProps> = ({ album, isOpen, onClose
             <img
               src={qrApiUrl}
               alt={`QR Code for ${album.couple} Wedding Album`}
-              className="w-48 h-48 sm:w-56 sm:h-56 mx-auto object-contain rounded-lg"
+              className="w-48 h-48 sm:w-56 sm:h-56 mx-auto object-contain rounded-lg shadow-md"
+              onError={(e) => {
+                const target = e.currentTarget;
+                target.src = `https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl=${encodeURIComponent(shareableUrl)}`;
+              }}
             />
           </div>
 

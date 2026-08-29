@@ -281,7 +281,7 @@ export const albumService = {
 
     const cleanSlug = album.slug.toLowerCase().trim().replace(/^#?album-/, '');
     const encoded = encodeAlbumToUrl(album);
-    if (encoded) {
+    if (encoded && encoded.length < 1500) {
       return `${origin}/?album=${cleanSlug}&d=${encoded}#album-${cleanSlug}`;
     }
 
