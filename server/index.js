@@ -49,6 +49,9 @@ const readDb = () => {
       albums: [],
       leads: [],
       stories: [],
+      services: [],
+      founders: [],
+      testimonials: [],
       settings: {
         phone: '+91 9033032922',
         whatsapp: '9033032922',
@@ -67,7 +70,7 @@ const readDb = () => {
     return JSON.parse(content);
   } catch (e) {
     console.error('Error reading db.json', e);
-    return { albums: [], leads: [], stories: [], settings: {} };
+    return { albums: [], leads: [], stories: [], services: [], founders: [], testimonials: [], settings: {} };
   }
 };
 
@@ -155,7 +158,97 @@ app.post('/api/upload', upload.array('photos', 50), (req, res) => {
   }
 });
 
-// 2. Client Booking Leads Endpoints
+// 2. Portfolio Stories Endpoints
+app.get('/api/stories', (req, res) => {
+  const db = readDb();
+  res.json(db.stories || []);
+});
+
+app.post('/api/stories', (req, res) => {
+  const db = readDb();
+  const story = req.body;
+  const existingIndex = (db.stories || []).findIndex((s) => s.id === story.id);
+  if (existingIndex >= 0) {
+    db.stories[existingIndex] = story;
+  } else {
+    db.stories.unshift(story);
+  }
+  writeDb(db);
+  res.json({ success: true, story });
+});
+
+app.delete('/api/stories/:id', (req, res) => {
+  const db = readDb();
+  db.stories = (db.stories || []).filter((s) => s.id !== req.params.id);
+  writeDb(db);
+  res.json({ success: true, id: req.params.id });
+});
+
+// 3. Signature Services Endpoints
+app.get('/api/services', (req, res) => {
+  const db = readDb();
+  res.json(db.services || []);
+});
+
+app.post('/api/services', (req, res) => {
+  const db = readDb();
+  const service = req.body;
+  const existingIndex = (db.services || []).findIndex((s) => s.id === service.id);
+  if (existingIndex >= 0) {
+    db.services[existingIndex] = service;
+  } else {
+    db.services.unshift(service);
+  }
+  writeDb(db);
+  res.json({ success: true, service });
+});
+
+// 4. Founders Endpoints
+app.get('/api/founders', (req, res) => {
+  const db = readDb();
+  res.json(db.founders || []);
+});
+
+app.post('/api/founders', (req, res) => {
+  const db = readDb();
+  const founder = req.body;
+  const existingIndex = (db.founders || []).findIndex((f) => f.id === founder.id);
+  if (existingIndex >= 0) {
+    db.founders[existingIndex] = founder;
+  } else {
+    db.founders.unshift(founder);
+  }
+  writeDb(db);
+  res.json({ success: true, founder });
+});
+
+// 5. Testimonials Endpoints
+app.get('/api/testimonials', (req, res) => {
+  const db = readDb();
+  res.json(db.testimonials || []);
+});
+
+app.post('/api/testimonials', (req, res) => {
+  const db = readDb();
+  const testimonial = req.body;
+  const existingIndex = (db.testimonials || []).findIndex((t) => t.id === testimonial.id);
+  if (existingIndex >= 0) {
+    db.testimonials[existingIndex] = testimonial;
+  } else {
+    db.testimonials.unshift(testimonial);
+  }
+  writeDb(db);
+  res.json({ success: true, testimonial });
+});
+
+app.delete('/api/testimonials/:id', (req, res) => {
+  const db = readDb();
+  db.testimonials = (db.testimonials || []).filter((t) => t.id !== req.params.id);
+  writeDb(db);
+  res.json({ success: true, id: req.params.id });
+});
+
+// 6. Client Booking Leads Endpoints
 app.get('/api/leads', (req, res) => {
   const db = readDb();
   res.json(db.leads || []);
@@ -173,7 +266,7 @@ app.post('/api/leads', (req, res) => {
   res.json({ success: true, lead });
 });
 
-// 3. Site Settings Endpoint
+// 7. Site Settings Endpoint
 app.get('/api/settings', (req, res) => {
   const db = readDb();
   res.json(db.settings || {});

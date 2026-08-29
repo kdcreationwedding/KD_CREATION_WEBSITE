@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { MapPin, Calendar, ArrowUpRight } from 'lucide-react';
 import { SITE_CONFIG, PortfolioItem } from '../../config/siteConfig';
+import { cmsService } from '../../services/cmsService';
 import { StoryDetailModal } from './StoryDetailModal';
 
 interface SelectedStoriesProps {
@@ -17,11 +18,12 @@ export const SelectedStories: React.FC<SelectedStoriesProps> = ({
   const [selectedStory, setSelectedStory] = useState<PortfolioItem | null>(null);
 
   const categories = ['All', 'Royal Wedding', 'Destination', 'Pre-Wedding'];
+  const stories = cmsService.getStories();
 
   const filteredPortfolio =
     activeCategory === 'All'
-      ? SITE_CONFIG.portfolio
-      : SITE_CONFIG.portfolio.filter((p) => p.category === activeCategory);
+      ? stories
+      : stories.filter((p) => p.category === activeCategory);
 
   return (
     <section id="stories" className="relative py-28 sm:py-36 bg-[#2B050B] border-t border-gold/20 overflow-hidden text-[#F5F2EB]">

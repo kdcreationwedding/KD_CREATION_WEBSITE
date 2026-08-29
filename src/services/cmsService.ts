@@ -1,4 +1,5 @@
 import { PortfolioItem, ServiceItem, FounderItem, Testimonial, SITE_CONFIG } from '../config/siteConfig';
+import { apiClient } from './apiClient';
 
 const CMS_STORAGE_KEYS = {
   STORIES: 'kd_cms_stories_v1',
@@ -70,6 +71,7 @@ export const cmsService = {
     } catch (e) {
       console.warn('Could not persist stories', e);
     }
+    apiClient.saveStory(story).catch(() => {});
     return story;
   },
 
@@ -82,6 +84,7 @@ export const cmsService = {
     } catch (e) {
       console.warn('Could not delete story', e);
     }
+    apiClient.deleteStory(id).catch(() => {});
   },
 
   // --- 2. SERVICES ---
@@ -119,6 +122,7 @@ export const cmsService = {
     } catch (e) {
       console.warn('Could not persist services', e);
     }
+    apiClient.saveService(service).catch(() => {});
     return service;
   },
 
@@ -157,6 +161,7 @@ export const cmsService = {
     } catch (e) {
       console.warn('Could not persist founders', e);
     }
+    apiClient.saveFounder(founder).catch(() => {});
     return founder;
   },
 
@@ -195,6 +200,7 @@ export const cmsService = {
     } catch (e) {
       console.warn('Could not persist testimonials', e);
     }
+    apiClient.saveTestimonial(t).catch(() => {});
     return t;
   },
 
@@ -207,6 +213,7 @@ export const cmsService = {
     } catch (e) {
       console.warn('Could not delete testimonial', e);
     }
+    apiClient.deleteTestimonial(id).catch(() => {});
   },
 
   // --- 5. SITE SETTINGS ---
@@ -236,6 +243,7 @@ export const cmsService = {
     } catch (e) {
       console.warn('Could not persist site settings', e);
     }
+    apiClient.saveSettings(settings).catch(() => {});
     return settings;
   }
 };
