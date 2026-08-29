@@ -70,6 +70,8 @@ export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCo
       return;
     }
 
+    const finalCover = editingAlbum.coverImage || (editingAlbum.pages && editingAlbum.pages[0]) || '';
+
     const albumToSave: DigitalAlbum = {
       id: editingAlbum.id || `album-${Date.now()}`,
       slug: editingAlbum.slug.toLowerCase().replace(/\s+/g, '-'),
@@ -78,7 +80,7 @@ export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCo
       subtitle: editingAlbum.subtitle || '',
       date: editingAlbum.date || '2026',
       location: editingAlbum.location || 'Ahmedabad, Gujarat',
-      coverImage: editingAlbum.coverImage || 'assets/service-album-ring.jpg',
+      coverImage: finalCover,
       description: editingAlbum.description || '',
       pages: editingAlbum.pages || [],
       isPublished: editingAlbum.isPublished ?? true,

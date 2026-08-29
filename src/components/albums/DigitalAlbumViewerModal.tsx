@@ -317,7 +317,7 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
             {/* Background Cover Image with Dark Overlay */}
             <div className="absolute inset-0 z-0">
               <img
-                src={getAssetPath(album.coverImage)}
+                src={getAssetPath(album.coverImage || (album.pages && album.pages[0]) || '')}
                 alt={album.couple}
                 className="w-full h-full object-cover brightness-[0.35] group-hover:scale-105 transition-transform duration-1000"
               />
