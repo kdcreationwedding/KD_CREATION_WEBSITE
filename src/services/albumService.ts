@@ -1,4 +1,5 @@
 import { DigitalAlbum } from '../types/album';
+import { apiClient } from './apiClient';
 
 const STORAGE_KEY = 'kd_digital_albums_v4';
 
@@ -97,7 +98,7 @@ export const albumService = {
     return found;
   },
 
-  // Save or update an album
+  // Save or update an album with asynchronous Node.js Express server sync
   saveAlbum: (album: DigitalAlbum): DigitalAlbum => {
     const albums = albumService.getAlbums();
     const index = albums.findIndex((a) => a.id === album.id);
@@ -122,6 +123,11 @@ export const albumService = {
       console.warn('LocalStorage quota limit reached, persisted in runtime memory', e);
     }
 
+    // Sync in background to Node.js Backend API Server
+    apiClient.saveAlbum(updatedAlbum).catch((err) => {
+      console.warn('Server sync error', err);
+    });
+
     return updatedAlbum;
   },
 
@@ -136,7 +142,7 @@ export const albumService = {
     return DEMO_ALBUMS;
   },
 
-  // Delete an album
+  // Delete an album with server sync
   deleteAlbum: (id: string): void => {
     const albums = albumService.getAlbums();
     const newAlbums = albums.filter((a) => a.id !== id);
@@ -146,6 +152,7 @@ export const albumService = {
     } catch (e) {
       console.warn('Could not delete digital album', e);
     }
+    apiClient.deleteAlbum(id).catch(() => {});
   },
 
   // Toggle published status
