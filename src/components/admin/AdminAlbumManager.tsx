@@ -96,31 +96,38 @@ export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCo
     refreshAlbums();
   };
 
-  // Bulk Image File Upload Handler
-  const handleBulkUploadPages = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // Bulk Image File Upload Handler with Natural Numerical Ascending Sort (1, 2, 3...)
+  const handleBulkUploadPages = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files || files.length === 0 || !editingAlbum) return;
 
+    // Sort selected files in natural numerical ascending order (e.g. 1.jpg, 2.jpg, 10.jpg or DSC001, DSC002)
+    const sortedFiles = Array.from(files).sort((a, b) =>
+      a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' })
+    );
+
     setUploadProgress(10);
-    const newPages: string[] = [...(editingAlbum.pages || [])];
-    let loadedCount = 0;
 
-    Array.from(files).forEach((file) => {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        if (event.target?.result) {
-          newPages.push(event.target.result as string);
-          loadedCount++;
-          setUploadProgress(Math.round((loadedCount / files.length) * 100));
+    const readPage = (file: File): Promise<string> => {
+      return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = (event) => resolve((event.target?.result as string) || '');
+        reader.readAsDataURL(file);
+      });
+    };
 
-          if (loadedCount === files.length) {
-            setEditingAlbum((prev) => prev ? { ...prev, pages: newPages } : null);
-            setTimeout(() => setUploadProgress(null), 500);
-          }
-        }
-      };
-      reader.readAsDataURL(file);
-    });
+    const uploadedPages: string[] = [];
+    for (let i = 0; i < sortedFiles.length; i++) {
+      const pageData = await readPage(sortedFiles[i]);
+      if (pageData) {
+        uploadedPages.push(pageData);
+        setUploadProgress(Math.round(((i + 1) / sortedFiles.length) * 100));
+      }
+    }
+
+    const combinedPages = [...(editingAlbum.pages || []), ...uploadedPages];
+    setEditingAlbum((prev) => (prev ? { ...prev, pages: combinedPages } : null));
+    setTimeout(() => setUploadProgress(null), 500);
   };
 
   // Cover Image Upload Handler
@@ -158,6 +165,15 @@ export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCo
     if (!editingAlbum || !editingAlbum.pages) return;
     const newPages = editingAlbum.pages.filter((_, idx) => idx !== index);
     setEditingAlbum({ ...editingAlbum, pages: newPages });
+  };
+
+  // Auto Sort Pages in Natural Ascending Order (1, 2, 3...)
+  const handleSortPagesAscending = () => {
+    if (!editingAlbum || !editingAlbum.pages) return;
+    const sortedPages = [...editingAlbum.pages].sort((a, b) =>
+      a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' })
+    );
+    setEditingAlbum({ ...editingAlbum, pages: sortedPages });
   };
 
   return (
@@ -324,10 +340,22 @@ export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCo
                 </span>
               </div>
 
-              <label className="cursor-pointer px-4 py-2.5 rounded-xl bg-gold-gradient text-obsidian text-xs font-mono font-bold flex items-center gap-2 hover:brightness-110 transition-all shadow-md">
-                <Upload className="w-4 h-4" /> BULK UPLOAD PAGES
-                <input type="file" accept="image/*" multiple onChange={handleBulkUploadPages} className="hidden" />
-              </label>
+              <div className="flex items-center gap-2">
+                {editingAlbum.pages && editingAlbum.pages.length > 1 && (
+                  <button
+                    type="button"
+                    onClick={handleSortPagesAscending}
+                    className="px-3.5 py-2.5 rounded-xl bg-[#3B0811] border border-gold/40 text-gold text-xs font-mono font-bold flex items-center gap-1.5 hover:bg-gold hover:text-obsidian transition-all shadow-md"
+                    title="Sort Pages in Natural Numerical Ascending Order (1, 2, 3...)"
+                  >
+                    <ArrowUp className="w-3.5 h-3.5" /> SORT 1 → N
+                  </button>
+                )}
+                <label className="cursor-pointer px-4 py-2.5 rounded-xl bg-gold-gradient text-obsidian text-xs font-mono font-bold flex items-center gap-2 hover:brightness-110 transition-all shadow-md">
+                  <Upload className="w-4 h-4" /> BULK UPLOAD PAGES
+                  <input type="file" accept="image/*" multiple onChange={handleBulkUploadPages} className="hidden" />
+                </label>
+              </div>
             </div>
 
             {uploadProgress !== null && (
