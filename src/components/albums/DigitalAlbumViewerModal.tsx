@@ -398,87 +398,91 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
           </div>
         )}
 
-        {/* 3. 3D REALISTIC PHOTOBOOK SPREAD STAGE */}
+        {/* 3. 3D REALISTIC PHOTOBOOK 2-PAGE SPREAD STAGE */}
         {viewMode === 'book' && (
-          <div className="relative w-full h-full flex items-center justify-center">
+          <div className="relative w-full h-full flex flex-col items-center justify-center p-2 sm:p-4">
 
-            {/* Desktop 2-Page Spread View */}
+            {/* Stage Container with Zoom */}
             <div
-              className="relative transition-transform duration-300"
+              className="relative transition-transform duration-300 w-full flex items-center justify-center"
               style={{ transform: `scale(${zoomLevel})` }}
             >
-              <div className="relative flex items-center justify-center shadow-2xl border border-gold/30 rounded-xl overflow-hidden bg-[#1C0307]">
+              <div className="relative w-full max-w-[96vw] lg:max-w-6xl h-[60vh] sm:h-[75vh] flex items-center justify-center shadow-2xl border border-gold/40 rounded-2xl overflow-hidden bg-[#140205]">
 
-                {/* Left Page (Desktop 2-Page Spread) */}
-                <div className="hidden lg:block relative w-[480px] h-[640px] border-r border-black/60 bg-[#140205] overflow-hidden">
-                  {currentPageIndex > 0 && pages[currentPageIndex - 1] ? (
-                    <img
-                      src={getAssetPath(pages[currentPageIndex - 1])}
-                      alt={`Page ${currentPageIndex}`}
-                      className="w-full h-full object-contain p-2"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex flex-col items-center justify-center p-8 text-center bg-[#1C0307] text-gold/40 border-r border-gold/10">
-                      <BookOpen className="w-12 h-12 mb-3" />
-                      <p className="font-serif-luxury text-sm uppercase">INSIDE COVER</p>
-                    </div>
-                  )}
-                  {/* Spine Crease Shadow Overlay */}
-                  <div className="absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-black/80 to-transparent pointer-events-none" />
-                </div>
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentPageIndex}
+                    initial={{ opacity: 0.2, rotateY: flipDirection === 'next' ? 45 : -45, scale: 0.96 }}
+                    animate={{ opacity: 1, rotateY: 0, scale: 1 }}
+                    exit={{ opacity: 0.2, rotateY: flipDirection === 'next' ? -45 : 45, scale: 0.96 }}
+                    transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
+                    className="w-full h-full relative flex items-center justify-center overflow-hidden"
+                    style={{ perspective: 1400 }}
+                  >
+                    {pages[currentPageIndex] ? (
+                      <div className="w-full h-full flex items-center justify-center relative overflow-hidden">
 
-                {/* Right / Main Active Page (Mobile 1-Page & Desktop Right Page) */}
-                <div
-                  className="relative w-[340px] sm:w-[480px] h-[520px] sm:h-[640px] bg-[#140205] overflow-hidden flex items-center justify-center"
-                  style={{ perspective: 1200 }}
-                >
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={currentPageIndex}
-                      initial={{ opacity: 0.2, rotateY: flipDirection === 'next' ? 75 : -75, scale: 0.95 }}
-                      animate={{ opacity: 1, rotateY: 0, scale: 1 }}
-                      exit={{ opacity: 0.2, rotateY: flipDirection === 'next' ? -75 : 75, scale: 0.95 }}
-                      transition={{ duration: 0.5, ease: [0.25, 1, 0.5, 1] }}
-                      className="w-full h-full relative flex items-center justify-center"
-                      style={{ transformOrigin: flipDirection === 'next' ? 'left center' : 'right center' }}
-                    >
-                      {pages[currentPageIndex] ? (
-                        <img
-                          src={getAssetPath(pages[currentPageIndex])}
-                          alt={`Page ${currentPageIndex + 1}`}
-                          className="w-full h-full object-contain p-2 shadow-2xl"
-                        />
-                      ) : (
-                        <div className="w-full h-full flex flex-col items-center justify-center p-6 text-center text-gold/60">
-                          <BookOpen className="w-10 h-10 mb-2 opacity-50" />
-                          <p className="font-mono text-xs uppercase">No Page Loaded</p>
+                        {/* DESKTOP 2-PAGE SPREAD VIEW (Lg Screens: Split wide image into Left and Right halves with Spine Crease) */}
+                        <div className="hidden lg:flex w-full h-full relative">
+
+                          {/* LEFT PAGE (Left 50% of the Wide Photobook Spread) */}
+                          <div className="w-1/2 h-full relative overflow-hidden border-r border-black/70 bg-[#140205] flex items-center justify-end">
+                            <img
+                              src={getAssetPath(pages[currentPageIndex])}
+                              alt={`Page ${currentPageIndex + 1} - Left`}
+                              className="h-full w-[200%] max-w-none object-cover object-left shadow-xl"
+                            />
+                            {/* Spine Crease Shadow Overlay (Left Edge) */}
+                            <div className="absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-black/90 via-black/40 to-transparent pointer-events-none z-10" />
+                            <div className="absolute inset-y-0 right-0 w-[1px] bg-gold/30 pointer-events-none z-10" />
+                          </div>
+
+                          {/* RIGHT PAGE (Right 50% of the Wide Photobook Spread) */}
+                          <div className="w-1/2 h-full relative overflow-hidden bg-[#140205] flex items-center justify-start">
+                            <img
+                              src={getAssetPath(pages[currentPageIndex])}
+                              alt={`Page ${currentPageIndex + 1} - Right`}
+                              className="h-full w-[200%] max-w-none object-cover object-right shadow-xl"
+                            />
+                            {/* Spine Crease Shadow Overlay (Right Edge) */}
+                            <div className="absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-black/90 via-black/40 to-transparent pointer-events-none z-10" />
+                            <div className="absolute inset-y-0 left-0 w-[1px] bg-gold/30 pointer-events-none z-10" />
+                          </div>
+
                         </div>
-                      )}
-                      {/* Dynamic Paper Turn Shadow Overlay */}
-                      <motion.div
-                        initial={{ opacity: 0.6 }}
-                        animate={{ opacity: 0 }}
-                        transition={{ duration: 0.5 }}
-                        className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent pointer-events-none"
-                      />
-                    </motion.div>
-                  </AnimatePresence>
 
-                  {/* Spine Crease Shadow Overlay */}
-                  <div className="absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-black/80 to-transparent pointer-events-none hidden lg:block" />
+                        {/* MOBILE / TABLET RESPONSIVE SPREAD VIEW (Fills screen aspect ratio automatically) */}
+                        <div className="flex lg:hidden w-full h-full relative items-center justify-center p-2">
+                          <img
+                            src={getAssetPath(pages[currentPageIndex])}
+                            alt={`Page ${currentPageIndex + 1}`}
+                            className="w-full h-full object-contain shadow-2xl rounded-lg"
+                          />
+                          {/* Center Fold Line Indicator */}
+                          <div className="absolute inset-y-0 left-1/2 w-[1px] bg-gold/25 pointer-events-none" />
+                        </div>
 
-                  {/* Watermark Overlay */}
-                  {watermarkOn && (
-                    <div className="absolute bottom-4 right-4 pointer-events-none opacity-40 text-right">
-                      <p className="text-[9px] font-mono tracking-widest text-gold uppercase font-bold">
-                        KD CREATIONS
-                      </p>
-                      <p className="text-[7px] font-mono text-white/70">
-                        LUXURY HEIRLOOM PHOTOBOOK
-                      </p>
-                    </div>
-                  )}
-                </div>
+                        {/* Watermark Overlay */}
+                        {watermarkOn && (
+                          <div className="absolute bottom-3 right-4 pointer-events-none opacity-50 text-right z-20">
+                            <p className="text-[9px] font-mono tracking-widest text-gold uppercase font-bold">
+                              KD CREATIONS
+                            </p>
+                            <p className="text-[7px] font-mono text-white/70">
+                              LUXURY HEIRLOOM PHOTOBOOK
+                            </p>
+                          </div>
+                        )}
+
+                      </div>
+                    ) : (
+                      <div className="w-full h-full flex flex-col items-center justify-center p-6 text-center text-gold/60">
+                        <BookOpen className="w-10 h-10 mb-2 opacity-50" />
+                        <p className="font-mono text-xs uppercase">No Page Loaded</p>
+                      </div>
+                    )}
+                  </motion.div>
+                </AnimatePresence>
 
               </div>
             </div>
