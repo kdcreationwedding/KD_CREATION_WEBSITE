@@ -145,6 +145,13 @@ export const apiClient = {
 
   // 2. Portfolio Stories
   getStories: async () => {
+    if (isSupabaseConfigured() && supabase) {
+      try {
+        const { data, error } = await supabase.from('stories').select('*');
+        if (!error && Array.isArray(data) && data.length > 0) return data;
+      } catch (e) {}
+    }
+
     try {
       const res = await fetch(`${API_BASE_URL}/stories`);
       if (res.ok) return await res.json();
@@ -155,6 +162,12 @@ export const apiClient = {
   },
 
   saveStory: async (story: any) => {
+    if (isSupabaseConfigured() && supabase) {
+      try {
+        await supabase.from('stories').upsert(story, { onConflict: 'id' });
+      } catch (e) {}
+    }
+
     try {
       const res = await fetch(`${API_BASE_URL}/stories`, {
         method: 'POST',
@@ -169,6 +182,12 @@ export const apiClient = {
   },
 
   deleteStory: async (id: string) => {
+    if (isSupabaseConfigured() && supabase) {
+      try {
+        await supabase.from('stories').delete().eq('id', id);
+      } catch (e) {}
+    }
+
     try {
       await fetch(`${API_BASE_URL}/stories/${id}`, { method: 'DELETE' });
     } catch (e) {
@@ -178,6 +197,13 @@ export const apiClient = {
 
   // 3. Leads
   getLeads: async () => {
+    if (isSupabaseConfigured() && supabase) {
+      try {
+        const { data, error } = await supabase.from('leads').select('*').order('created_at', { ascending: false });
+        if (!error && Array.isArray(data) && data.length > 0) return data;
+      } catch (e) {}
+    }
+
     try {
       const res = await fetch(`${API_BASE_URL}/leads`);
       if (res.ok) return await res.json();
@@ -188,6 +214,14 @@ export const apiClient = {
   },
 
   saveLead: async (lead: any) => {
+    if (isSupabaseConfigured() && supabase) {
+      try {
+        await supabase.from('leads').upsert(lead, { onConflict: 'id' });
+      } catch (e) {
+        console.warn('Supabase save lead error:', e);
+      }
+    }
+
     try {
       const res = await fetch(`${API_BASE_URL}/leads`, {
         method: 'POST',
@@ -202,6 +236,12 @@ export const apiClient = {
   },
 
   updateLeadStatus: async (id: string, status: string) => {
+    if (isSupabaseConfigured() && supabase) {
+      try {
+        await supabase.from('leads').update({ status }).eq('id', id);
+      } catch (e) {}
+    }
+
     try {
       const res = await fetch(`${API_BASE_URL}/leads/${id}/status`, {
         method: 'PATCH',
@@ -216,6 +256,12 @@ export const apiClient = {
   },
 
   deleteLead: async (id: string) => {
+    if (isSupabaseConfigured() && supabase) {
+      try {
+        await supabase.from('leads').delete().eq('id', id);
+      } catch (e) {}
+    }
+
     try {
       await fetch(`${API_BASE_URL}/leads/${id}`, { method: 'DELETE' });
     } catch (e) {
@@ -267,6 +313,12 @@ export const apiClient = {
   },
 
   saveSettings: async (settings: any) => {
+    if (isSupabaseConfigured() && supabase) {
+      try {
+        await supabase.from('site_settings').upsert({ id: 'global_settings', ...settings }, { onConflict: 'id' });
+      } catch (e) {}
+    }
+
     try {
       const res = await fetch(`${API_BASE_URL}/settings`, {
         method: 'POST',
