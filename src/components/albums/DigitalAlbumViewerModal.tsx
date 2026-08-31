@@ -36,6 +36,7 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
   const [watermarkOn, setWatermarkOn] = useState(true);
   const [showThumbnails, setShowThumbnails] = useState(false);
   const [flipDirection, setFlipDirection] = useState<'next' | 'prev'>('next');
+  const [isUltraHdModalOpen, setIsUltraHdModalOpen] = useState(false);
 
   // Touch Swipe Refs
   const touchStartX = useRef<number | null>(null);
@@ -436,11 +437,20 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
                     {pages[currentPageIndex] ? (
                       <div className="w-full h-full flex items-center justify-center relative overflow-hidden">
 
-                        {/* 100% RAW FULL RESOLUTION HIGH-DEFINING PHOTO DISPLAY */}
+                        {/* 100% RAW UNCOMPRESSED NATIVE 4K ULTRA-HD PHOTO DISPLAY */}
                         <img
                           src={getAssetPath(pages[currentPageIndex])}
                           alt={`Page ${currentPageIndex + 1}`}
-                          className="w-full h-full object-contain pointer-events-auto select-none rounded-sm shadow-2xl transition-all duration-300"
+                          decoding="sync"
+                          loading="eager"
+                          className="max-w-full max-h-full w-auto h-auto object-contain pointer-events-auto select-none rounded-sm shadow-2xl transition-all duration-300 cursor-zoom-in"
+                          style={{
+                            maxHeight: '94vh',
+                            maxWidth: '99vw',
+                            objectFit: 'contain'
+                          }}
+                          onClick={() => setIsUltraHdModalOpen(true)}
+                          title="Click for 100% Ultra-HD 4K Full-Resolution View"
                         />
 
                         {/* Interactive Click/Tap Zones: Left 40% = Prev Page, Right 40% = Next Page */}
@@ -575,6 +585,33 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
               </span>
             </button>
           ))}
+        </div>
+      )}
+
+      {/* 100% UNTOUCHED NATIVE RAW 4K ULTRA-HD FULLSCREEN OVERLAY */}
+      {isUltraHdModalOpen && (
+        <div className="fixed inset-0 z-[200000] bg-black flex flex-col items-center justify-center p-2 sm:p-4 overflow-auto animate-fade-in">
+          <div className="absolute top-4 right-4 z-50 flex items-center gap-3">
+            <span className="px-3 py-1 rounded-full bg-gold/20 border border-gold/40 text-gold text-xs font-mono font-bold uppercase tracking-widest">
+              100% RAW 4K ULTRA-HD NATIVE VIEW
+            </span>
+            <button
+              onClick={() => setIsUltraHdModalOpen(false)}
+              className="p-2 rounded-full bg-gold/20 text-gold hover:bg-gold hover:text-obsidian transition-all"
+              aria-label="Close Ultra HD Lightbox"
+            >
+              <X className="w-6 h-6" />
+            </button>
+          </div>
+
+          <div className="w-full h-full flex items-center justify-center overflow-auto p-2">
+            <img
+              src={getAssetPath(pages[currentPageIndex])}
+              alt={`Raw 4K Page ${currentPageIndex + 1}`}
+              className="max-w-none max-h-none w-auto h-auto min-w-full object-contain pointer-events-auto rounded-md shadow-2xl"
+              style={{ maxHeight: '98vh', maxWidth: '98vw' }}
+            />
+          </div>
         </div>
       )}
 
