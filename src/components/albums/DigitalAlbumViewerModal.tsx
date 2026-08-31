@@ -398,23 +398,23 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
           </div>
         )}
 
-        {/* 3. 3D REALISTIC PHOTOBOOK SPREAD STAGE (100% UNCROPPED FULL PHOTO) */}
+        {/* 3. 3D REALISTIC PHOTOBOOK SPREAD STAGE (100% HIGH-RESOLUTION FULL SCREEN DISPLAY) */}
         {viewMode === 'book' && (
-          <div className="relative w-full h-full flex flex-col items-center justify-center p-2 sm:p-4">
+          <div className="relative w-full h-full flex flex-col items-center justify-center p-1 sm:p-2">
 
             {/* Stage Container with Zoom */}
             <div
               className="relative transition-transform duration-300 w-full h-full flex items-center justify-center"
               style={{ transform: `scale(${zoomLevel})` }}
             >
-              <div className="relative w-full max-w-[98vw] lg:max-w-6xl h-[65vh] sm:h-[80vh] flex items-center justify-center shadow-2xl border border-gold/40 rounded-2xl overflow-hidden bg-[#120204] p-1 sm:p-3">
+              <div className="relative w-full max-w-[99vw] h-[86vh] sm:h-[93vh] flex items-center justify-center shadow-2xl border border-gold/30 rounded-xl overflow-hidden bg-[#0A0103] p-0 shadow-gold/10">
 
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentPageIndex}
-                    initial={{ opacity: 0.2, rotateY: flipDirection === 'next' ? 45 : -45, scale: 0.96 }}
+                    initial={{ opacity: 0.2, rotateY: flipDirection === 'next' ? 45 : -45, scale: 0.97 }}
                     animate={{ opacity: 1, rotateY: 0, scale: 1 }}
-                    exit={{ opacity: 0.2, rotateY: flipDirection === 'next' ? -45 : 45, scale: 0.96 }}
+                    exit={{ opacity: 0.2, rotateY: flipDirection === 'next' ? -45 : 45, scale: 0.97 }}
                     transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
                     className="w-full h-full relative flex items-center justify-center overflow-hidden"
                     style={{ perspective: 1400 }}
@@ -422,11 +422,12 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
                     {pages[currentPageIndex] ? (
                       <div className="w-full h-full flex items-center justify-center relative overflow-hidden">
 
-                        {/* 100% UNCROPPED FULL PHOTO DISPLAY (Zero Cropping on any device) */}
+                        {/* 100% CRISP HIGH-RESOLUTION FULL SCREEN PHOTO DISPLAY */}
                         <img
                           src={getAssetPath(pages[currentPageIndex])}
                           alt={`Page ${currentPageIndex + 1}`}
-                          className="w-full h-full object-contain shadow-2xl rounded-lg pointer-events-auto select-none"
+                          style={{ imageRendering: '-webkit-optimize-contrast' as any, WebkitBackfaceVisibility: 'hidden' }}
+                          className="w-full h-full object-contain pointer-events-auto select-none rounded-sm filter drop-shadow-2xl"
                         />
 
                         {/* Interactive Click/Tap Zones: Left 40% = Prev Page, Right 40% = Next Page */}
