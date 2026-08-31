@@ -103,9 +103,13 @@ input::placeholder, textarea::placeholder {
   color: rgba(245, 242, 235, 0.45) !important;
 }
 
-/* Standard Clean Native OS Cursor Everywhere */
-a, button, [role="button"] {
-  cursor: pointer;
+/* Luxury Royal Golden Gradient System Cursor (Zero-Lag 120Hz Hardware Accelerated) */
+html, body, div, span, p, h1, h2, h3, h4, section, header, footer {
+  cursor: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%23F3E5AB'/><stop offset='50%' stop-color='%23D4AF37'/><stop offset='100%' stop-color='%2394742B'/></linearGradient></defs><path d='M3 3L10.07 19.97L13.58 12.58L20.97 9.07L3 3Z' fill='url(%23g)' stroke='%23240409' stroke-width='1.5'/></svg>") 0 0, auto;
+}
+
+a, button, [role="button"], input[type="submit"], label.cursor-pointer, .cursor-pointer {
+  cursor: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><defs><linearGradient id='gp' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%23FFFFFF'/><stop offset='40%' stop-color='%23F3E5AB'/><stop offset='100%' stop-color='%23D4AF37'/></linearGradient></defs><path d='M3 3L10.07 19.97L13.58 12.58L20.97 9.07L3 3Z' fill='url(%23gp)' stroke='%23240409' stroke-width='1.5'/></svg>") 0 0, pointer !important;
 }
 
 /* Custom Scrollbar for Royal Maroon Theme */
