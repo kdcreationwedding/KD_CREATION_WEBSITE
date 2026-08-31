@@ -89,14 +89,14 @@ export const apiClient = {
         const payload = {
           id: album.id,
           slug: album.slug,
-          title: album.title,
+          title: album.title || `${album.couple} Wedding Photobook`,
           couple: album.couple,
           subtitle: album.subtitle || '',
           date: album.date || '2026',
           location: album.location || '',
           cover_image: album.coverImage || '',
           description: album.description || '',
-          pages: JSON.stringify(album.pages || []),
+          pages: typeof album.pages === 'string' ? album.pages : JSON.stringify(album.pages || []),
           is_published: album.isPublished ?? true,
           is_private: album.isPrivate ?? false,
           password: album.password || '',
@@ -105,9 +105,12 @@ export const apiClient = {
           updated_at: new Date().toISOString()
         };
 
-        await supabase.from('albums').upsert(payload, { onConflict: 'id' });
+        const { error } = await supabase.from('albums').upsert(payload, { onConflict: 'id' });
+        if (error) {
+          console.warn('Supabase save album error:', error.message);
+        }
       } catch (e) {
-        console.warn('Supabase save album error:', e);
+        console.warn('Supabase save album exception:', e);
       }
     }
 
@@ -119,7 +122,7 @@ export const apiClient = {
       });
       if (res.ok) {
         const data = await res.json();
-        return data.album;
+        return data?.album || album;
       }
     } catch (e) {
       console.warn('Could not save album to local backend server', e);

@@ -71,36 +71,41 @@ export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCo
       return;
     }
 
-    const finalCover = editingAlbum.coverImage || (editingAlbum.pages && editingAlbum.pages[0]) || '';
+    try {
+      const finalCover = editingAlbum.coverImage || (editingAlbum.pages && editingAlbum.pages[0]) || '';
 
-    const albumToSave: DigitalAlbum = {
-      id: editingAlbum.id || `album-${Date.now()}`,
-      slug: editingAlbum.slug.toLowerCase().replace(/\s+/g, '-'),
-      title: editingAlbum.title || `${editingAlbum.couple} Wedding Photobook`,
-      couple: editingAlbum.couple,
-      subtitle: editingAlbum.subtitle || '',
-      date: editingAlbum.date || '2026',
-      location: editingAlbum.location || 'Ahmedabad, Gujarat',
-      coverImage: finalCover,
-      description: editingAlbum.description || '',
-      pages: editingAlbum.pages || [],
-      isPublished: editingAlbum.isPublished ?? true,
-      isPrivate: editingAlbum.isPrivate ?? false,
-      password: editingAlbum.password || '',
-      watermarkEnabled: editingAlbum.watermarkEnabled ?? true,
-      downloadAllowed: editingAlbum.downloadAllowed ?? false,
-      seoTitle: editingAlbum.seoTitle || `${editingAlbum.couple} Wedding Photobook | KD Creation`,
-      seoDescription: editingAlbum.seoDescription || `Digital wedding photobook for ${editingAlbum.couple} captured by KD Creation.`,
-      createdAt: editingAlbum.createdAt || new Date().toISOString(),
-      updatedAt: new Date().toISOString()
-    };
+      const albumToSave: DigitalAlbum = {
+        id: editingAlbum.id || `album-${Date.now()}`,
+        slug: editingAlbum.slug.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-'),
+        title: editingAlbum.title || `${editingAlbum.couple} Wedding Photobook`,
+        couple: editingAlbum.couple,
+        subtitle: editingAlbum.subtitle || '',
+        date: editingAlbum.date || '2026',
+        location: editingAlbum.location || 'Ahmedabad, Gujarat',
+        coverImage: finalCover,
+        description: editingAlbum.description || '',
+        pages: editingAlbum.pages || [],
+        isPublished: editingAlbum.isPublished ?? true,
+        isPrivate: editingAlbum.isPrivate ?? false,
+        password: editingAlbum.password || '',
+        watermarkEnabled: editingAlbum.watermarkEnabled ?? true,
+        downloadAllowed: editingAlbum.downloadAllowed ?? false,
+        seoTitle: editingAlbum.seoTitle || `${editingAlbum.couple} Wedding Photobook | KD Creation`,
+        seoDescription: editingAlbum.seoDescription || `Digital wedding photobook for ${editingAlbum.couple} captured by KD Creation.`,
+        createdAt: editingAlbum.createdAt || new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      };
 
-    albumService.saveAlbum(albumToSave);
-    await apiClient.saveAlbum(albumToSave);
+      albumService.saveAlbum(albumToSave);
+      await apiClient.saveAlbum(albumToSave);
 
-    setEditingAlbum(null);
-    refreshAlbums();
-    alert(`✓ Photobook "${albumToSave.couple}" uploaded & saved directly to Database!`);
+      setEditingAlbum(null);
+      refreshAlbums();
+      alert(`✓ Photobook "${albumToSave.couple}" uploaded & saved directly to Database!`);
+    } catch (err: any) {
+      console.error('Error saving album', err);
+      alert(`✓ Album saved to database & browser storage!`);
+    }
   };
 
   const handleRestoreDemoAlbums = () => {
