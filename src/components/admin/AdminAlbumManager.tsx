@@ -425,7 +425,7 @@ export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCo
             <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-3 max-h-80 overflow-y-auto p-2 bg-[#1C0307] rounded-xl border border-gold/20">
               {editingAlbum.pages?.map((pageUrl, idx) => (
                 <div key={idx} className="relative group border border-gold/30 rounded-lg overflow-hidden bg-[#3B0811] flex flex-col justify-between">
-                  <img src={getAssetPath(pageUrl)} alt={`Image ${idx + 1}`} className="w-full h-24 object-cover" />
+                  <img src={getAssetPath(pageUrl)} alt={`Image ${idx + 1}`} loading="lazy" decoding="async" className="w-full h-24 object-cover" />
                   <div className="p-1.5 bg-black/90 flex items-center justify-between text-[9px] font-mono text-gold font-bold">
                     <span>Image {idx + 1}</span>
                     <div className="flex items-center gap-1">
@@ -517,7 +517,7 @@ export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCo
                       className="flex items-center gap-3 cursor-pointer group"
                       title="Click to Preview Photobook"
                     >
-                      <img src={getAssetPath(album.coverImage)} alt={album.couple} className="w-10 h-10 object-cover rounded-lg border border-gold/30 group-hover:border-gold group-hover:scale-105 transition-all" />
+                      <img src={getAssetPath(album.coverImage)} alt={album.couple} loading="lazy" decoding="async" className="w-10 h-10 object-cover rounded-lg border border-gold/30 group-hover:border-gold group-hover:scale-105 transition-all" />
                       <div>
                         <span className="font-bold text-white group-hover:text-gold transition-colors block">{album.title}</span>
                         <span className="text-[9px] text-gold/70">/album/{album.slug}</span>

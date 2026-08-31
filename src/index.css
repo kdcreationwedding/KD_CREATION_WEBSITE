@@ -103,11 +103,9 @@ input::placeholder, textarea::placeholder {
   color: rgba(245, 242, 235, 0.45) !important;
 }
 
-/* Enforce Custom Site Cursor EVERYWHERE on Desktop (Hide Browser System Cursor) */
-@media (min-width: 1024px) {
-  html, body, *, a, button, input, textarea, select, [role="button"], [role="dialog"], .fixed, div, span, header, footer, section {
-    cursor: none !important;
-  }
+/* Standard Clean Native OS Cursor Everywhere */
+a, button, [role="button"] {
+  cursor: pointer;
 }
 
 /* Custom Scrollbar for Royal Maroon Theme */
