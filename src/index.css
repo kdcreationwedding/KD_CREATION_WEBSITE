@@ -103,13 +103,13 @@ input::placeholder, textarea::placeholder {
   color: rgba(245, 242, 235, 0.45) !important;
 }
 
-/* Luxury Royal Golden Gradient System Cursor (Zero-Lag 120Hz Hardware Accelerated) */
+/* Unique KD Creation Royal Golden Diamond Star & Camera Lens Aperture Cursor (Zero-Lag 120Hz) */
 html, body, div, span, p, h1, h2, h3, h4, section, header, footer {
-  cursor: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%23F3E5AB'/><stop offset='50%' stop-color='%23D4AF37'/><stop offset='100%' stop-color='%2394742B'/></linearGradient></defs><path d='M3 3L10.07 19.97L13.58 12.58L20.97 9.07L3 3Z' fill='url(%23g)' stroke='%23240409' stroke-width='1.5'/></svg>") 0 0, auto;
+  cursor: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><defs><linearGradient id='goldDia' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%23FFF5D1'/><stop offset='50%' stop-color='%23D4AF37'/><stop offset='100%' stop-color='%238A661C'/></linearGradient></defs><path d='M12 2L15 9L22 12L15 15L12 22L9 15L2 12L9 9L12 2Z' fill='url(%23goldDia)' stroke='%231A0206' stroke-width='1.2'/></svg>") 12 12, auto;
 }
 
 a, button, [role="button"], input[type="submit"], label.cursor-pointer, .cursor-pointer {
-  cursor: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><defs><linearGradient id='gp' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%23FFFFFF'/><stop offset='40%' stop-color='%23F3E5AB'/><stop offset='100%' stop-color='%23D4AF37'/></linearGradient></defs><path d='M3 3L10.07 19.97L13.58 12.58L20.97 9.07L3 3Z' fill='url(%23gp)' stroke='%23240409' stroke-width='1.5'/></svg>") 0 0, pointer !important;
+  cursor: url("data:image/svg+xml;utf8,<svg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'><defs><linearGradient id='goldLens' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%23FFF5D1'/><stop offset='40%' stop-color='%23D4AF37'/><stop offset='100%' stop-color='%2394742B'/></linearGradient></defs><circle cx='16' cy='16' r='13' stroke='url(%23goldLens)' stroke-width='2' fill='rgba(59,8,17,0.45)'/><circle cx='16' cy='16' r='3' fill='url(%23goldLens)'/><path d='M16 4V8M16 24V28M4 16H8M24 16H28' stroke='url(%23goldLens)' stroke-width='1.5' stroke-linecap='round'/></svg>") 16 16, pointer !important;
 }
 
 /* Custom Scrollbar for Royal Maroon Theme */
