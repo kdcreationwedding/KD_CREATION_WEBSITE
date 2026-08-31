@@ -176,12 +176,24 @@ export const SplineHero3D: React.FC = () => {
     };
     window.addEventListener('resize', handleResize);
 
+    // IntersectionObserver to pause WebGL rendering when scrolled off-screen
+    let isVisible = true;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+      },
+      { threshold: 0.05 }
+    );
+    if (canvas) observer.observe(canvas);
+
     // Animation Loop
     let animationFrameId: number;
     const clock = new THREE.Clock();
 
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
+      if (!isVisible) return; // Skip rendering when off-screen to save 100% GPU resources!
+
       const elapsedTime = clock.getElapsedTime();
 
       // Smooth mouse lerp
@@ -213,6 +225,7 @@ export const SplineHero3D: React.FC = () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleResize);
+      observer.disconnect();
       cancelAnimationFrame(animationFrameId);
       if (renderer) renderer.dispose();
     };
