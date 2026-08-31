@@ -413,32 +413,25 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
                   <motion.div
                     key={currentPageIndex}
                     initial={{
-                      opacity: 0.7,
-                      rotateY: flipDirection === 'next' ? 80 : -80,
-                      x: flipDirection === 'next' ? '20%' : '-20%',
-                      scale: 0.96,
-                      transformOrigin: flipDirection === 'next' ? 'left center' : 'right center'
+                      opacity: 0,
+                      x: flipDirection === 'next' ? 80 : -80,
+                      scale: 0.98
                     }}
                     animate={{
                       opacity: 1,
-                      rotateY: 0,
-                      x: '0%',
-                      scale: 1,
-                      transformOrigin: flipDirection === 'next' ? 'left center' : 'right center'
+                      x: 0,
+                      scale: 1
                     }}
                     exit={{
-                      opacity: 0.7,
-                      rotateY: flipDirection === 'next' ? -80 : 80,
-                      x: flipDirection === 'next' ? '-20%' : '20%',
-                      scale: 0.96,
-                      transformOrigin: flipDirection === 'next' ? 'right center' : 'left center'
+                      opacity: 0,
+                      x: flipDirection === 'next' ? -80 : 80,
+                      scale: 0.98
                     }}
                     transition={{
-                      duration: 0.45,
-                      ease: [0.22, 1, 0.36, 1]
+                      duration: 0.35,
+                      ease: [0.25, 1, 0.5, 1]
                     }}
                     className="w-full h-full relative flex items-center justify-center overflow-hidden"
-                    style={{ perspective: 1800 }}
                   >
                     {pages[currentPageIndex] ? (
                       <div className="w-full h-full flex items-center justify-center relative overflow-hidden">
