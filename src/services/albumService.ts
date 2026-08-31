@@ -266,24 +266,14 @@ export const albumService = {
     return album.isPublished;
   },
 
-  // Generate full shareable URL with portable ?d= data encoding for 100% mobile scanner compatibility
+  // Generate 100% PERMANENT, IMMUTABLE shareable URL & QR code per album slug
+  // QR code NEVER changes even when photos are added, edited, or updated inside the album!
   getShareableUrl: (album: DigitalAlbum | string): string => {
     const origin = typeof window !== 'undefined' ? window.location.origin : 'https://www.kdcreations.in';
     
-    if (typeof album === 'string') {
-      const cleanSlug = album.toLowerCase().trim().replace(/^#?album-/, '');
-      const found = albumService.getAlbumBySlug(cleanSlug);
-      if (found) {
-        return albumService.getShareableUrl(found);
-      }
-      return `${origin}/?album=${cleanSlug}#album-${cleanSlug}`;
-    }
-
-    const cleanSlug = album.slug.toLowerCase().trim().replace(/^#?album-/, '');
-    const encoded = encodeAlbumToUrl(album);
-    if (encoded && encoded.length < 1500) {
-      return `${origin}/?album=${cleanSlug}&d=${encoded}#album-${cleanSlug}`;
-    }
+    const cleanSlug = typeof album === 'string'
+      ? album.toLowerCase().trim().replace(/^#?album-/, '')
+      : (album.slug || album.id).toLowerCase().trim().replace(/^#?album-/, '');
 
     return `${origin}/?album=${cleanSlug}#album-${cleanSlug}`;
   }
