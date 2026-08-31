@@ -399,59 +399,55 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
           </div>
         )}
 
-        {/* 3. 3D REALISTIC PHOTOBOOK SPREAD STAGE (100% HIGH-RESOLUTION FULL SCREEN DISPLAY) */}
+        {/* 3. 100% DIRECT FULL SCREEN PHOTO SPREAD DISPLAY (Zero Quality Loss & Zero Box Borders) */}
         {viewMode === 'book' && (
-          <div className="relative w-full h-full flex flex-col items-center justify-center p-1 sm:p-2">
+          <div className="relative w-full h-full flex items-center justify-center p-0 overflow-hidden">
 
             {/* Stage Container with Zoom */}
             <div
               className="relative transition-transform duration-300 w-full h-full flex items-center justify-center"
               style={{ transform: `scale(${zoomLevel})` }}
             >
-              <div className="relative w-full max-w-[99vw] h-[86vh] sm:h-[93vh] flex items-center justify-center shadow-2xl border border-gold/30 rounded-xl overflow-hidden bg-[#0A0103] p-0 shadow-gold/10">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentPageIndex}
+                  initial={{
+                    opacity: 0,
+                    x: flipDirection === 'next' ? 60 : -60,
+                    scale: 0.98
+                  }}
+                  animate={{
+                    opacity: 1,
+                    x: 0,
+                    scale: 1
+                  }}
+                  exit={{
+                    opacity: 0,
+                    x: flipDirection === 'next' ? -60 : 60,
+                    scale: 0.98
+                  }}
+                  transition={{
+                    duration: 0.3,
+                    ease: [0.25, 1, 0.5, 1]
+                  }}
+                  className="w-full h-full relative flex items-center justify-center overflow-hidden"
+                >
+                  {pages[currentPageIndex] ? (
+                    <div className="w-full h-full flex items-center justify-center relative overflow-hidden">
 
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={currentPageIndex}
-                    initial={{
-                      opacity: 0,
-                      x: flipDirection === 'next' ? 80 : -80,
-                      scale: 0.98
-                    }}
-                    animate={{
-                      opacity: 1,
-                      x: 0,
-                      scale: 1
-                    }}
-                    exit={{
-                      opacity: 0,
-                      x: flipDirection === 'next' ? -80 : 80,
-                      scale: 0.98
-                    }}
-                    transition={{
-                      duration: 0.35,
-                      ease: [0.25, 1, 0.5, 1]
-                    }}
-                    className="w-full h-full relative flex items-center justify-center overflow-hidden"
-                  >
-                    {pages[currentPageIndex] ? (
-                      <div className="w-full h-full flex items-center justify-center relative overflow-hidden">
-
-                        {/* 100% RAW UNCOMPRESSED NATIVE 4K ULTRA-HD PHOTO DISPLAY */}
-                        <img
-                          src={getAssetPath(pages[currentPageIndex])}
-                          alt={`Page ${currentPageIndex + 1}`}
-                          decoding="sync"
-                          loading="eager"
-                          className="max-w-full max-h-full w-auto h-auto object-contain pointer-events-auto select-none rounded-sm shadow-2xl transition-all duration-300 cursor-zoom-in"
-                          style={{
-                            maxHeight: '94vh',
-                            maxWidth: '99vw',
-                            objectFit: 'contain'
-                          }}
-                          onClick={() => setIsUltraHdModalOpen(true)}
-                          title="Click for 100% Ultra-HD 4K Full-Resolution View"
-                        />
+                      {/* 100% UNTOUCHED NATIVE RAW 4K FULL SCREEN PHOTO */}
+                      <img
+                        src={getAssetPath(pages[currentPageIndex])}
+                        alt={`Page ${currentPageIndex + 1}`}
+                        decoding="sync"
+                        loading="eager"
+                        className="w-full h-full object-contain pointer-events-auto select-none"
+                        style={{
+                          width: '100vw',
+                          height: '92vh',
+                          objectFit: 'contain'
+                        }}
+                      />
 
                         {/* Interactive Click/Tap Zones: Left 40% = Prev Page, Right 40% = Next Page */}
                         <div
@@ -496,7 +492,6 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
                   </motion.div>
                 </AnimatePresence>
 
-              </div>
             </div>
 
             {/* Desktop Navigation Side Controls */}
