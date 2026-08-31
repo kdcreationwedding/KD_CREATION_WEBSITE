@@ -426,8 +426,29 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
                         <img
                           src={getAssetPath(pages[currentPageIndex])}
                           alt={`Page ${currentPageIndex + 1}`}
-                          className="w-full h-full object-contain shadow-2xl rounded-lg pointer-events-auto"
+                          className="w-full h-full object-contain shadow-2xl rounded-lg pointer-events-auto select-none"
                         />
+
+                        {/* Interactive Click/Tap Zones: Left 40% = Prev Page, Right 40% = Next Page */}
+                        <div
+                          onClick={handlePrevPage}
+                          className="absolute inset-y-0 left-0 w-2/5 cursor-pointer z-15 hover:bg-gradient-to-r hover:from-gold/5 hover:to-transparent transition-all group/left"
+                          title="Click to Flip to Previous Page"
+                        >
+                          <div className="absolute left-4 top-1/2 -translate-y-1/2 opacity-0 group-hover/left:opacity-100 transition-opacity p-2 rounded-full bg-black/60 text-gold border border-gold/40">
+                            <ChevronLeft className="w-6 h-6" />
+                          </div>
+                        </div>
+
+                        <div
+                          onClick={handleNextPage}
+                          className="absolute inset-y-0 right-0 w-2/5 cursor-pointer z-15 hover:bg-gradient-to-l hover:from-gold/5 hover:to-transparent transition-all group/right"
+                          title="Click to Flip to Next Page"
+                        >
+                          <div className="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover/right:opacity-100 transition-opacity p-2 rounded-full bg-black/60 text-gold border border-gold/40">
+                            <ChevronRight className="w-6 h-6" />
+                          </div>
+                        </div>
 
                         {/* CENTER PHOTOBOOK SPINE CREASE SHADOW (Adds realistic 2-page photobook fold depth without cropping) */}
                         <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-16 bg-gradient-to-r from-transparent via-black/45 to-transparent pointer-events-none z-10" />
