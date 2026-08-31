@@ -413,29 +413,32 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
                   <motion.div
                     key={currentPageIndex}
                     initial={{
-                      opacity: 0.1,
-                      rotateY: flipDirection === 'next' ? 70 : -70,
-                      scale: 0.94,
+                      opacity: 0.7,
+                      rotateY: flipDirection === 'next' ? 80 : -80,
+                      x: flipDirection === 'next' ? '20%' : '-20%',
+                      scale: 0.96,
                       transformOrigin: flipDirection === 'next' ? 'left center' : 'right center'
                     }}
                     animate={{
                       opacity: 1,
                       rotateY: 0,
+                      x: '0%',
                       scale: 1,
                       transformOrigin: flipDirection === 'next' ? 'left center' : 'right center'
                     }}
                     exit={{
-                      opacity: 0.1,
-                      rotateY: flipDirection === 'next' ? -70 : 70,
-                      scale: 0.94,
+                      opacity: 0.7,
+                      rotateY: flipDirection === 'next' ? -80 : 80,
+                      x: flipDirection === 'next' ? '-20%' : '20%',
+                      scale: 0.96,
                       transformOrigin: flipDirection === 'next' ? 'right center' : 'left center'
                     }}
                     transition={{
-                      duration: 0.5,
+                      duration: 0.45,
                       ease: [0.22, 1, 0.36, 1]
                     }}
                     className="w-full h-full relative flex items-center justify-center overflow-hidden"
-                    style={{ perspective: 2200, transformStyle: 'preserve-3d' }}
+                    style={{ perspective: 1800 }}
                   >
                     {pages[currentPageIndex] ? (
                       <div className="w-full h-full flex items-center justify-center relative overflow-hidden">
