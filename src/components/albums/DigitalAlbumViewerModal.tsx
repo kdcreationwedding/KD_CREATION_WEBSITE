@@ -412,12 +412,30 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentPageIndex}
-                    initial={{ opacity: 0.2, rotateY: flipDirection === 'next' ? 45 : -45, scale: 0.97 }}
-                    animate={{ opacity: 1, rotateY: 0, scale: 1 }}
-                    exit={{ opacity: 0.2, rotateY: flipDirection === 'next' ? -45 : 45, scale: 0.97 }}
-                    transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
+                    initial={{
+                      opacity: 0.1,
+                      rotateY: flipDirection === 'next' ? 70 : -70,
+                      scale: 0.94,
+                      transformOrigin: flipDirection === 'next' ? 'left center' : 'right center'
+                    }}
+                    animate={{
+                      opacity: 1,
+                      rotateY: 0,
+                      scale: 1,
+                      transformOrigin: flipDirection === 'next' ? 'left center' : 'right center'
+                    }}
+                    exit={{
+                      opacity: 0.1,
+                      rotateY: flipDirection === 'next' ? -70 : 70,
+                      scale: 0.94,
+                      transformOrigin: flipDirection === 'next' ? 'right center' : 'left center'
+                    }}
+                    transition={{
+                      duration: 0.5,
+                      ease: [0.22, 1, 0.36, 1]
+                    }}
                     className="w-full h-full relative flex items-center justify-center overflow-hidden"
-                    style={{ perspective: 1400 }}
+                    style={{ perspective: 2200, transformStyle: 'preserve-3d' }}
                   >
                     {pages[currentPageIndex] ? (
                       <div className="w-full h-full flex items-center justify-center relative overflow-hidden">
