@@ -422,12 +422,11 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
                     {pages[currentPageIndex] ? (
                       <div className="w-full h-full flex items-center justify-center relative overflow-hidden">
 
-                        {/* 100% CRISP HIGH-RESOLUTION FULL SCREEN PHOTO DISPLAY */}
+                        {/* 100% RAW FULL RESOLUTION HIGH-DEFINING PHOTO DISPLAY */}
                         <img
                           src={getAssetPath(pages[currentPageIndex])}
                           alt={`Page ${currentPageIndex + 1}`}
-                          style={{ imageRendering: '-webkit-optimize-contrast' as any, WebkitBackfaceVisibility: 'hidden' }}
-                          className="w-full h-full object-contain pointer-events-auto select-none rounded-sm filter drop-shadow-2xl"
+                          className="w-full h-full object-contain pointer-events-auto select-none rounded-sm shadow-2xl transition-all duration-300"
                         />
 
                         {/* Interactive Click/Tap Zones: Left 40% = Prev Page, Right 40% = Next Page */}
