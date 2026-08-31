@@ -108,86 +108,24 @@ export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCo
     refreshAlbums();
   };
 
-  // Helper to compress high-res photo files into crisp HD preview data URLs or upload to Supabase Storage Bucket
+  // Helper to preserve 100% original raw photo file quality with zero quality reduction
   const compressImageFile = async (file: File): Promise<string> => {
+    // 1. Upload 100% ORIGINAL RAW FILE directly to Supabase Storage Bucket ('album-photos') for 0% Quality Loss!
     if (isSupabaseConfigured()) {
       try {
         const publicUrl = await uploadPhotoToSupabase(file);
         if (publicUrl) return publicUrl;
       } catch (e) {
-        console.warn('Supabase storage upload fallback to canvas compression:', e);
+        console.warn('Supabase storage upload error, fallback to direct raw data URL:', e);
       }
     }
 
+    // 2. Direct FileReader fallback preserving 100% original binary data without canvas downscaling
     return new Promise((resolve) => {
-      let isDone = false;
-
-      // 3-second Fail-Safe Safety Timeout
-      const timer = setTimeout(() => {
-        if (!isDone) {
-          isDone = true;
-          // Fallback to direct FileReader if image compression times out
-          const fallbackReader = new FileReader();
-          fallbackReader.onload = (e) => resolve((e.target?.result as string) || '');
-          fallbackReader.onerror = () => resolve('');
-          fallbackReader.readAsDataURL(file);
-        }
-      }, 3000);
-
-      const finish = (result: string) => {
-        if (!isDone) {
-          isDone = true;
-          clearTimeout(timer);
-          resolve(result);
-        }
-      };
-
       const reader = new FileReader();
-      reader.onerror = () => finish('');
-      reader.onload = (e) => {
-        const rawResult = (e.target?.result as string) || '';
-        if (!rawResult) return finish('');
-
-        const img = new Image();
-        img.onerror = () => finish(rawResult);
-        img.onload = () => {
-          try {
-            const canvas = document.createElement('canvas');
-            let width = img.width;
-            let height = img.height;
-            const maxDim = 2400; // 2400px max dimension for ultra-crisp high-resolution 4K photobook spreads
-
-            if (width > height && width > maxDim) {
-              height = Math.round((height * maxDim) / width);
-              width = maxDim;
-            } else if (height > maxDim) {
-              width = Math.round((width * maxDim) / height);
-              height = maxDim;
-            }
-
-            canvas.width = width;
-            canvas.height = height;
-            const ctx = canvas.getContext('2d');
-            if (ctx) {
-              ctx.imageSmoothingEnabled = true;
-              ctx.imageSmoothingQuality = 'high';
-              ctx.drawImage(img, 0, 0, width, height);
-              finish(canvas.toDataURL('image/jpeg', 0.90));
-            } else {
-              finish(rawResult);
-            }
-          } catch {
-            finish(rawResult);
-          }
-        };
-        img.src = rawResult;
-      };
-
-      try {
-        reader.readAsDataURL(file);
-      } catch {
-        finish('');
-      }
+      reader.onload = (e) => resolve((e.target?.result as string) || '');
+      reader.onerror = () => resolve('');
+      reader.readAsDataURL(file);
     });
   };
 

@@ -451,10 +451,6 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
                           </div>
                         </div>
 
-                        {/* CENTER PHOTOBOOK SPINE CREASE SHADOW (Adds realistic 2-page photobook fold depth without cropping) */}
-                        <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-16 bg-gradient-to-r from-transparent via-black/45 to-transparent pointer-events-none z-10" />
-                        <div className="absolute inset-y-0 left-1/2 w-[1px] bg-gold/30 pointer-events-none z-10" />
-
                         {/* Watermark Overlay */}
                         {watermarkOn && (
                           <div className="absolute bottom-3 right-4 pointer-events-none opacity-50 text-right z-20">
