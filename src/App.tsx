@@ -31,6 +31,8 @@ import { WeddingPhotographerAhmedabad } from './pages/WeddingPhotographerAhmedab
 import { PreWeddingPhotographerAhmedabad } from './pages/PreWeddingPhotographerAhmedabad';
 import { WeddingVideographerAhmedabad } from './pages/WeddingVideographerAhmedabad';
 import { DestinationWeddingGujarat } from './pages/DestinationWeddingGujarat';
+import { CandidWeddingPhotographerAhmedabad } from './pages/CandidWeddingPhotographerAhmedabad';
+import { WeddingPhotographyCostAhmedabad } from './pages/WeddingPhotographyCostAhmedabad';
 
 // Lazy-loaded Modal and Overlay Components for Performance Optimization
 const VideoModal = lazy(() => import('./components/video/VideoModal').then(m => ({ default: m.VideoModal })));
@@ -291,10 +293,12 @@ export const App: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const isWeddingPhotographerPage = currentPath.includes('wedding-photographer-ahmedabad') || currentPath.includes('candid-wedding-photographer');
+  const isWeddingPhotographerPage = currentPath.includes('wedding-photographer-ahmedabad');
+  const isCandidPage = currentPath.includes('candid-wedding-photographer');
   const isPreWeddingPage = currentPath.includes('pre-wedding-photographer-ahmedabad');
   const isVideographerPage = currentPath.includes('wedding-videographer-ahmedabad') || currentPath.includes('cinematic-wedding-photography');
   const isDestinationPage = currentPath.includes('destination-wedding-photographer-gujarat');
+  const isCostPage = currentPath.includes('wedding-photography-cost-ahmedabad') || currentPath.includes('packages');
 
   return (
     <div className="relative min-h-screen bg-obsidian text-champagne font-sans overflow-x-hidden">
@@ -324,6 +328,11 @@ export const App: React.FC = () => {
           onBackToHome={navigateHome}
           onOpenBooking={() => handleOpenLeadForm('Wedding Photography')}
         />
+      ) : isCandidPage ? (
+        <CandidWeddingPhotographerAhmedabad
+          onBackToHome={navigateHome}
+          onOpenBooking={() => handleOpenLeadForm('Candid Photography')}
+        />
       ) : isPreWeddingPage ? (
         <PreWeddingPhotographerAhmedabad
           onBackToHome={navigateHome}
@@ -338,6 +347,11 @@ export const App: React.FC = () => {
         <DestinationWeddingGujarat
           onBackToHome={navigateHome}
           onOpenBooking={() => handleOpenLeadForm('Destination Wedding')}
+        />
+      ) : isCostPage ? (
+        <WeddingPhotographyCostAhmedabad
+          onBackToHome={navigateHome}
+          onOpenBooking={() => handleOpenLeadForm('Packages & Price Guide')}
         />
       ) : (
         <>

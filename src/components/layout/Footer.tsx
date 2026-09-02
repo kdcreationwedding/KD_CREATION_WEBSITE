@@ -59,11 +59,11 @@ export const Footer: React.FC<FooterProps> = ({ onOpenAdminPortal }) => {
             </h4>
             <ul className="space-y-2 text-xs font-bold text-[#F5F2EB]/90">
               <li><a href="/wedding-photographer-ahmedabad" className="hover:text-gold transition-colors">Wedding Photographer Ahmedabad</a></li>
+              <li><a href="/candid-wedding-photographer-ahmedabad" className="hover:text-gold transition-colors">Candid Photographer Ahmedabad</a></li>
               <li><a href="/wedding-videographer-ahmedabad" className="hover:text-gold transition-colors">Wedding Videographer Ahmedabad</a></li>
               <li><a href="/pre-wedding-photographer-ahmedabad" className="hover:text-gold transition-colors">Pre Wedding Shoot Ahmedabad</a></li>
               <li><a href="/destination-wedding-photographer-gujarat" className="hover:text-gold transition-colors">Destination Wedding Gujarat</a></li>
-              <li><a href="#services" className="hover:text-gold transition-colors">All Visual Services</a></li>
-              <li><a href="#contact" className="hover:text-gold transition-colors">Check Availability</a></li>
+              <li><a href="/wedding-photography-cost-ahmedabad" className="hover:text-gold transition-colors">Packages & Price Guide</a></li>
             </ul>
           </div>
 
