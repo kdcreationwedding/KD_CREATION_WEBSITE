@@ -2,36 +2,93 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
         xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+  <!-- Homepage -->
   <url>
-    <loc>https://kdcreations.in/</loc>
-    <lastmod>2026-08-19</lastmod>
-    <changefreq>weekly</changefreq>
+    <loc>https://www.kdcreations.in/</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://kdcreations.in/assets/kd-logo.jpg</image:loc>
-      <image:title>KD CREATION Official Logo</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://kdcreations.in/assets/service-wedding-photography.jpg</image:loc>
-      <image:title>KD CREATION Luxury Wedding Photography</image:title>
+      <image:loc>https://www.kdcreations.in/assets/kd-logo.jpg</image:loc>
+      <image:title>KD CREATION Luxury Wedding Photography Ahmedabad</image:title>
     </image:image>
     <video:video>
-      <video:thumbnail_loc>https://kdcreations.in/assets/dhaval-sangeeta-outer-cover.jpg</video:thumbnail_loc>
+      <video:thumbnail_loc>https://www.kdcreations.in/assets/dhaval-sangeeta-outer-cover.jpg</video:thumbnail_loc>
       <video:title>KD CREATION 4K Luxury Wedding Cinema Showreel</video:title>
       <video:description>Royal destination wedding films and pre-wedding teasers by KD CREATION</video:description>
       <video:player_loc>https://www.youtube.com/embed/3i1-aJcasSg</video:player_loc>
     </video:video>
   </url>
+
+  <!-- Service Landing Pages -->
   <url>
-    <loc>https://kdcreations.in/llms.txt</loc>
-    <lastmod>2026-08-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://www.kdcreations.in/wedding-photographer-ahmedabad/</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://kdcreations.in/llms-full.txt</loc>
-    <lastmod>2026-08-22</lastmod>
+    <loc>https://www.kdcreations.in/wedding-videographer-ahmedabad/</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://www.kdcreations.in/pre-wedding-photographer-ahmedabad/</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://www.kdcreations.in/candid-wedding-photographer-ahmedabad/</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://www.kdcreations.in/destination-wedding-photographer-gujarat/</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://www.kdcreations.in/wedding-photography-cost-ahmedabad/</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Venue Hub Pages -->
+  <url>
+    <loc>https://www.kdcreations.in/venues/belvedere-golf-country-club-wedding/</loc>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.kdcreations.in/venues/taj-skyline-ahmedabad-wedding/</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Content & Blog Guides -->
+  <url>
+    <loc>https://www.kdcreations.in/blog/pre-wedding-shoot-locations-gujarat/</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.kdcreations.in/llms.txt</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://www.kdcreations.in/llms-full.txt</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
   </url>
 </urlset>

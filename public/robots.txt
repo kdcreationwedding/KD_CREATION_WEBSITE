@@ -4,5 +4,9 @@ Allow: /
 Disallow: /admin
 Disallow: /?admin=true
 
+User-agent: Googlebot-Image
+Allow: /assets/
+Allow: /public/
+
 # Sitemap Location for Googlebot and Bingbot
-Sitemap: https://kdcreations.in/sitemap.xml
+Sitemap: https://www.kdcreations.in/sitemap.xml

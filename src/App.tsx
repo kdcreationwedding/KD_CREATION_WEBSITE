@@ -26,6 +26,10 @@ import { DigitalAlbum } from './types/album';
 import { albumService, decodeAlbumFromUrl } from './services/albumService';
 import { SITE_CONFIG } from './config/siteConfig';
 
+// Dedicated SEO Landing Pages
+import { WeddingPhotographerAhmedabad } from './pages/WeddingPhotographerAhmedabad';
+import { PreWeddingPhotographerAhmedabad } from './pages/PreWeddingPhotographerAhmedabad';
+
 // Lazy-loaded Modal and Overlay Components for Performance Optimization
 const VideoModal = lazy(() => import('./components/video/VideoModal').then(m => ({ default: m.VideoModal })));
 const KdAiChatbot = lazy(() => import('./components/chatbot/KdAiChatbot').then(m => ({ default: m.KdAiChatbot })));
@@ -41,6 +45,17 @@ export const App: React.FC = () => {
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(() => {
     return sessionStorage.getItem('kd_admin_auth') === 'true';
   });
+
+  // Client-Side Router State for SEO Landing Pages
+  const [currentPath, setCurrentPath] = useState(() => window.location.pathname);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      setCurrentPath(window.location.pathname);
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
   // Digital Album Platform State
   const [activeAlbum, setActiveAlbum] = useState<DigitalAlbum | null>(null);
@@ -267,6 +282,16 @@ export const App: React.FC = () => {
     );
   }
 
+  // Render Dedicated SEO Landing Pages if URL matches
+  const navigateHome = () => {
+    window.history.pushState({}, '', '/');
+    setCurrentPath('/');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const isWeddingPhotographerPage = currentPath.includes('wedding-photographer-ahmedabad') || currentPath.includes('candid-wedding-photographer');
+  const isPreWeddingPage = currentPath.includes('pre-wedding-photographer-ahmedabad');
+
   return (
     <div className="relative min-h-screen bg-obsidian text-champagne font-sans overflow-x-hidden">
       {/* Real-Time Luxury Scroll Progress Indicator */}
@@ -289,51 +314,65 @@ export const App: React.FC = () => {
         loggedInClient={loggedInClient}
       />
 
-      {/* 4. Fullscreen 3D Hero Section */}
-      <HeroSection
-        onExploreStories={() => scrollToSection('stories')}
-        onStartStory={() => handleOpenLeadForm()}
-        onOpenVideoModal={handleOpenVideoModal}
-      />
+      {/* Render Dedicated Sub-Page or Main SPA Flow */}
+      {isWeddingPhotographerPage ? (
+        <WeddingPhotographerAhmedabad
+          onBackToHome={navigateHome}
+          onOpenBooking={() => handleOpenLeadForm('Wedding Photography')}
+        />
+      ) : isPreWeddingPage ? (
+        <PreWeddingPhotographerAhmedabad
+          onBackToHome={navigateHome}
+          onOpenBooking={() => handleOpenLeadForm('Pre-Wedding Shoot')}
+        />
+      ) : (
+        <>
+          {/* 4. Fullscreen 3D Hero Section */}
+          <HeroSection
+            onExploreStories={() => scrollToSection('stories')}
+            onStartStory={() => handleOpenLeadForm()}
+            onOpenVideoModal={handleOpenVideoModal}
+          />
 
+          {/* 5. Portfolio Stories Section */}
+          <SelectedStories
+            onStartStory={() => handleOpenLeadForm()}
+            onPlayVideo={handleOpenVideoModal}
+          />
 
-      {/* 5. Portfolio Stories Section */}
-      <SelectedStories
-        onStartStory={() => handleOpenLeadForm()}
-        onPlayVideo={handleOpenVideoModal}
-      />
+          {/* 6. Signature Services Section */}
+          <ServicesSection onSelectService={handleOpenLeadForm} />
 
-      {/* 6. Signature Services Section */}
-      <ServicesSection onSelectService={handleOpenLeadForm} />
+          {/* 7. Cinema Showreel Showcase */}
+          <CinemaSection
+            onOpenVideoModal={handleOpenVideoModal}
+            onStartStory={() => handleOpenLeadForm()}
+          />
 
-      {/* 7. Cinema Showreel Showcase */}
-      <CinemaSection
-        onOpenVideoModal={handleOpenVideoModal}
-        onStartStory={() => handleOpenLeadForm()}
-      />
+          {/* 8. Studio Philosophy & About Section */}
+          <AboutSection />
 
-      {/* 8. Studio Philosophy & About Section */}
-      <AboutSection />
+          {/* 9. Founders & Executive Leadership Section */}
+          <FoundersSection />
 
-      {/* 9. Founders & Executive Leadership Section */}
-      <FoundersSection />
+          {/* 10. Why KD Creation Showcase */}
+          <WhyKdCreation />
 
-      {/* 10. Why KD Creation Showcase */}
-      <WhyKdCreation />
+          {/* 11. Process & Timeline Section */}
+          <ProcessTimeline />
 
-      {/* 11. Process & Timeline Section */}
-      <ProcessTimeline />
+          {/* 12. Testimonials Showcase */}
+          <Testimonials />
 
-      {/* 12. Testimonials Showcase */}
-      <Testimonials />
+          <FaqSection />
 
-      <FaqSection />
+          {/* 13. Instagram Live Feed */}
+          <InstagramFeed />
 
-      {/* 13. Instagram Live Feed */}
-      <InstagramFeed />
-
-      {/* 14. Lead Inquiry Form Section */}
-      <LeadFormSection preselectedService={selectedService} />
+          {/* 14. Lead Inquiry Form Section */}
+          <LeadFormSection preselectedService={selectedService} />
+        </>
+      )}
 
       {/* 15. Footer with Brand Credits & Admin Lead Access */}
       <Footer onOpenAdminPortal={handleOpenAdminAccess} />
