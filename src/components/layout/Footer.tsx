@@ -33,7 +33,15 @@ export const Footer: React.FC<FooterProps> = ({ onOpenAdminPortal }) => {
           
           {/* Brand Info & Official Logo */}
           <div className="md:col-span-5 space-y-6">
-            <a href="#hero" className="inline-block">
+            <a
+              href="/"
+              onClick={(e) => {
+                e.preventDefault();
+                window.history.pushState({}, '', '/');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="inline-block cursor-pointer"
+            >
               <div className="border border-gold/40 p-2 rounded-xl bg-[#3B0811] shadow-md inline-block max-w-[240px]">
                 <img
                   src={SITE_CONFIG.brand.officialLogo}

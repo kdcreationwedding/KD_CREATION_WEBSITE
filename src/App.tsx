@@ -320,6 +320,7 @@ export const App: React.FC = () => {
         onOpenLeadForm={() => handleOpenLeadForm()}
         onOpenClientAuth={handleOpenClientAuth}
         loggedInClient={loggedInClient}
+        onNavigateHome={navigateHome}
       />
 
       {/* Render Dedicated Sub-Page or Main SPA Flow */}

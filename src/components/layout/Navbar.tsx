@@ -8,6 +8,7 @@ interface NavbarProps {
   onOpenLeadForm: () => void;
   onOpenClientAuth: () => void;
   loggedInClient: { name: string; email: string } | null;
+  onNavigateHome?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -15,6 +16,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenLeadForm,
   onOpenClientAuth,
   loggedInClient,
+  onNavigateHome,
 }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -27,8 +29,18 @@ export const Navbar: React.FC<NavbarProps> = ({
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleLogoClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (onNavigateHome) {
+      onNavigateHome();
+    } else {
+      window.history.pushState({}, '', '/');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   const navLinks = [
-    { name: 'HOME', href: '#hero' },
+    { name: 'HOME', href: '/' },
     { name: 'STORIES', href: '#stories' },
     { name: 'SERVICES', href: '#services' },
     { name: 'LEADERSHIP', href: '#founders' },
@@ -49,8 +61,9 @@ export const Navbar: React.FC<NavbarProps> = ({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3">
           {/* Official Logo Brand Container */}
           <a
-            href="#hero"
-            className="group flex items-center gap-2.5 relative focus:outline-none py-0.5"
+            href="/"
+            onClick={handleLogoClick}
+            className="group flex items-center gap-2.5 relative focus:outline-none py-0.5 cursor-pointer"
             aria-label="KD CREATION Home"
           >
             <div className="relative h-9 sm:h-10 w-auto overflow-hidden rounded-xl border border-gold/40 bg-[#3B0811] p-1 shadow-[0_4px_15px_rgba(212,175,55,0.2)] transition-all duration-300 group-hover:border-gold group-hover:shadow-[0_4px_20px_rgba(212,175,55,0.4)] flex items-center justify-center">
