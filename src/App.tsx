@@ -29,6 +29,8 @@ import { SITE_CONFIG } from './config/siteConfig';
 // Dedicated SEO Landing Pages
 import { WeddingPhotographerAhmedabad } from './pages/WeddingPhotographerAhmedabad';
 import { PreWeddingPhotographerAhmedabad } from './pages/PreWeddingPhotographerAhmedabad';
+import { WeddingVideographerAhmedabad } from './pages/WeddingVideographerAhmedabad';
+import { DestinationWeddingGujarat } from './pages/DestinationWeddingGujarat';
 
 // Lazy-loaded Modal and Overlay Components for Performance Optimization
 const VideoModal = lazy(() => import('./components/video/VideoModal').then(m => ({ default: m.VideoModal })));
@@ -291,6 +293,8 @@ export const App: React.FC = () => {
 
   const isWeddingPhotographerPage = currentPath.includes('wedding-photographer-ahmedabad') || currentPath.includes('candid-wedding-photographer');
   const isPreWeddingPage = currentPath.includes('pre-wedding-photographer-ahmedabad');
+  const isVideographerPage = currentPath.includes('wedding-videographer-ahmedabad') || currentPath.includes('cinematic-wedding-photography');
+  const isDestinationPage = currentPath.includes('destination-wedding-photographer-gujarat');
 
   return (
     <div className="relative min-h-screen bg-obsidian text-champagne font-sans overflow-x-hidden">
@@ -324,6 +328,16 @@ export const App: React.FC = () => {
         <PreWeddingPhotographerAhmedabad
           onBackToHome={navigateHome}
           onOpenBooking={() => handleOpenLeadForm('Pre-Wedding Shoot')}
+        />
+      ) : isVideographerPage ? (
+        <WeddingVideographerAhmedabad
+          onBackToHome={navigateHome}
+          onOpenBooking={() => handleOpenLeadForm('Wedding Videography')}
+        />
+      ) : isDestinationPage ? (
+        <DestinationWeddingGujarat
+          onBackToHome={navigateHome}
+          onOpenBooking={() => handleOpenLeadForm('Destination Wedding')}
         />
       ) : (
         <>

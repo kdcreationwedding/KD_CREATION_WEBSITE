@@ -55,14 +55,15 @@ export const Footer: React.FC<FooterProps> = ({ onOpenAdminPortal }) => {
           {/* Quick Navigation Links */}
           <div className="md:col-span-3 space-y-4">
             <h4 className="text-xs tracking-[0.25em] font-serif-luxury font-extrabold text-gold uppercase">
-              NAVIGATION
+              SERVICES & LOCATIONS
             </h4>
-            <ul className="space-y-2.5 text-xs tracking-widest uppercase font-bold text-[#F5F2EB]">
-              <li><a href="#hero" className="hover:text-gold transition-colors">HOME</a></li>
-              <li><a href="#stories" className="hover:text-gold transition-colors">STORIES</a></li>
-              <li><a href="#services" className="hover:text-gold transition-colors">SERVICES</a></li>
-              <li><a href="#about" className="hover:text-gold transition-colors">ABOUT STUDIO</a></li>
-              <li><a href="#contact" className="hover:text-gold transition-colors">ENQUIRE / BOOK</a></li>
+            <ul className="space-y-2 text-xs font-bold text-[#F5F2EB]/90">
+              <li><a href="/wedding-photographer-ahmedabad" className="hover:text-gold transition-colors">Wedding Photographer Ahmedabad</a></li>
+              <li><a href="/wedding-videographer-ahmedabad" className="hover:text-gold transition-colors">Wedding Videographer Ahmedabad</a></li>
+              <li><a href="/pre-wedding-photographer-ahmedabad" className="hover:text-gold transition-colors">Pre Wedding Shoot Ahmedabad</a></li>
+              <li><a href="/destination-wedding-photographer-gujarat" className="hover:text-gold transition-colors">Destination Wedding Gujarat</a></li>
+              <li><a href="#services" className="hover:text-gold transition-colors">All Visual Services</a></li>
+              <li><a href="#contact" className="hover:text-gold transition-colors">Check Availability</a></li>
             </ul>
           </div>
 
