@@ -46,6 +46,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           WE TURN YOUR <br />
           <span className="text-gold-gradient italic font-normal">WEDDING</span> INTO A <br />
           TIMELESS FILM.
+          <span className="sr-only"> — Luxury Wedding Photography & 4K Cinematography in Ahmedabad</span>
         </motion.h1>
 
         {/* Subheading */}

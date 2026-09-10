@@ -299,15 +299,15 @@ export const App: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const isWeddingPhotographerPage = currentPath.includes('wedding-photographer-ahmedabad');
-  const isCandidPage = currentPath.includes('candid-wedding-photographer');
-  const isPreWeddingPage = currentPath.includes('pre-wedding-photographer-ahmedabad');
-  const isVideographerPage = currentPath.includes('wedding-videographer-ahmedabad') || currentPath.includes('cinematic-wedding-photography');
-  const isDestinationPage = currentPath.includes('destination-wedding-photographer-gujarat');
-  const isCostPage = currentPath.includes('wedding-photography-cost-ahmedabad') || currentPath.includes('packages');
+  const isWeddingPhotographerPage = currentPath.includes('wedding-photographer-ahmedabad') || currentPath.includes('wedding-photography');
+  const isCandidPage = currentPath.includes('candid-wedding-photographer') || currentPath.includes('candid-photography');
+  const isPreWeddingPage = currentPath.includes('pre-wedding-photographer-ahmedabad') || currentPath.includes('pre-wedding-photography');
+  const isVideographerPage = currentPath.includes('wedding-videographer-ahmedabad') || currentPath.includes('cinematic-wedding-photography') || currentPath.includes('cinematic-films') || currentPath.includes('wedding-cinematography');
+  const isDestinationPage = currentPath.includes('destination-wedding-photographer-gujarat') || currentPath.includes('destination-weddings');
+  const isCostPage = currentPath.includes('wedding-photography-cost-ahmedabad') || currentPath.includes('packages') || currentPath.includes('pricing');
   const isBelvedereVenuePage = currentPath.includes('belvedere');
   const isTajSkylineVenuePage = currentPath.includes('taj-skyline');
-  const isAnamorphicPalacePage = currentPath.includes('4k-anamorphic') || currentPath.includes('anamorphic');
+  const isAnamorphicPalacePage = currentPath.includes('4k-anamorphic') || currentPath.includes('anamorphic') || currentPath.includes('palace-cinema');
   const isBridalPage = currentPath.includes('bridal-portraits') || currentPath.includes('bridal');
   const isDronePage = currentPath.includes('drone-wedding-photography') || currentPath.includes('drone');
   const isAlbumPage = currentPath.includes('luxury-wedding-albums') || currentPath.includes('wedding-albums');
