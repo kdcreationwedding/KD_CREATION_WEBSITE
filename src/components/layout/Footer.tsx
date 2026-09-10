@@ -71,11 +71,11 @@ export const Footer: React.FC<FooterProps> = ({ onOpenAdminPortal }) => {
               <li><a href="/wedding-videographer-ahmedabad" className="hover:text-gold transition-colors">Wedding Videographer Ahmedabad</a></li>
               <li><a href="/pre-wedding-photographer-ahmedabad" className="hover:text-gold transition-colors">Pre Wedding Shoot Ahmedabad</a></li>
               <li><a href="/destination-wedding-photographer-gujarat" className="hover:text-gold transition-colors">Destination Wedding Gujarat</a></li>
-              <li><a href="/4k-anamorphic-wedding-cinematography-heritage-palace-rajasthan" className="hover:text-gold transition-colors text-gold">4K Anamorphic Palace Cinema (₹15L+)</a></li>
+              <li><a href="/4k-anamorphic-wedding-cinematography-heritage-palace-rajasthan" className="hover:text-gold transition-colors text-gold">4K Anamorphic Palace Cinema</a></li>
               <li><a href="/bridal-portraits" className="hover:text-gold transition-colors">Bridal Portraits Ahmedabad</a></li>
               <li><a href="/drone-wedding-photography" className="hover:text-gold transition-colors">Drone & Aerial Cinematography</a></li>
               <li><a href="/luxury-wedding-albums" className="hover:text-gold transition-colors">Italian Leather Heirloom Albums</a></li>
-              <li><a href="/anamorphic-4k-wedding-videography-cost-gujarat" className="hover:text-gold transition-colors text-gold">4K Anamorphic Cost Guide (₹15L+)</a></li>
+              <li><a href="/anamorphic-4k-wedding-videography-cost-gujarat" className="hover:text-gold transition-colors text-gold">4K Anamorphic Cinema Guide</a></li>
               <li><a href="/venues/glade-one-ahmedabad-wedding" className="hover:text-gold transition-colors">Glade One Resort Weddings</a></li>
               <li><a href="/venues/gulmohar-greens-wedding" className="hover:text-gold transition-colors">Gulmohar Greens Weddings</a></li>
               <li><a href="/blog/pre-wedding-shoot-locations-gujarat" className="hover:text-gold transition-colors">Top Pre-Wedding Locations Gujarat</a></li>

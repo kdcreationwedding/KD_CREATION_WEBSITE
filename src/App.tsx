@@ -402,7 +402,7 @@ export const App: React.FC = () => {
       ) : isAnamorphicPalacePage ? (
         <AnamorphicPalaceCinematography
           onBackToHome={navigateHome}
-          onOpenBooking={() => handleOpenLeadForm('4K Anamorphic Palace Cinematography (₹15L+)')}
+          onOpenBooking={() => handleOpenLeadForm('4K Anamorphic Palace Cinematography')}
         />
       ) : isBridalPage ? (
         <BridalPortraitsAhmedabad
