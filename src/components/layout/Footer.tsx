@@ -169,7 +169,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenAdminPortal }) => {
                 </span>
                 <div className="flex items-center gap-1 text-[10px] text-amber-400 font-bold bg-black/40 px-2 py-0.5 rounded-full border border-amber-500/30">
                   <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
-                  <span>5.0 GOOGLE</span>
+                  <span>4.9 GOOGLE</span>
                 </div>
               </div>
               <p className="text-[11px] text-[#F5F2EB]/90 leading-relaxed font-sans">

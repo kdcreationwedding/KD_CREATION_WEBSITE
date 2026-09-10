@@ -38,16 +38,16 @@ export const AnamorphicPalaceCinematography: React.FC<PageProps> = ({ onBackToHo
           "paymentAccepted": "Bank Transfer, Wire Transfer",
           "address": {
             "@type": "PostalAddress",
-            "streetAddress": "SG Highway, Prahlad Nagar",
+            "streetAddress": "Bapunagar",
             "addressLocality": "Ahmedabad",
             "addressRegion": "Gujarat",
-            "postalCode": "380015",
+            "postalCode": "380024",
             "addressCountry": "IN"
           },
           "geo": {
             "@type": "GeoCoordinates",
-            "latitude": 23.0225,
-            "longitude": 72.5714
+            "latitude": 23.0373,
+            "longitude": 72.6321
           },
           "founder": [
             {

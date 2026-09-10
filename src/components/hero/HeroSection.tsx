@@ -93,7 +93,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         >
           <div className="flex items-center gap-1.5 bg-[#3B0811]/90 border border-gold/30 px-3 py-1.5 rounded-full shadow-lg">
             <span className="text-amber-400">★★★★★</span>
-            <span className="font-bold text-[#F5F2EB]">5.0 GOOGLE RATING</span>
+            <span className="font-bold text-[#F5F2EB]">4.9 GOOGLE RATING</span>
             <span className="text-gold/70 font-sans font-bold">(128+ REVIEWS)</span>
           </div>
 
@@ -106,7 +106,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           <div className="flex items-center gap-1.5 bg-[#3B0811]/90 border border-gold/30 px-3 py-1.5 rounded-full shadow-lg">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
             <span className="font-bold text-[#F5F2EB]">AHMEDABAD ATELIER</span>
-            <span className="text-gold/70 font-sans font-bold">• PRAHLAD NAGAR</span>
+            <span className="text-gold/70 font-sans font-bold">• BAPUNAGAR</span>
           </div>
         </motion.div>
 

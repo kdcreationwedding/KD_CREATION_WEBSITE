@@ -21,7 +21,7 @@ const routes = [
     title: "Best Wedding Photographer in Ahmedabad | KD Creation",
     description: "Looking for the best wedding photographer in Ahmedabad? KD Creation captures royal Gujarati celebrations, candid fine-art bridal portraits, and luxury weddings.",
     h1: "Best Wedding Photographer in Ahmedabad",
-    summary: "KD Creation is Ahmedabad premier luxury wedding photography studio founded by Mahesh Parmar and Harshad Chavda. Located in Prahlad Nagar on SG Highway, we craft editorial wedding films and fine-art portraits for royal families across Gujarat."
+    summary: "KD Creation is Ahmedabad premier luxury wedding photography studio founded by Mahesh Parmar and Harshad Chavda. Located in Bapunagar, Ahmedabad, we craft editorial wedding films and fine-art portraits for royal families across Gujarat."
   },
   {
     path: "/wedding-videographer-ahmedabad",
