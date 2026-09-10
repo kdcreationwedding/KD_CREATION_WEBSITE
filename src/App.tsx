@@ -41,6 +41,8 @@ import { DroneWeddingPhotography } from './pages/DroneWeddingPhotography';
 import { LuxuryWeddingAlbums } from './pages/LuxuryWeddingAlbums';
 import { AnamorphicWeddingVideographyCostGujarat } from './pages/AnamorphicWeddingVideographyCostGujarat';
 import { VenueGladeOne } from './pages/VenueGladeOne';
+import { VenueGulmoharGreens } from './pages/VenueGulmoharGreens';
+import { BlogPreWeddingLocationsGujarat } from './pages/BlogPreWeddingLocationsGujarat';
 
 // Lazy-loaded Modal and Overlay Components for Performance Optimization
 const VideoModal = lazy(() => import('./components/video/VideoModal').then(m => ({ default: m.VideoModal })));
@@ -310,6 +312,8 @@ export const App: React.FC = () => {
   const isBelvedereVenuePage = currentPath.includes('belvedere');
   const isTajSkylineVenuePage = currentPath.includes('taj-skyline');
   const isGladeOneVenuePage = currentPath.includes('glade-one');
+  const isGulmoharVenuePage = currentPath.includes('gulmohar');
+  const isBlogPreWeddingPage = currentPath.includes('pre-wedding-shoot-locations') || currentPath.includes('shoot-locations');
   const isAnamorphicPalacePage = currentPath.includes('4k-anamorphic') || currentPath.includes('anamorphic') || currentPath.includes('palace-cinema');
   const isBridalPage = currentPath.includes('bridal-portraits') || currentPath.includes('bridal');
   const isDronePage = currentPath.includes('drone-wedding-photography') || currentPath.includes('drone');
@@ -384,6 +388,16 @@ export const App: React.FC = () => {
         <VenueGladeOne
           onBackToHome={navigateHome}
           onOpenBooking={() => handleOpenLeadForm('Glade One Resort Wedding')}
+        />
+      ) : isGulmoharVenuePage ? (
+        <VenueGulmoharGreens
+          onBackToHome={navigateHome}
+          onOpenBooking={() => handleOpenLeadForm('Gulmohar Greens Wedding')}
+        />
+      ) : isBlogPreWeddingPage ? (
+        <BlogPreWeddingLocationsGujarat
+          onBackToHome={navigateHome}
+          onOpenBooking={() => handleOpenLeadForm('Pre-Wedding Locations Shoot')}
         />
       ) : isAnamorphicPalacePage ? (
         <AnamorphicPalaceCinematography
