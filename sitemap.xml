@@ -88,6 +88,14 @@
     <priority>0.95</priority>
   </url>
 
+  <!-- Real Wedding Case Studies -->
+  <url>
+    <loc>https://www.kdcreations.in/real-weddings/royal-belvedere-club-wedding-ahmedabad/</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
   <!-- Venue Hub Pages -->
   <url>
     <loc>https://www.kdcreations.in/venues/belvedere-golf-country-club-wedding/</loc>
