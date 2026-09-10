@@ -61,7 +61,7 @@ export const WeddingPhotographerAhmedabad: React.FC<PageProps> = ({ onBackToHome
             <div className="absolute bottom-6 left-6 right-6 p-4 rounded-xl bg-black/80 border border-gold/30 backdrop-blur-md flex items-center justify-between">
               <div>
                 <p className="text-xs font-bold text-gold uppercase tracking-wider">Royal Wedding Portfolio</p>
-                <p className="text-sm font-serif-luxury font-semibold text-white">Yash & Kavya • Belvedere Club</p>
+                <p className="text-sm font-serif-luxury font-semibold text-white">Royal Celebration • The Belvedere Club</p>
               </div>
               <div className="flex items-center gap-1 text-gold text-xs font-bold">
                 <Star className="w-4 h-4 fill-gold" />
