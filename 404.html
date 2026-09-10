@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
     <title>KD Creation | Luxury Wedding Photography & Cinematography</title>
     <script>
-      // Single Page Apps for GitHub Pages
+      // Single Page Apps for GitHub Pages & Custom Domain www.kdcreations.in
       (function() {
-        var pathSegmentsToKeep = 1;
+        var isCustomDomain = window.location.hostname === 'www.kdcreations.in' || window.location.hostname === 'kdcreations.in' || !window.location.hostname.includes('github.io');
+        var pathSegmentsToKeep = isCustomDomain ? 0 : 1;
         var l = window.location;
         l.replace(
           l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
