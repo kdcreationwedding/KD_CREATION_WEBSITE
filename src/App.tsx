@@ -33,6 +33,8 @@ import { WeddingVideographerAhmedabad } from './pages/WeddingVideographerAhmedab
 import { DestinationWeddingGujarat } from './pages/DestinationWeddingGujarat';
 import { CandidWeddingPhotographerAhmedabad } from './pages/CandidWeddingPhotographerAhmedabad';
 import { WeddingPhotographyCostAhmedabad } from './pages/WeddingPhotographyCostAhmedabad';
+import { VenueBelvedereClub } from './pages/VenueBelvedereClub';
+import { VenueTajSkyline } from './pages/VenueTajSkyline';
 
 // Lazy-loaded Modal and Overlay Components for Performance Optimization
 const VideoModal = lazy(() => import('./components/video/VideoModal').then(m => ({ default: m.VideoModal })));
@@ -299,6 +301,8 @@ export const App: React.FC = () => {
   const isVideographerPage = currentPath.includes('wedding-videographer-ahmedabad') || currentPath.includes('cinematic-wedding-photography');
   const isDestinationPage = currentPath.includes('destination-wedding-photographer-gujarat');
   const isCostPage = currentPath.includes('wedding-photography-cost-ahmedabad') || currentPath.includes('packages');
+  const isBelvedereVenuePage = currentPath.includes('belvedere');
+  const isTajSkylineVenuePage = currentPath.includes('taj-skyline');
 
   return (
     <div className="relative min-h-screen bg-obsidian text-champagne font-sans overflow-x-hidden">
@@ -353,6 +357,16 @@ export const App: React.FC = () => {
         <WeddingPhotographyCostAhmedabad
           onBackToHome={navigateHome}
           onOpenBooking={() => handleOpenLeadForm('Packages & Price Guide')}
+        />
+      ) : isBelvedereVenuePage ? (
+        <VenueBelvedereClub
+          onBackToHome={navigateHome}
+          onOpenBooking={() => handleOpenLeadForm('Belvedere Club Wedding')}
+        />
+      ) : isTajSkylineVenuePage ? (
+        <VenueTajSkyline
+          onBackToHome={navigateHome}
+          onOpenBooking={() => handleOpenLeadForm('Taj Skyline Wedding')}
         />
       ) : (
         <>
