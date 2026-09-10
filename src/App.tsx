@@ -36,6 +36,9 @@ import { WeddingPhotographyCostAhmedabad } from './pages/WeddingPhotographyCostA
 import { VenueBelvedereClub } from './pages/VenueBelvedereClub';
 import { VenueTajSkyline } from './pages/VenueTajSkyline';
 import { AnamorphicPalaceCinematography } from './pages/AnamorphicPalaceCinematography';
+import { BridalPortraitsAhmedabad } from './pages/BridalPortraitsAhmedabad';
+import { DroneWeddingPhotography } from './pages/DroneWeddingPhotography';
+import { LuxuryWeddingAlbums } from './pages/LuxuryWeddingAlbums';
 
 // Lazy-loaded Modal and Overlay Components for Performance Optimization
 const VideoModal = lazy(() => import('./components/video/VideoModal').then(m => ({ default: m.VideoModal })));
@@ -305,6 +308,9 @@ export const App: React.FC = () => {
   const isBelvedereVenuePage = currentPath.includes('belvedere');
   const isTajSkylineVenuePage = currentPath.includes('taj-skyline');
   const isAnamorphicPalacePage = currentPath.includes('4k-anamorphic') || currentPath.includes('anamorphic');
+  const isBridalPage = currentPath.includes('bridal-portraits') || currentPath.includes('bridal');
+  const isDronePage = currentPath.includes('drone-wedding-photography') || currentPath.includes('drone');
+  const isAlbumPage = currentPath.includes('luxury-wedding-albums') || currentPath.includes('wedding-albums');
 
   return (
     <div className="relative min-h-screen bg-obsidian text-champagne font-sans overflow-x-hidden">
@@ -374,6 +380,21 @@ export const App: React.FC = () => {
         <AnamorphicPalaceCinematography
           onBackToHome={navigateHome}
           onOpenBooking={() => handleOpenLeadForm('4K Anamorphic Palace Cinematography (₹15L+)')}
+        />
+      ) : isBridalPage ? (
+        <BridalPortraitsAhmedabad
+          onBackToHome={navigateHome}
+          onOpenBooking={() => handleOpenLeadForm('Bridal Portrait Session')}
+        />
+      ) : isDronePage ? (
+        <DroneWeddingPhotography
+          onBackToHome={navigateHome}
+          onOpenBooking={() => handleOpenLeadForm('Drone Wedding Coverage')}
+        />
+      ) : isAlbumPage ? (
+        <LuxuryWeddingAlbums
+          onBackToHome={navigateHome}
+          onOpenBooking={() => handleOpenLeadForm('Heirloom Wedding Album')}
         />
       ) : (
         <>
