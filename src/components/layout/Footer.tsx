@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Instagram, Youtube, MessageCircle, ArrowUp, Mail, Phone, PhoneCall, Check, Lock } from 'lucide-react';
+import { Instagram, Youtube, MessageCircle, ArrowUp, Mail, Phone, PhoneCall, Check, Lock, MapPin, Star } from 'lucide-react';
 import { SITE_CONFIG } from '../../config/siteConfig';
 
 interface FooterProps {
@@ -157,6 +157,43 @@ export const Footer: React.FC<FooterProps> = ({ onOpenAdminPortal }) => {
                     <span>DIRECT CALL</span>
                   </a>
                 </div>
+              </div>
+            </div>
+
+            {/* Atelier Studio & Google 5.0 Star Rating */}
+            <div className="p-3.5 rounded-2xl bg-[#3B0811] border border-gold/35 space-y-2.5 shadow-lg">
+              <div className="flex items-center justify-between">
+                <span className="flex items-center gap-1.5 text-[11px] font-bold text-gold tracking-wide">
+                  <MapPin className="w-3.5 h-3.5 text-gold flex-shrink-0" />
+                  <span>AHMEDABAD ATELIER</span>
+                </span>
+                <div className="flex items-center gap-1 text-[10px] text-amber-400 font-bold bg-black/40 px-2 py-0.5 rounded-full border border-amber-500/30">
+                  <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
+                  <span>5.0 GOOGLE</span>
+                </div>
+              </div>
+              <p className="text-[11px] text-[#F5F2EB]/90 leading-relaxed font-sans">
+                {SITE_CONFIG.brand.location}
+              </p>
+              <div className="grid grid-cols-2 gap-2 pt-0.5">
+                <a
+                  href={SITE_CONFIG.brand.googleMapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-1 text-[10px] tracking-wider font-extrabold text-gold bg-black/50 hover:bg-gold-gradient hover:text-obsidian p-2 rounded-xl border border-gold/30 transition-all text-center"
+                >
+                  <MapPin className="w-3 h-3" />
+                  <span>GOOGLE MAPS</span>
+                </a>
+                <a
+                  href={SITE_CONFIG.brand.googleReviewUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-1 text-[10px] tracking-wider font-extrabold text-amber-300 bg-black/50 hover:bg-amber-400 hover:text-black p-2 rounded-xl border border-amber-400/30 transition-all text-center"
+                >
+                  <Star className="w-3 h-3 fill-current" />
+                  <span>WRITE REVIEW</span>
+                </a>
               </div>
             </div>
 
