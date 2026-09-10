@@ -71,6 +71,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenAdminPortal }) => {
               <li><a href="/wedding-videographer-ahmedabad" className="hover:text-gold transition-colors">Wedding Videographer Ahmedabad</a></li>
               <li><a href="/pre-wedding-photographer-ahmedabad" className="hover:text-gold transition-colors">Pre Wedding Shoot Ahmedabad</a></li>
               <li><a href="/destination-wedding-photographer-gujarat" className="hover:text-gold transition-colors">Destination Wedding Gujarat</a></li>
+              <li><a href="/4k-anamorphic-wedding-cinematography-heritage-palace-rajasthan" className="hover:text-gold transition-colors text-gold">4K Anamorphic Palace Cinema (₹15L+)</a></li>
               <li><a href="/wedding-photography-cost-ahmedabad" className="hover:text-gold transition-colors">Packages & Price Guide</a></li>
             </ul>
           </div>

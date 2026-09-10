@@ -35,6 +35,7 @@ import { CandidWeddingPhotographerAhmedabad } from './pages/CandidWeddingPhotogr
 import { WeddingPhotographyCostAhmedabad } from './pages/WeddingPhotographyCostAhmedabad';
 import { VenueBelvedereClub } from './pages/VenueBelvedereClub';
 import { VenueTajSkyline } from './pages/VenueTajSkyline';
+import { AnamorphicPalaceCinematography } from './pages/AnamorphicPalaceCinematography';
 
 // Lazy-loaded Modal and Overlay Components for Performance Optimization
 const VideoModal = lazy(() => import('./components/video/VideoModal').then(m => ({ default: m.VideoModal })));
@@ -303,6 +304,7 @@ export const App: React.FC = () => {
   const isCostPage = currentPath.includes('wedding-photography-cost-ahmedabad') || currentPath.includes('packages');
   const isBelvedereVenuePage = currentPath.includes('belvedere');
   const isTajSkylineVenuePage = currentPath.includes('taj-skyline');
+  const isAnamorphicPalacePage = currentPath.includes('4k-anamorphic') || currentPath.includes('anamorphic');
 
   return (
     <div className="relative min-h-screen bg-obsidian text-champagne font-sans overflow-x-hidden">
@@ -367,6 +369,11 @@ export const App: React.FC = () => {
         <VenueTajSkyline
           onBackToHome={navigateHome}
           onOpenBooking={() => handleOpenLeadForm('Taj Skyline Wedding')}
+        />
+      ) : isAnamorphicPalacePage ? (
+        <AnamorphicPalaceCinematography
+          onBackToHome={navigateHome}
+          onOpenBooking={() => handleOpenLeadForm('4K Anamorphic Palace Cinematography (₹15L+)')}
         />
       ) : (
         <>
