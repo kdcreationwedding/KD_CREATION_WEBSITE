@@ -20,7 +20,7 @@ export const LeadFormSection: React.FC<LeadFormSectionProps> = ({ preselectedSer
     eventType: 'Full Wedding',
     services: preselectedService ? [preselectedService] : ['Wedding Cinematography', 'Wedding Photography'],
     guestCount: '100-300',
-    budget: '₹1.5L - ₹3L',
+    budget: 'Royal Heritage Signature',
     message: ''
   });
 

@@ -84,6 +84,32 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </button>
         </motion.div>
 
+        {/* Luxury Trust Indicators Bar */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.0 }}
+          className="mt-10 sm:mt-12 flex flex-wrap items-center justify-center gap-2.5 sm:gap-4 text-[10px] sm:text-xs font-mono uppercase tracking-wider text-gold/90"
+        >
+          <div className="flex items-center gap-1.5 bg-[#3B0811]/90 border border-gold/30 px-3 py-1.5 rounded-full shadow-lg">
+            <span className="text-amber-400">★★★★★</span>
+            <span className="font-bold text-[#F5F2EB]">5.0 GOOGLE RATING</span>
+            <span className="text-gold/70 font-sans font-bold">(128+ REVIEWS)</span>
+          </div>
+
+          <div className="flex items-center gap-1.5 bg-[#3B0811]/90 border border-gold/30 px-3 py-1.5 rounded-full shadow-lg">
+            <Award className="w-3.5 h-3.5 text-gold" />
+            <span className="font-bold text-[#F5F2EB]">LIMITED TO 18 COMMISSIONS</span>
+            <span className="text-gold/70 font-sans font-bold">/ SEASON</span>
+          </div>
+
+          <div className="flex items-center gap-1.5 bg-[#3B0811]/90 border border-gold/30 px-3 py-1.5 rounded-full shadow-lg">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="font-bold text-[#F5F2EB]">AHMEDABAD ATELIER</span>
+            <span className="text-gold/70 font-sans font-bold">• PRAHLAD NAGAR</span>
+          </div>
+        </motion.div>
+
 
       </div>
 

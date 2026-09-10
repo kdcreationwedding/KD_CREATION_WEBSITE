@@ -214,12 +214,8 @@ export const App: React.FC = () => {
     setIsClientPortalOpen(false);
   };
 
-  // Handle Action Trigger: require login before opening inquiry form
+  // Handle Action Trigger: smoothly scroll to contact inquiry form
   const handleOpenLeadForm = (serviceName?: string) => {
-    if (!loggedInClient) {
-      setIsClientAuthOpen(true);
-      return;
-    }
     if (serviceName) setSelectedService(serviceName);
     scrollToSection('contact');
   };
