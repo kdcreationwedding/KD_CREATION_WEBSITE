@@ -31,7 +31,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           className="inline-flex items-center gap-2.5 border border-gold/40 bg-[#3B0811]/80 backdrop-blur-md px-6 py-2.5 rounded-full shadow-2xl mb-8"
         >
           <Award className="w-4 h-4 text-gold" />
-          <span className="text-[11px] sm:text-xs tracking-[0.25em] font-serif-luxury font-extrabold text-gold uppercase">
+          <span className="text-xs tracking-[0.25em] font-serif-luxury font-extrabold text-gold uppercase">
             LUXURY WEDDING FILM STUDIO
           </span>
         </motion.div>
@@ -95,7 +95,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 cursor-pointer group"
         onClick={onExploreStories}
       >
-        <span className="text-[9px] tracking-[0.3em] uppercase text-gold font-bold group-hover:text-white transition-colors">
+        <span className="text-xs tracking-[0.3em] uppercase text-gold font-bold group-hover:text-white transition-colors">
           SCROLL TO DISCOVER
         </span>
         <motion.div
