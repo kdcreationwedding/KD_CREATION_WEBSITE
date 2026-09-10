@@ -101,6 +101,12 @@
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
+  <url>
+    <loc>https://www.kdcreations.in/venues/glade-one-ahmedabad-wedding/</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
 
   <!-- Content & Blog Guides -->
   <url>

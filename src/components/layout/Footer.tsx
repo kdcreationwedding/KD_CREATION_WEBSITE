@@ -76,6 +76,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenAdminPortal }) => {
               <li><a href="/drone-wedding-photography" className="hover:text-gold transition-colors">Drone & Aerial Cinematography</a></li>
               <li><a href="/luxury-wedding-albums" className="hover:text-gold transition-colors">Italian Leather Heirloom Albums</a></li>
               <li><a href="/anamorphic-4k-wedding-videography-cost-gujarat" className="hover:text-gold transition-colors text-gold">4K Anamorphic Cost Guide (₹15L+)</a></li>
+              <li><a href="/venues/glade-one-ahmedabad-wedding" className="hover:text-gold transition-colors">Glade One Resort Weddings</a></li>
               <li><a href="/wedding-photography-cost-ahmedabad" className="hover:text-gold transition-colors">Packages & Price Guide</a></li>
             </ul>
           </div>

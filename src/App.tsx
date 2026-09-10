@@ -40,6 +40,7 @@ import { BridalPortraitsAhmedabad } from './pages/BridalPortraitsAhmedabad';
 import { DroneWeddingPhotography } from './pages/DroneWeddingPhotography';
 import { LuxuryWeddingAlbums } from './pages/LuxuryWeddingAlbums';
 import { AnamorphicWeddingVideographyCostGujarat } from './pages/AnamorphicWeddingVideographyCostGujarat';
+import { VenueGladeOne } from './pages/VenueGladeOne';
 
 // Lazy-loaded Modal and Overlay Components for Performance Optimization
 const VideoModal = lazy(() => import('./components/video/VideoModal').then(m => ({ default: m.VideoModal })));
@@ -308,6 +309,7 @@ export const App: React.FC = () => {
   const isCostPage = currentPath.includes('wedding-photography-cost-ahmedabad') || currentPath.includes('packages') || currentPath.includes('pricing');
   const isBelvedereVenuePage = currentPath.includes('belvedere');
   const isTajSkylineVenuePage = currentPath.includes('taj-skyline');
+  const isGladeOneVenuePage = currentPath.includes('glade-one');
   const isAnamorphicPalacePage = currentPath.includes('4k-anamorphic') || currentPath.includes('anamorphic') || currentPath.includes('palace-cinema');
   const isBridalPage = currentPath.includes('bridal-portraits') || currentPath.includes('bridal');
   const isDronePage = currentPath.includes('drone-wedding-photography') || currentPath.includes('drone');
@@ -377,6 +379,11 @@ export const App: React.FC = () => {
         <VenueTajSkyline
           onBackToHome={navigateHome}
           onOpenBooking={() => handleOpenLeadForm('Taj Skyline Wedding')}
+        />
+      ) : isGladeOneVenuePage ? (
+        <VenueGladeOne
+          onBackToHome={navigateHome}
+          onOpenBooking={() => handleOpenLeadForm('Glade One Resort Wedding')}
         />
       ) : isAnamorphicPalacePage ? (
         <AnamorphicPalaceCinematography
