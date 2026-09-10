@@ -33,7 +33,7 @@ export const AnamorphicPalaceCinematography: React.FC<PageProps> = ({ onBackToHo
           "description": "KD Creations is Ahmedabad's premier luxury wedding photography and 4K anamorphic cinematography studio, engineering bespoke cinematic visual heirlooms for royal destination palace weddings across Rajasthan, Gujarat, and worldwide.",
           "telephone": "+919033032922",
           "email": "contact@kdcreations.in",
-          "priceRange": "₹₹₹₹₹ (₹15,00,000+)",
+          "priceRange": "₹₹₹₹₹ (Bespoke Luxury Tier)",
           "currenciesAccepted": "INR, USD, AED, GBP",
           "paymentAccepted": "Bank Transfer, Wire Transfer",
           "address": {
@@ -166,7 +166,7 @@ export const AnamorphicPalaceCinematography: React.FC<PageProps> = ({ onBackToHo
             },
             {
               "@type": "Question",
-              "name": "What deliverables are included in KD Creations’ ₹15,00,000+ ultra-luxury palace package?",
+              "name": "What deliverables are included in KD Creations’ bespoke royal palace commissions?",
               "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "Our ultra-luxury package includes full multi-day destination coverage led personally by founders Mahesh Parmar and Harshad Chavda, a 4K Anamorphic Feature Film, a 3-Minute Cinematic Trailer, RAW archive storage on encrypted drives, two hand-bound Italian leather flush-mount heirloom albums, and drone cinematography operated by certified aerial pilots."
@@ -212,7 +212,7 @@ export const AnamorphicPalaceCinematography: React.FC<PageProps> = ({ onBackToHo
         <header className="mb-20">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold/15 border border-gold/40 text-gold text-xs font-mono font-bold uppercase tracking-widest mb-6">
             <Award className="w-3.5 h-3.5 text-gold" />
-            <span>Ultra-Luxury Tier • ₹15,00,000+ Master Commission</span>
+            <span>Ultra-Luxury Tier • Bespoke Master Commission</span>
           </div>
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-serif-luxury font-bold leading-[1.1] mb-8 text-[#F5F2EB]">
             4K Anamorphic Wedding Cinematography for <span className="text-gold-gradient italic font-normal">Heritage Palaces</span> in Rajasthan
@@ -223,7 +223,7 @@ export const AnamorphicPalaceCinematography: React.FC<PageProps> = ({ onBackToHo
               <strong className="text-gold font-bold">4K anamorphic wedding cinematography at heritage palaces in Rajasthan requires true 2x cylindrical optical glass elements to capture the sweeping 2.39:1 widescreen grandeur of royal architecture without cropping sensor resolution.</strong> At KD Creations, founders Mahesh Parmar and Harshad Chavda deploy cinema-grade anamorphic primes paired with large-format Hollywood sensors to immortalize royal destination unions across Udaipur, Jaipur, and Jodhpur. Where standard wedding videography relies on consumer spherical lenses that compress background depth, true anamorphic capture renders creamy horizontal bokeh, signature anamorphic flares, and an expansive perspective that mirrors high-budget period epics.
             </p>
             <p className="text-sm sm:text-base text-[#F5F2EB]/80 leading-relaxed">
-              Our multi-day palace commissions operate strictly within our signature ₹15,00,000+ ultra-luxury tier, reflecting an uncompromising technical infrastructure. Every celebration is captured with bespoke camera builds, redundant dual-operator monitoring stations, and calibrated cinema color pipelines that treat the 400-year-old sandstone ramparts of Rajasthan as a living, breathing cinematic character.
+              Our multi-day palace commissions operate strictly within our bespoke ultra-luxury tier by private consultation, reflecting an uncompromising technical infrastructure. Every celebration is captured with bespoke camera builds, redundant dual-operator monitoring stations, and calibrated cinema color pipelines that treat the 400-year-old sandstone ramparts of Rajasthan as a living, breathing cinematic character.
             </p>
           </div>
 
@@ -236,7 +236,7 @@ export const AnamorphicPalaceCinematography: React.FC<PageProps> = ({ onBackToHo
               <ArrowRight className="w-4 h-4" />
             </button>
             <a
-              href="https://wa.me/919033032922?text=Inquiry%20regarding%204K%20Anamorphic%20Palace%20Cinematography%20Commission%20(₹15L+)"
+              href="https://wa.me/919033032922?text=Inquiry%20regarding%204K%20Anamorphic%20Palace%20Cinematography%20Commission"
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-4 rounded-xl bg-[#3B0811] border border-gold/40 text-gold font-bold text-sm uppercase tracking-wider hover:bg-gold hover:text-obsidian transition-all flex items-center gap-2"
@@ -345,7 +345,7 @@ export const AnamorphicPalaceCinematography: React.FC<PageProps> = ({ onBackToHo
           </div>
           <div className="p-8 rounded-2xl bg-[#33060D] border border-gold/25 space-y-4">
             <p className="text-base sm:text-lg text-[#F5F2EB] leading-relaxed">
-              <strong className="text-gold font-bold">Physical visual heirlooms must be crafted from archival museum-grade materials designed to resist atmospheric humidity and thermal yellowing across multiple generations.</strong> Complementing our 4K anamorphic films, Creative Director Mahesh Parmar personally curates KD Creations’ bespoke 12x18 and 12x24-inch master heirloom flush-mount albums for our ₹15L+ patrons. Unlike mass-market photo books that crack at the gutter and utilize chemical-bleached paper, our master volumes are hand-bound in Florence, Italy, using full-grain Tuscan vegetable-tanned leather, hand-stitched book blocks, and shatterproof acrylic glass frontispieces.
+              <strong className="text-gold font-bold">Physical visual heirlooms must be crafted from archival museum-grade materials designed to resist atmospheric humidity and thermal yellowing across multiple generations.</strong> Complementing our 4K anamorphic films, Creative Director Mahesh Parmar personally curates KD Creations’ bespoke 12x18 and 12x24-inch master heirloom flush-mount albums for our bespoke patrons. Unlike mass-market photo books that crack at the gutter and utilize chemical-bleached paper, our master volumes are hand-bound in Florence, Italy, using full-grain Tuscan vegetable-tanned leather, hand-stitched book blocks, and shatterproof acrylic glass frontispieces.
             </p>
             <p className="text-sm sm:text-base text-[#F5F2EB]/80 leading-relaxed">
               Each panoramic spread is printed on 100% cotton-rag, acid-free museum fine-art archival paper using 12-color pigment-based Lucia PRO inks that guarantee color stability for over 200 years. The rigid flush-mount core substrate ensures that pages lay perfectly flat across two-foot spreads, allowing panoramic royal palace portraits to extend uninterrupted across the binding.
@@ -410,7 +410,7 @@ export const AnamorphicPalaceCinematography: React.FC<PageProps> = ({ onBackToHo
               </p>
             </div>
             <div className="p-6 rounded-xl bg-[#33060D] border border-gold/30">
-              <h3 className="font-bold text-gold text-base mb-2">What is included in the ₹15,00,000+ ultra-luxury palace package?</h3>
+              <h3 className="font-bold text-gold text-base mb-2">What is included in the bespoke royal palace commission?</h3>
               <p className="text-xs sm:text-sm text-[#F5F2EB]/80 leading-relaxed">
                 Our ultra-luxury package includes full multi-day destination coverage led personally by founders Mahesh Parmar and Harshad Chavda, a 4K Anamorphic Feature Film, a 3-Minute Cinematic Trailer, RAW archive storage on encrypted drives, two hand-bound Italian leather flush-mount heirloom albums, and drone cinematography operated by certified aerial pilots.
               </p>
@@ -441,7 +441,7 @@ export const AnamorphicPalaceCinematography: React.FC<PageProps> = ({ onBackToHo
               Request Private Screening & Availability
             </button>
             <a
-              href="https://wa.me/919033032922?text=Inquiry%20regarding%204K%20Anamorphic%20Palace%20Cinematography%20Commission%20(₹15L+)"
+              href="https://wa.me/919033032922?text=Inquiry%20regarding%204K%20Anamorphic%20Palace%20Cinematography%20Commission"
               target="_blank"
               rel="noopener noreferrer"
               className="px-10 py-5 rounded-xl bg-[#240409] border border-gold text-gold font-bold text-sm uppercase tracking-wider hover:bg-gold hover:text-obsidian transition-all flex items-center gap-2"

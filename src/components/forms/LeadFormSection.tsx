@@ -313,11 +313,10 @@ export const LeadFormSection: React.FC<LeadFormSectionProps> = ({ preselectedSer
                       onChange={handleChange}
                       className="w-full bg-[#2B050B] border border-gold/35 rounded-xl px-4 py-3.5 text-sm text-[#F5F2EB] font-semibold focus:outline-none focus:border-gold transition-colors shadow-sm"
                     >
-                      <option value="₹1.5L - ₹3L">₹1.5 Lakhs – ₹3 Lakhs</option>
-                      <option value="₹3L - ₹5L">₹3 Lakhs – ₹5 Lakhs</option>
-                      <option value="₹5L - ₹10L">₹5 Lakhs – ₹10 Lakhs</option>
-                      <option value="₹10L - ₹15L">₹10 Lakhs – ₹15 Lakhs</option>
-                      <option value="₹15L+ Luxury Experience">Custom Luxury Experience (₹15L+)</option>
+                      <option value="Essential Luxury">Essential Luxury Celebration</option>
+                      <option value="Royal Heritage Signature">Royal Heritage Signature</option>
+                      <option value="Grand Palace Destination">Grand Palace Destination</option>
+                      <option value="Custom Bespoke Commission">Custom Bespoke Commission</option>
                     </select>
                   </div>
 

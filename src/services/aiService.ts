@@ -83,12 +83,12 @@ export class AiService {
     // 2. Pricing & Cost Inquiries
     else if (actionValue === 'view_pricing' || lower.includes('price') || lower.includes('cost') || lower.includes('package') || lower.includes('rate') || lower.includes('bhav') || lower.includes('ketla') || lower.includes('kethla')) {
       nextStep = 'budget';
-      replyText = `At **KD CREATION**, we treat every wedding as an heirloom film piece.\n\nHere is our signature package structure:\n\n✨ **Essential Luxury Tier (₹5L – ₹10L)**:\nComplete candid photography, 4K highlight film, and 24-hour social reels.\n\n👑 **Royal Signature Tier (₹10L – ₹15L)**:\n4K Anamorphic cinema coverage + drone cinematics + luxury Italian leather heirloom albums.\n\n🌟 **Master Experience (₹15L – ₹25L+)**:\n10+ Director crew, pre-wedding love story film, same-day edit reels, & full multi-camera coverage.\n\nWhich experience aligns best with your wedding scale?`;
+      replyText = `At **KD CREATION**, we treat every wedding as an unrepeatable heirloom film.\n\nBecause we accept strictly 18 exclusive weddings per calendar season, our commissions are completely bespoke. Each proposal is tailored to your wedding dates, venue scale, and multi-day cinema requirements.\n\nWhich experience aligns best with your wedding scale?`;
       options = [
-        { label: '₹5L - ₹10L Package', action: 'set_budget', value: '₹5L - ₹10L' },
-        { label: '₹10L - ₹15L Package', action: 'set_budget', value: '₹10L - ₹15L' },
-        { label: '₹15L - ₹25L+ Royal Package', action: 'set_budget', value: '₹15L - ₹25L+' },
-        { label: 'Custom Luxury Experience', action: 'set_budget', value: 'Custom Package' }
+        { label: 'Essential Luxury Celebration', action: 'set_budget', value: 'Essential Luxury' },
+        { label: 'Royal Heritage Signature', action: 'set_budget', value: 'Royal Signature' },
+        { label: 'Grand Palace Destination', action: 'set_budget', value: 'Grand Destination' },
+        { label: 'Custom Bespoke Commission', action: 'set_budget', value: 'Custom Bespoke' }
       ];
     }
 
@@ -168,11 +168,12 @@ export class AiService {
         updatedLead.services = currentSvcs;
       }
       nextStep = 'budget';
-      replyText = `Understood (**${rawText}**).\n\nTo tailor the ideal director crew size and cinema equipment for your dates, what budget tier matches your plans?`;
+      replyText = `Understood (**${rawText}**).\n\nTo tailor the ideal director crew size and cinema equipment for your dates, which celebration tier matches your plans?`;
       options = [
-        { label: '₹5L - ₹10L Tier', action: 'set_budget', value: '₹5L - ₹10L' },
-        { label: '₹10L - ₹15L Tier', action: 'set_budget', value: '₹10L - ₹15L' },
-        { label: '₹15L - ₹25L+ Royal Tier', action: 'set_budget', value: '₹15L - ₹25L+' }
+        { label: 'Essential Luxury', action: 'set_budget', value: 'Essential Luxury' },
+        { label: 'Royal Signature Tier', action: 'set_budget', value: 'Royal Signature' },
+        { label: 'Grand Palace Destination', action: 'set_budget', value: 'Grand Destination' },
+        { label: 'Custom Bespoke Commission', action: 'set_budget', value: 'Custom Bespoke' }
       ];
     }
 

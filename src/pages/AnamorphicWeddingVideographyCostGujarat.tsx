@@ -26,7 +26,7 @@ export const AnamorphicWeddingVideographyCostGujarat: React.FC<PageProps> = ({ o
               "name": "What is the true cost of anamorphic 4K wedding videography in Gujarat?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "The baseline cost of authentic anamorphic 4K wedding videography in Gujarat ranges from ₹15,00,000 to ₹35,00,000 for multi-day royal celebrations. This investment covers large-format RED cinema sensors, Atlas Orion anamorphic primes, 32-bit float sound design, and hand-bound Italian leather albums."
+                "text": "Authentic anamorphic 4K wedding videography in Gujarat is commissioned on a bespoke basis tailored strictly to your event duration, venue scale, and multi-camera infrastructure. This investment covers large-format RED cinema sensors, Atlas Orion anamorphic primes, 32-bit float sound design, and hand-bound Italian leather albums."
               }
             },
             {
@@ -39,7 +39,7 @@ export const AnamorphicWeddingVideographyCostGujarat: React.FC<PageProps> = ({ o
             },
             {
               "@type": "Question",
-              "name": "What specific visual deliverables are included in KD Creations' ₹15 Lakh+ luxury package?",
+              "name": "What specific visual deliverables are included in KD Creations' bespoke cinema commissions?",
               "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "The package includes a 4K Anamorphic Feature Film, a 3-to-5-minute master cinema trailer, uncompressed RAW media on encrypted SSDs, multi-track 32-bit float audio stems, and two hand-bound Italian leather flush-mount heirloom albums."
@@ -139,7 +139,7 @@ export const AnamorphicWeddingVideographyCostGujarat: React.FC<PageProps> = ({ o
         <header className="mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold/15 border border-gold/40 text-gold text-xs font-mono font-bold uppercase tracking-widest mb-6">
             <Award className="w-3.5 h-3.5 text-gold" />
-            <span>Investment Guide • ₹15,00,000+ Master Tier</span>
+            <span>Investment Guide • Bespoke Palatial Commissions</span>
           </div>
 
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-serif-luxury font-bold leading-[1.1] mb-8 text-[#F5F2EB]">
@@ -151,13 +151,13 @@ export const AnamorphicWeddingVideographyCostGujarat: React.FC<PageProps> = ({ o
               What is the true cost of anamorphic 4K wedding videography in Gujarat?
             </h2>
             <p className="text-base sm:text-lg text-[#F5F2EB] leading-relaxed">
-              <strong className="text-gold font-bold">The baseline cost of authentic anamorphic 4K wedding videography in Gujarat ranges from ₹15,00,000 to ₹35,00,000 for multi-day royal celebrations.</strong> At KD Creations, founders Mahesh Parmar and Harshad Chavda engineer bespoke palatial cinema commissions starting at ₹15 Lakhs for couples seeking Hollywood-grade widescreen visual heirlooms. This investment reflects the deployment of genuine cylindrical optical glass elements, large-format cinema sensors, and uncompressed 16-bit color pipelines rather than consumer-grade digital cameras.
+              <strong className="text-gold font-bold">Authentic anamorphic 4K wedding videography in Gujarat is commissioned on a bespoke basis tailored strictly to your event duration, venue scale, and multi-camera infrastructure.</strong> At KD Creations, founders Mahesh Parmar and Harshad Chavda engineer bespoke palatial cinema commissions on a bespoke consultation model for couples seeking Hollywood-grade widescreen visual heirlooms. This investment reflects the deployment of genuine cylindrical optical glass elements, large-format cinema sensors, and uncompressed 16-bit color pipelines rather than consumer-grade digital cameras.
             </p>
             <p className="text-sm sm:text-base text-[#F5F2EB]/80 leading-relaxed">
               Standard commercial wedding videographers in Ahmedabad often quote between ₹2 Lakhs and ₹6 Lakhs because they utilize spherical zoom lenses and crop the top and bottom of a standard video file in post-production. True anamorphic cinematography cannot be faked through digital letterboxing. It requires optical compression that captures an organic 2.39:1 cinemascope aspect ratio across the full physical sensor, preserving extraordinary image resolution and optical fidelity.
             </p>
             <p className="text-sm sm:text-base text-[#F5F2EB]/80 leading-relaxed">
-              Our ₹15 Lakh+ commissions represent an all-inclusive production deployment. Each royal commission includes dual directors on location, dedicated drone cinema pilots, specialized acoustic engineers, custom color grading, and physical hand-bound Italian leather visual deliverables.
+              Our bespoke palatial commissions represent an all-inclusive production deployment. Each royal commission includes dual directors on location, dedicated drone cinema pilots, specialized acoustic engineers, custom color grading, and physical hand-bound Italian leather visual deliverables.
             </p>
           </div>
 
@@ -170,7 +170,7 @@ export const AnamorphicWeddingVideographyCostGujarat: React.FC<PageProps> = ({ o
               <ArrowRight className="w-4 h-4" />
             </button>
             <a
-              href="https://wa.me/919033032922?text=Inquiry%20regarding%20Anamorphic%204K%20Wedding%20Videography%20Cost%20in%20Gujarat%20(₹15L+)"
+              href="https://wa.me/919033032922?text=Inquiry%20regarding%20Anamorphic%204K%20Wedding%20Videography%20Cost%20in%20Gujarat"
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-4 rounded-xl bg-[#3B0811] border border-gold/40 text-gold font-bold text-sm uppercase tracking-wider hover:bg-gold hover:text-obsidian transition-all flex items-center gap-2"
@@ -207,12 +207,12 @@ export const AnamorphicWeddingVideographyCostGujarat: React.FC<PageProps> = ({ o
           <div className="flex items-center gap-3 text-gold">
             <CheckCircle2 className="w-6 h-6" />
             <h2 className="text-2xl sm:text-4xl font-serif-luxury font-bold text-white">
-              What specific visual deliverables are included in KD Creations' ₹15 Lakh+ luxury package?
+              What specific visual deliverables are included in KD Creations' bespoke cinema commissions?
             </h2>
           </div>
           <div className="p-8 rounded-2xl bg-[#33060D] border border-gold/25 space-y-4">
             <p className="text-base sm:text-lg text-[#F5F2EB] leading-relaxed">
-              <strong className="text-gold font-bold">KD Creations' ₹15,00,000+ luxury package includes a 4K Anamorphic Feature Film, an editorial cinema trailer, multi-channel 32-bit float audio stems, and two hand-bound Italian leather flush-mount albums.</strong> Every visual commission is personally overseen and directed by founders Mahesh Parmar and Harshad Chavda to guarantee uncompromising aesthetic standards. Patrons receive an archival master box containing encrypted solid-state drives with the full uncompressed 4K mastercut and complete ceremony chapter archives.
+              <strong className="text-gold font-bold">KD Creations' bespoke royal cinema commission includes a 4K Anamorphic Feature Film, an editorial cinema trailer, multi-channel 32-bit float audio stems, and two hand-bound Italian leather flush-mount albums.</strong> Every visual commission is personally overseen and directed by founders Mahesh Parmar and Harshad Chavda to guarantee uncompromising aesthetic standards. Patrons receive an archival master box containing encrypted solid-state drives with the full uncompressed 4K mastercut and complete ceremony chapter archives.
             </p>
             <p className="text-sm sm:text-base text-[#F5F2EB]/80 leading-relaxed">
               Our cinematic trailer is crafted as a 3-to-5-minute narrative masterwork suitable for theatrical projection and private cinema screenings. We edit this film with the structural discipline of high-budget period dramas, balancing fast-paced Baarat celebrations with intimate, quiet vows.
@@ -302,9 +302,9 @@ export const AnamorphicWeddingVideographyCostGujarat: React.FC<PageProps> = ({ o
               </p>
             </div>
             <div className="p-6 rounded-xl bg-[#33060D] border border-gold/30">
-              <h3 className="font-bold text-gold text-base mb-2">How many crew members are deployed for a ₹15 Lakh+ commission?</h3>
+              <h3 className="font-bold text-gold text-base mb-2">How many crew members are deployed for a royal palace commission?</h3>
               <p className="text-xs sm:text-sm text-[#F5F2EB]/80 leading-relaxed">
-                A standard ₹15 Lakh+ palace commission includes a master team of 6 to 10 specialized visual artisans, including founding directors Mahesh Parmar and Harshad Chavda, two anamorphic camera operators, two candid photographers, a drone pilot, and an audio engineer.
+                A standard royal palace commission includes a master team of 6 to 10 specialized visual artisans, including founding directors Mahesh Parmar and Harshad Chavda, two anamorphic camera operators, two candid photographers, a drone pilot, and an audio engineer.
               </p>
             </div>
             <div className="p-6 rounded-xl bg-[#33060D] border border-gold/30">
@@ -333,7 +333,7 @@ export const AnamorphicWeddingVideographyCostGujarat: React.FC<PageProps> = ({ o
               Request Detailed Proposal & Screening
             </button>
             <a
-              href="https://wa.me/919033032922?text=Inquiry%20regarding%20Anamorphic%204K%20Wedding%20Videography%20Cost%20in%20Gujarat%20(₹15L+)"
+              href="https://wa.me/919033032922?text=Inquiry%20regarding%20Anamorphic%204K%20Wedding%20Videography%20Cost%20in%20Gujarat"
               target="_blank"
               rel="noopener noreferrer"
               className="px-10 py-5 rounded-xl bg-[#240409] border border-gold text-gold font-bold text-sm uppercase tracking-wider hover:bg-gold hover:text-obsidian transition-all flex items-center gap-2"

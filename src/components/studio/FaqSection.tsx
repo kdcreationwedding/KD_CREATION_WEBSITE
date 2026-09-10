@@ -20,7 +20,7 @@ export const FAQS: FaqItem[] = [
     id: 'faq-2',
     category: 'PRICING & PACKAGES',
     question: 'What is the cost of wedding photography & 4K cinematography packages in Ahmedabad?',
-    answer: 'Our bespoke wedding packages range from Essential Luxury (₹5L – ₹10L), Royal Signature (₹10L – ₹15L), to Master Experience (₹15L – ₹25L+). Pricing depends on event duration, crew size (up to 10+ directors), drone aerial cinematics, pre-wedding films, and heirloom album choices.'
+    answer: 'Because we accept strictly 18 exclusive weddings per calendar year, all commissions are bespoke and quoted upon private consultation. Each tailored proposal reflects your wedding dates, venue scale, multi-day ceremonial itinerary, cinema crew size, and heirloom album choices.'
   },
   {
     id: 'faq-3',
