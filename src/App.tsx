@@ -43,6 +43,7 @@ import { AnamorphicWeddingVideographyCostGujarat } from './pages/AnamorphicWeddi
 import { VenueGladeOne } from './pages/VenueGladeOne';
 import { VenueGulmoharGreens } from './pages/VenueGulmoharGreens';
 import { BlogPreWeddingLocationsGujarat } from './pages/BlogPreWeddingLocationsGujarat';
+import { RealWeddingBelvedereCaseStudy } from './pages/RealWeddingBelvedereCaseStudy';
 
 // Lazy-loaded Modal and Overlay Components for Performance Optimization
 const VideoModal = lazy(() => import('./components/video/VideoModal').then(m => ({ default: m.VideoModal })));
@@ -309,7 +310,8 @@ export const App: React.FC = () => {
   const isVideographerPage = currentPath.includes('wedding-videographer-ahmedabad') || currentPath.includes('cinematic-wedding-photography') || currentPath.includes('cinematic-films') || currentPath.includes('wedding-cinematography');
   const isDestinationPage = currentPath.includes('destination-wedding-photographer-gujarat') || currentPath.includes('destination-weddings');
   const isCostPage = currentPath.includes('wedding-photography-cost-ahmedabad') || currentPath.includes('packages') || currentPath.includes('pricing');
-  const isBelvedereVenuePage = currentPath.includes('belvedere');
+  const isRealWeddingBelvederePage = currentPath.includes('real-weddings') || currentPath.includes('royal-belvedere');
+  const isBelvedereVenuePage = !isRealWeddingBelvederePage && currentPath.includes('belvedere');
   const isTajSkylineVenuePage = currentPath.includes('taj-skyline');
   const isGladeOneVenuePage = currentPath.includes('glade-one');
   const isGulmoharVenuePage = currentPath.includes('gulmohar');
@@ -373,6 +375,11 @@ export const App: React.FC = () => {
         <WeddingPhotographyCostAhmedabad
           onBackToHome={navigateHome}
           onOpenBooking={() => handleOpenLeadForm('Packages & Price Guide')}
+        />
+      ) : isRealWeddingBelvederePage ? (
+        <RealWeddingBelvedereCaseStudy
+          onBackToHome={navigateHome}
+          onOpenBooking={() => handleOpenLeadForm('Belvedere Real Wedding Case Study')}
         />
       ) : isBelvedereVenuePage ? (
         <VenueBelvedereClub
