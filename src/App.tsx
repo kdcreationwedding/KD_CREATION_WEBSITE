@@ -72,6 +72,19 @@ export const App: React.FC = () => {
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
+  // Synchronize dynamic Canonical tag on client-side navigation
+  useEffect(() => {
+    let canonicalLink = document.querySelector('link[rel="canonical"]');
+    if (!canonicalLink) {
+      canonicalLink = document.createElement('link');
+      canonicalLink.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonicalLink);
+    }
+    const cleanPath = window.location.pathname.replace(/\/$/, '') || '';
+    const canonicalUrl = `https://www.kdcreations.in${cleanPath || '/'}`;
+    canonicalLink.setAttribute('href', canonicalUrl);
+  }, [currentPath]);
+
   // Digital Album Platform State
   const [activeAlbum, setActiveAlbum] = useState<DigitalAlbum | null>(null);
   const [qrModalAlbum, setQrModalAlbum] = useState<DigitalAlbum | null>(null);
