@@ -7,6 +7,7 @@ import { DigitalAlbum } from '../../types/album';
 import { albumService } from '../../services/albumService';
 import { apiClient } from '../../services/apiClient';
 import { isSupabaseConfigured, uploadPhotoToSupabase } from '../../services/supabaseClient';
+import { r2Service } from '../../services/r2Client';
 import { getAssetPath } from '../../utils/assetHelper';
 
 interface AdminAlbumManagerProps {
@@ -115,7 +116,18 @@ export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCo
 
   // Helper to preserve 100% original raw photo file quality with zero quality reduction
   const compressImageFile = async (file: File): Promise<string> => {
-    // 1. Upload 100% ORIGINAL RAW FILE directly to Supabase Storage Bucket ('album-photos') for 0% Quality Loss!
+    // 1. Upload 100% ORIGINAL RAW FILE directly to Cloudflare R2 Bucket (Priority 1: 0 Egress & Global CDN)
+    if (r2Service.isConfigured()) {
+      try {
+        const slug = editingAlbum?.slug || 'general';
+        const r2Url = await r2Service.uploadPhoto(file, slug);
+        if (r2Url) return r2Url;
+      } catch (e) {
+        console.warn('Cloudflare R2 storage upload error, falling back to secondary storage:', e);
+      }
+    }
+
+    // 2. Upload to Supabase Storage Bucket ('album-photos') if configured
     if (isSupabaseConfigured()) {
       try {
         const publicUrl = await uploadPhotoToSupabase(file);
@@ -125,7 +137,7 @@ export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCo
       }
     }
 
-    // 2. Direct FileReader fallback preserving 100% original binary data without canvas downscaling
+    // 3. Direct FileReader fallback preserving 100% original binary data without canvas downscaling
     return new Promise((resolve) => {
       const reader = new FileReader();
       reader.onload = (e) => resolve((e.target?.result as string) || '');
@@ -263,6 +275,32 @@ export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCo
             >
               <X className="w-5 h-5" />
             </button>
+          </div>
+
+          {/* Storage Provider Status Banner */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-3 rounded-xl bg-[#2B050B] border border-gold/25 text-xs font-mono">
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="font-bold text-white">STORAGE ENGINE:</span>
+              {r2Service.isConfigured() ? (
+                <span className="text-amber-400 font-extrabold flex items-center gap-1">
+                  ⚡ CLOUDFLARE R2 CDN (10GB ZERO-EGRESS)
+                </span>
+              ) : isSupabaseConfigured() ? (
+                <span className="text-emerald-400 font-extrabold">
+                  ⚡ SUPABASE STORAGE BUCKET
+                </span>
+              ) : (
+                <span className="text-gold/80">
+                  📁 BROWSER DATABASE (Configure Cloudflare R2 in Settings for Cloud CDN)
+                </span>
+              )}
+            </div>
+            {r2Service.isConfigured() && (
+              <span className="text-[10px] text-emerald-400 font-bold bg-emerald-950 px-2.5 py-0.5 rounded-full border border-emerald-500/40 self-start sm:self-auto">
+                R2 ACTIVE
+              </span>
+            )}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -426,6 +464,15 @@ export const AdminAlbumManager: React.FC<AdminAlbumManagerProps> = ({ onOpenQrCo
               {editingAlbum.pages?.map((pageUrl, idx) => (
                 <div key={idx} className="relative group border border-gold/30 rounded-lg overflow-hidden bg-[#3B0811] flex flex-col justify-between">
                   <img src={getAssetPath(pageUrl)} alt={`Image ${idx + 1}`} loading="lazy" decoding="async" className="w-full h-24 object-cover" />
+                  {pageUrl.includes('r2.cloudflarestorage.com') || pageUrl.includes('r2.dev') || pageUrl.includes('albums.kdcreations.in') ? (
+                    <span className="absolute top-1 left-1 px-1.5 py-0.5 rounded bg-amber-950/90 border border-amber-400 text-amber-300 text-[8px] font-mono font-bold shadow-md">
+                      R2 CDN
+                    </span>
+                  ) : pageUrl.includes('supabase.co') ? (
+                    <span className="absolute top-1 left-1 px-1.5 py-0.5 rounded bg-emerald-950/90 border border-emerald-400 text-emerald-300 text-[8px] font-mono font-bold shadow-md">
+                      SUPABASE
+                    </span>
+                  ) : null}
                   <div className="p-1.5 bg-black/90 flex items-center justify-between text-[9px] font-mono text-gold font-bold">
                     <span>Image {idx + 1}</span>
                     <div className="flex items-center gap-1">

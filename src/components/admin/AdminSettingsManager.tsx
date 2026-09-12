@@ -1,17 +1,31 @@
 import React, { useState } from 'react';
-import { Settings, Phone, MessageSquare, Mail, MapPin, Globe, Check } from 'lucide-react';
+import { Settings, Phone, MessageSquare, Mail, MapPin, Globe, Check, Sparkles, AlertCircle, RefreshCw } from 'lucide-react';
 import { cmsService, SiteSettings } from '../../services/cmsService';
+import { r2Service, R2Config } from '../../services/r2Client';
 
 export const AdminSettingsManager: React.FC = () => {
   const [settings, setSettings] = useState<SiteSettings>(() => cmsService.getSettings());
+  const [r2Config, setR2Config] = useState<R2Config>(() => r2Service.getConfig());
   const [savedSuccess, setSavedSuccess] = useState(false);
+  const [isTestingR2, setIsTestingR2] = useState(false);
+  const [r2TestMessage, setR2TestMessage] = useState<string | null>(null);
 
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
     cmsService.saveSettings(settings);
+    r2Service.saveConfig(r2Config);
     setSavedSuccess(true);
     setTimeout(() => setSavedSuccess(false), 3000);
-    alert('✓ Studio & Contact Settings saved successfully!');
+    alert('✓ Studio, Contact & Cloudflare R2 Settings saved successfully!');
+  };
+
+  const handleTestR2 = async () => {
+    setIsTestingR2(true);
+    setR2TestMessage(null);
+    r2Service.saveConfig(r2Config); // save current inputs first
+    const result = await r2Service.testConnection();
+    setIsTestingR2(false);
+    setR2TestMessage(result.message);
   };
 
   return (
@@ -179,12 +193,139 @@ export const AdminSettingsManager: React.FC = () => {
           </div>
         </div>
 
+        {/* 3. Cloudflare R2 Object Storage & CDN Configuration */}
+        <div className="bg-[#2B050B] border border-amber-500/50 rounded-xl p-5 space-y-4 shadow-xl">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-gold/20">
+            <div>
+              <span className="text-[10px] tracking-widest font-mono text-amber-400 uppercase font-extrabold flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                CLOUDFLARE R2 OBJECT STORAGE (ZERO EGRESS & GLOBAL CDN)
+              </span>
+              <h4 className="text-base font-serif-luxury font-bold text-[#F5F2EB]">
+                DIGITAL PHOTOBOOK MEDIA HOSTING
+              </h4>
+            </div>
+
+            {r2Service.isConfigured() ? (
+              <span className="px-3 py-1 rounded-full bg-emerald-950/80 border border-emerald-500 text-emerald-300 text-[10px] font-mono font-bold inline-flex items-center gap-1 self-start">
+                <Check className="w-3 h-3" /> R2 ACTIVE
+              </span>
+            ) : (
+              <span className="px-3 py-1 rounded-full bg-amber-950/80 border border-amber-500/60 text-amber-300 text-[10px] font-mono font-bold inline-flex items-center gap-1 self-start">
+                <AlertCircle className="w-3 h-3" /> NOT CONFIGURED
+              </span>
+            )}
+          </div>
+
+          <p className="text-xs font-mono text-[#F5F2EB]/80 leading-relaxed">
+            Cloudflare R2 provides 10GB free lifetime storage with <strong className="text-gold">0 bandwidth/egress fees</strong>. All uploaded photobook spreads are delivered globally through Cloudflare's ultra-fast CDN without lag or quality loss.
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className="text-[10px] font-mono text-gold uppercase block mb-1 font-bold">
+                CLOUDFLARE ACCOUNT ID *
+              </label>
+              <input
+                type="text"
+                value={r2Config.accountId}
+                onChange={(e) => setR2Config({ ...r2Config, accountId: e.target.value.trim() })}
+                placeholder="e.g. 5f8a123bc456..."
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#1C0307] border border-gold/30 text-gold text-xs font-mono"
+              />
+            </div>
+
+            <div>
+              <label className="text-[10px] font-mono text-gold uppercase block mb-1 font-bold">
+                R2 BUCKET NAME *
+              </label>
+              <input
+                type="text"
+                value={r2Config.bucketName}
+                onChange={(e) => setR2Config({ ...r2Config, bucketName: e.target.value.trim() })}
+                placeholder="kd-creation-albums"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#1C0307] border border-gold/30 text-gold text-xs font-mono"
+              />
+            </div>
+
+            <div>
+              <label className="text-[10px] font-mono text-gold uppercase block mb-1 font-bold">
+                R2 ACCESS KEY ID *
+              </label>
+              <input
+                type="text"
+                value={r2Config.accessKeyId}
+                onChange={(e) => setR2Config({ ...r2Config, accessKeyId: e.target.value.trim() })}
+                placeholder="e.g. 78f9a0b1c2..."
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#1C0307] border border-gold/30 text-gold text-xs font-mono"
+              />
+            </div>
+
+            <div>
+              <label className="text-[10px] font-mono text-gold uppercase block mb-1 font-bold">
+                R2 SECRET ACCESS KEY *
+              </label>
+              <input
+                type="password"
+                value={r2Config.secretAccessKey}
+                onChange={(e) => setR2Config({ ...r2Config, secretAccessKey: e.target.value.trim() })}
+                placeholder="e.g. 91a8b7c6d5..."
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#1C0307] border border-gold/30 text-gold text-xs font-mono"
+              />
+            </div>
+
+            <div className="sm:col-span-2">
+              <label className="text-[10px] font-mono text-gold uppercase block mb-1 font-bold">
+                PUBLIC DOMAIN / R2.DEV CDN URL (FOR DIRECT VIEWING)
+              </label>
+              <input
+                type="text"
+                value={r2Config.publicDomain}
+                onChange={(e) => setR2Config({ ...r2Config, publicDomain: e.target.value.trim() })}
+                placeholder="e.g. https://pub-xxxxxx.r2.dev or https://albums.kdcreations.in"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#1C0307] border border-gold/30 text-gold text-xs font-mono"
+              />
+              <span className="text-[9.5px] font-mono text-[#F5F2EB]/60 block mt-1">
+                Enable "Public R2.dev access" or connect a custom domain in your Cloudflare R2 bucket settings.
+              </span>
+            </div>
+          </div>
+
+          {/* Test & Action Buttons */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-3 border-t border-gold/20">
+            <button
+              type="button"
+              onClick={handleTestR2}
+              disabled={isTestingR2}
+              className="px-4 py-2 rounded-xl bg-[#3B0811] border border-gold/40 text-gold hover:bg-gold hover:text-black transition-colors text-xs font-mono font-bold flex items-center gap-2"
+            >
+              {isTestingR2 ? (
+                <>
+                  <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+                  <span>TESTING R2 CONNECTION...</span>
+                </>
+              ) : (
+                <>
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>TEST R2 CONNECTION</span>
+                </>
+              )}
+            </button>
+
+            {r2TestMessage && (
+              <div className="text-xs font-mono text-gold/90 bg-black/40 px-3 py-1.5 rounded-lg border border-gold/20 flex-1">
+                {r2TestMessage}
+              </div>
+            )}
+          </div>
+        </div>
+
         <div className="flex justify-end pt-4 border-t border-gold/20">
           <button
             type="submit"
-            className="px-8 py-3 rounded-xl bg-gold-gradient text-obsidian font-bold text-xs uppercase tracking-wider hover:brightness-110 shadow-lg"
+            className="px-8 py-3 rounded-xl bg-gold-gradient text-obsidian font-bold text-xs uppercase tracking-wider hover:brightness-110 shadow-lg active:scale-95 transition-transform"
           >
-            SAVE SITE BACKEND SETTINGS
+            SAVE SITE & R2 BACKEND SETTINGS
           </button>
         </div>
       </form>
