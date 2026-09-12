@@ -16,11 +16,11 @@ const R2_CONFIG_KEY = 'kd_cloudflare_r2_config_v1';
 
 // Default / initial environment fallback if provided in Vite .env
 const DEFAULT_CONFIG: R2Config = {
-  accountId: import.meta.env.VITE_R2_ACCOUNT_ID || '',
+  accountId: import.meta.env.VITE_R2_ACCOUNT_ID || 'f72c4d9c7b4e0ebbf11439806bd043d2',
   bucketName: import.meta.env.VITE_R2_BUCKET_NAME || 'albums',
-  accessKeyId: import.meta.env.VITE_R2_ACCESS_KEY_ID || '',
-  secretAccessKey: import.meta.env.VITE_R2_SECRET_ACCESS_KEY || '',
-  publicDomain: import.meta.env.VITE_R2_PUBLIC_DOMAIN || ''
+  accessKeyId: import.meta.env.VITE_R2_ACCESS_KEY_ID || 'f7d9f1690df1f5ff33bca4335c7451af',
+  secretAccessKey: import.meta.env.VITE_R2_SECRET_ACCESS_KEY || '1f86767008a77e992650a9168a2430f7a8b1e4760932f0c8816eb9d744ac737f',
+  publicDomain: import.meta.env.VITE_R2_PUBLIC_DOMAIN || 'https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev'
 };
 
 export const r2Service = {
