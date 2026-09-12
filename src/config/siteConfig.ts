@@ -21,7 +21,7 @@ export interface PortfolioItem {
   couple: string;
   location: string;
   year: string;
-  category: 'Royal Wedding' | 'Destination' | 'Pre-Wedding' | 'Cinematic Film';
+  category: 'Royal Wedding' | 'Destination' | 'Pre-Wedding' | 'Cinematic Film' | 'Engagement';
   description: string;
   heroImage: string;
   modalCover?: string;
@@ -236,6 +236,29 @@ export const SITE_CONFIG = {
 
   // Portfolio Items — Selected Stories
   portfolio: [
+    {
+      id: "story-manvi-dharmik-engagement",
+      title: "Beginning of Forever",
+      couple: "Manvi & Dharmik",
+      location: "Ahmedabad, Gujarat",
+      year: "2026",
+      category: "Engagement",
+      description: "A day filled with happiness, love, and beautiful emotions. Her smile says everything her heart is feeling, and with Dharmik by her side, this moment marks the beginning of their forever.",
+      heroImage: "assets/manvi-dharmik/manvi-dharmik-hero.jpg",
+      modalCover: "assets/manvi-dharmik/manvi-dharmik-walk.jpg",
+      gallery: [
+        "assets/manvi-dharmik/manvi-dharmik-hero.jpg",
+        "assets/manvi-dharmik/manvi-dharmik-walk.jpg",
+        "assets/manvi-dharmik/manvi-dharmik-mehndi.jpg",
+        "assets/manvi-dharmik/manvi-dharmik-editorial.jpg"
+      ],
+      highlights: [
+        "Editorial Engagement Walk & Tender Connection",
+        "Intricate Bridal Mehndi & Engagement Ring Ceremony",
+        "Architectural Fine-Art Garden Portraits"
+      ],
+      bts: "Captured with natural directional lighting and 85mm prime portrait lenses for soft editorial tones."
+    },
     {
       id: "story-yash-kavya-ahmedabad",
       title: "The Heritage Grandeur",

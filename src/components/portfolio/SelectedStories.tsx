@@ -17,7 +17,7 @@ export const SelectedStories: React.FC<SelectedStoriesProps> = ({
   const [activeCategory, setActiveCategory] = useState<string>('All');
   const [selectedStory, setSelectedStory] = useState<PortfolioItem | null>(null);
 
-  const categories = ['All', 'Royal Wedding', 'Destination', 'Pre-Wedding'];
+  const categories = ['All', 'Royal Wedding', 'Destination', 'Pre-Wedding', 'Engagement'];
   const stories = cmsService.getStories();
 
   const filteredPortfolio =

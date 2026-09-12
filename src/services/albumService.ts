@@ -7,6 +7,29 @@ const STORAGE_KEY = 'kd_digital_albums_v8';
 // Real sample photobooks dataset for 1-click restore and default mobile scan fallback
 export const DEMO_ALBUMS: DigitalAlbum[] = [
   {
+    id: 'album-manvi-dharmik',
+    slug: 'manvi-dharmik',
+    title: 'Beginning of Forever',
+    couple: 'Manvi & Dharmik',
+    subtitle: 'Luxury Engagement Ceremony Photobook',
+    date: '2026',
+    location: 'Ahmedabad, Gujarat',
+    coverImage: 'assets/manvi-dharmik/manvi-dharmik-hero.jpg',
+    description: 'A day filled with happiness, love, and beautiful emotions. Celebrating the beginning of a beautiful journey where two hearts promise to walk together forever.',
+    pages: [
+      'assets/manvi-dharmik/manvi-dharmik-walk.jpg',
+      'assets/manvi-dharmik/manvi-dharmik-hero.jpg',
+      'assets/manvi-dharmik/manvi-dharmik-mehndi.jpg',
+      'assets/manvi-dharmik/manvi-dharmik-editorial.jpg'
+    ],
+    isPublished: true,
+    isPrivate: false,
+    watermarkEnabled: true,
+    downloadAllowed: false,
+    createdAt: '2026-03-01T00:00:00.000Z',
+    updatedAt: '2026-03-01T00:00:00.000Z'
+  },
+  {
     id: 'album-yash-kavya',
     slug: 'yash-kavya',
     title: 'The Heritage Grandeur',

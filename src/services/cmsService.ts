@@ -44,8 +44,12 @@ export const cmsService = {
       if (stored) {
         const parsed = JSON.parse(stored);
         if (Array.isArray(parsed) && parsed.length > 0) {
-          inMemoryStories = parsed;
-          return parsed;
+          const missingDefaults = SITE_CONFIG.portfolio.filter(
+            (def) => !parsed.some((p: any) => p.id === def.id)
+          );
+          const merged = [...missingDefaults, ...parsed];
+          inMemoryStories = merged;
+          return merged;
         }
       }
     } catch (e) {
