@@ -48,7 +48,8 @@ export const QrCodeModal: React.FC<QrCodeModalProps> = ({ album, isOpen, onClose
     window.print();
   };
 
-  const whatsappMsg = `Explore the official digital wedding photobook of ${album.couple} by KD CREATION:\n${shareableUrl}`;
+  const coupleName = album.couple || album.title || 'Client';
+  const whatsappMsg = `✨ *KD CREATION — Luxury Heirloom Photobook* ✨\n\nDear Family & Friends,\nExperience the official 4K Ultra-HD Digital Photobook of *${coupleName}*!\n\n📖 *Open Digital Photobook:*\n${shareableUrl}\n\n*(Mobile & Desktop Compatible • Zero Quality Loss)*\nCaptured with love by *KD CREATION* 📸`;
   const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(whatsappMsg)}`;
 
   return (
@@ -67,7 +68,7 @@ export const QrCodeModal: React.FC<QrCodeModalProps> = ({ album, isOpen, onClose
         {/* Modal Title Header */}
         <div className="text-center space-y-2 mb-6">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 border border-gold/30 text-gold text-xs font-mono font-bold uppercase tracking-wider">
-            <QrCode className="w-3.5 h-3.5" /> DIGITAL WEDDING ALBUM QR CODE
+            <QrCode className="w-3.5 h-3.5" /> DIGITAL PHOTOBOOK QR CODE
           </div>
           <h3 className="text-xl sm:text-2xl font-serif-luxury font-bold text-gold">
             {album.couple}
@@ -98,7 +99,7 @@ export const QrCodeModal: React.FC<QrCodeModalProps> = ({ album, isOpen, onClose
           <div className="relative inline-block p-4 rounded-xl border border-gold/50 bg-[#1C0307] shadow-xl">
             <img
               src={qrApiUrl}
-              alt={`QR Code for ${album.couple} Wedding Album`}
+              alt={`QR Code for ${album.couple} Photobook`}
               className="w-48 h-48 sm:w-56 sm:h-56 mx-auto object-contain rounded-lg shadow-md"
               onError={(e) => {
                 const target = e.currentTarget;
@@ -110,7 +111,7 @@ export const QrCodeModal: React.FC<QrCodeModalProps> = ({ album, isOpen, onClose
           {/* Printable Callout */}
           <div className="space-y-1">
             <p className="text-xs font-serif-luxury font-bold text-gold tracking-widest uppercase">
-              SCAN TO VIEW COMPLETE DIGITAL WEDDING PHOTOBOOK
+              SCAN TO VIEW COMPLETE DIGITAL PHOTOBOOK
             </p>
             <p className="text-[11px] font-mono text-[#F5F2EB]/60">
               {shareableUrl}

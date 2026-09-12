@@ -239,16 +239,17 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
   };
 
   const handleShare = () => {
-    const shareableUrl = `${window.location.origin}/#album-${album.slug}`;
+    const coupleName = album.couple || album.title || 'Client';
+    const shareableUrl = `${window.location.origin}/?album=${album.slug}#album-${album.slug}`;
     if (navigator.share) {
       navigator.share({
-        title: `${album.couple} Wedding Album | KD CREATION`,
-        text: `View the official luxury digital wedding photobook of ${album.couple} by KD CREATION`,
+        title: `${coupleName} Digital Photobook | KD CREATION`,
+        text: `✨ KD CREATION — Luxury Heirloom Photobook ✨\nExperience the official 4K Ultra-HD Digital Photobook of ${coupleName}!`,
         url: shareableUrl
       }).catch(() => {});
     } else {
       navigator.clipboard.writeText(shareableUrl);
-      alert('Album share link copied to clipboard!');
+      alert('Photobook link copied to clipboard!');
     }
   };
 
