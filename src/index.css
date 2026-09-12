@@ -103,13 +103,35 @@ input::placeholder, textarea::placeholder {
   color: rgba(245, 242, 235, 0.45) !important;
 }
 
-/* Unique KD Creation Royal Gold Precision Arrow & Camera Shutter Focus Cursor (Zero-Lag 120Hz) */
-html, body, div, span, p, h1, h2, h3, h4, section, header, footer {
-  cursor: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><defs><linearGradient id='kdG' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%23FFF8DC'/><stop offset='40%' stop-color='%23D4AF37'/><stop offset='100%' stop-color='%238B6914'/></linearGradient></defs><path d='M3 2L10 21L13.5 13.5L21 10L3 2Z' fill='url(%23kdG)' stroke='%231F0307' stroke-width='1.4'/><circle cx='9.5' cy='9.5' r='1.6' fill='%23FFFFFF'/></svg>") 3 2, auto;
+/* Unique KD Creation Royal Gold Precision Arrow & Camera Shutter Focus Cursor (Desktop Only) */
+@media (hover: hover) and (pointer: fine) {
+  html, body, div, span, p, h1, h2, h3, h4, section, header, footer {
+    cursor: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><defs><linearGradient id='kdG' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%23FFF8DC'/><stop offset='40%' stop-color='%23D4AF37'/><stop offset='100%' stop-color='%238B6914'/></linearGradient></defs><path d='M3 2L10 21L13.5 13.5L21 10L3 2Z' fill='url(%23kdG)' stroke='%231F0307' stroke-width='1.4'/><circle cx='9.5' cy='9.5' r='1.6' fill='%23FFFFFF'/></svg>") 3 2, auto;
+  }
+
+  a, button, [role="button"], input, select, textarea, label.cursor-pointer, .cursor-pointer {
+    cursor: url("data:image/svg+xml;utf8,<svg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'><defs><linearGradient id='kdS' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%23FFF8DC'/><stop offset='50%' stop-color='%23D4AF37'/><stop offset='100%' stop-color='%2394742B'/></linearGradient></defs><circle cx='16' cy='16' r='13' stroke='url(%23kdS)' stroke-width='2' fill='rgba(51,6,13,0.65)'/><path d='M16 3L11 11M29 16L21 11M16 29L21 21M3 16L11 21' stroke='url(%23kdS)' stroke-width='1.2' stroke-linecap='round'/><circle cx='16' cy='16' r='3.5' fill='url(%23kdS)'/><circle cx='16' cy='16' r='1.5' fill='%23FFFFFF'/></svg>") 16 16, pointer !important;
+  }
 }
 
-a, button, [role="button"], input, select, textarea, label.cursor-pointer, .cursor-pointer {
-  cursor: url("data:image/svg+xml;utf8,<svg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'><defs><linearGradient id='kdS' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%23FFF8DC'/><stop offset='50%' stop-color='%23D4AF37'/><stop offset='100%' stop-color='%2394742B'/></linearGradient></defs><circle cx='16' cy='16' r='13' stroke='url(%23kdS)' stroke-width='2' fill='rgba(51,6,13,0.65)'/><path d='M16 3L11 11M29 16L21 11M16 29L21 21M3 16L11 21' stroke='url(%23kdS)' stroke-width='1.2' stroke-linecap='round'/><circle cx='16' cy='16' r='3.5' fill='url(%23kdS)'/><circle cx='16' cy='16' r='1.5' fill='%23FFFFFF'/></svg>") 16 16, pointer !important;
+/* Off-thread Rendering & Native Layout Containment for 120Hz Lag-Free Performance */
+#cinema, #founders, #process, #testimonials, #instagram-feed, #faq {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 700px;
+}
+
+/* GPU Compositor Acceleration */
+.liquid-glass-card, .glass-card, .liquid-glass-panel, .glass-panel {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* Custom Scrollbar for Royal Maroon Theme */

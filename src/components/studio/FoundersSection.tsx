@@ -51,11 +51,11 @@ export const FoundersSection: React.FC = () => {
           {SITE_CONFIG.founders.map((founder, idx) => (
             <motion.div
               key={founder.id}
-              initial={{ opacity: 0, y: 45, scale: 0.95 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: false, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: idx * 0.15, ease: [0.16, 1, 0.3, 1] }}
-              whileHover={{ y: -8, scale: 1.015 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: idx * 0.1, ease: "easeOut" }}
+              whileHover={{ y: -6 }}
               className="liquid-glass-card rounded-3xl overflow-hidden flex flex-col group border border-gold/35 hover:border-gold/65 shadow-2xl bg-[#3B0811]/90 transition-all duration-300"
               data-cursor="LEADER"
             >

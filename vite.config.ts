@@ -41,11 +41,11 @@ export default defineConfig({
             if (id.includes('framer-motion')) {
               return 'vendor-framer';
             }
+            if (id.includes('three')) {
+              return 'vendor-three';
+            }
             if (id.includes('lucide-react')) {
               return 'vendor-icons';
-            }
-            if (id.includes('three') || id.includes('@splinetool')) {
-              return 'vendor-three';
             }
           }
         }

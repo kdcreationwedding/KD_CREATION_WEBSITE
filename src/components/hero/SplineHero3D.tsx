@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import Spline from '@splinetool/react-spline';
 import * as THREE from 'three';
 import { SITE_CONFIG } from '../../config/siteConfig';
+import { getDevicePerformanceProfile } from '../../utils/performance';
 
 // Safe Spline Error Boundary
 class SafeSpline extends React.Component<
@@ -36,8 +37,12 @@ export const SplineHero3D: React.FC = () => {
   const [splineError, setSplineError] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  // Unique Interactive 3D Royal Maroon Canvas for Hero Page
+  const profile = useRef(getDevicePerformanceProfile()).current;
+
+  // Optimized Interactive 3D Royal Maroon Canvas for Hero Page
   useEffect(() => {
+    // If Spline has loaded on high-end desktop, skip WebGL canvas to prevent double rendering
+    if (splineLoaded) return;
     if (!canvasRef.current) return;
     const canvas = canvasRef.current;
 
@@ -52,18 +57,18 @@ export const SplineHero3D: React.FC = () => {
     );
     camera.position.set(0, 0, 9);
 
-    let renderer: THREE.WebGLRenderer;
+    let renderer: THREE.WebGLRenderer | null = null;
     try {
       renderer = new THREE.WebGLRenderer({
         canvas,
         alpha: true,
-        antialias: true,
-        powerPreference: 'high-performance',
+        antialias: !profile.isLowEnd,
+        powerPreference: profile.isLowEnd ? 'low-power' : 'high-performance',
       });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setPixelRatio(profile.maxPixelRatio);
       renderer.setSize(canvas.clientWidth, canvas.clientHeight);
     } catch (e) {
-      console.warn("WebGL renderer creation warning:", e);
+      console.warn('WebGL renderer creation warning:', e);
       return;
     }
 
@@ -71,29 +76,30 @@ export const SplineHero3D: React.FC = () => {
     scene.add(heroGroup);
 
     // 1. Dual Interlocking 24k Gold Wedding Rings
-    const ringMat = new THREE.MeshPhysicalMaterial({
+    // Low-end uses lightweight StandardMaterial, high-end uses PhysicalMaterial
+    const RingMaterialClass = profile.isLowEnd ? THREE.MeshStandardMaterial : THREE.MeshPhysicalMaterial;
+    const ringMat = new RingMaterialClass({
       color: 0xd4af37,
-      metalness: 0.95,
-      roughness: 0.08,
-      clearcoat: 1.0,
-      clearcoatRoughness: 0.05,
-      reflectivity: 1.0,
-      emissive: 0x4a0e17,
+      metalness: 0.9,
+      roughness: 0.15,
+      emissive: 0x33060d,
     });
 
-    const ring1Geo = new THREE.TorusGeometry(1.8, 0.22, 32, 100);
+    // Lower geometry resolution on low-end systems (16x40 vs 32x100 = 75% fewer vertices)
+    const ring1RadialSegs = profile.isLowEnd ? 16 : 24;
+    const ring1TubularSegs = profile.isLowEnd ? 40 : 80;
+    const ring1Geo = new THREE.TorusGeometry(1.8, 0.22, ring1RadialSegs, ring1TubularSegs);
     const ring1 = new THREE.Mesh(ring1Geo, ringMat);
     ring1.rotation.x = Math.PI / 4;
     ring1.rotation.y = Math.PI / 6;
     heroGroup.add(ring1);
 
-    const ring2Geo = new THREE.TorusGeometry(1.4, 0.16, 32, 100);
-    const ring2Mat = new THREE.MeshPhysicalMaterial({
+    const ring2Geo = new THREE.TorusGeometry(1.4, 0.16, ring1RadialSegs, ring1TubularSegs);
+    const ring2Mat = new RingMaterialClass({
       color: 0xf3e5ab,
-      metalness: 0.95,
-      roughness: 0.05,
-      clearcoat: 1.0,
-      emissive: 0x3b0811,
+      metalness: 0.9,
+      roughness: 0.15,
+      emissive: 0x240409,
     });
     const ring2 = new THREE.Mesh(ring2Geo, ring2Mat);
     ring2.rotation.x = -Math.PI / 3;
@@ -102,7 +108,7 @@ export const SplineHero3D: React.FC = () => {
     heroGroup.add(ring2);
 
     // 2. Outer Floating Camera Lens Ring
-    const apertureGeo = new THREE.RingGeometry(2.5, 2.54, 64);
+    const apertureGeo = new THREE.RingGeometry(2.5, 2.54, profile.isLowEnd ? 32 : 64);
     const apertureMat = new THREE.MeshBasicMaterial({
       color: 0xd4af37,
       side: THREE.DoubleSide,
@@ -114,7 +120,7 @@ export const SplineHero3D: React.FC = () => {
     heroGroup.add(apertureRing);
 
     // 3. Floating Gold Particles / Star Dust
-    const particleCount = window.innerWidth < 768 ? 200 : 600;
+    const particleCount = profile.particleCount;
     const particleGeo = new THREE.BufferGeometry();
     const posArray = new Float32Array(particleCount * 3);
 
@@ -126,7 +132,7 @@ export const SplineHero3D: React.FC = () => {
     particleGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
 
     const particleMat = new THREE.PointsMaterial({
-      size: 0.045,
+      size: profile.isLowEnd ? 0.055 : 0.045,
       color: 0xf3e5ab,
       transparent: true,
       opacity: 0.75,
@@ -136,16 +142,12 @@ export const SplineHero3D: React.FC = () => {
     scene.add(particles);
 
     // 4. Dynamic Lighting System
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    const ambientLight = new THREE.AmbientLight(0xffffff, profile.isLowEnd ? 0.8 : 0.5);
     scene.add(ambientLight);
 
-    const goldLight1 = new THREE.PointLight(0xd4af37, 4, 25);
+    const goldLight1 = new THREE.PointLight(0xd4af37, 3, 20);
     goldLight1.position.set(5, 6, 5);
     scene.add(goldLight1);
-
-    const wineLight = new THREE.PointLight(0x5a121f, 5, 25);
-    wineLight.position.set(-5, -5, -2);
-    scene.add(wineLight);
 
     // Mouse Parallax Logic
     let mouseX = 0;
@@ -158,14 +160,16 @@ export const SplineHero3D: React.FC = () => {
       mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    if (!profile.isMobile) {
+      window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    }
 
     // Scroll Logic
     let scrollY = 0;
     const handleScroll = () => {
       scrollY = window.scrollY;
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
     // Resize Handler
     const handleResize = () => {
@@ -174,9 +178,9 @@ export const SplineHero3D: React.FC = () => {
       camera.updateProjectionMatrix();
       renderer.setSize(canvas.clientWidth, canvas.clientHeight);
     };
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', handleResize, { passive: true });
 
-    // IntersectionObserver to pause WebGL rendering when scrolled off-screen
+    // Visibility management: Pause RAF when off-screen or tab hidden
     let isVisible = true;
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -186,13 +190,25 @@ export const SplineHero3D: React.FC = () => {
     );
     if (canvas) observer.observe(canvas);
 
-    // Animation Loop
+    const handleVisibilityChange = () => {
+      isVisible = !document.hidden;
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    // Animation Loop with low-spec throttling
     let animationFrameId: number;
     const clock = new THREE.Clock();
+    let lastRenderTime = 0;
+    const frameInterval = profile.isLowEnd ? 1000 / 45 : 1000 / 60; // 45fps cap on low-end to preserve CPU/battery
 
-    const animate = () => {
+    const animate = (timestamp: number) => {
       animationFrameId = requestAnimationFrame(animate);
-      if (!isVisible) return; // Skip rendering when off-screen to save 100% GPU resources!
+      if (!isVisible || document.hidden) return;
+
+      if (profile.isLowEnd && timestamp - lastRenderTime < frameInterval) {
+        return;
+      }
+      lastRenderTime = timestamp;
 
       const elapsedTime = clock.getElapsedTime();
 
@@ -201,40 +217,50 @@ export const SplineHero3D: React.FC = () => {
       targetY += (mouseY - targetY) * 0.05;
 
       // Rotate 3D Geometries
-      ring1.rotation.z = elapsedTime * 0.2;
-      ring1.rotation.x = Math.PI / 4 + Math.sin(elapsedTime * 0.3) * 0.2 + targetY * 0.4;
+      ring1.rotation.z = elapsedTime * 0.18;
+      ring1.rotation.x = Math.PI / 4 + Math.sin(elapsedTime * 0.25) * 0.15 + targetY * 0.3;
 
-      ring2.rotation.z = -elapsedTime * 0.25;
-      ring2.rotation.y = -Math.PI / 4 + Math.cos(elapsedTime * 0.3) * 0.2 + targetX * 0.4;
+      ring2.rotation.z = -elapsedTime * 0.22;
+      ring2.rotation.y = -Math.PI / 4 + Math.cos(elapsedTime * 0.25) * 0.15 + targetX * 0.3;
 
-      apertureRing.rotation.z = elapsedTime * 0.08;
-
-      particles.rotation.y = elapsedTime * 0.03;
+      apertureRing.rotation.z = elapsedTime * 0.07;
+      particles.rotation.y = elapsedTime * 0.025;
 
       // Camera motion
-      camera.position.x = targetX * 1.2;
-      camera.position.y = -targetY * 1.2 - scrollY * 0.002;
+      camera.position.x = targetX * 1.0;
+      camera.position.y = -targetY * 1.0 - scrollY * 0.0015;
       camera.lookAt(scene.position);
 
-      renderer.render(scene, camera);
+      if (renderer) {
+        renderer.render(scene, camera);
+      }
     };
 
-    animate();
+    animationFrameId = requestAnimationFrame(animate);
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
+      if (!profile.isMobile) {
+        window.removeEventListener('mousemove', handleMouseMove);
+      }
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleResize);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       observer.disconnect();
       cancelAnimationFrame(animationFrameId);
-      if (renderer) renderer.dispose();
+      if (renderer) {
+        renderer.dispose();
+        ring1Geo.dispose();
+        ring2Geo.dispose();
+        apertureGeo.dispose();
+        particleGeo.dispose();
+      }
     };
-  }, []);
+  }, [splineLoaded]);
 
   return (
     <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-      {/* Spline 3D Scene Container */}
-      {!splineError && (
+      {/* Spline 3D Scene Container - ONLY loaded on high-performance desktop hardware */}
+      {profile.enableHeavy3D && !splineError && (
         <div className="absolute inset-0 z-10 opacity-90 transition-opacity duration-1000 pointer-events-auto">
           <SafeSpline
             scene={SITE_CONFIG.SPLINE_SCENE_URL}
@@ -244,11 +270,11 @@ export const SplineHero3D: React.FC = () => {
         </div>
       )}
 
-      {/* WebGL 3D Canvas Fallback & Ambient Gold Glow Layer */}
+      {/* WebGL 3D Canvas - Zero lag, optimized for every device tier */}
       <canvas
         ref={canvasRef}
         className={`w-full h-full absolute inset-0 z-0 transition-opacity duration-1000 ${
-          splineLoaded ? 'opacity-40' : 'opacity-100'
+          splineLoaded ? 'opacity-0 pointer-events-none' : 'opacity-100'
         }`}
       />
 
