@@ -30,6 +30,7 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
 
   // Page Index State (0-indexed)
   const [currentPageIndex, setCurrentPageIndex] = useState(0);
+  const [isPageLoading, setIsPageLoading] = useState(true);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [zoomLevel, setZoomLevel] = useState(1);
   const [isMuted, setIsMuted] = useState(true);
@@ -119,10 +120,27 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, viewMode, currentPageIndex, album]);
 
-  if (!isOpen || !album) return null;
-
-  const pages = getParsedPages(album.pages);
+  const pages = album ? getParsedPages(album.pages) : [];
   const totalPages = pages.length;
+
+  // Intelligent Preloading: Preload adjacent pages in background for zero-latency page turns
+  useEffect(() => {
+    setIsPageLoading(true);
+    if (isOpen && viewMode === 'book' && pages.length > 0) {
+      const toPreload = [
+        pages[currentPageIndex + 1],
+        pages[currentPageIndex + 2],
+        pages[currentPageIndex - 1]
+      ].filter(Boolean);
+
+      toPreload.forEach((url) => {
+        const img = new Image();
+        img.src = getAssetPath(url);
+      });
+    }
+  }, [currentPageIndex, viewMode, pages, isOpen]);
+
+  if (!isOpen || !album) return null;
 
   const handlePasswordSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -435,19 +453,33 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
                   {pages[currentPageIndex] ? (
                     <div className="w-full h-full flex items-center justify-center relative overflow-hidden">
 
-                      {/* 100% UNTOUCHED NATIVE RAW 4K FULL SCREEN PHOTO */}
+                      {/* 100% Ultra-HD Native Full Screen Photo with Off-Thread Async Decoding */}
                       <img
                         src={getAssetPath(pages[currentPageIndex])}
                         alt={`Page ${currentPageIndex + 1}`}
-                        decoding="sync"
+                        decoding="async"
                         loading="eager"
-                        className="w-full h-full object-contain pointer-events-auto select-none"
+                        onLoad={() => setIsPageLoading(false)}
+                        onError={() => setIsPageLoading(false)}
+                        className={`w-full h-full object-contain pointer-events-auto select-none transition-opacity duration-300 ${
+                          isPageLoading ? 'opacity-30 blur-sm' : 'opacity-100 blur-0'
+                        }`}
                         style={{
                           width: '100vw',
                           height: '92vh',
                           objectFit: 'contain'
                         }}
                       />
+
+                      {/* Luxury Gold Page Loading Spinner */}
+                      {isPageLoading && (
+                        <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#0A0103]/60 backdrop-blur-sm z-10 pointer-events-none">
+                          <div className="w-10 h-10 border-2 border-gold/20 border-t-gold rounded-full animate-spin mb-3 shadow-[0_0_15px_rgba(212,175,55,0.3)]" />
+                          <span className="text-[10px] font-mono tracking-widest text-gold uppercase font-bold">
+                            Loading 4K Page...
+                          </span>
+                        </div>
+                      )}
 
                         {/* Interactive Click/Tap Zones: Left 40% = Prev Page, Right 40% = Next Page */}
                         <div

@@ -19,31 +19,33 @@ import { StickyLeadCtas } from './components/forms/StickyLeadCtas';
 import { Footer } from './components/layout/Footer';
 import { apiClient } from './services/apiClient';
 
-import { DigitalAlbumsShowcase } from './components/albums/DigitalAlbumsShowcase';
-import { DigitalAlbumViewerModal } from './components/albums/DigitalAlbumViewerModal';
-import { QrCodeModal } from './components/albums/QrCodeModal';
 import { DigitalAlbum } from './types/album';
 import { albumService, decodeAlbumFromUrl } from './services/albumService';
 import { SITE_CONFIG } from './config/siteConfig';
 
-// Dedicated SEO Landing Pages
-import { WeddingPhotographerAhmedabad } from './pages/WeddingPhotographerAhmedabad';
-import { PreWeddingPhotographerAhmedabad } from './pages/PreWeddingPhotographerAhmedabad';
-import { WeddingVideographerAhmedabad } from './pages/WeddingVideographerAhmedabad';
-import { DestinationWeddingGujarat } from './pages/DestinationWeddingGujarat';
-import { CandidWeddingPhotographerAhmedabad } from './pages/CandidWeddingPhotographerAhmedabad';
-import { WeddingPhotographyCostAhmedabad } from './pages/WeddingPhotographyCostAhmedabad';
-import { VenueBelvedereClub } from './pages/VenueBelvedereClub';
-import { VenueTajSkyline } from './pages/VenueTajSkyline';
-import { AnamorphicPalaceCinematography } from './pages/AnamorphicPalaceCinematography';
-import { BridalPortraitsAhmedabad } from './pages/BridalPortraitsAhmedabad';
-import { DroneWeddingPhotography } from './pages/DroneWeddingPhotography';
-import { LuxuryWeddingAlbums } from './pages/LuxuryWeddingAlbums';
-import { AnamorphicWeddingVideographyCostGujarat } from './pages/AnamorphicWeddingVideographyCostGujarat';
-import { VenueGladeOne } from './pages/VenueGladeOne';
-import { VenueGulmoharGreens } from './pages/VenueGulmoharGreens';
-import { BlogPreWeddingLocationsGujarat } from './pages/BlogPreWeddingLocationsGujarat';
-import { RealWeddingBelvedereCaseStudy } from './pages/RealWeddingBelvedereCaseStudy';
+// Lazy-loaded Album Components for Instant Mobile Loading
+const DigitalAlbumsShowcase = lazy(() => import('./components/albums/DigitalAlbumsShowcase').then(m => ({ default: m.DigitalAlbumsShowcase })));
+const DigitalAlbumViewerModal = lazy(() => import('./components/albums/DigitalAlbumViewerModal').then(m => ({ default: m.DigitalAlbumViewerModal })));
+const QrCodeModal = lazy(() => import('./components/albums/QrCodeModal').then(m => ({ default: m.QrCodeModal })));
+
+// Lazy-loaded Dedicated SEO Landing Pages for Sub-Second Initial Page Paint
+const WeddingPhotographerAhmedabad = lazy(() => import('./pages/WeddingPhotographerAhmedabad').then(m => ({ default: m.WeddingPhotographerAhmedabad })));
+const PreWeddingPhotographerAhmedabad = lazy(() => import('./pages/PreWeddingPhotographerAhmedabad').then(m => ({ default: m.PreWeddingPhotographerAhmedabad })));
+const WeddingVideographerAhmedabad = lazy(() => import('./pages/WeddingVideographerAhmedabad').then(m => ({ default: m.WeddingVideographerAhmedabad })));
+const DestinationWeddingGujarat = lazy(() => import('./pages/DestinationWeddingGujarat').then(m => ({ default: m.DestinationWeddingGujarat })));
+const CandidWeddingPhotographerAhmedabad = lazy(() => import('./pages/CandidWeddingPhotographerAhmedabad').then(m => ({ default: m.CandidWeddingPhotographerAhmedabad })));
+const WeddingPhotographyCostAhmedabad = lazy(() => import('./pages/WeddingPhotographyCostAhmedabad').then(m => ({ default: m.WeddingPhotographyCostAhmedabad })));
+const VenueBelvedereClub = lazy(() => import('./pages/VenueBelvedereClub').then(m => ({ default: m.VenueBelvedereClub })));
+const VenueTajSkyline = lazy(() => import('./pages/VenueTajSkyline').then(m => ({ default: m.VenueTajSkyline })));
+const AnamorphicPalaceCinematography = lazy(() => import('./pages/AnamorphicPalaceCinematography').then(m => ({ default: m.AnamorphicPalaceCinematography })));
+const BridalPortraitsAhmedabad = lazy(() => import('./pages/BridalPortraitsAhmedabad').then(m => ({ default: m.BridalPortraitsAhmedabad })));
+const DroneWeddingPhotography = lazy(() => import('./pages/DroneWeddingPhotography').then(m => ({ default: m.DroneWeddingPhotography })));
+const LuxuryWeddingAlbums = lazy(() => import('./pages/LuxuryWeddingAlbums').then(m => ({ default: m.LuxuryWeddingAlbums })));
+const AnamorphicWeddingVideographyCostGujarat = lazy(() => import('./pages/AnamorphicWeddingVideographyCostGujarat').then(m => ({ default: m.AnamorphicWeddingVideographyCostGujarat })));
+const VenueGladeOne = lazy(() => import('./pages/VenueGladeOne').then(m => ({ default: m.VenueGladeOne })));
+const VenueGulmoharGreens = lazy(() => import('./pages/VenueGulmoharGreens').then(m => ({ default: m.VenueGulmoharGreens })));
+const BlogPreWeddingLocationsGujarat = lazy(() => import('./pages/BlogPreWeddingLocationsGujarat').then(m => ({ default: m.BlogPreWeddingLocationsGujarat })));
+const RealWeddingBelvedereCaseStudy = lazy(() => import('./pages/RealWeddingBelvedereCaseStudy').then(m => ({ default: m.RealWeddingBelvedereCaseStudy })));
 
 // Lazy-loaded Modal and Overlay Components for Performance Optimization
 const VideoModal = lazy(() => import('./components/video/VideoModal').then(m => ({ default: m.VideoModal })));
@@ -283,25 +285,32 @@ export const App: React.FC = () => {
   if (isDirectAlbumLink && activeAlbum) {
     return (
       <div className="fixed inset-0 bg-[#0F0204] text-[#F5F2EB] z-[999999] overflow-hidden">
-        <DigitalAlbumViewerModal
-          album={activeAlbum}
-          isOpen={true}
-          isQrAccess={true}
-          onClose={() => {
-            setActiveAlbum(null);
-            setIsDirectAlbumLink(false);
-            window.history.pushState('', document.title, window.location.pathname);
-          }}
-          onOpenQrCode={(album) => setQrModalAlbum(album)}
-        />
-
-        {qrModalAlbum && (
-          <QrCodeModal
-            album={qrModalAlbum}
-            isOpen={!!qrModalAlbum}
-            onClose={() => setQrModalAlbum(null)}
+        <Suspense fallback={
+          <div className="fixed inset-0 bg-[#0F0204] flex flex-col items-center justify-center text-gold">
+            <div className="w-10 h-10 border-2 border-gold/20 border-t-gold rounded-full animate-spin mb-3 shadow-[0_0_15px_rgba(212,175,55,0.3)]" />
+            <span className="text-xs font-serif-luxury tracking-widest uppercase">Opening 4K Photobook Atelier...</span>
+          </div>
+        }>
+          <DigitalAlbumViewerModal
+            album={activeAlbum}
+            isOpen={true}
+            isQrAccess={true}
+            onClose={() => {
+              setActiveAlbum(null);
+              setIsDirectAlbumLink(false);
+              window.history.pushState('', document.title, window.location.pathname);
+            }}
+            onOpenQrCode={(album) => setQrModalAlbum(album)}
           />
-        )}
+
+          {qrModalAlbum && (
+            <QrCodeModal
+              album={qrModalAlbum}
+              isOpen={!!qrModalAlbum}
+              onClose={() => setQrModalAlbum(null)}
+            />
+          )}
+        </Suspense>
       </div>
     );
   }
@@ -354,140 +363,147 @@ export const App: React.FC = () => {
         onNavigateHome={navigateHome}
       />
 
-      {/* Render Dedicated Sub-Page or Main SPA Flow */}
-      {isWeddingPhotographerPage ? (
-        <WeddingPhotographerAhmedabad
-          onBackToHome={navigateHome}
-          onOpenBooking={() => handleOpenLeadForm('Wedding Photography')}
-        />
-      ) : isCandidPage ? (
-        <CandidWeddingPhotographerAhmedabad
-          onBackToHome={navigateHome}
-          onOpenBooking={() => handleOpenLeadForm('Candid Photography')}
-        />
-      ) : isPreWeddingPage ? (
-        <PreWeddingPhotographerAhmedabad
-          onBackToHome={navigateHome}
-          onOpenBooking={() => handleOpenLeadForm('Pre-Wedding Shoot')}
-        />
-      ) : isVideographerPage ? (
-        <WeddingVideographerAhmedabad
-          onBackToHome={navigateHome}
-          onOpenBooking={() => handleOpenLeadForm('Wedding Videography')}
-        />
-      ) : isDestinationPage ? (
-        <DestinationWeddingGujarat
-          onBackToHome={navigateHome}
-          onOpenBooking={() => handleOpenLeadForm('Destination Wedding')}
-        />
-      ) : isCostPage ? (
-        <WeddingPhotographyCostAhmedabad
-          onBackToHome={navigateHome}
-          onOpenBooking={() => handleOpenLeadForm('Packages & Price Guide')}
-        />
-      ) : isRealWeddingBelvederePage ? (
-        <RealWeddingBelvedereCaseStudy
-          onBackToHome={navigateHome}
-          onOpenBooking={() => handleOpenLeadForm('Belvedere Real Wedding Case Study')}
-        />
-      ) : isBelvedereVenuePage ? (
-        <VenueBelvedereClub
-          onBackToHome={navigateHome}
-          onOpenBooking={() => handleOpenLeadForm('Belvedere Club Wedding')}
-        />
-      ) : isTajSkylineVenuePage ? (
-        <VenueTajSkyline
-          onBackToHome={navigateHome}
-          onOpenBooking={() => handleOpenLeadForm('Taj Skyline Wedding')}
-        />
-      ) : isGladeOneVenuePage ? (
-        <VenueGladeOne
-          onBackToHome={navigateHome}
-          onOpenBooking={() => handleOpenLeadForm('Glade One Resort Wedding')}
-        />
-      ) : isGulmoharVenuePage ? (
-        <VenueGulmoharGreens
-          onBackToHome={navigateHome}
-          onOpenBooking={() => handleOpenLeadForm('Gulmohar Greens Wedding')}
-        />
-      ) : isBlogPreWeddingPage ? (
-        <BlogPreWeddingLocationsGujarat
-          onBackToHome={navigateHome}
-          onOpenBooking={() => handleOpenLeadForm('Pre-Wedding Locations Shoot')}
-        />
-      ) : isAnamorphicPalacePage ? (
-        <AnamorphicPalaceCinematography
-          onBackToHome={navigateHome}
-          onOpenBooking={() => handleOpenLeadForm('4K Anamorphic Palace Cinematography')}
-        />
-      ) : isBridalPage ? (
-        <BridalPortraitsAhmedabad
-          onBackToHome={navigateHome}
-          onOpenBooking={() => handleOpenLeadForm('Bridal Portrait Session')}
-        />
-      ) : isDronePage ? (
-        <DroneWeddingPhotography
-          onBackToHome={navigateHome}
-          onOpenBooking={() => handleOpenLeadForm('Drone Wedding Coverage')}
-        />
-      ) : isAlbumPage ? (
-        <LuxuryWeddingAlbums
-          onBackToHome={navigateHome}
-          onOpenBooking={() => handleOpenLeadForm('Heirloom Wedding Album')}
-        />
-      ) : isAnamorphicCostPage ? (
-        <AnamorphicWeddingVideographyCostGujarat
-          onBackToHome={navigateHome}
-          onOpenBooking={() => handleOpenLeadForm('Anamorphic 4K Videography Cost Proposal')}
-        />
-      ) : (
-        <>
-          {/* 4. Fullscreen 3D Hero Section */}
-          <HeroSection
-            onExploreStories={() => scrollToSection('stories')}
-            onStartStory={() => handleOpenLeadForm()}
-            onOpenVideoModal={handleOpenVideoModal}
+      {/* Render Dedicated Sub-Page or Main SPA Flow with Suspense for Zero Initial Blocking */}
+      <Suspense fallback={
+        <div className="min-h-screen bg-obsidian flex flex-col items-center justify-center text-gold">
+          <div className="w-10 h-10 border-2 border-gold/20 border-t-gold rounded-full animate-spin mb-3" />
+          <span className="text-xs font-serif-luxury tracking-widest uppercase">Loading KD Creation Atelier...</span>
+        </div>
+      }>
+        {isWeddingPhotographerPage ? (
+          <WeddingPhotographerAhmedabad
+            onBackToHome={navigateHome}
+            onOpenBooking={() => handleOpenLeadForm('Wedding Photography')}
           />
-
-          {/* 5. Portfolio Stories Section */}
-          <SelectedStories
-            onStartStory={() => handleOpenLeadForm()}
-            onPlayVideo={handleOpenVideoModal}
+        ) : isCandidPage ? (
+          <CandidWeddingPhotographerAhmedabad
+            onBackToHome={navigateHome}
+            onOpenBooking={() => handleOpenLeadForm('Candid Photography')}
           />
-
-          {/* 6. Signature Services Section */}
-          <ServicesSection onSelectService={handleOpenLeadForm} />
-
-          {/* 7. Cinema Showreel Showcase */}
-          <CinemaSection
-            onOpenVideoModal={handleOpenVideoModal}
-            onStartStory={() => handleOpenLeadForm()}
+        ) : isPreWeddingPage ? (
+          <PreWeddingPhotographerAhmedabad
+            onBackToHome={navigateHome}
+            onOpenBooking={() => handleOpenLeadForm('Pre-Wedding Shoot')}
           />
+        ) : isVideographerPage ? (
+          <WeddingVideographerAhmedabad
+            onBackToHome={navigateHome}
+            onOpenBooking={() => handleOpenLeadForm('Wedding Videography')}
+          />
+        ) : isDestinationPage ? (
+          <DestinationWeddingGujarat
+            onBackToHome={navigateHome}
+            onOpenBooking={() => handleOpenLeadForm('Destination Wedding')}
+          />
+        ) : isCostPage ? (
+          <WeddingPhotographyCostAhmedabad
+            onBackToHome={navigateHome}
+            onOpenBooking={() => handleOpenLeadForm('Packages & Price Guide')}
+          />
+        ) : isRealWeddingBelvederePage ? (
+          <RealWeddingBelvedereCaseStudy
+            onBackToHome={navigateHome}
+            onOpenBooking={() => handleOpenLeadForm('Belvedere Real Wedding Case Study')}
+          />
+        ) : isBelvedereVenuePage ? (
+          <VenueBelvedereClub
+            onBackToHome={navigateHome}
+            onOpenBooking={() => handleOpenLeadForm('Belvedere Club Wedding')}
+          />
+        ) : isTajSkylineVenuePage ? (
+          <VenueTajSkyline
+            onBackToHome={navigateHome}
+            onOpenBooking={() => handleOpenLeadForm('Taj Skyline Wedding')}
+          />
+        ) : isGladeOneVenuePage ? (
+          <VenueGladeOne
+            onBackToHome={navigateHome}
+            onOpenBooking={() => handleOpenLeadForm('Glade One Resort Wedding')}
+          />
+        ) : isGulmoharVenuePage ? (
+          <VenueGulmoharGreens
+            onBackToHome={navigateHome}
+            onOpenBooking={() => handleOpenLeadForm('Gulmohar Greens Wedding')}
+          />
+        ) : isBlogPreWeddingPage ? (
+          <BlogPreWeddingLocationsGujarat
+            onBackToHome={navigateHome}
+            onOpenBooking={() => handleOpenLeadForm('Pre-Wedding Locations Shoot')}
+          />
+        ) : isAnamorphicPalacePage ? (
+          <AnamorphicPalaceCinematography
+            onBackToHome={navigateHome}
+            onOpenBooking={() => handleOpenLeadForm('4K Anamorphic Palace Cinematography')}
+          />
+        ) : isBridalPage ? (
+          <BridalPortraitsAhmedabad
+            onBackToHome={navigateHome}
+            onOpenBooking={() => handleOpenLeadForm('Bridal Portrait Session')}
+          />
+        ) : isDronePage ? (
+          <DroneWeddingPhotography
+            onBackToHome={navigateHome}
+            onOpenBooking={() => handleOpenLeadForm('Drone Wedding Coverage')}
+          />
+        ) : isAlbumPage ? (
+          <LuxuryWeddingAlbums
+            onBackToHome={navigateHome}
+            onOpenBooking={() => handleOpenLeadForm('Heirloom Wedding Album')}
+          />
+        ) : isAnamorphicCostPage ? (
+          <AnamorphicWeddingVideographyCostGujarat
+            onBackToHome={navigateHome}
+            onOpenBooking={() => handleOpenLeadForm('Anamorphic 4K Videography Cost Proposal')}
+          />
+        ) : (
+          <>
+            {/* 4. Fullscreen 3D Hero Section */}
+            <HeroSection
+              onExploreStories={() => scrollToSection('stories')}
+              onStartStory={() => handleOpenLeadForm()}
+              onOpenVideoModal={handleOpenVideoModal}
+            />
 
-          {/* 8. Studio Philosophy & About Section */}
-          <AboutSection />
+            {/* 5. Portfolio Stories Section */}
+            <SelectedStories
+              onStartStory={() => handleOpenLeadForm()}
+              onPlayVideo={handleOpenVideoModal}
+            />
 
-          {/* 9. Founders & Executive Leadership Section */}
-          <FoundersSection />
+            {/* 6. Signature Services Section */}
+            <ServicesSection onSelectService={handleOpenLeadForm} />
 
-          {/* 10. Why KD Creation Showcase */}
-          <WhyKdCreation />
+            {/* 7. Cinema Showreel Showcase */}
+            <CinemaSection
+              onOpenVideoModal={handleOpenVideoModal}
+              onStartStory={() => handleOpenLeadForm()}
+            />
 
-          {/* 11. Process & Timeline Section */}
-          <ProcessTimeline />
+            {/* 8. Studio Philosophy & About Section */}
+            <AboutSection />
 
-          {/* 12. Testimonials Showcase */}
-          <Testimonials />
+            {/* 9. Founders & Executive Leadership Section */}
+            <FoundersSection />
 
-          <FaqSection />
+            {/* 10. Why KD Creation Showcase */}
+            <WhyKdCreation />
 
-          {/* 13. Instagram Live Feed */}
-          <InstagramFeed />
+            {/* 11. Process & Timeline Section */}
+            <ProcessTimeline />
 
-          {/* 14. Lead Inquiry Form Section */}
-          <LeadFormSection preselectedService={selectedService} />
-        </>
-      )}
+            {/* 12. Testimonials Showcase */}
+            <Testimonials />
+
+            <FaqSection />
+
+            {/* 13. Instagram Live Feed */}
+            <InstagramFeed />
+
+            {/* 14. Lead Inquiry Form Section */}
+            <LeadFormSection preselectedService={selectedService} />
+          </>
+        )}
+      </Suspense>
 
       {/* 15. Footer with Brand Credits & Admin Lead Access */}
       <Footer onOpenAdminPortal={handleOpenAdminAccess} />
@@ -539,28 +555,28 @@ export const App: React.FC = () => {
           onOpenQrCode={(album) => setQrModalAlbum(album)}
           onSelectAlbum={(album) => setActiveAlbum(album)}
         />
-      </Suspense>
 
-      {/* 18. Digital Album Viewer & QR Code Modals */}
-      <DigitalAlbumViewerModal
-        album={activeAlbum}
-        isOpen={!!activeAlbum}
-        onClose={() => {
-          setActiveAlbum(null);
-          if (window.location.hash.startsWith('#album-')) {
-            window.history.pushState('', document.title, window.location.pathname + window.location.search);
-          }
-        }}
-        onOpenQrCode={(album) => setQrModalAlbum(album)}
-      />
-
-      {qrModalAlbum && (
-        <QrCodeModal
-          album={qrModalAlbum}
-          isOpen={!!qrModalAlbum}
-          onClose={() => setQrModalAlbum(null)}
+        {/* 18. Digital Album Viewer & QR Code Modals */}
+        <DigitalAlbumViewerModal
+          album={activeAlbum}
+          isOpen={!!activeAlbum}
+          onClose={() => {
+            setActiveAlbum(null);
+            if (window.location.hash.startsWith('#album-')) {
+              window.history.pushState('', document.title, window.location.pathname + window.location.search);
+            }
+          }}
+          onOpenQrCode={(album) => setQrModalAlbum(album)}
         />
-      )}
+
+        {qrModalAlbum && (
+          <QrCodeModal
+            album={qrModalAlbum}
+            isOpen={!!qrModalAlbum}
+            onClose={() => setQrModalAlbum(null)}
+          />
+        )}
+      </Suspense>
     </div>
   );
 };

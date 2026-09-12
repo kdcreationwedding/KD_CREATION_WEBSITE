@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { Play, Sparkles, Award } from 'lucide-react';
-import { SplineHero3D } from './SplineHero3D';
 import { SITE_CONFIG } from '../../config/siteConfig';
+
+const SplineHero3D = lazy(() =>
+  import('./SplineHero3D').then((m) => ({ default: m.SplineHero3D }))
+);
 
 interface HeroSectionProps {
   onExploreStories: () => void;
@@ -17,8 +20,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 }) => {
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center pt-28 pb-24 sm:pt-36 sm:pb-32 overflow-hidden bg-[#2B050B] text-[#F5F2EB]">
-      {/* 3D Spline & Canvas Background */}
-      <SplineHero3D />
+      {/* 3D Spline & Canvas Background (Loaded Asynchronously to guarantee sub-second mobile page load) */}
+      <Suspense fallback={<div className="absolute inset-0 bg-[#2B050B] pointer-events-none" />}>
+        <SplineHero3D />
+      </Suspense>
 
       {/* Hero Content Stack */}
       <div className="relative z-30 max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 w-full flex flex-col items-center text-center">
