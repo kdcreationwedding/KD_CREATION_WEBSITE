@@ -1,4 +1,4 @@
-import{r as h,j as e,m as I,A as j}from"./vendor-framer.C8kokVM1.js";import{S as k,L as A}from"./index.q3Dm6gn8.js";import{S as E,$ as D,a0 as _,X as W,a1 as P}from"./vendor-icons.DNVkISHC.js";import"./vendor-three.UU_95PR3.js";class N{static getInitialState(){const p={id:"init-1",sender:"ai",text:`Namaste & Warm Welcome! ✨
+import{r as h,j as e,m as I,A as j}from"./vendor-framer.C8kokVM1.js";import{S as k,L as A}from"./index.DYiCxBau.js";import{S as E,$ as D,a0 as _,X as W,a1 as P}from"./vendor-icons.DNVkISHC.js";import"./vendor-three.UU_95PR3.js";class N{static getInitialState(){const p={id:"init-1",sender:"ai",text:`Namaste & Warm Welcome! ✨
 
 I am **KD AI**, your Chief Wedding Film Consultant at **KD CREATION**.
 
