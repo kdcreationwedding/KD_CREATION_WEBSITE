@@ -14,9 +14,10 @@ export const DEMO_ALBUMS: DigitalAlbum[] = [
     subtitle: 'Luxury Engagement Ceremony Photobook',
     date: '2026',
     location: 'Ahmedabad, Gujarat',
-    coverImage: 'assets/manvi-dharmik/manvi-dharmik-hero.jpg',
+    coverImage: 'assets/manvi-dharmik/manvi-dharmik-cover.jpg',
     description: 'A day filled with happiness, love, and beautiful emotions. Celebrating the beginning of a beautiful journey where two hearts promise to walk together forever.',
     pages: [
+      'assets/manvi-dharmik/manvi-dharmik-cover.jpg',
       'assets/manvi-dharmik/manvi-dharmik-walk.jpg',
       'assets/manvi-dharmik/manvi-dharmik-hero.jpg',
       'assets/manvi-dharmik/manvi-dharmik-mehndi.jpg',
