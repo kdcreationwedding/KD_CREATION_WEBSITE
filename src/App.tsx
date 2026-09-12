@@ -87,40 +87,84 @@ export const App: React.FC = () => {
     canonicalLink.setAttribute('href', canonicalUrl);
   }, [currentPath]);
 
+// Helper to extract album query/hash deep link parameters
+const parseAlbumFromLocation = (): { slug: string; encodedData: string; isDirect: boolean } => {
+  if (typeof window === 'undefined') return { slug: '', encodedData: '', isDirect: false };
+  const hash = window.location.hash;
+  const search = window.location.search;
+  const pathname = window.location.pathname;
+  let slug = '';
+  let encodedData = '';
+
+  if (search.includes('album=')) {
+    const params = new URLSearchParams(search);
+    slug = params.get('album') || '';
+    encodedData = params.get('d') || '';
+  } else if (search.includes('album_id=')) {
+    const params = new URLSearchParams(search);
+    slug = params.get('album_id') || '';
+  } else if (hash.includes('album-')) {
+    slug = hash.split('album-')[1].split('?')[0].split('&')[0];
+  } else if (hash.includes('album/')) {
+    slug = hash.split('album/')[1].split('?')[0].split('&')[0];
+  } else if (pathname.includes('/album/')) {
+    slug = pathname.split('/album/')[1].split('?')[0].split('&')[0];
+  }
+
+  return {
+    slug,
+    encodedData,
+    isDirect: Boolean(slug)
+  };
+};
+
   // Digital Album Platform State
-  const [activeAlbum, setActiveAlbum] = useState<DigitalAlbum | null>(null);
+  const [activeAlbum, setActiveAlbum] = useState<DigitalAlbum | null>(() => {
+    const { slug, encodedData } = parseAlbumFromLocation();
+    if (!slug) return null;
+    const cleanSlug = slug.toLowerCase().trim().replace(/[^a-z0-9]/g, '');
+    let found = albumService.getAlbumBySlug(cleanSlug) || albumService.getAlbumBySlug(slug);
+    if (!found && encodedData) {
+      found = decodeAlbumFromUrl(encodedData) || undefined;
+    }
+    return found || null;
+  });
+
   const [qrModalAlbum, setQrModalAlbum] = useState<DigitalAlbum | null>(null);
-  const [isDirectAlbumLink, setIsDirectAlbumLink] = useState(false);
+  const [isDirectAlbumLink, setIsDirectAlbumLink] = useState<boolean>(() => {
+    const { isDirect } = parseAlbumFromLocation();
+    return isDirect;
+  });
 
-  // URL Hash & Query Deep-Linking for Direct Shareable Album Links (e.g. /?album=yash-kavya)
+  // URL Hash & Query Deep-Linking for Direct Shareable Album Links (e.g. /?album=nikhil-priyanka)
   useEffect(() => {
-    const handleHashChange = async () => {
-      const hash = window.location.hash;
-      const search = window.location.search;
-      const pathname = window.location.pathname;
-      let slug = '';
-      let encodedData = '';
+    let isMounted = true;
 
-      if (search.includes('album=')) {
-        const params = new URLSearchParams(search);
-        slug = params.get('album') || '';
-        encodedData = params.get('d') || '';
-      } else if (search.includes('album_id=')) {
-        const params = new URLSearchParams(search);
-        slug = params.get('album_id') || '';
-      } else if (hash.includes('album-')) {
-        slug = hash.split('album-')[1].split('?')[0].split('&')[0];
-      } else if (hash.includes('album/')) {
-        slug = hash.split('album/')[1].split('?')[0].split('&')[0];
-      } else if (pathname.includes('/album/')) {
-        slug = pathname.split('/album/')[1].split('?')[0].split('&')[0];
+    const handleHashChange = async () => {
+      const { slug, encodedData, isDirect } = parseAlbumFromLocation();
+      if (!isDirect || !slug) {
+        if (isMounted) setIsDirectAlbumLink(false);
+        return;
       }
 
-      if (slug) {
-        const cleanSlug = slug.toLowerCase().trim().replace(/[^a-z0-9]/g, '');
+      const cleanSlug = slug.toLowerCase().trim().replace(/[^a-z0-9]/g, '');
 
-        // 1. Try 24/7 Supabase Cloud Database first for instant multi-device sync
+      // 1. Immediate synchronous fallback check from local memory / demo albums
+      let localFound = albumService.getAlbumBySlug(cleanSlug) || albumService.getAlbumBySlug(slug);
+      if (!localFound && encodedData) {
+        localFound = decodeAlbumFromUrl(encodedData) || undefined;
+      }
+
+      if (localFound && isMounted) {
+        setActiveAlbum(localFound);
+        setIsDirectAlbumLink(true);
+      }
+
+      // 2. Fetch 24/7 Supabase Cloud Database in background for multi-device sync
+      try {
         const cloudAlbums = await apiClient.getAlbums();
+        if (!isMounted) return;
+
         if (cloudAlbums && Array.isArray(cloudAlbums) && cloudAlbums.length > 0) {
           const matched = cloudAlbums.find((a: any) => {
             const s = (a.slug || '').toLowerCase().replace(/[^a-z0-9]/g, '');
@@ -129,35 +173,26 @@ export const App: React.FC = () => {
             return s === cleanSlug || c === cleanSlug || i === cleanSlug || i === `album${cleanSlug}` || cleanSlug.includes(s) || s.includes(cleanSlug);
           });
 
-          if (matched) {
-            albumService.saveAlbum(matched);
-            setActiveAlbum(matched);
+          if (matched && isMounted) {
+            setActiveAlbum((prev) => {
+              if (prev && prev.id === matched.id && JSON.stringify(prev.pages) === JSON.stringify(matched.pages)) {
+                return prev;
+              }
+              return matched;
+            });
             setIsDirectAlbumLink(true);
-            return;
           }
         }
-
-        // 2. Fallback to local memory / demo albums
-        let found = albumService.getAlbumBySlug(slug);
-        if (!found && encodedData) {
-          found = decodeAlbumFromUrl(encodedData) || undefined;
-        }
-
-        if (found) {
-          setActiveAlbum(found);
-          setIsDirectAlbumLink(true);
-        }
-      } else {
-        setIsDirectAlbumLink(false);
+      } catch (err) {
+        console.warn('Could not sync cloud album in background:', err);
       }
     };
 
     handleHashChange();
-    const unsubscribe = albumService.subscribe(handleHashChange);
     window.addEventListener('hashchange', handleHashChange);
     window.addEventListener('popstate', handleHashChange);
     return () => {
-      unsubscribe();
+      isMounted = false;
       window.removeEventListener('hashchange', handleHashChange);
       window.removeEventListener('popstate', handleHashChange);
     };

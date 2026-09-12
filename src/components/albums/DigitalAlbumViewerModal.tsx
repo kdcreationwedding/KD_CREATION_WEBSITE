@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   X, ChevronLeft, ChevronRight, Maximize2, Minimize2, ZoomIn, ZoomOut,
@@ -24,13 +24,18 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
   onOpenQrCode
 }) => {
   // Viewer View States: 'cover' | 'password' | 'book' | 'end'
-  const [viewMode, setViewMode] = useState<'cover' | 'password' | 'book' | 'end'>('cover');
+  const [viewMode, setViewMode] = useState<'cover' | 'password' | 'book' | 'end'>(() => {
+    if (!album) return 'cover';
+    if (album.isPrivate && !isQrAccess) return 'password';
+    if (isQrAccess) return 'book';
+    return !album.isPrivate ? 'book' : 'cover';
+  });
   const [enteredPassword, setEnteredPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
 
   // Page Index State (0-indexed)
   const [currentPageIndex, setCurrentPageIndex] = useState(0);
-  const [isPageLoading, setIsPageLoading] = useState(true);
+  const [isPageLoading, setIsPageLoading] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [zoomLevel, setZoomLevel] = useState(1);
   const [isMuted, setIsMuted] = useState(true);
@@ -82,14 +87,15 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
         setCurrentPageIndex(0);
         setZoomLevel(1);
 
-        const isQrAccess =
+        const isDirect =
+          Boolean(isQrAccess) ||
           window.location.hash.includes(album.slug) ||
           window.location.search.includes('qr=true') ||
           window.location.search.includes('access=qr') ||
           window.location.search.includes('album=') ||
           window.location.search.includes('album_id=');
 
-        if (isQrAccess || !album.isPrivate) {
+        if (isDirect || !album.isPrivate) {
           setViewMode('book');
         } else {
           setViewMode('password');
@@ -100,7 +106,7 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
     if (!isOpen) {
       activeAlbumIdRef.current = null;
     }
-  }, [isOpen, album?.id, album?.slug]);
+  }, [isOpen, album?.id, album?.slug, isQrAccess]);
 
   // Keyboard Arrow Navigation listener
   useEffect(() => {
@@ -120,13 +126,43 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, viewMode, currentPageIndex, album]);
 
-  const pages = album ? getParsedPages(album.pages) : [];
+  const pages = useMemo(() => {
+    return album ? getParsedPages(album.pages) : [];
+  }, [album?.id, album?.slug, album?.pages]);
   const totalPages = pages.length;
 
-  // Intelligent Preloading: Preload adjacent pages in background for zero-latency page turns
+  const currentPageUrl = pages[currentPageIndex] ? getAssetPath(pages[currentPageIndex]) : '';
+
+  // Intelligent Preloading & Immediate Image Availability Detection
   useEffect(() => {
-    setIsPageLoading(true);
-    if (isOpen && viewMode === 'book' && pages.length > 0) {
+    if (!isOpen || viewMode !== 'book') {
+      setIsPageLoading(false);
+      return;
+    }
+
+    if (!currentPageUrl) {
+      setIsPageLoading(false);
+      return;
+    }
+
+    // Check if the current page image is already loaded/cached in browser memory
+    const testImg = new Image();
+    testImg.src = currentPageUrl;
+    if (testImg.complete) {
+      setIsPageLoading(false);
+    } else {
+      setIsPageLoading(true);
+      testImg.onload = () => setIsPageLoading(false);
+      testImg.onerror = () => setIsPageLoading(false);
+    }
+
+    // Safety timeout: Never let the spinner hang for more than 1.5 seconds under any network condition
+    const timer = setTimeout(() => {
+      setIsPageLoading(false);
+    }, 1500);
+
+    // Preload adjacent pages in background for zero-latency page turns
+    if (pages.length > 0) {
       const toPreload = [
         pages[currentPageIndex + 1],
         pages[currentPageIndex + 2],
@@ -138,7 +174,9 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
         img.src = getAssetPath(url);
       });
     }
-  }, [currentPageIndex, viewMode, pages, isOpen]);
+
+    return () => clearTimeout(timer);
+  }, [currentPageIndex, viewMode, currentPageUrl, isOpen]);
 
   if (!isOpen || !album) return null;
 
@@ -455,7 +493,8 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
 
                       {/* 100% Ultra-HD Native Full Screen Photo with Off-Thread Async Decoding */}
                       <img
-                        src={getAssetPath(pages[currentPageIndex])}
+                        key={currentPageUrl || currentPageIndex}
+                        src={currentPageUrl}
                         alt={`Page ${currentPageIndex + 1}`}
                         decoding="async"
                         loading="eager"
