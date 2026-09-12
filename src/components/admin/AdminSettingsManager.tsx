@@ -243,7 +243,7 @@ export const AdminSettingsManager: React.FC = () => {
                 type="text"
                 value={r2Config.bucketName}
                 onChange={(e) => setR2Config({ ...r2Config, bucketName: e.target.value.trim() })}
-                placeholder="kd-creation-albums"
+                placeholder="albums"
                 className="w-full px-3.5 py-2.5 rounded-xl bg-[#1C0307] border border-gold/30 text-gold text-xs font-mono"
               />
             </div>
