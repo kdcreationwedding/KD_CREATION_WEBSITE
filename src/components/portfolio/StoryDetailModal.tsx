@@ -58,13 +58,22 @@ export const StoryDetailModal: React.FC<StoryDetailModalProps> = ({
             <div className="p-6 sm:p-10 overflow-y-auto space-y-10">
               
               {/* Main Top Video Preview & Thumbnail Banner */}
-              <div className="relative rounded-2xl overflow-hidden h-72 sm:h-[440px] border border-gold/40 group shadow-2xl bg-[#2B050B]">
+              <div className="relative rounded-2xl overflow-hidden h-72 sm:h-[440px] border border-gold/40 group shadow-2xl bg-[#1C0307] flex items-center justify-center">
+                {/* Ambient Blurred Backdrop */}
+                <img
+                  src={videoThumbnail}
+                  alt=""
+                  aria-hidden="true"
+                  className="absolute inset-0 w-full h-full object-cover blur-lg opacity-40 scale-105 pointer-events-none"
+                />
+
+                {/* Full Uncropped High-Fidelity Thumbnail */}
                 <img
                   src={videoThumbnail}
                   alt={`${story.couple} Video Thumbnail`}
-                  className="w-full h-full object-cover brightness-95 group-hover:brightness-100 transition-all duration-500"
+                  className="relative z-10 w-full h-full object-contain brightness-95 group-hover:brightness-100 transition-all duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#2B050B]/90 via-black/30 to-transparent" />
+                <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#2B050B]/90 via-transparent to-transparent pointer-events-none" />
                 
                 {/* Prominent Glowing 4K Play Button Banner */}
                 {story.videoUrl && (

@@ -44,10 +44,19 @@ export const cmsService = {
       if (stored) {
         const parsed = JSON.parse(stored);
         if (Array.isArray(parsed) && parsed.length > 0) {
+          const updated = parsed.map((item: any) => {
+            if (item.id === 'story-manvi-dharmik-engagement') {
+              const def = SITE_CONFIG.portfolio.find(p => p.id === item.id);
+              if (def) {
+                return { ...item, heroImage: def.heroImage, modalCover: def.modalCover, gallery: def.gallery };
+              }
+            }
+            return item;
+          });
           const missingDefaults = SITE_CONFIG.portfolio.filter(
-            (def) => !parsed.some((p: any) => p.id === def.id)
+            (def) => !updated.some((p: any) => p.id === def.id)
           );
-          const merged = [...missingDefaults, ...parsed];
+          const merged = [...missingDefaults, ...updated];
           inMemoryStories = merged;
           return merged;
         }

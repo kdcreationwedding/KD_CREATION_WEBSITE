@@ -245,9 +245,10 @@ export const SITE_CONFIG = {
       category: "Engagement",
       description: "A day filled with happiness, love, and beautiful emotions. Her smile says everything her heart is feeling, and with Dharmik by her side, this moment marks the beginning of their forever.",
       heroImage: "assets/manvi-dharmik/manvi-dharmik-cover.jpg",
-      modalCover: "assets/manvi-dharmik/manvi-dharmik-hero.jpg",
+      modalCover: "assets/manvi-dharmik/manvi-dharmik-jeevan-saathi.jpg",
       gallery: [
         "assets/manvi-dharmik/manvi-dharmik-cover.jpg",
+        "assets/manvi-dharmik/manvi-dharmik-jeevan-saathi.jpg",
         "assets/manvi-dharmik/manvi-dharmik-hero.jpg",
         "assets/manvi-dharmik/manvi-dharmik-walk.jpg",
         "assets/manvi-dharmik/manvi-dharmik-mehndi.jpg",
