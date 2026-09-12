@@ -133,7 +133,7 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
 
   const currentPageUrl = pages[currentPageIndex] ? getAssetPath(pages[currentPageIndex]) : '';
 
-  // Intelligent Preloading & Immediate Image Availability Detection
+  // Intelligent Sequential Bandwidth-Friendly Image Loading
   useEffect(() => {
     if (!isOpen || viewMode !== 'book') {
       setIsPageLoading(false);
@@ -145,37 +145,45 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
       return;
     }
 
-    // Check if the current page image is already loaded/cached in browser memory
+    let isSubscribed = true;
+
+    // 1. Check if the current page image is already cached in browser memory
     const testImg = new Image();
     testImg.src = currentPageUrl;
+
+    const preloadNextPage = () => {
+      // Preload ONLY the next single page to avoid clogging mobile bandwidth
+      if (pages[currentPageIndex + 1]) {
+        const nextImg = new Image();
+        nextImg.src = getAssetPath(pages[currentPageIndex + 1]);
+      }
+    };
+
     if (testImg.complete) {
       setIsPageLoading(false);
+      preloadNextPage();
     } else {
       setIsPageLoading(true);
-      testImg.onload = () => setIsPageLoading(false);
-      testImg.onerror = () => setIsPageLoading(false);
+      testImg.onload = () => {
+        if (!isSubscribed) return;
+        setIsPageLoading(false);
+        preloadNextPage();
+      };
+      testImg.onerror = () => {
+        if (!isSubscribed) return;
+        setIsPageLoading(false);
+      };
     }
 
-    // Safety timeout: Never let the spinner hang for more than 1.5 seconds under any network condition
+    // Safety timeout: dismiss spinner after 800ms so user always has control
     const timer = setTimeout(() => {
-      setIsPageLoading(false);
-    }, 1500);
+      if (isSubscribed) setIsPageLoading(false);
+    }, 800);
 
-    // Preload adjacent pages in background for zero-latency page turns
-    if (pages.length > 0) {
-      const toPreload = [
-        pages[currentPageIndex + 1],
-        pages[currentPageIndex + 2],
-        pages[currentPageIndex - 1]
-      ].filter(Boolean);
-
-      toPreload.forEach((url) => {
-        const img = new Image();
-        img.src = getAssetPath(url);
-      });
-    }
-
-    return () => clearTimeout(timer);
+    return () => {
+      isSubscribed = false;
+      clearTimeout(timer);
+    };
   }, [currentPageIndex, viewMode, currentPageUrl, isOpen]);
 
   if (!isOpen || !album) return null;
@@ -492,18 +500,17 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
                   {pages[currentPageIndex] ? (
                     <div className="w-full h-full flex items-center justify-center relative overflow-hidden">
 
-                      {/* 100% Ultra-HD Native Full Screen Photo with Off-Thread Async Decoding */}
+                      {/* 100% Ultra-HD Native Full Screen Photo with Off-Thread Async Decoding & High Network Priority */}
                       <img
                         key={currentPageUrl || currentPageIndex}
                         src={currentPageUrl}
                         alt={`Page ${currentPageIndex + 1}`}
                         decoding="async"
                         loading="eager"
+                        fetchPriority="high"
                         onLoad={() => setIsPageLoading(false)}
                         onError={() => setIsPageLoading(false)}
-                        className={`w-full h-full object-contain pointer-events-auto select-none transition-opacity duration-300 ${
-                          isPageLoading ? 'opacity-30 blur-sm' : 'opacity-100 blur-0'
-                        }`}
+                        className="w-full h-full object-contain pointer-events-auto select-none opacity-100 transition-opacity duration-300"
                         style={{
                           width: '100vw',
                           height: '92vh',
@@ -511,13 +518,16 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
                         }}
                       />
 
-                      {/* Luxury Gold Page Loading Spinner */}
+                      {/* Luxury Non-Blocking Top Loading Progress Indicator */}
                       {isPageLoading && (
-                        <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#0A0103]/60 backdrop-blur-sm z-10 pointer-events-none">
-                          <div className="w-10 h-10 border-2 border-gold/20 border-t-gold rounded-full animate-spin mb-3 shadow-[0_0_15px_rgba(212,175,55,0.3)]" />
-                          <span className="text-[10px] font-mono tracking-widest text-gold uppercase font-bold">
-                            Loading 4K Page...
-                          </span>
+                        <div className="absolute top-0 inset-x-0 z-30 pointer-events-none flex flex-col items-center">
+                          <div className="w-full h-[3px] bg-gradient-to-r from-gold/20 via-gold to-gold/20 animate-pulse shadow-[0_0_12px_rgba(212,175,55,0.8)]" />
+                          <div className="mt-3 px-4 py-1.5 rounded-full bg-black/75 backdrop-blur-md border border-gold/30 flex items-center gap-2 shadow-2xl">
+                            <div className="w-3.5 h-3.5 border border-gold/30 border-t-gold rounded-full animate-spin" />
+                            <span className="text-[10px] font-mono tracking-widest text-gold uppercase font-bold">
+                              Loading 4K Page...
+                            </span>
+                          </div>
                         </div>
                       )}
 

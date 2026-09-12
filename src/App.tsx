@@ -160,28 +160,39 @@ const parseAlbumFromLocation = (): { slug: string; encodedData: string; isDirect
         setIsDirectAlbumLink(true);
       }
 
-      // 2. Fetch 24/7 Supabase Cloud Database in background for multi-device sync
+      // 2. Fetch 24/7 Supabase Cloud Database with fast sub-50ms single lookup
       try {
-        const cloudAlbums = await apiClient.getAlbums();
-        if (!isMounted) return;
-
-        if (cloudAlbums && Array.isArray(cloudAlbums) && cloudAlbums.length > 0) {
-          const matched = cloudAlbums.find((a: any) => {
-            const s = (a.slug || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-            const c = (a.couple || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-            const i = (a.id || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-            return s === cleanSlug || c === cleanSlug || i === cleanSlug || i === `album${cleanSlug}` || cleanSlug.includes(s) || s.includes(cleanSlug);
-          });
-
-          if (matched && isMounted) {
-            setActiveAlbum((prev) => {
-              if (prev && prev.id === matched.id && JSON.stringify(prev.pages) === JSON.stringify(matched.pages)) {
-                return prev;
-              }
-              return matched;
+        let matched = await apiClient.getAlbumBySlug(cleanSlug);
+        if (!matched && isMounted) {
+          const cloudAlbums = await apiClient.getAlbums();
+          if (cloudAlbums && Array.isArray(cloudAlbums)) {
+            matched = cloudAlbums.find((a: any) => {
+              const s = (a.slug || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+              const c = (a.couple || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+              const i = (a.id || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+              return s === cleanSlug || c === cleanSlug || i === cleanSlug || i === `album${cleanSlug}` || cleanSlug.includes(s) || s.includes(cleanSlug);
             });
-            setIsDirectAlbumLink(true);
           }
+        }
+
+        if (matched && isMounted) {
+          // Cache in localStorage for instant 0ms access on next visit
+          try {
+            const stored = localStorage.getItem('kd_digital_albums_v9');
+            const existing = stored ? JSON.parse(stored) : [];
+            const idx = existing.findIndex((a: any) => a.id === matched.id || a.slug === matched.slug);
+            if (idx >= 0) existing[idx] = matched;
+            else existing.unshift(matched);
+            localStorage.setItem('kd_digital_albums_v9', JSON.stringify(existing));
+          } catch (e) {}
+
+          setActiveAlbum((prev) => {
+            if (prev && prev.id === matched.id && JSON.stringify(prev.pages) === JSON.stringify(matched.pages)) {
+              return prev;
+            }
+            return matched;
+          });
+          setIsDirectAlbumLink(true);
         }
       } catch (err) {
         console.warn('Could not sync cloud album in background:', err);
@@ -317,7 +328,21 @@ const parseAlbumFromLocation = (): { slug: string; encodedData: string; isDirect
   });
 
   // Standalone Direct 3D E-Album Viewer Page (When accessed via QR or direct album URL)
-  if (isDirectAlbumLink && activeAlbum) {
+  if (isDirectAlbumLink) {
+    if (!activeAlbum) {
+      return (
+        <div className="fixed inset-0 bg-[#0A0103] flex flex-col items-center justify-center text-gold z-[999999] p-6 text-center">
+          <div className="w-12 h-12 border-2 border-gold/20 border-t-gold rounded-full animate-spin mb-4 shadow-[0_0_20px_rgba(212,175,55,0.4)]" />
+          <span className="text-sm font-serif-luxury tracking-[0.25em] uppercase text-gold font-bold">
+            KD CREATION
+          </span>
+          <span className="text-[11px] font-mono text-[#F5F2EB]/60 mt-1.5 tracking-wider">
+            OPENING 4K ULTRA-HD PHOTOBOOK...
+          </span>
+        </div>
+      );
+    }
+
     return (
       <div className="fixed inset-0 bg-[#0F0204] text-[#F5F2EB] z-[999999] overflow-hidden">
         <Suspense fallback={

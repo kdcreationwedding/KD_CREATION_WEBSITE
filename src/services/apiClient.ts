@@ -23,7 +23,47 @@ export const apiClient = {
     }
   },
 
-  // 1. Digital Albums - 24/7 Cloud Sync from Supabase + GitHub Cloud DB + Local Backend
+  // 1. Single Digital Album - Sub-50ms Direct Lookup from Supabase
+  getAlbumBySlug: async (slug: string) => {
+    if (isSupabaseConfigured() && supabase) {
+      try {
+        const cleanSlug = slug.toLowerCase().trim().replace(/[^a-z0-9]/g, '');
+        const { data, error } = await supabase
+          .from('albums')
+          .select('*')
+          .or(`slug.eq.${cleanSlug},slug.eq.${slug},id.eq.${slug},id.eq.album-${cleanSlug}`)
+          .limit(1)
+          .maybeSingle();
+
+        if (!error && data) {
+          return {
+            id: data.id,
+            slug: data.slug,
+            title: data.title,
+            couple: data.couple,
+            subtitle: data.subtitle,
+            date: data.date,
+            location: data.location,
+            coverImage: data.cover_image || data.coverImage,
+            description: data.description,
+            pages: typeof data.pages === 'string' ? JSON.parse(data.pages) : (data.pages || []),
+            isPublished: data.is_published ?? data.isPublished ?? true,
+            isPrivate: data.is_private ?? data.isPrivate ?? false,
+            password: data.password || '',
+            watermarkEnabled: data.watermark_enabled ?? data.watermarkEnabled ?? true,
+            downloadAllowed: data.download_allowed ?? data.downloadAllowed ?? false,
+            createdAt: data.created_at || data.createdAt,
+            updatedAt: data.updated_at || data.updatedAt
+          };
+        }
+      } catch (e) {
+        console.warn('Supabase getAlbumBySlug error:', e);
+      }
+    }
+    return null;
+  },
+
+  // 2. Digital Albums - 24/7 Cloud Sync from Supabase + GitHub Cloud DB + Local Backend
   getAlbums: async () => {
     // 0. Try Supabase first if configured
     if (isSupabaseConfigured() && supabase) {
