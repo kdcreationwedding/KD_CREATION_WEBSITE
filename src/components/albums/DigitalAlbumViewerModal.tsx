@@ -5,7 +5,7 @@ import {
   Volume2, VolumeX, QrCode, Share2, Lock, Key, RotateCcw, BookOpen, Layers
 } from 'lucide-react';
 import { DigitalAlbum } from '../../types/album';
-import { getAssetPath } from '../../utils/assetHelper';
+import { getAssetPath, getOptimizedImageUrl } from '../../utils/assetHelper';
 import { SITE_CONFIG } from '../../config/siteConfig';
 
 interface DigitalAlbumViewerModalProps {
@@ -131,9 +131,10 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
   }, [album?.id, album?.slug, album?.pages]);
   const totalPages = pages.length;
 
-  const currentPageUrl = pages[currentPageIndex] ? getAssetPath(pages[currentPageIndex]) : '';
+  const rawPageUrl = pages[currentPageIndex] ? getAssetPath(pages[currentPageIndex]) : '';
+  const currentPageUrl = pages[currentPageIndex] ? getOptimizedImageUrl(pages[currentPageIndex], 2048, 85) : '';
 
-  // Intelligent Sequential Bandwidth-Friendly Image Loading
+  // Intelligent Sequential Bandwidth-Friendly Image Loading with Global Edge CDN
   useEffect(() => {
     if (!isOpen || viewMode !== 'book') {
       setIsPageLoading(false);
@@ -152,10 +153,10 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
     testImg.src = currentPageUrl;
 
     const preloadNextPage = () => {
-      // Preload ONLY the next single page to avoid clogging mobile bandwidth
+      // Preload ONLY the next single page using Edge CDN to avoid clogging mobile bandwidth
       if (pages[currentPageIndex + 1]) {
         const nextImg = new Image();
-        nextImg.src = getAssetPath(pages[currentPageIndex + 1]);
+        nextImg.src = getOptimizedImageUrl(pages[currentPageIndex + 1], 2048, 85);
       }
     };
 
@@ -175,10 +176,10 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
       };
     }
 
-    // Safety timeout: dismiss spinner after 800ms so user always has control
+    // Safety timeout: dismiss spinner after 500ms so user always has instant control
     const timer = setTimeout(() => {
       if (isSubscribed) setIsPageLoading(false);
-    }, 800);
+    }, 500);
 
     return () => {
       isSubscribed = false;
@@ -509,7 +510,13 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
                         loading="eager"
                         fetchPriority="high"
                         onLoad={() => setIsPageLoading(false)}
-                        onError={() => setIsPageLoading(false)}
+                        onError={(e) => {
+                          setIsPageLoading(false);
+                          const target = e.currentTarget;
+                          if (rawPageUrl && target.src !== rawPageUrl) {
+                            target.src = rawPageUrl;
+                          }
+                        }}
                         className="w-full h-full object-contain pointer-events-auto select-none opacity-100 transition-opacity duration-300"
                         style={{
                           width: '100vw',
@@ -653,9 +660,16 @@ export const DigitalAlbumViewerModal: React.FC<DigitalAlbumViewerModalProps> = (
               className={`relative flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all ${idx === currentPageIndex ? 'border-gold scale-105 shadow-md' : 'border-gold/20 opacity-60 hover:opacity-100'}`}
             >
               <img
-                src={getAssetPath(pageUrl)}
+                src={getOptimizedImageUrl(pageUrl, 160, 65)}
                 alt={`Thumb ${idx + 1}`}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover"
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  const raw = getAssetPath(pageUrl);
+                  if (raw && target.src !== raw) target.src = raw;
+                }}
               />
               <span className="absolute bottom-0 inset-x-0 bg-black/80 text-[8px] font-mono text-gold text-center">
                 {idx + 1}

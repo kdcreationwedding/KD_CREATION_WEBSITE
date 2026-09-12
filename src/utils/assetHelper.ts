@@ -21,3 +21,28 @@ export const getAssetUrl = (path: string): string => {
 };
 
 export const getAssetPath = getAssetUrl;
+
+/**
+ * Global Edge CDN Image Optimizer
+ * Accelerates large Cloudflare R2 images (e.g. 7.8MB raw JPGs) by converting them
+ * to ~250KB WebP files cached directly at Cloudflare edge datacenters (Mumbai/Delhi).
+ */
+export const getOptimizedImageUrl = (
+  path: string,
+  width: number = 2048,
+  quality: number = 82
+): string => {
+  if (!path) return '';
+
+  const rawUrl = getAssetUrl(path);
+
+  if (rawUrl.endsWith('.svg') || rawUrl.endsWith('.mp4') || rawUrl.startsWith('data:')) {
+    return rawUrl;
+  }
+
+  if (rawUrl.includes('r2.dev') || rawUrl.includes('supabase.co/storage')) {
+    return `https://wsrv.nl/?url=${encodeURIComponent(rawUrl)}&w=${width}&q=${quality}&output=webp&we=1`;
+  }
+
+  return rawUrl;
+};
