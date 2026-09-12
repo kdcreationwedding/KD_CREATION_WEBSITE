@@ -64,6 +64,8 @@ export const StoryDetailModal: React.FC<StoryDetailModalProps> = ({
                   src={videoThumbnail}
                   alt=""
                   aria-hidden="true"
+                  loading="lazy"
+                  decoding="async"
                   className="absolute inset-0 w-full h-full object-cover blur-lg opacity-40 scale-105 pointer-events-none"
                 />
 
@@ -71,6 +73,8 @@ export const StoryDetailModal: React.FC<StoryDetailModalProps> = ({
                 <img
                   src={videoThumbnail}
                   alt={`${story.couple} Video Thumbnail`}
+                  loading="lazy"
+                  decoding="async"
                   className="relative z-10 w-full h-full object-contain brightness-95 group-hover:brightness-100 transition-all duration-500"
                 />
                 <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#2B050B]/90 via-transparent to-transparent pointer-events-none" />
@@ -216,6 +220,7 @@ export const StoryDetailModal: React.FC<StoryDetailModalProps> = ({
                         alt={`Gallery Still #${gIdx + 1}`}
                         className="w-full h-full object-cover group-hover:object-contain transition-all duration-300 brightness-95 group-hover:brightness-100 bg-[#2B050B]"
                         loading="lazy"
+                        decoding="async"
                       />
 
                       {/* Fullscreen Expand Icon Overlay on Hover */}

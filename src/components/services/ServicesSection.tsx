@@ -79,6 +79,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
                   alt={`KD Creation ${service.title} - Luxury Wedding Photography & Cinematography Ahmedabad Gujarat`}
                   className="w-full h-full object-cover object-[center_15%] transition-all duration-700 group-hover:scale-105 brightness-95 group-hover:brightness-100"
                   loading="lazy"
+                  decoding="async"
                 />
                 {service.images && service.images.length > 1 && (
                   <img
@@ -86,6 +87,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
                     alt={`KD Creation ${service.title} Gujarat Royal Wedding Portfolio`}
                     className="absolute inset-0 w-full h-full object-cover object-[center_15%] transition-all duration-700 opacity-0 group-hover:opacity-100 group-hover:scale-105 brightness-95 group-hover:brightness-100"
                     loading="lazy"
+                    decoding="async"
                   />
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#3B0811] via-[#3B0811]/30 to-transparent opacity-85 pointer-events-none" />

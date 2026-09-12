@@ -79,6 +79,7 @@ export const SelectedStories: React.FC<SelectedStoriesProps> = ({
                   alt={`KD Creation Wedding Photography & 4K Cinema - ${story.couple} ${story.title} ${story.location}`}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 brightness-90 group-hover:brightness-100"
                   loading="lazy"
+                  decoding="async"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#2B050B] via-transparent to-transparent opacity-90" />
 

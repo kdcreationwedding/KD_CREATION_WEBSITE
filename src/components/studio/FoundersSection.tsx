@@ -66,6 +66,7 @@ export const FoundersSection: React.FC = () => {
                   alt={founder.name}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 brightness-95 group-hover:brightness-100"
                   loading="lazy"
+                  decoding="async"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#3B0811] via-transparent to-transparent opacity-90" />
 

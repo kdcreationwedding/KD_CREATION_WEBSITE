@@ -84,6 +84,8 @@ export const CinemaSection: React.FC<CinemaSectionProps> = ({ onOpenVideoModal, 
               key={activeVideo.url}
               src={activeVideo.poster}
               alt={activeVideo.title}
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover brightness-75 group-hover:scale-105 transition-transform duration-1000"
             />
           ) : (

@@ -19,6 +19,8 @@ export const AboutSection: React.FC = () => {
               <img
                 src="assets/about-behind-the-frames.jpg"
                 alt="KD CREATION Studio Team"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover brightness-95"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-transparent opacity-80" />

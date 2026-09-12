@@ -58,6 +58,8 @@ export const Testimonials: React.FC = () => {
                 <img
                   src={current.portrait}
                   alt={current.couple}
+                  loading="lazy"
+                  decoding="async"
                   className="w-16 h-16 rounded-full object-cover border-2 border-gold/40 shadow-lg"
                 />
                 <div>
