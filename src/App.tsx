@@ -1,5 +1,5 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react';
-import { motion, useScroll } from 'framer-motion';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import { LoadingScreen } from './components/loading/LoadingScreen';
 import { CustomCursor } from './components/layout/CustomCursor';
 import { Navbar } from './components/layout/Navbar';
@@ -273,8 +273,13 @@ export const App: React.FC = () => {
     setVideoModalState({ isOpen: true, url, title });
   };
 
-  // Real-Time Direct Scroll Progress (Zero physics overhead for 120Hz smooth scrolling)
+  // Real-Time Scroll Reactive Physics Progress
   const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
 
   // Standalone Direct 3D E-Album Viewer Page (When accessed via QR or direct album URL)
   if (isDirectAlbumLink && activeAlbum) {
@@ -340,7 +345,7 @@ export const App: React.FC = () => {
       {/* Real-Time Luxury Scroll Progress Indicator */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-gold-light via-gold to-[#A38136] z-[999999] origin-left shadow-[0_0_12px_rgba(212,175,55,0.85)]"
-        style={{ scaleX: scrollYProgress }}
+        style={{ scaleX }}
       />
 
       {/* 1. Cinematic Loading Screen Overlay */}

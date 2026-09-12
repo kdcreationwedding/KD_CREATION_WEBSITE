@@ -114,24 +114,11 @@ input::placeholder, textarea::placeholder {
   }
 }
 
-/* Off-thread Rendering & Native Layout Containment for 120Hz Lag-Free Performance */
-#cinema, #founders, #process, #testimonials, #instagram-feed, #faq {
-  content-visibility: auto;
-  contain-intrinsic-size: 1px 700px;
-}
-
-/* GPU Compositor Acceleration */
+/* GPU Compositor Acceleration for Buttery Smooth 120fps Animations */
 .liquid-glass-card, .glass-card, .liquid-glass-panel, .glass-panel {
   transform: translateZ(0);
   backface-visibility: hidden;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, ::before, ::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
+  will-change: transform, opacity;
 }
 
 /* Custom Scrollbar for Royal Maroon Theme */

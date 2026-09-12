@@ -259,8 +259,8 @@ export const SplineHero3D: React.FC = () => {
 
   return (
     <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-      {/* Spline 3D Scene Container - ONLY loaded on high-performance desktop hardware */}
-      {profile.enableHeavy3D && !splineError && (
+      {/* Spline 3D Scene Container - Interactive luxury 3D wedding scene */}
+      {!splineError && (
         <div className="absolute inset-0 z-10 opacity-90 transition-opacity duration-1000 pointer-events-auto">
           <SafeSpline
             scene={SITE_CONFIG.SPLINE_SCENE_URL}

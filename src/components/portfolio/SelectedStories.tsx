@@ -63,11 +63,11 @@ export const SelectedStories: React.FC<SelectedStoriesProps> = ({
           {filteredPortfolio.map((story, idx) => (
             <motion.div
               key={story.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-20px" }}
-              transition={{ duration: 0.5, delay: (idx % 2) * 0.1, ease: "easeOut" }}
-              whileHover={{ y: -6 }}
+              initial={{ opacity: 0, y: 45, scale: 0.96 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: false, margin: "-50px" }}
+              transition={{ duration: 0.6, delay: (idx % 2) * 0.12, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ y: -8, scale: 1.015 }}
               onClick={() => setSelectedStory(story)}
               className="group relative rounded-3xl overflow-hidden liquid-glass-card cursor-pointer shadow-2xl transition-all duration-300"
               data-cursor="OPEN"

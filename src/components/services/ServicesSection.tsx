@@ -64,11 +64,11 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
           {SITE_CONFIG.services.map((service, index) => (
             <motion.div
               key={service.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: (index % 3) * 0.1, ease: "easeOut" }}
-              whileHover={{ y: -6 }}
+              initial={{ opacity: 0, y: 40, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: false, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: (index % 3) * 0.12, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ y: -7, scale: 1.015 }}
               className="liquid-glass-card rounded-3xl overflow-hidden flex flex-col group shadow-xl transition-all duration-300"
               data-cursor="VIEW"
             >
