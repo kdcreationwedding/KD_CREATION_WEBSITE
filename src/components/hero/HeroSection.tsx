@@ -51,7 +51,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           WE TURN YOUR <br />
           <span className="text-gold-gradient italic font-normal">WEDDING</span> INTO A <br />
           TIMELESS FILM.
-          <span className="sr-only"> — KD Creation Photography (KD Creations): Luxury Wedding Photography, 4K Cinematography, Pre-Wedding Shoots, Photo Editing, Video Editing & Album Designing in Ahmedabad, Gujarat</span>
+          <span className="sr-only"> — KD Creation Photography (KD Creations): Wedding Photographer & Filmmaker in Ahmedabad, Gujarat. Luxury Wedding Photography, Cinematic Wedding Films, Pre-Wedding Photography, Event Coverage, Photo & Video Editing, Heirloom Albums across Bodakdev, Satellite, S.G. Highway, Prahlad Nagar, Bopal, and Gandhinagar.</span>
         </motion.h1>
 
         {/* Subheading */}

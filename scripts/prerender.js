@@ -154,7 +154,112 @@ const routes = [
     title: "Top 10 Luxury Pre-Wedding Shoot Locations in Gujarat | Guide",
     description: "Curated guide to the best luxury pre-wedding shoot locations across Gujarat including Adalaj, White Rann of Kutch, and heritage palaces.",
     h1: "Top 10 Luxury Pre-Wedding Shoot Locations in Gujarat",
-    summary: "Discover Gujarat most breathtaking backdrop locations for cinematic pre-wedding photography, from ancient stepwells to desert salt flats."
+    summary: "Discover Gujarat's most breathtaking backdrop locations for cinematic pre-wedding photography, from ancient stepwells to desert salt flats."
+  },
+  {
+    path: "/wedding-photography",
+    title: "Wedding Photography Ahmedabad | KD Creation Photography",
+    description: "Capture your royal wedding celebrations with KD Creation Photography. Candid, traditional, and fine-art luxury wedding photography across Ahmedabad, Bodakdev, Satellite, SG Highway, and Gujarat.",
+    h1: "Luxury Wedding Photography in Ahmedabad & Gujarat",
+    summary: "KD Creation Photography is Ahmedabad's celebrated wedding photography studio, documenting sacred moments, candid tears, joyous laughter, and heirloom bridal portraits across Ahmedabad and royal destinations."
+  },
+  {
+    path: "/wedding-videography",
+    title: "Wedding Videography Ahmedabad | 4K Cinema | KD Creation",
+    description: "Hollywood-grade 4K wedding videography in Ahmedabad. KD Creation crafts emotional cinematic wedding films, royal trailers, and multi-camera ceremony coverage.",
+    h1: "Cinematic Wedding Videography in Ahmedabad",
+    summary: "Master 4K cinema cameras, anamorphic widescreen optics, and DaVinci Resolve color grading capturing the grand spectacle and tender intimacy of your Gujarati wedding."
+  },
+  {
+    path: "/wedding-films",
+    title: "Cinematic Wedding Films Ahmedabad | KD Creation Photography",
+    description: "Experience breathtaking 4K cinematic wedding films and royal teasers by KD Creation Photography. Highlighting unscripted love stories across Gujarat and Rajasthan.",
+    h1: "Cinematic Wedding Films & Royal Highlights in Ahmedabad",
+    summary: "We transform wedding memories into timeless cinematic films featuring original sound design, cinematic pacing, and magazine-quality editorial framing."
+  },
+  {
+    path: "/wedding-filmmaker",
+    title: "Wedding Filmmaker Ahmedabad | Award-Winning Cinema | KD Creation",
+    description: "Looking for a premier wedding filmmaker in Ahmedabad? KD Creation specializes in anamorphic 2.39:1 widescreen wedding films with custom sound design and DaVinci color grading.",
+    h1: "Premier Wedding Filmmaker in Ahmedabad & Gujarat",
+    summary: "Led by Harshad Chavda and Mahesh Parmar, our master filmmakers bring theatrical cinematography to destination celebrations across Ahmedabad, Udaipur, Jaipur, and Goa."
+  },
+  {
+    path: "/pre-wedding-photography",
+    title: "Pre-Wedding Photography Ahmedabad | KD Creation Photography",
+    description: "Romantic and conceptual pre-wedding photography in Ahmedabad. Heritage stepwells, luxury resorts, and palace locations across Gujarat and Rajasthan.",
+    h1: "Bespoke Pre-Wedding Photography in Ahmedabad",
+    summary: "Crafting stylized couple portraits and editorial romance narratives across Adalaj Stepwell, Polo Forest, Sabarmati Riverfront, and luxury golf resorts."
+  },
+  {
+    path: "/pre-wedding-films",
+    title: "Pre-Wedding Films & Teasers Ahmedabad | KD Creation Photography",
+    description: "Turn your love story into a cinematic pre-wedding film. Direction, concept scripts, aerial drone cinematography, and 4K editing by KD Creation in Ahmedabad.",
+    h1: "Cinematic Pre-Wedding Films in Ahmedabad & Beyond",
+    summary: "Creative concept films scripted to your journey with drone aerials, exotic scenic backdrops, and cinematic audio tracks."
+  },
+  {
+    path: "/cinematic-wedding-video",
+    title: "Cinematic Wedding Video Ahmedabad | 4K HDR | KD Creation",
+    description: "Elevate your wedding video into a cinema masterpiece. Anamorphic optics, master color grading, and heartfelt narrative storytelling by KD Creation Photography.",
+    h1: "Cinematic Wedding Videos in Ahmedabad & Gujarat",
+    summary: "Moving beyond traditional static videos into true cinematic cinema with emotional music sync, multi-mic audio clarity, and 4K anamorphic colors."
+  },
+  {
+    path: "/event-photography",
+    title: "Event Photographer Ahmedabad | Corporate & Family | KD Creation",
+    description: "Professional event photography in Ahmedabad for luxury engagements, anniversaries, corporate galas, and family milestones by KD Creation Photography.",
+    h1: "Professional Event Photography in Ahmedabad",
+    summary: "Discreet, high-impact photojournalism covering grand Sangeet nights, ring ceremonies, corporate inaugurations, and private luxury galas across Ahmedabad."
+  },
+  {
+    path: "/event-videography",
+    title: "Event Videography Ahmedabad | 4K Film Coverage | KD Creation",
+    description: "Comprehensive 4K event videography in Ahmedabad for corporate conferences, grand inaugurations, Sangeet galas, and VIP receptions.",
+    h1: "4K Event Videography & Highlight Films in Ahmedabad",
+    summary: "Broadcast-quality multi-camera video coverage, live streaming support, and next-day social highlight reels for prestigious events."
+  },
+  {
+    path: "/photo-video",
+    title: "Wedding Photography & Videography Ahmedabad | KD Creation Team",
+    description: "All-in-one synchronized wedding photo and video team in Ahmedabad. Seamless multi-camera coverage, director-level execution, and heirloom albums.",
+    h1: "Complete Wedding Photo & Video Team in Ahmedabad",
+    summary: "Experience total visual peace of mind with a fully coordinated in-house team of photographers, cinematographers, drone pilots, and editors."
+  },
+  {
+    path: "/photography",
+    title: "Professional Photographer Ahmedabad | KD Creation Photography",
+    description: "Discover premier photography services in Ahmedabad by KD Creation. Specializing in luxury weddings, fine-art portraits, pre-wedding, and events.",
+    h1: "Professional Photography Studio in Ahmedabad, Gujarat",
+    summary: "KD Creation Photography delivers award-worthy visual arts across Ahmedabad, serving Bodakdev, Satellite, SG Highway, Prahlad Nagar, Bopal, Vastrapur, and Gandhinagar."
+  },
+  {
+    path: "/portfolio",
+    title: "Wedding Photography & Film Portfolio | KD Creation Ahmedabad",
+    description: "Explore KD Creation Photography's signature portfolio of royal Gujarati weddings, cinematic teasers, bridal portraits, and luxury heirloom photobooks.",
+    h1: "Signature Wedding Photography & Film Portfolio",
+    summary: "Curated real wedding stories, 4K cinema trailers, and heirloom digital albums crafted for discerning couples across India."
+  },
+  {
+    path: "/about",
+    title: "About KD Creation Photography | Ahmedabad Wedding Studio & Directors",
+    description: "Learn about KD Creation Photography, founded by Mahesh Parmar, Harshad Chavda, and Aniket Vaghela. 16+ years of crafting luxury wedding films in Ahmedabad.",
+    h1: "About KD Creation Photography — The People Behind The Frames",
+    summary: "Discover our heritage, camera technology, editing suite, and creative philosophy rooted in Bapunagar, Ahmedabad, Gujarat."
+  },
+  {
+    path: "/contact",
+    title: "Contact KD Creation Photography | Ahmedabad Studio VIP Inquiries",
+    description: "Book a private consultation with KD Creation Photography in Bapunagar, Ahmedabad. Check wedding date availability, 4K film packages, and commissions.",
+    h1: "Connect With KD Creation Photography in Ahmedabad",
+    summary: "Reach out via WhatsApp at +91 90330 32922 or visit our studio in Bapunagar, Ahmedabad. Limited to 18 exclusive commissions per wedding season."
+  },
+  {
+    path: "/blog",
+    title: "Wedding Photography Guides & Insights Ahmedabad | KD Creation Blog",
+    description: "Expert wedding photography advice, Ahmedabad venue guides, Gujarati wedding muhurat tips, and pre-wedding location inspiration from KD Creation.",
+    h1: "Wedding Photography Guides, Venue Insights & Cinematography Tips",
+    summary: "In-depth editorial articles covering how to choose wedding photographers, cinematography checklists, and venue recommendations across Gujarat."
   }
 ];
 
