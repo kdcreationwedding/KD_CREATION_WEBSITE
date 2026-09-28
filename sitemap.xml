@@ -140,11 +140,95 @@
     <priority>0.85</priority>
   </url>
 
-  <!-- Content & Blog Guides -->
+  <!-- Master Service & Architecture Pages -->
   <url>
-    <loc>https://www.kdcreations.in/blog/pre-wedding-shoot-locations-gujarat</loc>
-    <lastmod>2026-09-10</lastmod>
+    <loc>https://www.kdcreations.in/wedding-photography</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.98</priority>
+  </url>
+  <url>
+    <loc>https://www.kdcreations.in/wedding-videography</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.98</priority>
+  </url>
+  <url>
+    <loc>https://www.kdcreations.in/wedding-films</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://www.kdcreations.in/wedding-filmmaker</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://www.kdcreations.in/pre-wedding-photography</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.92</priority>
+  </url>
+  <url>
+    <loc>https://www.kdcreations.in/pre-wedding-films</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.92</priority>
+  </url>
+  <url>
+    <loc>https://www.kdcreations.in/cinematic-wedding-video</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.92</priority>
+  </url>
+  <url>
+    <loc>https://www.kdcreations.in/event-photography</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.88</priority>
+  </url>
+  <url>
+    <loc>https://www.kdcreations.in/event-videography</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.88</priority>
+  </url>
+  <url>
+    <loc>https://www.kdcreations.in/photo-video</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.92</priority>
+  </url>
+  <url>
+    <loc>https://www.kdcreations.in/photography</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://www.kdcreations.in/portfolio</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://www.kdcreations.in/about</loc>
+    <lastmod>2026-09-28</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.kdcreations.in/contact</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.kdcreations.in/blog</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
 </urlset>
