@@ -56,11 +56,11 @@ export const AboutSection: React.FC = () => {
             </div>
 
             <p className="text-base sm:text-lg text-champagne/80 font-light leading-relaxed">
-              At **KD CREATION**, we believe a wedding is not a sequence of events to be documented—it is a sacred emotional universe deserving of museum-grade cinematic preservation.
+              At <strong className="text-gold font-semibold">KD CREATION PHOTOGRAPHY</strong> (also known as <strong className="text-gold font-semibold">KD Creations</strong>), we believe a wedding is not a sequence of events to be documented—it is a sacred emotional universe deserving of museum-grade cinematic preservation.
             </p>
 
             <p className="text-sm sm:text-base text-champagne/70 font-light leading-relaxed">
-              Founded by visionary directors and fine-art photographers, our studio blends haute couture aesthetic direction with raw, unscripted emotion. We obsess over light, color harmony, soundscapes, and editorial framing to create visual legacies that endure for generations.
+              Based in Bapunagar, Ahmedabad, Gujarat, our studio provides end-to-end luxury visual arts: fine-art wedding photography, 4K anamorphic cinematic videography, conceptual pre-wedding shoots, magazine-grade photo editing, DaVinci Resolve video editing, and handcrafted heirloom photobook designing. We obsess over light, soundscapes, and editorial framing to create visual legacies that endure for generations.
             </p>
 
             <div className="pt-6 border-t border-gold/15 grid grid-cols-2 gap-6 text-center sm:text-left">

@@ -37,7 +37,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         >
           <Award className="w-4 h-4 text-gold" />
           <span className="text-xs tracking-[0.25em] font-serif-luxury font-extrabold text-gold uppercase">
-            LUXURY WEDDING FILM STUDIO
+            KD CREATION PHOTOGRAPHY • LUXURY WEDDING FILM STUDIO
           </span>
         </motion.div>
 
@@ -51,7 +51,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           WE TURN YOUR <br />
           <span className="text-gold-gradient italic font-normal">WEDDING</span> INTO A <br />
           TIMELESS FILM.
-          <span className="sr-only"> — Luxury Wedding Photography & 4K Cinematography in Ahmedabad</span>
+          <span className="sr-only"> — KD Creation Photography (KD Creations): Luxury Wedding Photography, 4K Cinematography, Pre-Wedding Shoots, Photo Editing, Video Editing & Album Designing in Ahmedabad, Gujarat</span>
         </motion.h1>
 
         {/* Subheading */}

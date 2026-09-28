@@ -11,10 +11,28 @@ interface FaqItem {
 
 export const FAQS: FaqItem[] = [
   {
+    id: 'faq-brand',
+    category: 'BRAND & STUDIO IDENTITY',
+    question: 'Who is KD Creation Photography and what services do you provide in Ahmedabad?',
+    answer: 'KD Creation Photography (also widely known as KD Creation and KD Creations) is Ahmedabad’s premier luxury wedding photography and 4K cinema studio based in Bapunagar, Ahmedabad, Gujarat. Founded by Mahesh Parmar, Harshad Chavda, and Aniket Vaghela, our studio provides six core services: Luxury Wedding Photography, 4K Anamorphic Wedding Cinematography, Pre-Wedding Concept Shoots, Professional Photo Editing, High-End Video Editing, and Bespoke Heirloom Album Designing.'
+  },
+  {
+    id: 'faq-disambiguation',
+    category: 'BRAND & STUDIO IDENTITY',
+    question: 'How is KD Creation Photography distinguished from other businesses named KD Creation in Ahmedabad?',
+    answer: 'KD Creation Photography (official website: https://www.kdcreations.in/) is an exclusive visual arts and wedding cinematography atelier based in Bapunagar, Ahmedabad. We are completely independent from industrial packaging, box manufacturing (e.g. in Narol), textile, or clothing firms that share similar brand initials in Ahmedabad.'
+  },
+  {
     id: 'faq-1',
     category: 'AHMEDABAD & GUJARAT COVERAGE',
-    question: 'Why is KD Creation considered the best luxury wedding photographer in Ahmedabad?',
-    answer: 'KD Creation is led by founders Mahesh Parmar and Harshad Chavda with over 10+ years of expertise and 500+ luxury weddings shot across Ahmedabad, Gujarat, and international destinations. We specialize in 4K anamorphic cinematography, candid emotional storytelling, fine-art portraiture, and handcrafted Italian leather heirloom albums.'
+    question: 'Why is KD Creation Photography considered the best luxury wedding photographer in Ahmedabad?',
+    answer: 'KD Creation Photography is led by visionary directors with 16+ years of collective experience and 350+ royal weddings captured across Ahmedabad, Gujarat, and global destinations. We specialize in 4K anamorphic cinema, raw candid emotion, fine-art bridal portraits, and museum-grade Italian leather albums.'
+  },
+  {
+    id: 'faq-services',
+    category: 'SERVICES & POST-PRODUCTION',
+    question: 'Do you offer standalone photo editing, video editing, and heirloom album designing?',
+    answer: 'Yes. In addition to full wedding production, KD Creation Photography features an in-house post-production suite offering master high-end photo retouching, DaVinci Resolve 4K cinematic video editing and color grading, and custom layout design for non-tearable metallic heirloom photobooks.'
   },
   {
     id: 'faq-2',
@@ -35,15 +53,9 @@ export const FAQS: FaqItem[] = [
     answer: 'We provide Next-Day 24-Hour delivery for Instagram Social Reels. High-resolution edited candid photos are delivered via private online client gallery within 3 weeks. Master 4K Cinema Feature Films and handcrafted genuine leather heirloom albums are delivered within 4 to 6 weeks.'
   },
   {
-    id: 'faq-5',
-    category: 'CINEMA EQUIPMENT',
-    question: 'What camera gear and drone technology does KD Creation use for wedding films?',
-    answer: 'We deploy Sony FX Series 4K Cinema cameras, anamorphic cine optics, 85mm prime portrait lenses, DJI Ronin 3-axis gimbals, continuous cinema directional lighting matrix, master multi-channel audio recorders, and 4K aerial drones.'
-  },
-  {
     id: 'faq-6',
     category: 'BOOKING & AVAILABILITY',
-    question: 'How far in advance should we book KD Creation for our Gujarati wedding dates?',
+    question: 'How far in advance should we book KD Creation Photography for our Gujarati wedding dates?',
     answer: 'Because we limit our bookings each wedding season to guarantee uncompromising artistic quality, we recommend reserving your dates 4 to 8 months in advance, especially for popular auspicious Gujarati wedding muhurat dates in November to March.'
   }
 ];
