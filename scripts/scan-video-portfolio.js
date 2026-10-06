@@ -125,13 +125,28 @@ function scan() {
       const title = formatTitle(baseName);
       const slugKey = baseName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
-      // Check if known YouTube link exists, otherwise use video relative URL
-      const ytLink = KNOWN_YOUTUBE_LINKS[slugKey];
-      const videoUrl = ytLink || `video-portfolio/${folder.name}/${vFile.name}`;
+      const mappingFile = path.resolve(__dirname, 'r2-video-urls.json');
+      let mapping = {};
+      try {
+        if (fs.existsSync(mappingFile)) {
+          mapping = JSON.parse(fs.readFileSync(mappingFile, 'utf-8'));
+        }
+      } catch (e) {}
 
-      // Check for matching image or fallback to folder luxury poster
+      const relativeKey = `video-portfolio/${folder.name}/${vFile.name}`;
+      const r2DefaultUrl = `https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev/video-portfolio/${folder.name.replace(/[^a-zA-Z0-9_-]/g, '_')}/${vFile.name.replace(/[^a-zA-Z0-9._-]/g, '_')}`;
+      const ytLink = KNOWN_YOUTUBE_LINKS[slugKey];
+      const videoUrl = mapping[relativeKey] || ytLink || r2DefaultUrl;
+
+      const cleanBaseName = vFile.name.replace(/\.mp4$/i, '').replace(/[^a-zA-Z0-9._-]/g, '_');
+      const folderSafe = folder.name.replace(/[^a-zA-Z0-9_-]/g, '_');
+      const extractedThumb = `assets/video-thumbnails/${folderSafe}/${cleanBaseName}.jpg`;
+      const hasExtracted = fs.existsSync(path.resolve(__dirname, '../public', extractedThumb));
+
       const matchingImg = imageFiles.find((img) => path.basename(img.name, path.extname(img.name)) === baseName);
-      const thumbnail = matchingImg
+      const thumbnail = hasExtracted
+        ? extractedThumb
+        : matchingImg
         ? `video-portfolio/${folder.name}/${matchingImg.name}`
         : meta.poster;
 

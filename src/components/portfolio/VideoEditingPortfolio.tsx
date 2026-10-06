@@ -39,7 +39,7 @@ export const VideoEditingPortfolio: React.FC<VideoEditingPortfolioProps> = ({
   onPlayVideo,
   onInquire
 }) => {
-  const [activeFolderId, setActiveFolderId] = useState<string>('wedding-teasers');
+  const [activeFolderId, setActiveFolderId] = useState<string>('reel');
 
   const activeFolder = VIDEO_EDITING_FOLDERS.find((f) => f.id === activeFolderId);
 
@@ -265,18 +265,19 @@ export const VideoEditingPortfolio: React.FC<VideoEditingPortfolioProps> = ({
                 transition={{ duration: 0.4, delay: index * 0.05 }}
                 className="group relative rounded-3xl overflow-hidden bg-[#2B050B] border border-gold/25 hover:border-gold/60 shadow-xl hover:shadow-[0_15px_40px_rgba(212,175,55,0.2)] transition-all duration-300 flex flex-col justify-between"
               >
-                {/* Media Preview Box */}
+                {/* Media Preview Box - Thumbnail generated directly from video itself */}
                 <div
                   className="relative aspect-video sm:h-56 overflow-hidden cursor-pointer bg-black"
                   onClick={() => onPlayVideo(project.videoUrl, project.title)}
                 >
+                  {/* Video Thumbnail extracted directly from the video frame */}
                   <img
                     src={project.thumbnail}
                     alt={project.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-90 group-hover:brightness-100"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#2B050B] via-black/20 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#2B050B] via-black/20 to-transparent pointer-events-none" />
 
                   {/* Top Aspect Ratio & Duration Badges */}
                   <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-10">

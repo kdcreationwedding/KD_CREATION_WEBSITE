@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Film } from 'lucide-react';
+import { X, Film, Play, MessageCircle, ExternalLink } from 'lucide-react';
 
 interface VideoModalProps {
   isOpen: boolean;
@@ -17,9 +17,13 @@ const getYouTubeId = (url: string): string | null => {
 
 export const VideoModal: React.FC<VideoModalProps> = ({ isOpen, videoUrl, title, onClose }) => {
   const [activeUrl, setActiveUrl] = useState(videoUrl);
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
     setActiveUrl(videoUrl);
+    setIsLoading(true);
+    setHasError(false);
   }, [videoUrl]);
 
   if (!isOpen) return null;
@@ -69,7 +73,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({ isOpen, videoUrl, title,
           </div>
 
           {/* Video Player Container */}
-          <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+          <div className="relative w-full aspect-video bg-black overflow-hidden flex items-center justify-center">
             {isYouTube ? (
               <iframe
                 key={embedSrc}
@@ -80,19 +84,73 @@ export const VideoModal: React.FC<VideoModalProps> = ({ isOpen, videoUrl, title,
                 allowFullScreen
               />
             ) : (
-              <video
-                key={activeUrl}
-                src={activeUrl}
-                autoPlay
-                playsInline
-                controls
-                className="absolute inset-0 w-full h-full object-contain bg-black"
-              />
+              <>
+                {isLoading && !hasError && (
+                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/80 z-10 text-gold pointer-events-none">
+                    <div className="w-10 h-10 border-2 border-gold/20 border-t-gold rounded-full animate-spin mb-3" />
+                    <span className="text-xs font-serif-luxury tracking-widest uppercase">
+                      STREAMING 4K CINEMA MASTER...
+                    </span>
+                  </div>
+                )}
+
+                {hasError ? (
+                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#1C0307] p-6 text-center z-20">
+                    <Film className="w-12 h-12 text-gold mb-3 opacity-80" />
+                    <h4 className="text-base font-serif-luxury font-bold text-[#F5F2EB] mb-1">
+                      {title}
+                    </h4>
+                    <p className="text-xs text-[#F5F2EB]/70 max-w-md mb-6 leading-relaxed">
+                      This 4K Master film is synchronizing on our Cloud CDN archive. You can stream it directly or request the master copy via WhatsApp.
+                    </p>
+                    <div className="flex flex-wrap items-center justify-center gap-3">
+                      <a
+                        href={activeUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-gold-gradient text-obsidian text-xs font-serif-luxury font-bold tracking-wider uppercase hover:brightness-110 shadow-lg shadow-gold/20"
+                      >
+                        <ExternalLink className="w-3.5 h-3.5" />
+                        <span>Open Direct Stream</span>
+                      </a>
+                      <a
+                        href={`https://wa.me/919033032922?text=${encodeURIComponent(`Hi KD Creation, I would like to watch the full 4K film: ${title}`)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full border border-gold/40 text-gold text-xs font-serif-luxury font-bold tracking-wider uppercase hover:bg-gold/10"
+                      >
+                        <MessageCircle className="w-3.5 h-3.5" />
+                        <span>Watch on WhatsApp</span>
+                      </a>
+                    </div>
+                  </div>
+                ) : (
+                  <video
+                    key={activeUrl}
+                    src={activeUrl}
+                    autoPlay
+                    playsInline
+                    controls
+                    onWaiting={() => setIsLoading(true)}
+                    onCanPlay={() => setIsLoading(false)}
+                    onLoadedData={() => setIsLoading(false)}
+                    onPlaying={() => setIsLoading(false)}
+                    onError={() => {
+                      setIsLoading(false);
+                      setHasError(true);
+                    }}
+                    className="w-full h-full object-contain bg-black"
+                  />
+                )}
+              </>
             )}
           </div>
 
           {/* Footer Bar */}
-          <div className="px-5 py-3 bg-[#3B0811] border-t border-gold/30 flex items-center justify-end">
+          <div className="px-5 py-3 bg-[#3B0811] border-t border-gold/30 flex items-center justify-between">
+            <span className="text-[10px] text-[#F5F2EB]/60">
+              KD Creation Post-Production Studio Archive
+            </span>
             <span className="text-[9px] tracking-[0.25em] font-serif-luxury font-bold text-gold uppercase">
               4K ULTRA HD CINEMA
             </span>

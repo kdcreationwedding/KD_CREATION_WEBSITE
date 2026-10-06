@@ -183,8 +183,8 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
       "Dialogue Foley",
       "4K Master"
     ],
-    "thumbnail": "assets/yash-kavya-outer-cover.jpg",
-    "videoUrl": "video-portfolio/AI/AI Hilight.mp4",
+    "thumbnail": "assets/video-thumbnails/AI/AI_Hilight.jpg",
+    "videoUrl": "https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev/video-portfolio/AI/AI_Hilight.mp4",
     "description": "AI Hilight — Official post-production cut curated under AI.",
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
@@ -207,8 +207,8 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
       "Dialogue Foley",
       "4K Master"
     ],
-    "thumbnail": "assets/yash-kavya-outer-cover.jpg",
-    "videoUrl": "video-portfolio/AI/AI Kankotri Lekhan.mp4",
+    "thumbnail": "assets/video-thumbnails/AI/AI_Kankotri_Lekhan.jpg",
+    "videoUrl": "https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev/video-portfolio/AI/AI_Kankotri_Lekhan.mp4",
     "description": "AI Kankotri Lekhan — Official post-production cut curated under AI.",
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
@@ -231,8 +231,8 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
       "Dialogue Foley",
       "4K Master"
     ],
-    "thumbnail": "assets/yash-kavya-outer-cover.jpg",
-    "videoUrl": "video-portfolio/AI/AI Kankotri_Lekhan.mp4",
+    "thumbnail": "assets/video-thumbnails/AI/AI_Kankotri_Lekhan.jpg",
+    "videoUrl": "https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev/video-portfolio/AI/AI_Kankotri_Lekhan.mp4",
     "description": "AI Kankotri Lekhan — Official post-production cut curated under AI.",
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
@@ -255,8 +255,8 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
       "Punchy Bass",
       "Color Pop"
     ],
-    "thumbnail": "assets/yash-kavya-outer-cover.jpg",
-    "videoUrl": "video-portfolio/AI/Ai Animation Story Reel.mp4",
+    "thumbnail": "assets/video-thumbnails/AI/Ai_Animation_Story_Reel.jpg",
+    "videoUrl": "https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev/video-portfolio/AI/Ai_Animation_Story_Reel.mp4",
     "description": "Ai Animation Story Reel — Official post-production cut curated under AI.",
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
@@ -279,8 +279,8 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
       "Dialogue Foley",
       "4K Master"
     ],
-    "thumbnail": "assets/kaushik-anjali-outer-cover.jpg",
-    "videoUrl": "video-portfolio/Highlight/Garba_Highlight.mp4",
+    "thumbnail": "assets/video-thumbnails/Highlight/Garba_Highlight.jpg",
+    "videoUrl": "https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev/video-portfolio/Highlight/Garba_Highlight.mp4",
     "description": "Garba Highlight — Official post-production cut curated under Highlight.",
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
@@ -303,8 +303,8 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
       "Dialogue Foley",
       "4K Master"
     ],
-    "thumbnail": "assets/kaushik-anjali-outer-cover.jpg",
-    "videoUrl": "video-portfolio/Highlight/Haldi _Highlight.mp4",
+    "thumbnail": "assets/video-thumbnails/Highlight/Haldi__Highlight.jpg",
+    "videoUrl": "https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev/video-portfolio/Highlight/Haldi__Highlight.mp4",
     "description": "Haldi  Highlight — Official post-production cut curated under Highlight.",
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
@@ -327,7 +327,7 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
       "Dialogue Foley",
       "4K Master"
     ],
-    "thumbnail": "assets/kaushik-anjali-outer-cover.jpg",
+    "thumbnail": "assets/video-thumbnails/Highlight/SAMEDAY_DHAWAL__Highlight_AI_.jpg",
     "videoUrl": "https://youtu.be/mJ49EXaTXO8",
     "description": "SAMEDAY DHAWAL  Highlight(AI) — Official post-production cut curated under Highlight.",
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
@@ -351,8 +351,8 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
       "Dialogue Foley",
       "4K Master"
     ],
-    "thumbnail": "assets/kaushik-anjali-outer-cover.jpg",
-    "videoUrl": "video-portfolio/Highlight/Shivani Bharvad Highlight.mp4",
+    "thumbnail": "assets/video-thumbnails/Highlight/Shivani_Bharvad_Highlight.jpg",
+    "videoUrl": "https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev/video-portfolio/Highlight/Shivani_Bharvad_Highlight.mp4",
     "description": "Shivani Bharvad Highlight — Official post-production cut curated under Highlight.",
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
@@ -375,8 +375,8 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
       "Dialogue Foley",
       "4K Master"
     ],
-    "thumbnail": "assets/service-bride-mirror.jpg",
-    "videoUrl": "video-portfolio/Portraits/Couple Portrait.mp4",
+    "thumbnail": "assets/video-thumbnails/Portraits/Couple_Portrait.jpg",
+    "videoUrl": "https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev/video-portfolio/Portraits/Couple_Portrait.mp4",
     "description": "Couple Portrait — Official post-production cut curated under Portraits.",
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
@@ -399,8 +399,8 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
       "Dialogue Foley",
       "4K Master"
     ],
-    "thumbnail": "assets/service-bride-mirror.jpg",
-    "videoUrl": "video-portfolio/Portraits/PANKAJBHAI_Rec.mp4",
+    "thumbnail": "assets/video-thumbnails/Portraits/PANKAJBHAI_Rec.jpg",
+    "videoUrl": "https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev/video-portfolio/Portraits/PANKAJBHAI_Rec.mp4",
     "description": "PANKAJBHAI Rec — Official post-production cut curated under Portraits.",
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
@@ -423,8 +423,8 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
       "Punchy Bass",
       "Color Pop"
     ],
-    "thumbnail": "assets/service-bride-mirror.jpg",
-    "videoUrl": "video-portfolio/Portraits/Pre-Wedding_REEL.mp4",
+    "thumbnail": "assets/video-thumbnails/Portraits/Pre-Wedding_REEL.jpg",
+    "videoUrl": "https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev/video-portfolio/Portraits/Pre-Wedding_REEL.mp4",
     "description": "Pre Wedding REEL — Official post-production cut curated under Portraits.",
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
@@ -447,8 +447,8 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
       "Dialogue Foley",
       "4K Master"
     ],
-    "thumbnail": "assets/service-bride-mirror.jpg",
-    "videoUrl": "video-portfolio/Portraits/Sivani Solo Portrait.mp4",
+    "thumbnail": "assets/video-thumbnails/Portraits/Sivani_Solo_Portrait.jpg",
+    "videoUrl": "https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev/video-portfolio/Portraits/Sivani_Solo_Portrait.mp4",
     "description": "Sivani Solo Portrait — Official post-production cut curated under Portraits.",
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
@@ -471,8 +471,8 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
       "Dialogue Foley",
       "4K Master"
     ],
-    "thumbnail": "assets/service-prewedding-dhaval-sangita.jpg",
-    "videoUrl": "video-portfolio/Pre-Wedding/PREWEDDING_SONG(Mahesh & Ila).mp4",
+    "thumbnail": "assets/video-thumbnails/Pre-Wedding/PREWEDDING_SONG_Mahesh___Ila_.jpg",
+    "videoUrl": "https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev/video-portfolio/Pre-Wedding/PREWEDDING_SONG_Mahesh___Ila_.mp4",
     "description": "PREWEDDING SONG(Mahesh & Ila) — Official post-production cut curated under Pre Wedding.",
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
@@ -495,7 +495,7 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
       "Dialogue Foley",
       "4K Master"
     ],
-    "thumbnail": "assets/service-prewedding-dhaval-sangita.jpg",
+    "thumbnail": "assets/video-thumbnails/Pre-Wedding/Pre-Wedding_Teaser___Song_Dhawal___Sangita_.jpg",
     "videoUrl": "https://youtu.be/mJ49EXaTXO8",
     "description": "Pre Wedding Teaser + Song(Dhawal & Sangita) — Official post-production cut curated under Pre Wedding.",
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
@@ -519,8 +519,8 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
       "Punchy Bass",
       "Color Pop"
     ],
-    "thumbnail": "assets/dhaval-sangeeta-outer-cover.jpg",
-    "videoUrl": "video-portfolio/Reel/BADALBHAI_HALDI.mp4",
+    "thumbnail": "assets/video-thumbnails/Reel/BADALBHAI_HALDI.jpg",
+    "videoUrl": "https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev/video-portfolio/Reel/BADALBHAI_HALDI.mp4",
     "description": "BADALBHAI HALDI — Official post-production cut curated under Reel.",
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
@@ -543,8 +543,8 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
       "Punchy Bass",
       "Color Pop"
     ],
-    "thumbnail": "assets/dhaval-sangeeta-outer-cover.jpg",
-    "videoUrl": "video-portfolio/Reel/BRIDE.mp4",
+    "thumbnail": "assets/video-thumbnails/Reel/BRIDE.jpg",
+    "videoUrl": "https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev/video-portfolio/Reel/BRIDE.mp4",
     "description": "BRIDE — Official post-production cut curated under Reel.",
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
@@ -567,8 +567,8 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
       "Punchy Bass",
       "Color Pop"
     ],
-    "thumbnail": "assets/dhaval-sangeeta-outer-cover.jpg",
-    "videoUrl": "video-portfolio/Reel/BRIDE_REEL_REEL.mp4",
+    "thumbnail": "assets/video-thumbnails/Reel/BRIDE_REEL_REEL.jpg",
+    "videoUrl": "https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev/video-portfolio/Reel/BRIDE_REEL_REEL.mp4",
     "description": "BRIDE REEL REEL — Official post-production cut curated under Reel.",
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
@@ -591,8 +591,8 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
       "Punchy Bass",
       "Color Pop"
     ],
-    "thumbnail": "assets/dhaval-sangeeta-outer-cover.jpg",
-    "videoUrl": "video-portfolio/Reel/Bride_REEL.mp4",
+    "thumbnail": "assets/video-thumbnails/Reel/Bride_REEL.jpg",
+    "videoUrl": "https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev/video-portfolio/Reel/Bride_REEL.mp4",
     "description": "Bride REEL — Official post-production cut curated under Reel.",
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
@@ -615,8 +615,8 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
       "Punchy Bass",
       "Color Pop"
     ],
-    "thumbnail": "assets/dhaval-sangeeta-outer-cover.jpg",
-    "videoUrl": "video-portfolio/Reel/Couple REEL.mp4",
+    "thumbnail": "assets/video-thumbnails/Reel/Couple_REEL.jpg",
+    "videoUrl": "https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev/video-portfolio/Reel/Couple_REEL.mp4",
     "description": "Couple REEL — Official post-production cut curated under Reel.",
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
@@ -639,8 +639,8 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
       "Punchy Bass",
       "Color Pop"
     ],
-    "thumbnail": "assets/dhaval-sangeeta-outer-cover.jpg",
-    "videoUrl": "video-portfolio/Reel/GARBA.mp4",
+    "thumbnail": "assets/video-thumbnails/Reel/GARBA.jpg",
+    "videoUrl": "https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev/video-portfolio/Reel/GARBA.mp4",
     "description": "GARBA — Official post-production cut curated under Reel.",
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
@@ -663,8 +663,8 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
       "Punchy Bass",
       "Color Pop"
     ],
-    "thumbnail": "assets/dhaval-sangeeta-outer-cover.jpg",
-    "videoUrl": "video-portfolio/Reel/HALDI_REEL_KD_CREATION.mp4",
+    "thumbnail": "assets/video-thumbnails/Reel/HALDI_REEL_KD_CREATION.jpg",
+    "videoUrl": "https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev/video-portfolio/Reel/HALDI_REEL_KD_CREATION.mp4",
     "description": "HALDI REEL KD CREATION — Official post-production cut curated under Reel.",
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
@@ -687,8 +687,8 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
       "Punchy Bass",
       "Color Pop"
     ],
-    "thumbnail": "assets/dhaval-sangeeta-outer-cover.jpg",
-    "videoUrl": "video-portfolio/Reel/INTRO VIDEO.mp4",
+    "thumbnail": "assets/video-thumbnails/Reel/INTRO_VIDEO.jpg",
+    "videoUrl": "https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev/video-portfolio/Reel/INTRO_VIDEO.mp4",
     "description": "INTRO VIDEO — Official post-production cut curated under Reel.",
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
@@ -711,8 +711,8 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
       "Punchy Bass",
       "Color Pop"
     ],
-    "thumbnail": "assets/dhaval-sangeeta-outer-cover.jpg",
-    "videoUrl": "video-portfolio/Reel/MODEL REEL 2.mp4",
+    "thumbnail": "assets/video-thumbnails/Reel/MODEL_REEL_2.jpg",
+    "videoUrl": "https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev/video-portfolio/Reel/MODEL_REEL_2.mp4",
     "description": "MODEL REEL 2 — Official post-production cut curated under Reel.",
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
@@ -735,8 +735,8 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
       "Punchy Bass",
       "Color Pop"
     ],
-    "thumbnail": "assets/dhaval-sangeeta-outer-cover.jpg",
-    "videoUrl": "video-portfolio/Reel/REEL_1.mp4",
+    "thumbnail": "assets/video-thumbnails/Reel/REEL_1.jpg",
+    "videoUrl": "https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev/video-portfolio/Reel/REEL_1.mp4",
     "description": "REEL 1 — Official post-production cut curated under Reel.",
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
@@ -759,8 +759,8 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
       "Punchy Bass",
       "Color Pop"
     ],
-    "thumbnail": "assets/dhaval-sangeeta-outer-cover.jpg",
-    "videoUrl": "video-portfolio/Reel/Reel_3.mp4",
+    "thumbnail": "assets/video-thumbnails/Reel/Reel_3.jpg",
+    "videoUrl": "https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev/video-portfolio/Reel/Reel_3.mp4",
     "description": "Reel 3 — Official post-production cut curated under Reel.",
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
@@ -783,8 +783,8 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
       "Punchy Bass",
       "Color Pop"
     ],
-    "thumbnail": "assets/dhaval-sangeeta-outer-cover.jpg",
-    "videoUrl": "video-portfolio/Reel/SANGEET_REEL_KD_CREATION_FINAL_.mp4",
+    "thumbnail": "assets/video-thumbnails/Reel/SANGEET_REEL_KD_CREATION_FINAL_.jpg",
+    "videoUrl": "https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev/video-portfolio/Reel/SANGEET_REEL_KD_CREATION_FINAL_.mp4",
     "description": "SANGEET REEL KD CREATION FINAL — Official post-production cut curated under Reel.",
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
@@ -807,8 +807,8 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
       "Punchy Bass",
       "Color Pop"
     ],
-    "thumbnail": "assets/dhaval-sangeeta-outer-cover.jpg",
-    "videoUrl": "https://youtu.be/x7782vFootg",
+    "thumbnail": "assets/video-thumbnails/Reel/SAVE_THE_DATE_DHAWAL_KD_Creation.jpg",
+    "videoUrl": "https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev/video-portfolio/Reel/SAVE_THE_DATE_DHAWAL_KD_Creation.mp4",
     "description": "SAVE THE DATE DHAWAL KD Creation — Official post-production cut curated under Reel.",
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
@@ -831,7 +831,7 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
       "Punchy Bass",
       "Color Pop"
     ],
-    "thumbnail": "assets/dhaval-sangeeta-outer-cover.jpg",
+    "thumbnail": "assets/video-thumbnails/Reel/WEDDING_REEL_KD_CREATION.jpg",
     "videoUrl": "https://youtu.be/x7782vFootg",
     "description": "WEDDING REEL KD CREATION — Official post-production cut curated under Reel.",
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
@@ -855,8 +855,8 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
       "Dialogue Foley",
       "4K Master"
     ],
-    "thumbnail": "assets/vishwa-dhawal-outer-cover.jpg",
-    "videoUrl": "video-portfolio/Teaser/Pre-Wedding_teaser(Mahesh & Ila).mp4",
+    "thumbnail": "assets/video-thumbnails/Teaser/Pre-Wedding_teaser_Mahesh___Ila_.jpg",
+    "videoUrl": "https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev/video-portfolio/Teaser/Pre-Wedding_teaser_Mahesh___Ila_.mp4",
     "description": "Pre Wedding Teaser(Mahesh & Ila) — Official post-production cut curated under Teaser.",
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
@@ -879,8 +879,8 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
       "Dialogue Foley",
       "4K Master"
     ],
-    "thumbnail": "assets/vishwa-dhawal-outer-cover.jpg",
-    "videoUrl": "video-portfolio/Teaser/TEASER_INSTA.mp4",
+    "thumbnail": "assets/video-thumbnails/Teaser/TEASER_INSTA.jpg",
+    "videoUrl": "https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev/video-portfolio/Teaser/TEASER_INSTA.mp4",
     "description": "TEASER INSTA — Official post-production cut curated under Teaser.",
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
@@ -903,8 +903,8 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
       "Dialogue Foley",
       "4K Master"
     ],
-    "thumbnail": "assets/service-complete-coverage.jpg",
-    "videoUrl": "video-portfolio/Vehicle Delivery/CREATA DELIVERY Hilight.mp4",
+    "thumbnail": "assets/video-thumbnails/Vehicle_Delivery/CREATA_DELIVERY_Hilight.jpg",
+    "videoUrl": "https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev/video-portfolio/Vehicle_Delivery/CREATA_DELIVERY_Hilight.mp4",
     "description": "CREATA DELIVERY Hilight — Official post-production cut curated under Vehicle Delivery.",
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
@@ -927,8 +927,8 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
       "Dialogue Foley",
       "4K Master"
     ],
-    "thumbnail": "assets/service-complete-coverage.jpg",
-    "videoUrl": "video-portfolio/Vehicle Delivery/CREATA With Family Hilight.mp4",
+    "thumbnail": "assets/video-thumbnails/Vehicle_Delivery/CREATA_With_Family_Hilight.jpg",
+    "videoUrl": "https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev/video-portfolio/Vehicle_Delivery/CREATA_With_Family_Hilight.mp4",
     "description": "CREATA With Family Hilight — Official post-production cut curated under Vehicle Delivery.",
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   }
