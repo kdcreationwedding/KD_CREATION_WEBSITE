@@ -9,6 +9,7 @@
     "build": "tsc && vite build && node scripts/prerender.js",
     "predeploy": "GITHUB_PAGES=true npm run build",
     "deploy": "npx gh-pages -d dist",
+    "scan-videos": "node scripts/scan-video-portfolio.js",
     "lint": "tsc",
     "preview": "vite preview"
   },

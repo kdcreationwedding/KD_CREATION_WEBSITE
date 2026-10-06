@@ -4,11 +4,11 @@ export interface VideoEditingProject {
   title: string;
   client: string;
   eventDate: string;
-  aspectRatio: string; // e.g. "2.39:1 CinemaScope", "9:16 Vertical", "16:9 4K UHD"
-  duration: string; // e.g. "01:30", "08:45", "00:54"
-  resolution: string; // e.g. "4K 60FPS", "4K 24FPS DCI", "1080x1920 60FPS"
-  software: string[]; // e.g. ["DaVinci Resolve Studio", "Premiere Pro", "After Effects"]
-  tags: string[]; // e.g. ["Beat Sync", "Sound Design", "Film Emulation", "Multi-Cam"]
+  aspectRatio: string;
+  duration: string;
+  resolution: string;
+  software: string[];
+  tags: string[];
   thumbnail: string;
   videoUrl: string;
   description: string;
@@ -29,329 +29,913 @@ export interface VideoEditingFolder {
 
 export const VIDEO_EDITING_FOLDERS: VideoEditingFolder[] = [
   {
-    id: 'wedding-teasers',
-    folderCode: 'DIR_01_TEASERS',
-    name: 'Wedding Teasers & Trailers',
-    nameGujarati: 'વેડિંગ ટીઝર અને સિનેમેટિક ટ્રેલર્સ',
-    badge: 'CINEMASCOPE 2.39:1 / 4K',
-    iconName: 'Film',
-    description: 'High-impact, suspenseful 60–90 second cinematic teasers cut with orchestral swell, dialogue cues, and anamorphic letterboxing.',
-    softwareStack: ['DaVinci Resolve Studio 19', 'Adobe Premiere Pro', 'Logic Pro X (Sound FX)'],
-    workflowHighlights: ['Anamorphic Crop 2.39:1', 'Dynamic Sound Foley & Whoosh', 'Emotional Dialog Snips', '48h Priority Render']
+    "id": "ai",
+    "folderCode": "DIR_01_AI",
+    "name": "AI",
+    "nameGujarati": "AI સિનેમેટિક એડિટ્સ અને કંકોત્રી લેખન",
+    "badge": "4 PROJECT EDITS",
+    "iconName": "Sparkles",
+    "description": "Cutting-edge AI-assisted video storytelling, virtual invitations, and animated legacy reels.",
+    "softwareStack": [
+      "DaVinci Resolve Studio 19",
+      "Adobe Premiere Pro",
+      "Logic Pro X"
+    ],
+    "workflowHighlights": [
+      "Color Grading & LUT Emulation",
+      "4K Multi-Cam Sync",
+      "Sound Design & Foley"
+    ]
   },
   {
-    id: 'feature-films',
-    folderCode: 'DIR_02_HIGHLIGHTS',
-    name: 'Cinematic Highlights & Feature Films',
-    nameGujarati: 'સિનેમેટિક હાઇલાઇટ્સ અને ફુલ વેડિંગ ફિલ્મ્સ',
-    badge: 'NARRATIVE 4K MASTER (5-12 MIN)',
-    iconName: 'Video',
-    description: 'Bespoke storytelling that fuses multi-camera 4K angles, heartfelt vows, live cheers, and custom color grading into a timeless documentary.',
-    softwareStack: ['DaVinci Resolve Studio 19', 'Premiere Pro', 'iZotope RX 10 Audio Restoration'],
-    workflowHighlights: ['Multi-Cam 4K Synchronization', 'Vows & Speeches Audio Clean', 'Three-Act Narrative Flow', 'DCI-P3 Color Space']
+    "id": "highlight",
+    "folderCode": "DIR_02_HIGHLIGHT",
+    "name": "Highlight",
+    "nameGujarati": "સિનેમેટિક વેડિંગ અને ઇવેન્ટ હાઇલાઇટ્સ",
+    "badge": "4 PROJECT EDITS",
+    "iconName": "Video",
+    "description": "Bespoke multi-cam wedding highlights capturing raw emotion, family tears, sacred rituals, and celebrations.",
+    "softwareStack": [
+      "DaVinci Resolve Studio 19",
+      "Adobe Premiere Pro",
+      "Logic Pro X"
+    ],
+    "workflowHighlights": [
+      "Color Grading & LUT Emulation",
+      "4K Multi-Cam Sync",
+      "Sound Design & Foley"
+    ]
   },
   {
-    id: 'pre-wedding-concepts',
-    folderCode: 'DIR_03_PREWEDDING',
-    name: 'Pre-Wedding Concept Edits & Music Films',
-    nameGujarati: 'પ્રી-વેડિંગ સિનેમેટિક મ્યુઝિક સ્ટોરીઝ',
-    badge: 'STORYBOARD & LYRIC SYNC',
-    iconName: 'Sparkles',
-    description: 'Stylized music videos featuring speed-ramped emotional transitions, slow-motion poetry, and scenic drone establishing shots.',
-    softwareStack: ['Premiere Pro', 'After Effects', 'DaVinci Resolve Studio'],
-    workflowHighlights: ['Lyric & Beat Drop Sync', 'Atmospheric Ambience Audio', 'Speed Ramping 120 FPS to 24 FPS', 'Film Emulation LUTs']
+    "id": "portraits",
+    "folderCode": "DIR_03_PORTRAITS",
+    "name": "Portraits",
+    "nameGujarati": "બ્રાઇડલ & કપલ સિનેમેટિક પોર્ટ્રેટ્સ",
+    "badge": "4 PROJECT EDITS",
+    "iconName": "Smartphone",
+    "description": "Editorial slow-motion portrait films focusing on intricate bridal jewelry, royal attire, and emotional eyes.",
+    "softwareStack": [
+      "DaVinci Resolve Studio 19",
+      "Adobe Premiere Pro",
+      "Logic Pro X"
+    ],
+    "workflowHighlights": [
+      "Color Grading & LUT Emulation",
+      "4K Multi-Cam Sync",
+      "Sound Design & Foley"
+    ]
   },
   {
-    id: 'reels-vertical',
-    folderCode: 'DIR_04_REELS_9X16',
-    name: 'Instagram 9:16 Viral Reels & Shorts',
-    nameGujarati: 'ઇન્સ્ટાગ્રામ વાયરલ રીલ્સ (9:16)',
-    badge: 'VERTICAL 9:16 / MOBILE OLED',
-    iconName: 'Smartphone',
-    description: 'Fast-paced, hook-driven edits built specifically for mobile screens with vibrant contrast, rhythmic beat cuts, and kinetic titles.',
-    softwareStack: ['Premiere Pro', 'DaVinci Resolve Studio', 'Adobe After Effects'],
-    workflowHighlights: ['Immediate 3-Second Hook', 'Punchy Bass Beat Syncing', 'Mobile OLED HDR Contrast', 'Kinetic Typography']
+    "id": "pre-wedding",
+    "folderCode": "DIR_04_PRE_WEDDING",
+    "name": "Pre Wedding",
+    "nameGujarati": "પ્રી-વેડિંગ સિનેમેટિક મ્યુઝિક સ્ટોરીઝ",
+    "badge": "2 PROJECT EDITS",
+    "iconName": "Sliders",
+    "description": "Dreamy pre-wedding concept films cut with romantic speed ramps, drone perspectives, and acoustic lyrical flow.",
+    "softwareStack": [
+      "DaVinci Resolve Studio 19",
+      "Adobe Premiere Pro",
+      "Logic Pro X"
+    ],
+    "workflowHighlights": [
+      "Color Grading & LUT Emulation",
+      "4K Multi-Cam Sync",
+      "Sound Design & Foley"
+    ]
   },
   {
-    id: 'ceremony-rituals',
-    folderCode: 'DIR_05_RITUALS',
-    name: 'Ceremony & Ritual Highlights',
-    nameGujarati: 'વિધિ અને ઉત્સવ સ્પેશિયલ એડિટ્સ (હળદી, સંગીત, ફેરા)',
-    badge: 'RITUAL & CULTURAL EMOTION',
-    iconName: 'Scissors',
-    description: 'Dedicated ceremony cuts: Haldi splash slow-mo, high-energy Sangeet choreography cuts, and emotional Mandap Pheras pacing.',
-    softwareStack: ['Adobe Premiere Pro', 'DaVinci Resolve Studio'],
-    workflowHighlights: ['Haldi Yellow Warmth Retention', 'Sangeet Multi-Cam Dance Cuts', 'Sacred Mantras Clean Sound', 'Emotional Family Reactions']
+    "id": "reel",
+    "folderCode": "DIR_05_REEL",
+    "name": "Reel",
+    "nameGujarati": "ઇન્સ્ટાગ્રામ 9:16 વાયરલ રીલ્સ",
+    "badge": "14 PROJECT EDITS",
+    "iconName": "Smartphone",
+    "description": "Fast-paced, hook-driven vertical edits engineered for Instagram feeds with mobile OLED punch and beat drops.",
+    "softwareStack": [
+      "DaVinci Resolve Studio 19",
+      "Adobe Premiere Pro",
+      "Logic Pro X"
+    ],
+    "workflowHighlights": [
+      "Color Grading & LUT Emulation",
+      "4K Multi-Cam Sync",
+      "Sound Design & Foley"
+    ]
   },
   {
-    id: 'color-grading-suite',
-    folderCode: 'DIR_06_COLOR_STUDIO',
-    name: 'DaVinci Resolve Color Grading Suite',
-    nameGujarati: 'કલર ગ્રેડિંગ & LUT ફિલ્મ એમ્યુલેશન',
-    badge: 'LOG TO REC.709 & FILM LOOK',
-    iconName: 'Sliders',
-    description: 'Hardware node-based color grading transforming raw Sony S-Log3 and Apple ProRes into cinematic Kodak 2383 film stock tones.',
-    softwareStack: ['DaVinci Resolve Studio 19', 'Hardware Grading Panels', 'Color Calibrated 10-bit Displays'],
-    workflowHighlights: ['Kodak 2383 Film Emulation', 'Organic Film Grain & Halation', 'True Skin Tone Isolation', 'ACES & DaVinci Color Science']
+    "id": "teaser",
+    "folderCode": "DIR_06_TEASER",
+    "name": "Teaser",
+    "nameGujarati": "સિનેમેટિક વેડિંગ ટીઝર્સ (2.39:1)",
+    "badge": "2 PROJECT EDITS",
+    "iconName": "Film",
+    "description": "High-adrenaline 60–90 second widescreen trailers with orchestral rise and dialogue snips.",
+    "softwareStack": [
+      "DaVinci Resolve Studio 19",
+      "Adobe Premiere Pro",
+      "Logic Pro X"
+    ],
+    "workflowHighlights": [
+      "Color Grading & LUT Emulation",
+      "4K Multi-Cam Sync",
+      "Sound Design & Foley"
+    ]
+  },
+  {
+    "id": "vehicle-delivery",
+    "folderCode": "DIR_07_VEHICLE_DELIVERY",
+    "name": "Vehicle Delivery",
+    "nameGujarati": "રોયલ કાર ડિલિવરી અને સેલિબ્રેશન હાઇલાઇટ્સ",
+    "badge": "2 PROJECT EDITS",
+    "iconName": "Scissors",
+    "description": "Cinematic automobile delivery celebrations capturing the proud milestone moments with family.",
+    "softwareStack": [
+      "DaVinci Resolve Studio 19",
+      "Adobe Premiere Pro",
+      "Logic Pro X"
+    ],
+    "workflowHighlights": [
+      "Color Grading & LUT Emulation",
+      "4K Multi-Cam Sync",
+      "Sound Design & Foley"
+    ]
   }
 ];
 
 export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
-  // Folder 1: Wedding Teasers & Trailers
   {
-    id: 'teaser-yash-kavya',
-    folderId: 'wedding-teasers',
-    title: 'Yash & Kavya — Royal Roka 4K Official Teaser',
-    client: 'Yash & Kavya',
-    eventDate: 'Grand Roka Ceremony',
-    aspectRatio: '2.39:1 CinemaScope',
-    duration: '01:45',
-    resolution: '4K UHD 60FPS Master',
-    software: ['DaVinci Resolve Studio 19', 'Adobe Premiere Pro', 'Logic Pro'],
-    tags: ['Anamorphic Crop', 'Cinematic Sound Design', 'Dramatic Ramping', 'Gold Hue Grade'],
-    thumbnail: 'assets/yash-kavya-outer-cover.jpg',
-    videoUrl: 'https://youtu.be/3i1-aJcasSg',
-    description: 'Fast-paced cinematic teaser highlighting the royal grand entry, emotional parents blessings, and high-energy floral showers.',
-    keyFeature: 'Custom acoustic score with orchestral rise & bass drop'
+    "id": "proj-ai-1",
+    "folderId": "ai",
+    "title": "AI Hilight",
+    "client": "KD Creation Official Client",
+    "eventDate": "Cinema Master Edit",
+    "aspectRatio": "16:9 4K Master",
+    "duration": "02:30",
+    "resolution": "4K Ultra HD",
+    "software": [
+      "DaVinci Resolve Studio 19",
+      "Adobe Premiere Pro"
+    ],
+    "tags": [
+      "Multi-Cam Sync",
+      "Film Emulation",
+      "Dialogue Foley",
+      "4K Master"
+    ],
+    "thumbnail": "assets/yash-kavya-outer-cover.jpg",
+    "videoUrl": "video-portfolio/AI/AI Hilight.mp4",
+    "description": "AI Hilight — Official post-production cut curated under AI.",
+    "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
   {
-    id: 'teaser-kaushik-anjali',
-    folderId: 'wedding-teasers',
-    title: 'Kaushik & Anjali — Royal Wedding Cinema Trailer',
-    client: 'Kaushik & Anjali',
-    eventDate: 'Royal Wedding Celebration',
-    aspectRatio: '2.39:1 CinemaScope',
-    duration: '02:10',
-    resolution: '4K 24FPS DCI Master',
-    software: ['DaVinci Resolve Studio 19', 'Premiere Pro'],
-    tags: ['Anamorphic Letterbox', 'Dialogue Voiceover', 'Film Grain', 'Bass Foley'],
-    thumbnail: 'assets/kaushik-anjali-outer-cover.jpg',
-    videoUrl: 'https://youtu.be/DPSPFKgsDs4',
-    description: 'Trailer featuring bride voiceover vows, fireworks slow-motion, and majestic palace entry with rich royal red and gold grading.',
-    keyFeature: 'Seamless bride-entry voiceover overlaid on cinematic crescendo'
+    "id": "proj-ai-2",
+    "folderId": "ai",
+    "title": "AI Kankotri Lekhan",
+    "client": "KD Creation Official Client",
+    "eventDate": "Cinema Master Edit",
+    "aspectRatio": "16:9 4K Master",
+    "duration": "02:30",
+    "resolution": "4K Ultra HD",
+    "software": [
+      "DaVinci Resolve Studio 19",
+      "Adobe Premiere Pro"
+    ],
+    "tags": [
+      "Multi-Cam Sync",
+      "Film Emulation",
+      "Dialogue Foley",
+      "4K Master"
+    ],
+    "thumbnail": "assets/yash-kavya-outer-cover.jpg",
+    "videoUrl": "video-portfolio/AI/AI Kankotri Lekhan.mp4",
+    "description": "AI Kankotri Lekhan — Official post-production cut curated under AI.",
+    "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
   {
-    id: 'teaser-dhaval-sangeeta',
-    folderId: 'wedding-teasers',
-    title: 'Dhaval & Sangeeta — Pre-Wedding Cinematic Teaser',
-    client: 'Dhaval & Sangeeta',
-    eventDate: 'Pre-Wedding Celebration',
-    aspectRatio: '16:9 4K Cinema',
-    duration: '01:15',
-    resolution: '4K 60FPS Smooth',
-    software: ['Adobe Premiere Pro', 'DaVinci Resolve Studio'],
-    tags: ['Speed Ramp 120fps', 'Lens Flare FX', 'Golden Hour Grade', 'Beat Snips'],
-    thumbnail: 'assets/dhaval-sangeeta-outer-cover.jpg',
-    videoUrl: 'https://youtu.be/mJ49EXaTXO8',
-    description: 'High-energy romance teaser cut to a pulsating beat with sunset backlights and dramatic speed transitions.',
-    keyFeature: 'Sub-second speed ramps synchronized to percussion'
-  },
-
-  // Folder 2: Feature Films & Highlights
-  {
-    id: 'film-kaushik-anjali-highlights',
-    folderId: 'feature-films',
-    title: 'Kaushik & Anjali — Royal Wedding Highlights Film',
-    client: 'Kaushik & Anjali',
-    eventDate: 'Full Wedding Ceremony',
-    aspectRatio: '16:9 4K UHD Master',
-    duration: '07:35',
-    resolution: '4K ProRes Master',
-    software: ['DaVinci Resolve Studio 19', 'Premiere Pro', 'iZotope RX 10'],
-    tags: ['Multi-Cam Sync (4 Cameras)', 'Dialogue & Vows Restoration', 'Three-Act Emotional Arc'],
-    thumbnail: 'assets/kaushik-anjali-modal-cover.jpg',
-    videoUrl: 'https://youtu.be/DPSPFKgsDs4',
-    description: 'Full narrative highlight film following the three-act wedding journey: morning quiet anticipation, ceremonial vows, and midnight reception celebration.',
-    keyFeature: 'Multi-cam 4-camera synchronization with isolated lapel audio'
+    "id": "proj-ai-3",
+    "folderId": "ai",
+    "title": "AI Kankotri Lekhan",
+    "client": "KD Creation Official Client",
+    "eventDate": "Cinema Master Edit",
+    "aspectRatio": "16:9 4K Master",
+    "duration": "02:30",
+    "resolution": "4K Ultra HD",
+    "software": [
+      "DaVinci Resolve Studio 19",
+      "Adobe Premiere Pro"
+    ],
+    "tags": [
+      "Multi-Cam Sync",
+      "Film Emulation",
+      "Dialogue Foley",
+      "4K Master"
+    ],
+    "thumbnail": "assets/yash-kavya-outer-cover.jpg",
+    "videoUrl": "video-portfolio/AI/AI Kankotri_Lekhan.mp4",
+    "description": "AI Kankotri Lekhan — Official post-production cut curated under AI.",
+    "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
   {
-    id: 'film-yash-kavya-roka-film',
-    folderId: 'feature-films',
-    title: 'Yash & Kavya — Grand Roka Ceremony 4K Film',
-    client: 'Yash & Kavya',
-    eventDate: 'Roka Celebration Film',
-    aspectRatio: '16:9 4K UHD Master',
-    duration: '05:42',
-    resolution: '4K 60FPS UHD',
-    software: ['DaVinci Resolve Studio 19', 'Adobe Premiere Pro'],
-    tags: ['Family Narrative Cut', 'Ambient Audio Mix', 'True Skin Tones', 'Gimbal Flow'],
-    thumbnail: 'assets/yash-kavya-modal-cover.jpg',
-    videoUrl: 'https://youtu.be/3i1-aJcasSg',
-    description: 'Emotional documentary highlighting family speeches, ring exchange intimacy, and spontaneous laughter with natural studio acoustic mix.',
-    keyFeature: 'Balanced speech levels amidst loud live Indian orchestra'
+    "id": "proj-ai-4",
+    "folderId": "ai",
+    "title": "Ai Animation Story Reel",
+    "client": "KD Creation Official Client",
+    "eventDate": "Cinema Master Edit",
+    "aspectRatio": "9:16 Vertical Reel",
+    "duration": "00:50",
+    "resolution": "4K Ultra HD",
+    "software": [
+      "DaVinci Resolve Studio 19",
+      "Adobe Premiere Pro"
+    ],
+    "tags": [
+      "9:16 Mobile Cut",
+      "Beat Sync",
+      "Punchy Bass",
+      "Color Pop"
+    ],
+    "thumbnail": "assets/yash-kavya-outer-cover.jpg",
+    "videoUrl": "video-portfolio/AI/Ai Animation Story Reel.mp4",
+    "description": "Ai Animation Story Reel — Official post-production cut curated under AI.",
+    "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
   {
-    id: 'film-vishwa-dhawal-story',
-    folderId: 'feature-films',
-    title: 'Vishwa & Dhaval — Heritage Wedding Narrative Film',
-    client: 'Vishwa & Dhaval',
-    eventDate: 'Heritage Wedding Film',
-    aspectRatio: '16:9 4K UHD Master',
-    duration: '06:18',
-    resolution: '4K Ultra High Definition',
-    software: ['DaVinci Resolve Studio 19', 'Adobe Premiere Pro'],
-    tags: ['Story Arc', 'Mandap Pheras Vows', 'Warm Heritage Color Palette', 'Drone Perspective'],
-    thumbnail: 'assets/vishwa-dhawal-modal-cover.jpg',
-    videoUrl: 'https://youtu.be/DPSPFKgsDs4',
-    description: 'Timeless heirloom wedding film designed with authentic cultural pacing, heartfelt family moments, and cinematic framing.',
-    keyFeature: 'Film curve tonal transition preserving sacred flame highlights'
-  },
-
-  // Folder 3: Pre-Wedding Concepts & Music Films
-  {
-    id: 'prewed-dhaval-sangeeta-full',
-    folderId: 'pre-wedding-concepts',
-    title: 'Dhaval & Sangeeta — Pre-Wedding Teaser & Song Film',
-    client: 'Dhaval & Sangeeta',
-    eventDate: 'Pre-Wedding Music Film',
-    aspectRatio: '2.39:1 CinemaScope',
-    duration: '04:12',
-    resolution: '4K Cinematic 24P',
-    software: ['Adobe Premiere Pro', 'DaVinci Resolve Studio', 'After Effects'],
-    tags: ['Lyrical Sync', 'Dreamy Pastel Grade', '120fps Slow-Mo', 'Foley Soundscape'],
-    thumbnail: 'assets/service-prewedding-dhaval-sangita.jpg',
-    videoUrl: 'https://youtu.be/mJ49EXaTXO8',
-    description: 'Musical romance film featuring poetic movement, natural eye-contact pauses, and picturesque landscape cinematography.',
-    keyFeature: 'Custom lyric typography and beat-aligned motion'
+    "id": "proj-highlight-1",
+    "folderId": "highlight",
+    "title": "Garba Highlight",
+    "client": "KD Creation Official Client",
+    "eventDate": "Cinema Master Edit",
+    "aspectRatio": "16:9 4K Master",
+    "duration": "02:30",
+    "resolution": "4K Ultra HD",
+    "software": [
+      "DaVinci Resolve Studio 19",
+      "Adobe Premiere Pro"
+    ],
+    "tags": [
+      "Multi-Cam Sync",
+      "Film Emulation",
+      "Dialogue Foley",
+      "4K Master"
+    ],
+    "thumbnail": "assets/kaushik-anjali-outer-cover.jpg",
+    "videoUrl": "video-portfolio/Highlight/Garba_Highlight.mp4",
+    "description": "Garba Highlight — Official post-production cut curated under Highlight.",
+    "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
   {
-    id: 'prewed-desert-sunset-story',
-    folderId: 'pre-wedding-concepts',
-    title: 'Sun-Kissed Romance — Concept Narrative Edit',
-    client: 'KD Studio Showcase',
-    eventDate: 'Destination Pre-Wedding',
-    aspectRatio: '2.39:1 CinemaScope',
-    duration: '03:30',
-    resolution: '4K DCI Film Master',
-    software: ['DaVinci Resolve Studio', 'Premiere Pro'],
-    tags: ['Golden Hour LUT', 'Wind Foley Audio', 'Speed Ramps', 'Anamorphic Flares'],
-    thumbnail: 'assets/service-prewedding-rakhi.jpg',
-    videoUrl: 'https://youtu.be/mJ49EXaTXO8',
-    description: 'Bespoke editorial romantic music video featuring sunset dunes, veil flow dynamics, and rich warm film emulation.',
-    keyFeature: 'Organic wind & footsteps audio foley layered under acoustic guitar'
-  },
-
-  // Folder 4: Instagram 9:16 Viral Reels
-  {
-    id: 'reel-dhaval-sangeeta-viral',
-    folderId: 'reels-vertical',
-    title: 'Dhaval & Sangeeta — High-Impact Cinema Reel (9:16)',
-    client: 'Dhaval & Sangeeta',
-    eventDate: 'Viral Instagram Highlight',
-    aspectRatio: '9:16 Vertical Reel',
-    duration: '00:48',
-    resolution: '1080x1920 60FPS Smooth',
-    software: ['Adobe Premiere Pro', 'DaVinci Resolve Studio', 'CapCut Studio'],
-    tags: ['9:16 Vertical Crop', 'Trend Beat Sync', 'High Saturation Contrast', 'Instant Hook'],
-    thumbnail: 'assets/dhaval-sangeeta-g1.jpg',
-    videoUrl: 'https://youtu.be/x7782vFootg',
-    description: 'Tailored for Instagram feeds & algorithms with an immediate 2-second hook, bass punch, and saturated colors optimized for mobile screens.',
-    keyFeature: '60 FPS hyper-fluid vertical motion with frame-accurate bass sync'
+    "id": "proj-highlight-2",
+    "folderId": "highlight",
+    "title": "Haldi  Highlight",
+    "client": "KD Creation Official Client",
+    "eventDate": "Cinema Master Edit",
+    "aspectRatio": "16:9 4K Master",
+    "duration": "02:30",
+    "resolution": "4K Ultra HD",
+    "software": [
+      "DaVinci Resolve Studio 19",
+      "Adobe Premiere Pro"
+    ],
+    "tags": [
+      "Multi-Cam Sync",
+      "Film Emulation",
+      "Dialogue Foley",
+      "4K Master"
+    ],
+    "thumbnail": "assets/kaushik-anjali-outer-cover.jpg",
+    "videoUrl": "video-portfolio/Highlight/Haldi _Highlight.mp4",
+    "description": "Haldi  Highlight — Official post-production cut curated under Highlight.",
+    "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
   {
-    id: 'reel-yash-kavya-entry',
-    folderId: 'reels-vertical',
-    title: 'Yash & Kavya — Royal Entry & Fireworks (9:16)',
-    client: 'Yash & Kavya',
-    eventDate: 'Entry Special Reel',
-    aspectRatio: '9:16 Vertical Reel',
-    duration: '00:35',
-    resolution: '1080x1920 60FPS',
-    software: ['DaVinci Resolve Studio', 'Premiere Pro'],
-    tags: ['Cold Pyro Spark Sync', 'Crowd Roar Foley', 'Mobile OLED HDR', 'Beat Drop'],
-    thumbnail: 'assets/yash-kavya-g2.jpg',
-    videoUrl: 'https://youtu.be/3i1-aJcasSg',
-    description: 'Adrenaline-filled couple entry reel with sync on cold firework sparks and crowd cheer drop.',
-    keyFeature: 'Dynamic audio sidechain ducking under dramatic entry announcement'
+    "id": "proj-highlight-3",
+    "folderId": "highlight",
+    "title": "SAMEDAY DHAWAL  Highlight(AI)",
+    "client": "KD Creation Official Client",
+    "eventDate": "Cinema Master Edit",
+    "aspectRatio": "16:9 4K Master",
+    "duration": "02:30",
+    "resolution": "4K Ultra HD",
+    "software": [
+      "DaVinci Resolve Studio 19",
+      "Adobe Premiere Pro"
+    ],
+    "tags": [
+      "Multi-Cam Sync",
+      "Film Emulation",
+      "Dialogue Foley",
+      "4K Master"
+    ],
+    "thumbnail": "assets/kaushik-anjali-outer-cover.jpg",
+    "videoUrl": "https://youtu.be/mJ49EXaTXO8",
+    "description": "SAMEDAY DHAWAL  Highlight(AI) — Official post-production cut curated under Highlight.",
+    "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
   {
-    id: 'reel-bridal-royalty-solo',
-    folderId: 'reels-vertical',
-    title: 'Royal Bride — Elegance & Lehenga Twirl (9:16)',
-    client: 'Bridal Portrait Studio',
-    eventDate: 'Bridal Solo Reel',
-    aspectRatio: '9:16 Vertical Reel',
-    duration: '00:30',
-    resolution: '1080x1920 60FPS',
-    software: ['Premiere Pro', 'DaVinci Resolve Studio'],
-    tags: ['Slow-Mo 120fps Twirl', 'Jewelry Shimmer Highlights', 'Luxury Warm Tones'],
-    thumbnail: 'assets/service-bride-mirror.jpg',
-    videoUrl: 'https://youtu.be/x7782vFootg',
-    description: 'Fine-art editorial bridal reel with jewel sparkle enhancement, lehenga flare speed ramping, and classical sitar audio sync.',
-    keyFeature: 'Subtle shimmer highlights tracking bridal jewelry'
-  },
-
-  // Folder 5: Ceremony & Ritual Highlights
-  {
-    id: 'ceremony-haldi-splash',
-    folderId: 'ceremony-rituals',
-    title: 'Haldi Sunshine — Flower Petals & Water Splash Cut',
-    client: 'Haldi Madness Edit',
-    eventDate: 'Haldi Ceremony Special',
-    aspectRatio: '16:9 4K UHD Master',
-    duration: '02:20',
-    resolution: '4K 60FPS High-Frame',
-    software: ['DaVinci Resolve Studio 19', 'Adobe Premiere Pro'],
-    tags: ['Yellow Hue Isolation', 'Water Splash Speed Ramp', 'Laughs & Dhol Sync'],
-    thumbnail: 'assets/service-wedding-joyful.jpg',
-    videoUrl: 'https://youtu.be/3i1-aJcasSg',
-    description: 'High-vibe Haldi edit balancing natural turmeric yellow tones without clipping, set to fast Gujarati folk fusion beats.',
-    keyFeature: 'Preserved natural yellow skin hues without over-saturating whites'
+    "id": "proj-highlight-4",
+    "folderId": "highlight",
+    "title": "Shivani Bharvad Highlight",
+    "client": "KD Creation Official Client",
+    "eventDate": "Cinema Master Edit",
+    "aspectRatio": "16:9 4K Master",
+    "duration": "02:30",
+    "resolution": "4K Ultra HD",
+    "software": [
+      "DaVinci Resolve Studio 19",
+      "Adobe Premiere Pro"
+    ],
+    "tags": [
+      "Multi-Cam Sync",
+      "Film Emulation",
+      "Dialogue Foley",
+      "4K Master"
+    ],
+    "thumbnail": "assets/kaushik-anjali-outer-cover.jpg",
+    "videoUrl": "video-portfolio/Highlight/Shivani Bharvad Highlight.mp4",
+    "description": "Shivani Bharvad Highlight — Official post-production cut curated under Highlight.",
+    "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
   {
-    id: 'ceremony-sangeet-energy',
-    folderId: 'ceremony-rituals',
-    title: 'Sangeet Night — Dance Floor Fire & Choreography Cut',
-    client: 'Sangeet & Garba Night',
-    eventDate: 'Sangeet Special Edit',
-    aspectRatio: '16:9 4K UHD Master',
-    duration: '03:45',
-    resolution: '4K UHD High Definition',
-    software: ['Adobe Premiere Pro', 'DaVinci Resolve Studio'],
-    tags: ['Multi-Angle Dance Cut', 'Lighting Flare Correction', 'Live Bass Boost'],
-    thumbnail: 'assets/kaushik-anjali-g3.jpg',
-    videoUrl: 'https://youtu.be/DPSPFKgsDs4',
-    description: 'Fast-paced multi-angle dance routine edit seamlessly synchronizing stage choreography, couple duets, and crowd reactions.',
-    keyFeature: 'Stage strobe light flash dampening for smooth viewing comfort'
-  },
-
-  // Folder 6: Color Grading Suite (DaVinci Resolve)
-  {
-    id: 'color-grade-sony-slog3',
-    folderId: 'color-grading-suite',
-    title: 'Sony S-Log3 to Kodak 2383 Film Print Emulation',
-    client: 'KD Studio Color Lab',
-    eventDate: 'Color Grading Suite',
-    aspectRatio: '2.39:1 CinemaScope',
-    duration: '01:50',
-    resolution: '4K 10-bit 4:2:2 DCI',
-    software: ['DaVinci Resolve Studio 19 (Hardware Panel)', 'ACEScc Color Science'],
-    tags: ['Kodak 2383 Look', 'Skin Tone Qualifiers', 'Organic 35mm Film Grain', 'Highlight Rolloff'],
-    thumbnail: 'assets/yash-kavya-g3.jpg',
-    videoUrl: 'https://youtu.be/3i1-aJcasSg',
-    description: 'Professional color pipeline showcase converting flat 10-bit camera log into rich, creamy film tones with velvety blacks and glowing skin.',
-    keyFeature: 'Node-based ACEScc transform preserving 14+ stops of dynamic range'
+    "id": "proj-portraits-1",
+    "folderId": "portraits",
+    "title": "Couple Portrait",
+    "client": "KD Creation Official Client",
+    "eventDate": "Cinema Master Edit",
+    "aspectRatio": "16:9 4K Master",
+    "duration": "02:30",
+    "resolution": "4K Ultra HD",
+    "software": [
+      "DaVinci Resolve Studio 19",
+      "Adobe Premiere Pro"
+    ],
+    "tags": [
+      "Multi-Cam Sync",
+      "Film Emulation",
+      "Dialogue Foley",
+      "4K Master"
+    ],
+    "thumbnail": "assets/service-bride-mirror.jpg",
+    "videoUrl": "video-portfolio/Portraits/Couple Portrait.mp4",
+    "description": "Couple Portrait — Official post-production cut curated under Portraits.",
+    "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
   {
-    id: 'color-grade-golden-hour',
-    folderId: 'color-grading-suite',
-    title: 'Royal Mandap Golden Hour & Firelight Grading',
-    client: 'KD Studio Color Lab',
-    eventDate: 'Color Grading Suite',
-    aspectRatio: '16:9 4K Master',
-    duration: '01:30',
-    resolution: '4K UHD 10-bit',
-    software: ['DaVinci Resolve Studio 19'],
-    tags: ['Warm Shadow Lift', 'Sacred Fire Highlight Recovery', 'Cyan-Amber Contrast'],
-    thumbnail: 'assets/kaushik-anjali-g1.jpg',
-    videoUrl: 'https://youtu.be/DPSPFKgsDs4',
-    description: 'Advanced highlight rolloff and shadow separation ensuring holy sacred flames do not blow out the bride and groom facial details.',
-    keyFeature: 'Split-tone amber highlights with teal-rich royal background separation'
+    "id": "proj-portraits-2",
+    "folderId": "portraits",
+    "title": "PANKAJBHAI Rec",
+    "client": "KD Creation Official Client",
+    "eventDate": "Cinema Master Edit",
+    "aspectRatio": "16:9 4K Master",
+    "duration": "02:30",
+    "resolution": "4K Ultra HD",
+    "software": [
+      "DaVinci Resolve Studio 19",
+      "Adobe Premiere Pro"
+    ],
+    "tags": [
+      "Multi-Cam Sync",
+      "Film Emulation",
+      "Dialogue Foley",
+      "4K Master"
+    ],
+    "thumbnail": "assets/service-bride-mirror.jpg",
+    "videoUrl": "video-portfolio/Portraits/PANKAJBHAI_Rec.mp4",
+    "description": "PANKAJBHAI Rec — Official post-production cut curated under Portraits.",
+    "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
+  },
+  {
+    "id": "proj-portraits-3",
+    "folderId": "portraits",
+    "title": "Pre Wedding REEL",
+    "client": "KD Creation Official Client",
+    "eventDate": "Cinema Master Edit",
+    "aspectRatio": "9:16 Vertical Reel",
+    "duration": "00:50",
+    "resolution": "4K Ultra HD",
+    "software": [
+      "DaVinci Resolve Studio 19",
+      "Adobe Premiere Pro"
+    ],
+    "tags": [
+      "9:16 Mobile Cut",
+      "Beat Sync",
+      "Punchy Bass",
+      "Color Pop"
+    ],
+    "thumbnail": "assets/service-bride-mirror.jpg",
+    "videoUrl": "video-portfolio/Portraits/Pre-Wedding_REEL.mp4",
+    "description": "Pre Wedding REEL — Official post-production cut curated under Portraits.",
+    "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
+  },
+  {
+    "id": "proj-portraits-4",
+    "folderId": "portraits",
+    "title": "Sivani Solo Portrait",
+    "client": "KD Creation Official Client",
+    "eventDate": "Cinema Master Edit",
+    "aspectRatio": "16:9 4K Master",
+    "duration": "02:30",
+    "resolution": "4K Ultra HD",
+    "software": [
+      "DaVinci Resolve Studio 19",
+      "Adobe Premiere Pro"
+    ],
+    "tags": [
+      "Multi-Cam Sync",
+      "Film Emulation",
+      "Dialogue Foley",
+      "4K Master"
+    ],
+    "thumbnail": "assets/service-bride-mirror.jpg",
+    "videoUrl": "video-portfolio/Portraits/Sivani Solo Portrait.mp4",
+    "description": "Sivani Solo Portrait — Official post-production cut curated under Portraits.",
+    "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
+  },
+  {
+    "id": "proj-pre-wedding-1",
+    "folderId": "pre-wedding",
+    "title": "PREWEDDING SONG(Mahesh & Ila)",
+    "client": "KD Creation Official Client",
+    "eventDate": "Cinema Master Edit",
+    "aspectRatio": "16:9 4K Master",
+    "duration": "02:30",
+    "resolution": "4K Ultra HD",
+    "software": [
+      "DaVinci Resolve Studio 19",
+      "Adobe Premiere Pro"
+    ],
+    "tags": [
+      "Multi-Cam Sync",
+      "Film Emulation",
+      "Dialogue Foley",
+      "4K Master"
+    ],
+    "thumbnail": "assets/service-prewedding-dhaval-sangita.jpg",
+    "videoUrl": "video-portfolio/Pre-Wedding/PREWEDDING_SONG(Mahesh & Ila).mp4",
+    "description": "PREWEDDING SONG(Mahesh & Ila) — Official post-production cut curated under Pre Wedding.",
+    "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
+  },
+  {
+    "id": "proj-pre-wedding-2",
+    "folderId": "pre-wedding",
+    "title": "Pre Wedding Teaser + Song(Dhawal & Sangita)",
+    "client": "KD Creation Official Client",
+    "eventDate": "Cinema Master Edit",
+    "aspectRatio": "16:9 4K Master",
+    "duration": "02:30",
+    "resolution": "4K Ultra HD",
+    "software": [
+      "DaVinci Resolve Studio 19",
+      "Adobe Premiere Pro"
+    ],
+    "tags": [
+      "Multi-Cam Sync",
+      "Film Emulation",
+      "Dialogue Foley",
+      "4K Master"
+    ],
+    "thumbnail": "assets/service-prewedding-dhaval-sangita.jpg",
+    "videoUrl": "https://youtu.be/mJ49EXaTXO8",
+    "description": "Pre Wedding Teaser + Song(Dhawal & Sangita) — Official post-production cut curated under Pre Wedding.",
+    "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
+  },
+  {
+    "id": "proj-reel-1",
+    "folderId": "reel",
+    "title": "BADALBHAI HALDI",
+    "client": "KD Creation Official Client",
+    "eventDate": "Cinema Master Edit",
+    "aspectRatio": "9:16 Vertical Reel",
+    "duration": "00:50",
+    "resolution": "4K Ultra HD",
+    "software": [
+      "DaVinci Resolve Studio 19",
+      "Adobe Premiere Pro"
+    ],
+    "tags": [
+      "9:16 Mobile Cut",
+      "Beat Sync",
+      "Punchy Bass",
+      "Color Pop"
+    ],
+    "thumbnail": "assets/dhaval-sangeeta-outer-cover.jpg",
+    "videoUrl": "video-portfolio/Reel/BADALBHAI_HALDI.mp4",
+    "description": "BADALBHAI HALDI — Official post-production cut curated under Reel.",
+    "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
+  },
+  {
+    "id": "proj-reel-2",
+    "folderId": "reel",
+    "title": "BRIDE",
+    "client": "KD Creation Official Client",
+    "eventDate": "Cinema Master Edit",
+    "aspectRatio": "9:16 Vertical Reel",
+    "duration": "00:50",
+    "resolution": "4K Ultra HD",
+    "software": [
+      "DaVinci Resolve Studio 19",
+      "Adobe Premiere Pro"
+    ],
+    "tags": [
+      "9:16 Mobile Cut",
+      "Beat Sync",
+      "Punchy Bass",
+      "Color Pop"
+    ],
+    "thumbnail": "assets/dhaval-sangeeta-outer-cover.jpg",
+    "videoUrl": "video-portfolio/Reel/BRIDE.mp4",
+    "description": "BRIDE — Official post-production cut curated under Reel.",
+    "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
+  },
+  {
+    "id": "proj-reel-3",
+    "folderId": "reel",
+    "title": "BRIDE REEL REEL",
+    "client": "KD Creation Official Client",
+    "eventDate": "Cinema Master Edit",
+    "aspectRatio": "9:16 Vertical Reel",
+    "duration": "00:50",
+    "resolution": "4K Ultra HD",
+    "software": [
+      "DaVinci Resolve Studio 19",
+      "Adobe Premiere Pro"
+    ],
+    "tags": [
+      "9:16 Mobile Cut",
+      "Beat Sync",
+      "Punchy Bass",
+      "Color Pop"
+    ],
+    "thumbnail": "assets/dhaval-sangeeta-outer-cover.jpg",
+    "videoUrl": "video-portfolio/Reel/BRIDE_REEL_REEL.mp4",
+    "description": "BRIDE REEL REEL — Official post-production cut curated under Reel.",
+    "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
+  },
+  {
+    "id": "proj-reel-4",
+    "folderId": "reel",
+    "title": "Bride REEL",
+    "client": "KD Creation Official Client",
+    "eventDate": "Cinema Master Edit",
+    "aspectRatio": "9:16 Vertical Reel",
+    "duration": "00:50",
+    "resolution": "4K Ultra HD",
+    "software": [
+      "DaVinci Resolve Studio 19",
+      "Adobe Premiere Pro"
+    ],
+    "tags": [
+      "9:16 Mobile Cut",
+      "Beat Sync",
+      "Punchy Bass",
+      "Color Pop"
+    ],
+    "thumbnail": "assets/dhaval-sangeeta-outer-cover.jpg",
+    "videoUrl": "video-portfolio/Reel/Bride_REEL.mp4",
+    "description": "Bride REEL — Official post-production cut curated under Reel.",
+    "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
+  },
+  {
+    "id": "proj-reel-5",
+    "folderId": "reel",
+    "title": "Couple REEL",
+    "client": "KD Creation Official Client",
+    "eventDate": "Cinema Master Edit",
+    "aspectRatio": "9:16 Vertical Reel",
+    "duration": "00:50",
+    "resolution": "4K Ultra HD",
+    "software": [
+      "DaVinci Resolve Studio 19",
+      "Adobe Premiere Pro"
+    ],
+    "tags": [
+      "9:16 Mobile Cut",
+      "Beat Sync",
+      "Punchy Bass",
+      "Color Pop"
+    ],
+    "thumbnail": "assets/dhaval-sangeeta-outer-cover.jpg",
+    "videoUrl": "video-portfolio/Reel/Couple REEL.mp4",
+    "description": "Couple REEL — Official post-production cut curated under Reel.",
+    "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
+  },
+  {
+    "id": "proj-reel-6",
+    "folderId": "reel",
+    "title": "GARBA",
+    "client": "KD Creation Official Client",
+    "eventDate": "Cinema Master Edit",
+    "aspectRatio": "9:16 Vertical Reel",
+    "duration": "00:50",
+    "resolution": "4K Ultra HD",
+    "software": [
+      "DaVinci Resolve Studio 19",
+      "Adobe Premiere Pro"
+    ],
+    "tags": [
+      "9:16 Mobile Cut",
+      "Beat Sync",
+      "Punchy Bass",
+      "Color Pop"
+    ],
+    "thumbnail": "assets/dhaval-sangeeta-outer-cover.jpg",
+    "videoUrl": "video-portfolio/Reel/GARBA.mp4",
+    "description": "GARBA — Official post-production cut curated under Reel.",
+    "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
+  },
+  {
+    "id": "proj-reel-7",
+    "folderId": "reel",
+    "title": "HALDI REEL KD CREATION",
+    "client": "KD Creation Official Client",
+    "eventDate": "Cinema Master Edit",
+    "aspectRatio": "9:16 Vertical Reel",
+    "duration": "00:50",
+    "resolution": "4K Ultra HD",
+    "software": [
+      "DaVinci Resolve Studio 19",
+      "Adobe Premiere Pro"
+    ],
+    "tags": [
+      "9:16 Mobile Cut",
+      "Beat Sync",
+      "Punchy Bass",
+      "Color Pop"
+    ],
+    "thumbnail": "assets/dhaval-sangeeta-outer-cover.jpg",
+    "videoUrl": "video-portfolio/Reel/HALDI_REEL_KD_CREATION.mp4",
+    "description": "HALDI REEL KD CREATION — Official post-production cut curated under Reel.",
+    "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
+  },
+  {
+    "id": "proj-reel-8",
+    "folderId": "reel",
+    "title": "INTRO VIDEO",
+    "client": "KD Creation Official Client",
+    "eventDate": "Cinema Master Edit",
+    "aspectRatio": "9:16 Vertical Reel",
+    "duration": "00:50",
+    "resolution": "4K Ultra HD",
+    "software": [
+      "DaVinci Resolve Studio 19",
+      "Adobe Premiere Pro"
+    ],
+    "tags": [
+      "9:16 Mobile Cut",
+      "Beat Sync",
+      "Punchy Bass",
+      "Color Pop"
+    ],
+    "thumbnail": "assets/dhaval-sangeeta-outer-cover.jpg",
+    "videoUrl": "video-portfolio/Reel/INTRO VIDEO.mp4",
+    "description": "INTRO VIDEO — Official post-production cut curated under Reel.",
+    "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
+  },
+  {
+    "id": "proj-reel-9",
+    "folderId": "reel",
+    "title": "MODEL REEL 2",
+    "client": "KD Creation Official Client",
+    "eventDate": "Cinema Master Edit",
+    "aspectRatio": "9:16 Vertical Reel",
+    "duration": "00:50",
+    "resolution": "4K Ultra HD",
+    "software": [
+      "DaVinci Resolve Studio 19",
+      "Adobe Premiere Pro"
+    ],
+    "tags": [
+      "9:16 Mobile Cut",
+      "Beat Sync",
+      "Punchy Bass",
+      "Color Pop"
+    ],
+    "thumbnail": "assets/dhaval-sangeeta-outer-cover.jpg",
+    "videoUrl": "video-portfolio/Reel/MODEL REEL 2.mp4",
+    "description": "MODEL REEL 2 — Official post-production cut curated under Reel.",
+    "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
+  },
+  {
+    "id": "proj-reel-10",
+    "folderId": "reel",
+    "title": "REEL 1",
+    "client": "KD Creation Official Client",
+    "eventDate": "Cinema Master Edit",
+    "aspectRatio": "9:16 Vertical Reel",
+    "duration": "00:50",
+    "resolution": "4K Ultra HD",
+    "software": [
+      "DaVinci Resolve Studio 19",
+      "Adobe Premiere Pro"
+    ],
+    "tags": [
+      "9:16 Mobile Cut",
+      "Beat Sync",
+      "Punchy Bass",
+      "Color Pop"
+    ],
+    "thumbnail": "assets/dhaval-sangeeta-outer-cover.jpg",
+    "videoUrl": "video-portfolio/Reel/REEL_1.mp4",
+    "description": "REEL 1 — Official post-production cut curated under Reel.",
+    "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
+  },
+  {
+    "id": "proj-reel-11",
+    "folderId": "reel",
+    "title": "Reel 3",
+    "client": "KD Creation Official Client",
+    "eventDate": "Cinema Master Edit",
+    "aspectRatio": "9:16 Vertical Reel",
+    "duration": "00:50",
+    "resolution": "4K Ultra HD",
+    "software": [
+      "DaVinci Resolve Studio 19",
+      "Adobe Premiere Pro"
+    ],
+    "tags": [
+      "9:16 Mobile Cut",
+      "Beat Sync",
+      "Punchy Bass",
+      "Color Pop"
+    ],
+    "thumbnail": "assets/dhaval-sangeeta-outer-cover.jpg",
+    "videoUrl": "video-portfolio/Reel/Reel_3.mp4",
+    "description": "Reel 3 — Official post-production cut curated under Reel.",
+    "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
+  },
+  {
+    "id": "proj-reel-12",
+    "folderId": "reel",
+    "title": "SANGEET REEL KD CREATION FINAL",
+    "client": "KD Creation Official Client",
+    "eventDate": "Cinema Master Edit",
+    "aspectRatio": "9:16 Vertical Reel",
+    "duration": "00:50",
+    "resolution": "4K Ultra HD",
+    "software": [
+      "DaVinci Resolve Studio 19",
+      "Adobe Premiere Pro"
+    ],
+    "tags": [
+      "9:16 Mobile Cut",
+      "Beat Sync",
+      "Punchy Bass",
+      "Color Pop"
+    ],
+    "thumbnail": "assets/dhaval-sangeeta-outer-cover.jpg",
+    "videoUrl": "video-portfolio/Reel/SANGEET_REEL_KD_CREATION_FINAL_.mp4",
+    "description": "SANGEET REEL KD CREATION FINAL — Official post-production cut curated under Reel.",
+    "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
+  },
+  {
+    "id": "proj-reel-13",
+    "folderId": "reel",
+    "title": "SAVE THE DATE DHAWAL KD Creation",
+    "client": "KD Creation Official Client",
+    "eventDate": "Cinema Master Edit",
+    "aspectRatio": "9:16 Vertical Reel",
+    "duration": "00:50",
+    "resolution": "4K Ultra HD",
+    "software": [
+      "DaVinci Resolve Studio 19",
+      "Adobe Premiere Pro"
+    ],
+    "tags": [
+      "9:16 Mobile Cut",
+      "Beat Sync",
+      "Punchy Bass",
+      "Color Pop"
+    ],
+    "thumbnail": "assets/dhaval-sangeeta-outer-cover.jpg",
+    "videoUrl": "https://youtu.be/x7782vFootg",
+    "description": "SAVE THE DATE DHAWAL KD Creation — Official post-production cut curated under Reel.",
+    "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
+  },
+  {
+    "id": "proj-reel-14",
+    "folderId": "reel",
+    "title": "WEDDING REEL KD CREATION",
+    "client": "KD Creation Official Client",
+    "eventDate": "Cinema Master Edit",
+    "aspectRatio": "9:16 Vertical Reel",
+    "duration": "00:50",
+    "resolution": "4K Ultra HD",
+    "software": [
+      "DaVinci Resolve Studio 19",
+      "Adobe Premiere Pro"
+    ],
+    "tags": [
+      "9:16 Mobile Cut",
+      "Beat Sync",
+      "Punchy Bass",
+      "Color Pop"
+    ],
+    "thumbnail": "assets/dhaval-sangeeta-outer-cover.jpg",
+    "videoUrl": "https://youtu.be/x7782vFootg",
+    "description": "WEDDING REEL KD CREATION — Official post-production cut curated under Reel.",
+    "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
+  },
+  {
+    "id": "proj-teaser-1",
+    "folderId": "teaser",
+    "title": "Pre Wedding Teaser(Mahesh & Ila)",
+    "client": "KD Creation Official Client",
+    "eventDate": "Cinema Master Edit",
+    "aspectRatio": "16:9 4K Master",
+    "duration": "02:30",
+    "resolution": "4K Ultra HD",
+    "software": [
+      "DaVinci Resolve Studio 19",
+      "Adobe Premiere Pro"
+    ],
+    "tags": [
+      "Multi-Cam Sync",
+      "Film Emulation",
+      "Dialogue Foley",
+      "4K Master"
+    ],
+    "thumbnail": "assets/vishwa-dhawal-outer-cover.jpg",
+    "videoUrl": "video-portfolio/Teaser/Pre-Wedding_teaser(Mahesh & Ila).mp4",
+    "description": "Pre Wedding Teaser(Mahesh & Ila) — Official post-production cut curated under Teaser.",
+    "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
+  },
+  {
+    "id": "proj-teaser-2",
+    "folderId": "teaser",
+    "title": "TEASER INSTA",
+    "client": "KD Creation Official Client",
+    "eventDate": "Cinema Master Edit",
+    "aspectRatio": "16:9 4K Master",
+    "duration": "02:30",
+    "resolution": "4K Ultra HD",
+    "software": [
+      "DaVinci Resolve Studio 19",
+      "Adobe Premiere Pro"
+    ],
+    "tags": [
+      "Multi-Cam Sync",
+      "Film Emulation",
+      "Dialogue Foley",
+      "4K Master"
+    ],
+    "thumbnail": "assets/vishwa-dhawal-outer-cover.jpg",
+    "videoUrl": "video-portfolio/Teaser/TEASER_INSTA.mp4",
+    "description": "TEASER INSTA — Official post-production cut curated under Teaser.",
+    "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
+  },
+  {
+    "id": "proj-vehicle-delivery-1",
+    "folderId": "vehicle-delivery",
+    "title": "CREATA DELIVERY Hilight",
+    "client": "KD Creation Official Client",
+    "eventDate": "Cinema Master Edit",
+    "aspectRatio": "16:9 4K Master",
+    "duration": "02:30",
+    "resolution": "4K Ultra HD",
+    "software": [
+      "DaVinci Resolve Studio 19",
+      "Adobe Premiere Pro"
+    ],
+    "tags": [
+      "Multi-Cam Sync",
+      "Film Emulation",
+      "Dialogue Foley",
+      "4K Master"
+    ],
+    "thumbnail": "assets/service-complete-coverage.jpg",
+    "videoUrl": "video-portfolio/Vehicle Delivery/CREATA DELIVERY Hilight.mp4",
+    "description": "CREATA DELIVERY Hilight — Official post-production cut curated under Vehicle Delivery.",
+    "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
+  },
+  {
+    "id": "proj-vehicle-delivery-2",
+    "folderId": "vehicle-delivery",
+    "title": "CREATA With Family Hilight",
+    "client": "KD Creation Official Client",
+    "eventDate": "Cinema Master Edit",
+    "aspectRatio": "16:9 4K Master",
+    "duration": "02:30",
+    "resolution": "4K Ultra HD",
+    "software": [
+      "DaVinci Resolve Studio 19",
+      "Adobe Premiere Pro"
+    ],
+    "tags": [
+      "Multi-Cam Sync",
+      "Film Emulation",
+      "Dialogue Foley",
+      "4K Master"
+    ],
+    "thumbnail": "assets/service-complete-coverage.jpg",
+    "videoUrl": "video-portfolio/Vehicle Delivery/CREATA With Family Hilight.mp4",
+    "description": "CREATA With Family Hilight — Official post-production cut curated under Vehicle Delivery.",
+    "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   }
 ];
 
 export const POST_PRODUCTION_STATS = [
-  { value: '500+', label: 'Wedding Films Edited', sub: 'Crafted with narrative mastery' },
+  { value: '32+', label: 'Curated Video Edits', sub: 'Crafted with narrative mastery' },
   { value: '4K UHD', label: 'Master Delivery', sub: 'Native ProRes & HDR options' },
   { value: '48h', label: 'Express Teaser Delivery', sub: 'Ready for Instagram & WhatsApp' },
   { value: '10-Bit', label: 'Color Calibrated Grading', sub: 'DaVinci Resolve Studio 19' }
