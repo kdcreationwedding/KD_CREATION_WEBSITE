@@ -353,7 +353,7 @@ export const VideoEditingPortfolio: React.FC<VideoEditingPortfolioProps> = ({
                       className="inline-flex items-center gap-2 text-xs font-serif-luxury font-bold tracking-wider text-gold hover:text-gold-light transition-colors"
                     >
                       <Play className="w-3.5 h-3.5 fill-gold" />
-                      <span>WATCH EDIT</span>
+                      <span>PLAY VIDEO</span>
                     </button>
 
                     <button
