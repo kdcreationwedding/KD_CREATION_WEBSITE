@@ -6,6 +6,7 @@ import { Navbar } from './components/layout/Navbar';
 import { HeroSection } from './components/hero/HeroSection';
 import { ServicesSection } from './components/services/ServicesSection';
 import { SelectedStories } from './components/portfolio/SelectedStories';
+import { VideoEditingPortfolio } from './components/portfolio/VideoEditingPortfolio';
 import { CinemaSection } from './components/video/CinemaSection';
 import { AboutSection } from './components/studio/AboutSection';
 import { FoundersSection } from './components/studio/FoundersSection';
@@ -530,7 +531,13 @@ const parseAlbumFromLocation = (): { slug: string; encodedData: string; isDirect
               onPlayVideo={handleOpenVideoModal}
             />
 
-            {/* 6. Signature Services Section */}
+            {/* 6. Video Editing Portfolio (Folder-Wise Post-Production Archive) */}
+            <VideoEditingPortfolio
+              onPlayVideo={handleOpenVideoModal}
+              onInquire={(service) => handleOpenLeadForm(service || 'Video Editing')}
+            />
+
+            {/* 7. Signature Services Section */}
             <ServicesSection onSelectService={handleOpenLeadForm} />
 
             {/* 7. Cinema Showreel Showcase */}
