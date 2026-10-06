@@ -6,7 +6,6 @@ import { Navbar } from './components/layout/Navbar';
 import { HeroSection } from './components/hero/HeroSection';
 import { ServicesSection } from './components/services/ServicesSection';
 import { SelectedStories } from './components/portfolio/SelectedStories';
-import { VideoEditingPortfolio } from './components/portfolio/VideoEditingPortfolio';
 import { CinemaSection } from './components/video/CinemaSection';
 import { AboutSection } from './components/studio/AboutSection';
 import { FoundersSection } from './components/studio/FoundersSection';
@@ -47,6 +46,7 @@ const VenueGladeOne = lazy(() => import('./pages/VenueGladeOne').then(m => ({ de
 const VenueGulmoharGreens = lazy(() => import('./pages/VenueGulmoharGreens').then(m => ({ default: m.VenueGulmoharGreens })));
 const BlogPreWeddingLocationsGujarat = lazy(() => import('./pages/BlogPreWeddingLocationsGujarat').then(m => ({ default: m.BlogPreWeddingLocationsGujarat })));
 const RealWeddingBelvedereCaseStudy = lazy(() => import('./pages/RealWeddingBelvedereCaseStudy').then(m => ({ default: m.RealWeddingBelvedereCaseStudy })));
+const VideoEditingPortfolioPage = lazy(() => import('./pages/VideoEditingPortfolioPage').then(m => ({ default: m.VideoEditingPortfolioPage })));
 
 // Lazy-loaded Modal and Overlay Components for Performance Optimization
 const VideoModal = lazy(() => import('./components/video/VideoModal').then(m => ({ default: m.VideoModal })));
@@ -383,6 +383,7 @@ const parseAlbumFromLocation = (): { slug: string; encodedData: string; isDirect
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const isVideoEditingPage = currentPath.includes('video-editing') || currentPath.includes('video-portfolio') || currentPath === '/portfolio' || currentPath.includes('/portfolio');
   const isWeddingPhotographerPage = currentPath.includes('wedding-photographer-ahmedabad') || currentPath.includes('wedding-photography');
   const isCandidPage = currentPath.includes('candid-wedding-photographer') || currentPath.includes('candid-photography');
   const isPreWeddingPage = currentPath.includes('pre-wedding-photographer-ahmedabad') || currentPath.includes('pre-wedding-photography');
@@ -431,7 +432,13 @@ const parseAlbumFromLocation = (): { slug: string; encodedData: string; isDirect
           <span className="text-xs font-serif-luxury tracking-widest uppercase">Loading KD Creation Atelier...</span>
         </div>
       }>
-        {isWeddingPhotographerPage ? (
+        {isVideoEditingPage ? (
+          <VideoEditingPortfolioPage
+            onBackToHome={navigateHome}
+            onPlayVideo={handleOpenVideoModal}
+            onOpenBooking={handleOpenLeadForm}
+          />
+        ) : isWeddingPhotographerPage ? (
           <WeddingPhotographerAhmedabad
             onBackToHome={navigateHome}
             onOpenBooking={() => handleOpenLeadForm('Wedding Photography')}
@@ -531,13 +538,7 @@ const parseAlbumFromLocation = (): { slug: string; encodedData: string; isDirect
               onPlayVideo={handleOpenVideoModal}
             />
 
-            {/* 6. Video Editing Portfolio (Folder-Wise Post-Production Archive) */}
-            <VideoEditingPortfolio
-              onPlayVideo={handleOpenVideoModal}
-              onInquire={(service) => handleOpenLeadForm(service || 'Video Editing')}
-            />
-
-            {/* 7. Signature Services Section */}
+            {/* 6. Signature Services Section */}
             <ServicesSection onSelectService={handleOpenLeadForm} />
 
             {/* 7. Cinema Showreel Showcase */}

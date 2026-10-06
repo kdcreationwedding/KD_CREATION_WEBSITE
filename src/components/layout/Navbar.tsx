@@ -56,11 +56,10 @@ export const Navbar: React.FC<NavbarProps> = ({
       window.scrollTo({ top: 0, behavior: 'smooth' });
       window.history.pushState(null, '', '/');
     } else {
-      if (onNavigateHome) {
-        onNavigateHome();
-      } else {
-        window.location.href = '/';
-      }
+      window.history.pushState({}, '', '/');
+      window.dispatchEvent(new PopStateEvent('popstate'));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (onNavigateHome) onNavigateHome();
     }
   };
 
@@ -69,16 +68,17 @@ export const Navbar: React.FC<NavbarProps> = ({
     setMobileMenuOpen(false);
 
     if (href === '/' || href === '') {
-      if (window.location.pathname === '/' || window.location.pathname === '') {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        window.history.pushState(null, '', '/');
-      } else {
-        if (onNavigateHome) {
-          onNavigateHome();
-        } else {
-          window.location.href = '/';
-        }
-      }
+      window.history.pushState(null, '', '/');
+      window.dispatchEvent(new PopStateEvent('popstate'));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (onNavigateHome) onNavigateHome();
+      return;
+    }
+
+    if (href.startsWith('/')) {
+      window.history.pushState({}, '', href);
+      window.dispatchEvent(new PopStateEvent('popstate'));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
 
@@ -90,21 +90,18 @@ export const Navbar: React.FC<NavbarProps> = ({
         window.history.pushState(null, '', href);
       } else {
         // If on dedicated sub-page, navigate back home with hash
-        if (onNavigateHome) {
-          onNavigateHome();
-          setTimeout(() => {
-            document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' });
-          }, 300);
-        } else {
-          window.location.href = `/${href}`;
-        }
+        window.history.pushState({}, '', `/${href}`);
+        window.dispatchEvent(new PopStateEvent('popstate'));
+        setTimeout(() => {
+          document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' });
+        }, 150);
       }
     }
   };
 
   const navLinks = [
     { name: 'STORIES', href: '#stories', id: 'stories' },
-    { name: 'VIDEO EDITING', href: '#video-editing', id: 'video-editing' },
+    { name: 'VIDEO PORTFOLIO', href: '/video-editing', id: 'video-editing' },
     { name: 'SERVICES', href: '#services', id: 'services' },
     { name: 'ABOUT', href: '#about', id: 'about' },
     { name: 'LEADERSHIP', href: '#founders', id: 'founders' },

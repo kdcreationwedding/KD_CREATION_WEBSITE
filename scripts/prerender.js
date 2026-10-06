@@ -52,6 +52,13 @@ const routes = [
     summary: "KD Creation Photography offers master photo editing services in Ahmedabad, specializing in skin texture preservation, high-end bridal portrait retouching, color grading, and archival photo finishing."
   },
   {
+    path: "/video-editing",
+    title: "Video Editing Portfolio | 36 Master 4K Edits | KD Creation Photography",
+    description: "Explore KD Creation Photography's dedicated folder-wise video editing portfolio. 36 master 4K edits across AI, wedding highlights, teasers, reels, portraits, and automobile delivery.",
+    h1: "Video Editing Portfolio & Master Post-Production Suite | KD Creation",
+    summary: "Curated folder-wise archive of 36 cinematic video edits color-graded in DaVinci Resolve Studio 19 and edited under the direction of Mr. Aniket Vaghela."
+  },
+  {
     path: "/video-editing-services-ahmedabad",
     title: "Cinematic Video Editing & Color Grading in Ahmedabad | KD Creation Photography",
     description: "Professional 4K video editing, DaVinci Resolve color grading, multi-camera audio sync, and cinematic wedding film post-production in Ahmedabad.",
