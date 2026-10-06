@@ -103,7 +103,7 @@ export const VIDEO_EDITING_FOLDERS: VideoEditingFolder[] = [
     "id": "reel",
     "folderCode": "DIR_05_REEL",
     "name": "Reel",
-    "badge": "14 PROJECT EDITS",
+    "badge": "15 PROJECT EDITS",
     "iconName": "Smartphone",
     "description": "Fast-paced, hook-driven vertical edits engineered for Instagram feeds with mobile OLED punch and beat drops.",
     "softwareStack": [
@@ -139,7 +139,7 @@ export const VIDEO_EDITING_FOLDERS: VideoEditingFolder[] = [
     "id": "vehicle-delivery",
     "folderCode": "DIR_07_VEHICLE_DELIVERY",
     "name": "Vehicle Delivery",
-    "badge": "2 PROJECT EDITS",
+    "badge": "5 PROJECT EDITS",
     "iconName": "Scissors",
     "description": "Cinematic automobile delivery celebrations capturing the proud milestone moments with family.",
     "softwareStack": [
@@ -639,6 +639,30 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
   {
     "id": "proj-reel-7",
     "folderId": "reel",
+    "title": "HALDI",
+    "client": "KD Creation Official Client",
+    "eventDate": "Cinema Master Edit",
+    "aspectRatio": "9:16 Vertical Reel",
+    "duration": "00:50",
+    "resolution": "4K Ultra HD",
+    "software": [
+      "DaVinci Resolve Studio 19",
+      "Adobe Premiere Pro"
+    ],
+    "tags": [
+      "9:16 Mobile Cut",
+      "Beat Sync",
+      "Punchy Bass",
+      "Color Pop"
+    ],
+    "thumbnail": "assets/video-thumbnails/Reel/HALDI.jpg",
+    "videoUrl": "https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev/video-portfolio/Reel/HALDI.mp4",
+    "description": "HALDI — Official post-production cut curated under Reel.",
+    "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
+  },
+  {
+    "id": "proj-reel-8",
+    "folderId": "reel",
     "title": "HALDI REEL KD CREATION",
     "client": "KD Creation Official Client",
     "eventDate": "Cinema Master Edit",
@@ -661,7 +685,7 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
   {
-    "id": "proj-reel-8",
+    "id": "proj-reel-9",
     "folderId": "reel",
     "title": "INTRO VIDEO",
     "client": "KD Creation Official Client",
@@ -685,7 +709,7 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
   {
-    "id": "proj-reel-9",
+    "id": "proj-reel-10",
     "folderId": "reel",
     "title": "MODEL REEL 2",
     "client": "KD Creation Official Client",
@@ -709,7 +733,7 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
   {
-    "id": "proj-reel-10",
+    "id": "proj-reel-11",
     "folderId": "reel",
     "title": "REEL 1",
     "client": "KD Creation Official Client",
@@ -733,7 +757,7 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
   {
-    "id": "proj-reel-11",
+    "id": "proj-reel-12",
     "folderId": "reel",
     "title": "Reel 3",
     "client": "KD Creation Official Client",
@@ -757,7 +781,7 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
   {
-    "id": "proj-reel-12",
+    "id": "proj-reel-13",
     "folderId": "reel",
     "title": "SANGEET REEL KD CREATION FINAL",
     "client": "KD Creation Official Client",
@@ -781,7 +805,7 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
   {
-    "id": "proj-reel-13",
+    "id": "proj-reel-14",
     "folderId": "reel",
     "title": "SAVE THE DATE DHAWAL KD Creation",
     "client": "KD Creation Official Client",
@@ -805,7 +829,7 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
   {
-    "id": "proj-reel-14",
+    "id": "proj-reel-15",
     "folderId": "reel",
     "title": "WEDDING REEL KD CREATION",
     "client": "KD Creation Official Client",
@@ -831,7 +855,7 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
   {
     "id": "proj-teaser-1",
     "folderId": "teaser",
-    "title": "Pre Wedding Teaser(Mahesh & Ila)",
+    "title": "Pre Wedding Teaser",
     "client": "KD Creation Official Client",
     "eventDate": "Cinema Master Edit",
     "aspectRatio": "16:9 4K Master",
@@ -847,9 +871,9 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
       "Dialogue Foley",
       "4K Master"
     ],
-    "thumbnail": "assets/video-thumbnails/Teaser/Pre-Wedding_teaser_Mahesh___Ila_.jpg",
-    "videoUrl": "https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev/video-portfolio/Teaser/Pre-Wedding_teaser_Mahesh___Ila_.mp4",
-    "description": "Pre Wedding Teaser(Mahesh & Ila) — Official post-production cut curated under Teaser.",
+    "thumbnail": "assets/video-thumbnails/Teaser/Pre-Wedding_teaser.jpg",
+    "videoUrl": "https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev/video-portfolio/Teaser/Pre-Wedding_teaser.mp4",
+    "description": "Pre Wedding Teaser — Official post-production cut curated under Teaser.",
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
   {
@@ -879,7 +903,7 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
   {
     "id": "proj-vehicle-delivery-1",
     "folderId": "vehicle-delivery",
-    "title": "CREATA DELIVERY Hilight",
+    "title": "CAR DELIVERY00001",
     "client": "KD Creation Official Client",
     "eventDate": "Cinema Master Edit",
     "aspectRatio": "16:9 4K Master",
@@ -895,15 +919,15 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
       "Dialogue Foley",
       "4K Master"
     ],
-    "thumbnail": "assets/video-thumbnails/Vehicle_Delivery/CREATA_DELIVERY_Hilight.jpg",
-    "videoUrl": "https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev/video-portfolio/Vehicle_Delivery/CREATA_DELIVERY_Hilight.mp4",
-    "description": "CREATA DELIVERY Hilight — Official post-production cut curated under Vehicle Delivery.",
+    "thumbnail": "assets/video-thumbnails/Vehicle_Delivery/CAR_DELIVERY00001.jpg",
+    "videoUrl": "https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev/video-portfolio/Vehicle_Delivery/CAR_DELIVERY00001.mp4",
+    "description": "CAR DELIVERY00001 — Official post-production cut curated under Vehicle Delivery.",
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
   {
     "id": "proj-vehicle-delivery-2",
     "folderId": "vehicle-delivery",
-    "title": "CREATA With Family Hilight",
+    "title": "CAR DELIVERY00002",
     "client": "KD Creation Official Client",
     "eventDate": "Cinema Master Edit",
     "aspectRatio": "16:9 4K Master",
@@ -919,15 +943,87 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
       "Dialogue Foley",
       "4K Master"
     ],
-    "thumbnail": "assets/video-thumbnails/Vehicle_Delivery/CREATA_With_Family_Hilight.jpg",
-    "videoUrl": "https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev/video-portfolio/Vehicle_Delivery/CREATA_With_Family_Hilight.mp4",
-    "description": "CREATA With Family Hilight — Official post-production cut curated under Vehicle Delivery.",
+    "thumbnail": "assets/video-thumbnails/Vehicle_Delivery/CAR_DELIVERY00002.jpg",
+    "videoUrl": "https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev/video-portfolio/Vehicle_Delivery/CAR_DELIVERY00002.mp4",
+    "description": "CAR DELIVERY00002 — Official post-production cut curated under Vehicle Delivery.",
+    "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
+  },
+  {
+    "id": "proj-vehicle-delivery-3",
+    "folderId": "vehicle-delivery",
+    "title": "CAR DELIVERY00003",
+    "client": "KD Creation Official Client",
+    "eventDate": "Cinema Master Edit",
+    "aspectRatio": "16:9 4K Master",
+    "duration": "02:30",
+    "resolution": "4K Ultra HD",
+    "software": [
+      "DaVinci Resolve Studio 19",
+      "Adobe Premiere Pro"
+    ],
+    "tags": [
+      "Multi-Cam Sync",
+      "Film Emulation",
+      "Dialogue Foley",
+      "4K Master"
+    ],
+    "thumbnail": "assets/video-thumbnails/Vehicle_Delivery/CAR_DELIVERY00003.jpg",
+    "videoUrl": "https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev/video-portfolio/Vehicle_Delivery/CAR_DELIVERY00003.mp4",
+    "description": "CAR DELIVERY00003 — Official post-production cut curated under Vehicle Delivery.",
+    "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
+  },
+  {
+    "id": "proj-vehicle-delivery-4",
+    "folderId": "vehicle-delivery",
+    "title": "CAR DELIVERY00004",
+    "client": "KD Creation Official Client",
+    "eventDate": "Cinema Master Edit",
+    "aspectRatio": "16:9 4K Master",
+    "duration": "02:30",
+    "resolution": "4K Ultra HD",
+    "software": [
+      "DaVinci Resolve Studio 19",
+      "Adobe Premiere Pro"
+    ],
+    "tags": [
+      "Multi-Cam Sync",
+      "Film Emulation",
+      "Dialogue Foley",
+      "4K Master"
+    ],
+    "thumbnail": "assets/video-thumbnails/Vehicle_Delivery/CAR_DELIVERY00004.jpg",
+    "videoUrl": "https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev/video-portfolio/Vehicle_Delivery/CAR_DELIVERY00004.mp4",
+    "description": "CAR DELIVERY00004 — Official post-production cut curated under Vehicle Delivery.",
+    "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
+  },
+  {
+    "id": "proj-vehicle-delivery-5",
+    "folderId": "vehicle-delivery",
+    "title": "CAR DELIVERY00005",
+    "client": "KD Creation Official Client",
+    "eventDate": "Cinema Master Edit",
+    "aspectRatio": "16:9 4K Master",
+    "duration": "02:30",
+    "resolution": "4K Ultra HD",
+    "software": [
+      "DaVinci Resolve Studio 19",
+      "Adobe Premiere Pro"
+    ],
+    "tags": [
+      "Multi-Cam Sync",
+      "Film Emulation",
+      "Dialogue Foley",
+      "4K Master"
+    ],
+    "thumbnail": "assets/video-thumbnails/Vehicle_Delivery/CAR_DELIVERY00005.jpg",
+    "videoUrl": "https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev/video-portfolio/Vehicle_Delivery/CAR_DELIVERY00005.mp4",
+    "description": "CAR DELIVERY00005 — Official post-production cut curated under Vehicle Delivery.",
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   }
 ];
 
 export const POST_PRODUCTION_STATS = [
-  { value: '32+', label: 'Curated Video Edits', sub: 'Crafted with narrative mastery' },
+  { value: '36+', label: 'Curated Video Edits', sub: 'Crafted with narrative mastery' },
   { value: '4K UHD', label: 'Master Delivery', sub: 'Native ProRes & HDR options' },
   { value: '48h', label: 'Express Teaser Delivery', sub: 'Ready for Instagram & WhatsApp' },
   { value: '10-Bit', label: 'Color Calibrated Grading', sub: 'DaVinci Resolve Studio 19' }
