@@ -328,7 +328,7 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
       "4K Master"
     ],
     "thumbnail": "assets/video-thumbnails/Highlight/SAMEDAY_DHAWAL__Highlight_AI_.jpg",
-    "videoUrl": "https://youtu.be/mJ49EXaTXO8",
+    "videoUrl": "https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev/video-portfolio/Highlight/SAMEDAY_DHAWAL__Highlight_AI_.mp4",
     "description": "SAMEDAY DHAWAL  Highlight(AI) — Official post-production cut curated under Highlight.",
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
@@ -496,7 +496,7 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
       "4K Master"
     ],
     "thumbnail": "assets/video-thumbnails/Pre-Wedding/Pre-Wedding_Teaser___Song_Dhawal___Sangita_.jpg",
-    "videoUrl": "https://youtu.be/mJ49EXaTXO8",
+    "videoUrl": "https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev/video-portfolio/Pre-Wedding/Pre-Wedding_Teaser___Song_Dhawal___Sangita_.mp4",
     "description": "Pre Wedding Teaser + Song(Dhawal & Sangita) — Official post-production cut curated under Pre Wedding.",
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
@@ -832,7 +832,7 @@ export const VIDEO_EDITING_PROJECTS: VideoEditingProject[] = [
       "Color Pop"
     ],
     "thumbnail": "assets/video-thumbnails/Reel/WEDDING_REEL_KD_CREATION.jpg",
-    "videoUrl": "https://youtu.be/x7782vFootg",
+    "videoUrl": "https://pub-ab2255cdffb74b42b851c495d86cc164.r2.dev/video-portfolio/Reel/WEDDING_REEL_KD_CREATION.mp4",
     "description": "WEDDING REEL KD CREATION — Official post-production cut curated under Reel.",
     "keyFeature": "Master 4K Edit with Color Grading & Sound Design"
   },
