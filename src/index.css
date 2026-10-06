@@ -13,6 +13,11 @@
     --color-champagne: #F5F2EB;
   }
 
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 85px;
+  }
+
   html, body {
     background-color: #33060D !important;
     color: #F5F2EB !important;
