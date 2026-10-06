@@ -19,7 +19,6 @@ export interface VideoEditingFolder {
   id: string;
   folderCode: string;
   name: string;
-  nameGujarati: string;
   badge: string;
   iconName: 'Film' | 'Video' | 'Smartphone' | 'Sliders' | 'Sparkles' | 'Scissors';
   description: string;
@@ -32,7 +31,6 @@ export const VIDEO_EDITING_FOLDERS: VideoEditingFolder[] = [
     "id": "ai",
     "folderCode": "DIR_01_AI",
     "name": "AI",
-    "nameGujarati": "AI સિનેમેટિક એડિટ્સ અને કંકોત્રી લેખન",
     "badge": "4 PROJECT EDITS",
     "iconName": "Sparkles",
     "description": "Cutting-edge AI-assisted video storytelling, virtual invitations, and animated legacy reels.",
@@ -51,7 +49,6 @@ export const VIDEO_EDITING_FOLDERS: VideoEditingFolder[] = [
     "id": "highlight",
     "folderCode": "DIR_02_HIGHLIGHT",
     "name": "Highlight",
-    "nameGujarati": "સિનેમેટિક વેડિંગ અને ઇવેન્ટ હાઇલાઇટ્સ",
     "badge": "4 PROJECT EDITS",
     "iconName": "Video",
     "description": "Bespoke multi-cam wedding highlights capturing raw emotion, family tears, sacred rituals, and celebrations.",
@@ -70,7 +67,6 @@ export const VIDEO_EDITING_FOLDERS: VideoEditingFolder[] = [
     "id": "portraits",
     "folderCode": "DIR_03_PORTRAITS",
     "name": "Portraits",
-    "nameGujarati": "બ્રાઇડલ & કપલ સિનેમેટિક પોર્ટ્રેટ્સ",
     "badge": "4 PROJECT EDITS",
     "iconName": "Smartphone",
     "description": "Editorial slow-motion portrait films focusing on intricate bridal jewelry, royal attire, and emotional eyes.",
@@ -89,7 +85,6 @@ export const VIDEO_EDITING_FOLDERS: VideoEditingFolder[] = [
     "id": "pre-wedding",
     "folderCode": "DIR_04_PRE_WEDDING",
     "name": "Pre Wedding",
-    "nameGujarati": "પ્રી-વેડિંગ સિનેમેટિક મ્યુઝિક સ્ટોરીઝ",
     "badge": "2 PROJECT EDITS",
     "iconName": "Sliders",
     "description": "Dreamy pre-wedding concept films cut with romantic speed ramps, drone perspectives, and acoustic lyrical flow.",
@@ -108,7 +103,6 @@ export const VIDEO_EDITING_FOLDERS: VideoEditingFolder[] = [
     "id": "reel",
     "folderCode": "DIR_05_REEL",
     "name": "Reel",
-    "nameGujarati": "ઇન્સ્ટાગ્રામ 9:16 વાયરલ રીલ્સ",
     "badge": "14 PROJECT EDITS",
     "iconName": "Smartphone",
     "description": "Fast-paced, hook-driven vertical edits engineered for Instagram feeds with mobile OLED punch and beat drops.",
@@ -127,7 +121,6 @@ export const VIDEO_EDITING_FOLDERS: VideoEditingFolder[] = [
     "id": "teaser",
     "folderCode": "DIR_06_TEASER",
     "name": "Teaser",
-    "nameGujarati": "સિનેમેટિક વેડિંગ ટીઝર્સ (2.39:1)",
     "badge": "2 PROJECT EDITS",
     "iconName": "Film",
     "description": "High-adrenaline 60–90 second widescreen trailers with orchestral rise and dialogue snips.",
@@ -146,7 +139,6 @@ export const VIDEO_EDITING_FOLDERS: VideoEditingFolder[] = [
     "id": "vehicle-delivery",
     "folderCode": "DIR_07_VEHICLE_DELIVERY",
     "name": "Vehicle Delivery",
-    "nameGujarati": "રોયલ કાર ડિલિવરી અને સેલિબ્રેશન હાઇલાઇટ્સ",
     "badge": "2 PROJECT EDITS",
     "iconName": "Scissors",
     "description": "Cinematic automobile delivery celebrations capturing the proud milestone moments with family.",

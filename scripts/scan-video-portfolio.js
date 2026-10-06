@@ -13,49 +13,42 @@ const IMAGE_EXTS = new Set(['.jpg', '.jpeg', '.png', '.webp', '.avif']);
 
 const FOLDER_METADATA = {
   'ai': {
-    gujarati: 'AI સિનેમેટિક એડિટ્સ અને કંકોત્રી લેખન',
     poster: 'assets/yash-kavya-outer-cover.jpg',
     badge: 'AI VISUAL ARTS & STORYTELLING',
     icon: 'Sparkles',
     desc: 'Cutting-edge AI-assisted video storytelling, virtual invitations, and animated legacy reels.'
   },
   'highlight': {
-    gujarati: 'સિનેમેટિક વેડિંગ અને ઇવેન્ટ હાઇલાઇટ્સ',
     poster: 'assets/kaushik-anjali-outer-cover.jpg',
     badge: 'NARRATIVE 4K CINEMA HIGHLIGHTS',
     icon: 'Video',
     desc: 'Bespoke multi-cam wedding highlights capturing raw emotion, family tears, sacred rituals, and celebrations.'
   },
   'portraits': {
-    gujarati: 'બ્રાઇડલ & કપલ સિનેમેટિક પોર્ટ્રેટ્સ',
     poster: 'assets/service-bride-mirror.jpg',
     badge: 'FINE-ART PORTRAIT CINE CUTS',
     icon: 'Smartphone',
     desc: 'Editorial slow-motion portrait films focusing on intricate bridal jewelry, royal attire, and emotional eyes.'
   },
   'pre-wedding': {
-    gujarati: 'પ્રી-વેડિંગ સિનેમેટિક મ્યુઝિક સ્ટોરીઝ',
     poster: 'assets/service-prewedding-dhaval-sangita.jpg',
     badge: 'PRE-WEDDING CINEMA SCOPE',
     icon: 'Sliders',
     desc: 'Dreamy pre-wedding concept films cut with romantic speed ramps, drone perspectives, and acoustic lyrical flow.'
   },
   'reel': {
-    gujarati: 'ઇન્સ્ટાગ્રામ 9:16 વાયરલ રીલ્સ',
     poster: 'assets/dhaval-sangeeta-outer-cover.jpg',
     badge: 'VERTICAL 9:16 VIRAL EDITS',
     icon: 'Smartphone',
     desc: 'Fast-paced, hook-driven vertical edits engineered for Instagram feeds with mobile OLED punch and beat drops.'
   },
   'teaser': {
-    gujarati: 'સિનેમેટિક વેડિંગ ટીઝર્સ (2.39:1)',
     poster: 'assets/vishwa-dhawal-outer-cover.jpg',
     badge: 'ANAMORPHIC CINEMA TEASERS',
     icon: 'Film',
     desc: 'High-adrenaline 60–90 second widescreen trailers with orchestral rise and dialogue snips.'
   },
   'vehicle-delivery': {
-    gujarati: 'રોયલ કાર ડિલિવરી અને સેલિબ્રેશન હાઇલાઇટ્સ',
     poster: 'assets/service-complete-coverage.jpg',
     badge: 'DELIVERY HIGHLIGHT SPECIAL',
     icon: 'Scissors',
@@ -177,7 +170,6 @@ function scan() {
         id: folderId,
         folderCode,
         name: folderTitle,
-        nameGujarati: meta.gujarati,
         badge: `${folderProjects.length} PROJECT EDITS`,
         iconName: meta.icon,
         description: meta.desc,
@@ -211,7 +203,6 @@ export interface VideoEditingFolder {
   id: string;
   folderCode: string;
   name: string;
-  nameGujarati: string;
   badge: string;
   iconName: 'Film' | 'Video' | 'Smartphone' | 'Sliders' | 'Sparkles' | 'Scissors';
   description: string;

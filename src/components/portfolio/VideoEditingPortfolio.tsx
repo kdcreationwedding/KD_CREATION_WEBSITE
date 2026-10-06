@@ -92,7 +92,7 @@ export const VideoEditingPortfolio: React.FC<VideoEditingPortfolioProps> = ({
             VIDEO EDITING <span className="text-gold-gradient italic font-normal">PORTFOLIO</span>
           </h2>
           <div className="text-xs sm:text-sm tracking-[0.2em] font-serif-luxury text-gold uppercase mb-4">
-            ક્યુરેટેડ ફોલ્ડર-વાઇઝ વિડીયો એડિટિંગ શોકેસ • DIRECTED BY MR. ANIKET VAGHELA
+            CURATED FOLDER-WISE POST-PRODUCTION SHOWCASE • DIRECTED BY MR. ANIKET VAGHELA
           </div>
           <p className="text-sm sm:text-base text-[#F5F2EB]/70 font-light leading-relaxed max-w-2xl mx-auto">
             Explore our executive, folder-wise video editing archive. From 2.39:1 Anamorphic Wedding Teasers and 9:16 Viral Instagram Reels to multi-camera feature films and DaVinci Resolve color grading.
@@ -116,7 +116,7 @@ export const VideoEditingPortfolio: React.FC<VideoEditingPortfolioProps> = ({
             <div className="flex items-center gap-2">
               <FolderArchive className="w-4 h-4 text-gold" />
               <span className="text-xs tracking-[0.2em] font-serif-luxury font-bold text-gold uppercase">
-                SELECT PROJECT FOLDER (ફોલ્ડર પસંદ કરો)
+                SELECT PROJECT FOLDER
               </span>
             </div>
             <button
@@ -211,12 +211,9 @@ export const VideoEditingPortfolio: React.FC<VideoEditingPortfolioProps> = ({
                     {activeFolder.badge}
                   </span>
                 </div>
-                <h3 className="text-xl sm:text-2xl font-serif-luxury font-bold text-[#F5F2EB] mb-1">
+                <h3 className="text-xl sm:text-2xl font-serif-luxury font-bold text-[#F5F2EB] mb-2">
                   {activeFolder.name}
                 </h3>
-                <p className="text-xs text-gold/90 font-serif-luxury mb-3">
-                  {activeFolder.nameGujarati}
-                </p>
                 <p className="text-xs sm:text-sm text-[#F5F2EB]/80 leading-relaxed mb-4">
                   {activeFolder.description}
                 </p>
@@ -356,7 +353,7 @@ export const VideoEditingPortfolio: React.FC<VideoEditingPortfolioProps> = ({
                       className="inline-flex items-center gap-2 text-xs font-serif-luxury font-bold tracking-wider text-gold hover:text-gold-light transition-colors"
                     >
                       <Play className="w-3.5 h-3.5 fill-gold" />
-                      <span>WATCH EDIT / પ્લે કરો</span>
+                      <span>WATCH EDIT</span>
                     </button>
 
                     <button
