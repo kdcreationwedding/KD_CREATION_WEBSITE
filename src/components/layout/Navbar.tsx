@@ -101,7 +101,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   const navLinks = [
     { name: 'STORIES', href: '#stories', id: 'stories' },
-    { name: 'VIDEO PORTFOLIO', href: '/video-editing', id: 'video-editing' },
+    { name: 'PORTFOLIO', href: '/video-editing', id: 'video-editing' },
     { name: 'SERVICES', href: '#services', id: 'services' },
     { name: 'ABOUT', href: '#about', id: 'about' },
     { name: 'LEADERSHIP', href: '#founders', id: 'founders' },
@@ -114,36 +114,38 @@ export const Navbar: React.FC<NavbarProps> = ({
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
             ? 'bg-[#33060D]/95 backdrop-blur-md py-2.5 shadow-2xl border-b border-gold/30'
-            : 'bg-gradient-to-b from-[#2B050B]/95 via-[#2B050B]/75 to-transparent py-3.5 border-b border-gold/10'
+            : 'bg-gradient-to-b from-[#2B050B]/95 via-[#2B050B]/75 to-transparent py-3 border-b border-gold/10'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3">
-          {/* Official Logo Brand Container */}
-          <a
-            href="/"
-            onClick={handleLogoClick}
-            className="group flex items-center gap-2.5 relative focus:outline-none py-0.5 cursor-pointer shrink-0"
-            aria-label="KD CREATION Home"
-          >
-            <div className="relative h-9 sm:h-10 w-9 sm:w-10 overflow-hidden rounded-xl border border-gold/40 bg-[#3B0811] p-0.5 shadow-[0_4px_15px_rgba(212,175,55,0.2)] transition-all duration-300 group-hover:border-gold group-hover:shadow-[0_4px_20px_rgba(212,175,55,0.4)] flex items-center justify-center">
-              <img
-                src={SITE_CONFIG.brand.officialLogo}
-                alt={SITE_CONFIG.brand.logoAlt}
-                className="h-full w-full object-cover rounded-lg"
-              />
-            </div>
-            <div className="flex flex-col text-left">
-              <span className="text-xs sm:text-base tracking-[0.2em] font-serif-luxury font-extrabold text-gold uppercase leading-tight group-hover:text-gold-light transition-colors">
-                KD CREATION
-              </span>
-              <span className="text-[8px] sm:text-[9.5px] tracking-[0.16em] text-[#F5F2EB]/80 uppercase font-semibold">
-                LUXURY WEDDING FILMS
-              </span>
-            </div>
-          </a>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-2">
+          {/* Left: Brand Monogram & Studio Name */}
+          <div className="flex items-center justify-start shrink-0">
+            <a
+              href="/"
+              onClick={handleLogoClick}
+              className="group flex items-center gap-2.5 relative focus:outline-none py-0.5 cursor-pointer shrink-0"
+              aria-label="KD CREATION Home"
+            >
+              <div className="relative h-9 sm:h-10 w-9 sm:w-10 overflow-hidden rounded-xl border border-gold/40 bg-[#3B0811] p-0.5 shadow-[0_4px_15px_rgba(212,175,55,0.2)] transition-all duration-300 group-hover:border-gold group-hover:shadow-[0_4px_20px_rgba(212,175,55,0.4)] flex items-center justify-center">
+                <img
+                  src={SITE_CONFIG.brand.officialLogo}
+                  alt={SITE_CONFIG.brand.logoAlt}
+                  className="h-full w-full object-cover rounded-lg"
+                />
+              </div>
+              <div className="flex flex-col text-left">
+                <span className="text-xs sm:text-base tracking-[0.2em] font-serif-luxury font-extrabold text-gold uppercase leading-tight group-hover:text-gold-light transition-colors">
+                  KD CREATION
+                </span>
+                <span className="text-[8px] sm:text-[9.5px] tracking-[0.16em] text-[#F5F2EB]/80 uppercase font-semibold">
+                  LUXURY WEDDING FILMS
+                </span>
+              </div>
+            </a>
+          </div>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-4 xl:gap-6">
+          {/* Center: Desktop Navigation Links (Centered, Whitespace-Nowrap) */}
+          <nav className="hidden lg:flex items-center justify-center gap-4 xl:gap-6 whitespace-nowrap px-2">
             {navLinks.map((link) => {
               const isActive = activeSection === link.id;
               return (
@@ -151,7 +153,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   key={link.name}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className={`relative text-[11px] xl:text-xs tracking-[0.16em] font-bold py-1 transition-colors duration-300 ${
+                  className={`relative text-[11px] xl:text-xs tracking-[0.18em] font-bold py-1 whitespace-nowrap transition-colors duration-300 ${
                     isActive ? 'text-gold' : 'text-[#F5F2EB]/90 hover:text-gold'
                   }`}
                 >
@@ -168,12 +170,12 @@ export const Navbar: React.FC<NavbarProps> = ({
             })}
           </nav>
 
-          {/* Right Action CTAs */}
-          <div className="flex items-center gap-2 sm:gap-2.5">
+          {/* Right: Action CTAs */}
+          <div className="flex items-center justify-end gap-2 sm:gap-2.5 shrink-0">
             {/* Client Portal Login / Dashboard Button (Desktop Only) */}
             <button
               onClick={onOpenClientAuth}
-              className="hidden xl:flex items-center gap-1.5 text-[10px] tracking-widest font-bold text-[#F5F2EB] border border-gold/40 bg-[#3B0811] px-3 py-1.5 rounded-full hover:border-gold hover:text-gold hover:scale-105 transition-all shadow-md shrink-0"
+              className="hidden xl:flex items-center gap-1.5 text-[10px] tracking-widest font-bold text-[#F5F2EB] border border-gold/40 bg-[#3B0811] px-3 py-1.5 rounded-full hover:border-gold hover:text-gold hover:scale-105 transition-all shadow-md shrink-0 whitespace-nowrap"
               title="Open VIP Client Portal"
             >
               <UserCheck className="w-3.5 h-3.5 text-gold" />
@@ -183,7 +185,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Ask AI Consultant (Tablet & Desktop) */}
             <button
               onClick={onOpenChat}
-              className="hidden sm:flex items-center gap-1.5 text-[10px] tracking-widest font-bold text-gold border border-gold/40 bg-[#4A0E17]/80 backdrop-blur-md px-3 py-1.5 rounded-full hover:bg-gold-gradient hover:text-obsidian hover:scale-105 shadow-md transition-all duration-300 shrink-0"
+              className="hidden sm:flex items-center gap-1.5 text-[10px] tracking-widest font-bold text-gold border border-gold/40 bg-[#4A0E17]/80 backdrop-blur-md px-3 py-1.5 rounded-full hover:bg-gold-gradient hover:text-obsidian hover:scale-105 shadow-md transition-all duration-300 shrink-0 whitespace-nowrap"
             >
               <Sparkles className="w-3.5 h-3.5" />
               <span className="hidden md:inline">ASK KD AI</span>
@@ -193,7 +195,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Book Dates CTA (Always visible for top conversion) */}
             <button
               onClick={onOpenLeadForm}
-              className="flex items-center gap-1.5 text-[10px] sm:text-[11px] tracking-widest font-bold text-obsidian bg-gold-gradient px-3 sm:px-4 py-1.5 sm:py-2 rounded-full hover:brightness-110 hover:scale-105 shadow-lg shadow-gold/25 transition-all duration-300 active:scale-95 shrink-0"
+              className="flex items-center gap-1.5 text-[10px] sm:text-[11px] tracking-widest font-bold text-obsidian bg-gold-gradient px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full hover:brightness-110 hover:scale-105 shadow-lg shadow-gold/25 transition-all duration-300 active:scale-95 shrink-0 whitespace-nowrap"
             >
               <Calendar className="w-3.5 h-3.5 text-obsidian" />
               <span>BOOK DATES</span>
