@@ -196,6 +196,16 @@ export const SITE_CONFIG = {
       cta: "GET DETAILS"
     },
     {
+      id: "video-editing",
+      title: "VIDEO EDITING & POST-PRODUCTION",
+      subtitle: "DaVinci Resolve 4K Color Grading & Master Cuts",
+      description: "Professional multi-cam post-production suite directed by Mr. Aniket Vaghela. Cinematic color science, dialogue audio cleanup, and fast delivery for wedding films & reels.",
+      image: "assets/aniket-vaghela.jpg",
+      images: ["assets/aniket-vaghela.jpg", "assets/service-complete-coverage.jpg"],
+      features: ["DaVinci Resolve Studio 19 Color Science", "Multi-Cam Audio & Sound Foley Sync", "48-Hour Rush Teaser Delivery", "RAW Footage Editing Commissions", "Curated 36+ Master 4K Edits Archive"],
+      cta: "VIEW 36 EDITS PORTFOLIO"
+    },
+    {
       id: "pre-wedding-films",
       title: "PRE-WEDDING FILMS",
       subtitle: "Concept-Driven Romance Narratives",

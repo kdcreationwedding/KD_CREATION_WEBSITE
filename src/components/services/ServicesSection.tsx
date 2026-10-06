@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Camera, Film, Video, Smartphone, BookOpen, Crown, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { Camera, Film, Video, Smartphone, BookOpen, Crown, Sliders, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { SITE_CONFIG, ServiceItem } from '../../config/siteConfig';
 import { getAssetUrl } from '../../utils/assetHelper';
 import { ServiceDetailModal } from './ServiceDetailModal';
@@ -15,6 +15,8 @@ const getServiceIcon = (id: string) => {
       return <Camera className="w-5 h-5 text-gold" />;
     case 'wedding-cinematography':
       return <Film className="w-5 h-5 text-gold" />;
+    case 'video-editing':
+      return <Sliders className="w-5 h-5 text-gold" />;
     case 'pre-wedding-films':
       return <Video className="w-5 h-5 text-gold" />;
     case 'wedding-reels':
@@ -30,6 +32,16 @@ const getServiceIcon = (id: string) => {
 
 export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectService }) => {
   const [activeModalService, setActiveModalService] = useState<ServiceItem | null>(null);
+
+  const handleCardClick = (service: ServiceItem) => {
+    if (service.id === 'video-editing') {
+      window.history.pushState({}, '', '/video-editing');
+      window.dispatchEvent(new PopStateEvent('popstate'));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    setActiveModalService(service);
+  };
 
   return (
     <section id="services" className="relative py-28 sm:py-36 bg-[#3B0811] border-t border-gold/20 overflow-hidden text-[#F5F2EB]">
@@ -55,84 +67,101 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
           </h2>
           <div className="w-16 h-[1.5px] bg-gold mx-auto mb-6" />
           <p className="text-sm sm:text-base text-[#F5F2EB]/80 font-semibold leading-relaxed">
-            Every celebration demands a unique visual language. We combine editorial still frames, high-end 4K cinema production, and handcrafted heirlooms into one continuous legacy.
+            Every celebration demands a unique visual language. We combine editorial still frames, high-end 4K cinema production, post-production video editing, and handcrafted heirlooms into one continuous legacy.
           </p>
         </div>
 
         {/* Services Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {SITE_CONFIG.services.map((service, index) => (
-            <motion.div
-              key={service.id}
-              initial={{ opacity: 0, y: 40, scale: 0.95 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: false, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: (index % 3) * 0.12, ease: [0.16, 1, 0.3, 1] }}
-              whileHover={{ y: -7, scale: 1.015 }}
-              className="liquid-glass-card rounded-3xl overflow-hidden flex flex-col group shadow-xl transition-all duration-300"
-              data-cursor="VIEW"
-            >
-              {/* Image Preview with Hover Zoom & Crossfade */}
-              <div className="relative h-72 sm:h-80 overflow-hidden bg-[#2B050B]">
-                <img
-                  src={getAssetUrl(service.image)}
-                  alt={`KD Creation ${service.title} - Luxury Wedding Photography & Cinematography Ahmedabad Gujarat`}
-                  className="w-full h-full object-cover object-[center_15%] transition-all duration-700 group-hover:scale-105 brightness-95 group-hover:brightness-100"
-                  loading="lazy"
-                  decoding="async"
-                />
-                {service.images && service.images.length > 1 && (
+          {SITE_CONFIG.services.map((service, index) => {
+            const isVideoEditing = service.id === 'video-editing';
+
+            return (
+              <motion.div
+                key={service.id}
+                initial={{ opacity: 0, y: 40, scale: 0.95 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: false, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: (index % 3) * 0.12, ease: [0.16, 1, 0.3, 1] }}
+                whileHover={{ y: -7, scale: 1.015 }}
+                className={`liquid-glass-card rounded-3xl overflow-hidden flex flex-col group shadow-xl transition-all duration-300 ${
+                  isVideoEditing ? 'border-2 border-gold/50 shadow-[0_10px_30px_rgba(212,175,55,0.2)]' : ''
+                }`}
+                data-cursor="VIEW"
+              >
+                {/* Image Preview with Hover Zoom & Crossfade */}
+                <div className="relative h-72 sm:h-80 overflow-hidden bg-[#2B050B]">
                   <img
-                    src={getAssetUrl(service.images[1])}
-                    alt={`KD Creation ${service.title} Gujarat Royal Wedding Portfolio`}
-                    className="absolute inset-0 w-full h-full object-cover object-[center_15%] transition-all duration-700 opacity-0 group-hover:opacity-100 group-hover:scale-105 brightness-95 group-hover:brightness-100"
+                    src={getAssetUrl(service.image)}
+                    alt={`KD Creation ${service.title} - Luxury Wedding Photography & Cinematography Ahmedabad Gujarat`}
+                    className="w-full h-full object-cover object-[center_15%] transition-all duration-700 group-hover:scale-105 brightness-95 group-hover:brightness-100"
                     loading="lazy"
                     decoding="async"
                   />
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#3B0811] via-[#3B0811]/30 to-transparent opacity-85 pointer-events-none" />
-                
-                {/* Floating Service Badge */}
-                <div className="absolute top-4 left-4 liquid-glass-pill p-2.5 rounded-2xl shadow-lg">
-                  {getServiceIcon(service.id)}
-                </div>
-              </div>
+                  {service.images && service.images.length > 1 && (
+                    <img
+                      src={getAssetUrl(service.images[1])}
+                      alt={`KD Creation ${service.title} Gujarat Royal Wedding Portfolio`}
+                      className="absolute inset-0 w-full h-full object-cover object-[center_15%] transition-all duration-700 opacity-0 group-hover:opacity-100 group-hover:scale-105 brightness-95 group-hover:brightness-100"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#3B0811] via-[#3B0811]/30 to-transparent opacity-85 pointer-events-none" />
+                  
+                  {/* Floating Service Icon Badge */}
+                  <div className="absolute top-4 left-4 liquid-glass-pill p-2.5 rounded-2xl shadow-lg">
+                    {getServiceIcon(service.id)}
+                  </div>
 
-              {/* Card Body Content */}
-              <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between">
-                <div>
-                  <span className="text-[10px] tracking-[0.2em] font-serif-luxury font-extrabold text-gold uppercase block mb-1">
-                    {service.subtitle}
-                  </span>
-                  <h3 className="text-xl font-serif-luxury font-bold text-[#F5F2EB] uppercase mb-3 group-hover:text-gold transition-colors">
-                    {service.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-[#F5F2EB]/80 font-medium leading-relaxed mb-6">
-                    {service.description}
-                  </p>
-
-                  {/* Feature Bullets */}
-                  <ul className="space-y-2 mb-8 border-t border-gold/20 pt-4">
-                    {service.features.map((feat, fIdx) => (
-                      <li key={fIdx} className="flex items-center gap-2 text-xs text-[#F5F2EB]/90 font-semibold">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-gold flex-shrink-0" />
-                        <span>{feat}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  {/* Special Badge for Video Editing */}
+                  {isVideoEditing && (
+                    <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-gold text-obsidian text-[10px] font-mono font-bold tracking-widest shadow-lg">
+                      36 MASTER EDITS
+                    </div>
+                  )}
                 </div>
 
-                {/* Card CTA Action */}
-                <button
-                  onClick={() => setActiveModalService(service)}
-                  className="w-full flex items-center justify-between text-xs tracking-widest font-bold text-gold border border-gold/40 bg-[#2B050B]/60 py-3.5 px-5 rounded-2xl hover:bg-gold-gradient hover:text-obsidian shadow-sm transition-all duration-300 group/btn"
-                >
-                  <span>EXPLORE {service.title}</span>
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
-                </button>
-              </div>
-            </motion.div>
-          ))}
+                {/* Card Body Content */}
+                <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between">
+                  <div>
+                    <span className="text-[10px] tracking-[0.2em] font-serif-luxury font-extrabold text-gold uppercase block mb-1">
+                      {service.subtitle}
+                    </span>
+                    <h3 className="text-xl font-serif-luxury font-bold text-[#F5F2EB] uppercase mb-3 group-hover:text-gold transition-colors">
+                      {service.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-[#F5F2EB]/80 font-medium leading-relaxed mb-6">
+                      {service.description}
+                    </p>
+
+                    {/* Feature Bullets */}
+                    <ul className="space-y-2 mb-8 border-t border-gold/20 pt-4">
+                      {service.features.map((feat, fIdx) => (
+                        <li key={fIdx} className="flex items-center gap-2 text-xs text-[#F5F2EB]/90 font-semibold">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-gold flex-shrink-0" />
+                          <span>{feat}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Card CTA Action */}
+                  <button
+                    onClick={() => handleCardClick(service)}
+                    className={`w-full flex items-center justify-between text-xs tracking-widest font-bold py-3.5 px-5 rounded-2xl shadow-sm transition-all duration-300 group/btn ${
+                      isVideoEditing
+                        ? 'bg-gold-gradient text-obsidian hover:brightness-110 shadow-gold/20'
+                        : 'text-gold border border-gold/40 bg-[#2B050B]/60 hover:bg-gold-gradient hover:text-obsidian'
+                    }`}
+                  >
+                    <span>{isVideoEditing ? 'VIEW 36 EDITS PORTFOLIO' : `EXPLORE ${service.title}`}</span>
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
+                  </button>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

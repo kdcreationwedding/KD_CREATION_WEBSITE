@@ -122,25 +122,42 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
             </div>
 
             {/* Action CTAs */}
-            <div className="flex flex-col sm:flex-row items-center gap-4 pt-4 border-t border-gold/20">
-              <button
-                onClick={() => {
-                  onClose();
-                  onBookService(service.title);
-                }}
-                className="w-full sm:w-auto flex-1 py-4 px-8 rounded-full bg-gold-gradient text-obsidian font-serif-luxury font-bold text-xs uppercase tracking-widest hover:brightness-110 transition-all duration-300 shadow-xl flex items-center justify-center gap-2"
-              >
-                <Calendar className="w-4 h-4" />
-                <span>CHECK DATE AVAILABILITY & QUOTE</span>
-              </button>
+            <div className="flex flex-col gap-3 pt-4 border-t border-gold/20">
+              {service.id === 'video-editing' && (
+                <button
+                  onClick={() => {
+                    onClose();
+                    window.history.pushState({}, '', '/video-editing');
+                    window.dispatchEvent(new PopStateEvent('popstate'));
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                  className="w-full py-4 px-8 rounded-full border border-gold bg-[#2B050B] text-gold font-serif-luxury font-bold text-xs uppercase tracking-widest hover:bg-gold hover:text-obsidian transition-all duration-300 flex items-center justify-center gap-2 shadow-lg"
+                >
+                  <Film className="w-4 h-4" />
+                  <span>VIEW ALL 36 VIDEO EDITS & DIRECTORIES</span>
+                </button>
+              )}
 
-              <button
-                onClick={handleWhatsApp}
-                className="w-full sm:w-auto py-4 px-8 rounded-full border border-gold/50 bg-[#3B0811] text-gold font-serif-luxury font-bold text-xs uppercase tracking-widest hover:bg-gold/10 transition-all duration-300 flex items-center justify-center gap-2"
-              >
-                <MessageCircle className="w-4 h-4 text-emerald-400" />
-                <span>CHAT ON WHATSAPP</span>
-              </button>
+              <div className="flex flex-col sm:flex-row items-center gap-4">
+                <button
+                  onClick={() => {
+                    onClose();
+                    onBookService(service.title);
+                  }}
+                  className="w-full sm:w-auto flex-1 py-4 px-8 rounded-full bg-gold-gradient text-obsidian font-serif-luxury font-bold text-xs uppercase tracking-widest hover:brightness-110 transition-all duration-300 shadow-xl flex items-center justify-center gap-2"
+                >
+                  <Calendar className="w-4 h-4" />
+                  <span>CHECK DATE AVAILABILITY & QUOTE</span>
+                </button>
+
+                <button
+                  onClick={handleWhatsApp}
+                  className="w-full sm:w-auto py-4 px-8 rounded-full border border-gold/50 bg-[#3B0811] text-gold font-serif-luxury font-bold text-xs uppercase tracking-widest hover:bg-gold/10 transition-all duration-300 flex items-center justify-center gap-2"
+                >
+                  <MessageCircle className="w-4 h-4 text-emerald-400" />
+                  <span>CHAT ON WHATSAPP</span>
+                </button>
+              </div>
             </div>
 
           </div>
